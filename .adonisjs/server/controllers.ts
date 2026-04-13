@@ -8,6 +8,7 @@ export const controllers = {
     customer: {
       authentication: {
         Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
+        AuthenticateCustomer: () => import('#controllers/v1/customer/authentication/authenticate_customer_controller'),
       },
     },
   },

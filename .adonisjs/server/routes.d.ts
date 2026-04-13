@@ -5,9 +5,11 @@ type ParamValue = string | number | bigint | boolean
 export type ScannedRoutes = {
   ALL: {
     'onboarding': { paramsTuple?: []; params?: {} }
+    'authenticate_customer': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'onboarding': { paramsTuple?: []; params?: {} }
+    'authenticate_customer': { paramsTuple?: []; params?: {} }
   }
   GET: {
   }
