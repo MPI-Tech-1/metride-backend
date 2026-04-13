@@ -6,7 +6,12 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-,
+  'onboarding': {
+    methods: ["POST"],
+    pattern: '/v1/customers/authentication/onboarding',
+    tokens: [{"old":"/v1/customers/authentication/onboarding","type":0,"val":"v1","end":""},{"old":"/v1/customers/authentication/onboarding","type":0,"val":"customers","end":""},{"old":"/v1/customers/authentication/onboarding","type":0,"val":"authentication","end":""},{"old":"/v1/customers/authentication/onboarding","type":0,"val":"onboarding","end":""}],
+    types: placeholder as Registry['onboarding']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

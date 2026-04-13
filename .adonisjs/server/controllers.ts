@@ -3,4 +3,12 @@
  * DO NOT EDIT manually
  */
 
-export const controllers = {}
+export const controllers = {
+  v1: {
+    customer: {
+      authentication: {
+        Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
+      },
+    },
+  },
+}

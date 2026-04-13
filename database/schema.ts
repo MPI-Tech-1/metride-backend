@@ -8,17 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AdminSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'deletedAt',
-    'email',
-    'firstName',
-    'id',
-    'identifier',
-    'lastName',
-    'password',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'deletedAt', 'email', 'firstName', 'id', 'identifier', 'lastName', 'password', 'updatedAt'] as const
   $columns = AdminSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -41,18 +31,7 @@ export class AdminSchema extends BaseModel {
 }
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = [
-    'abilities',
-    'createdAt',
-    'expiresAt',
-    'hash',
-    'id',
-    'lastUsedAt',
-    'name',
-    'tokenableId',
-    'type',
-    'updatedAt',
-  ] as const
+  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -77,18 +56,7 @@ export class AuthAccessTokenSchema extends BaseModel {
 }
 
 export class CustomerSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'deletedAt',
-    'email',
-    'firstName',
-    'id',
-    'identifier',
-    'lastName',
-    'mobileNumber',
-    'password',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'deletedAt', 'email', 'fcmToken', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'password', 'updatedAt'] as const
   $columns = CustomerSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -96,6 +64,8 @@ export class CustomerSchema extends BaseModel {
   declare deletedAt: DateTime | null
   @column()
   declare email: string | null
+  @column()
+  declare fcmToken: string | null
   @column()
   declare firstName: string | null
   @column({ isPrimary: true })
@@ -113,18 +83,7 @@ export class CustomerSchema extends BaseModel {
 }
 
 export class DriverSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'deletedAt',
-    'email',
-    'firstName',
-    'id',
-    'identifier',
-    'lastName',
-    'mobileNumber',
-    'password',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'deletedAt', 'email', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'password', 'updatedAt'] as const
   $columns = DriverSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
