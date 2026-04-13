@@ -7,6 +7,39 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class AdminSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'firstName',
+    'id',
+    'identifier',
+    'lastName',
+    'password',
+    'updatedAt',
+  ] as const
+  $columns = AdminSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare email: string | null
+  @column()
+  declare firstName: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare lastName: string | null
+  @column({ serializeAs: null })
+  declare password: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class AuthAccessTokenSchema extends BaseModel {
   static $columns = [
     'abilities',
@@ -39,6 +72,78 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare tokenableId: number
   @column()
   declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CustomerSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'firstName',
+    'id',
+    'identifier',
+    'lastName',
+    'mobileNumber',
+    'password',
+    'updatedAt',
+  ] as const
+  $columns = CustomerSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare email: string | null
+  @column()
+  declare firstName: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare lastName: string | null
+  @column()
+  declare mobileNumber: string | null
+  @column({ serializeAs: null })
+  declare password: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class DriverSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'firstName',
+    'id',
+    'identifier',
+    'lastName',
+    'mobileNumber',
+    'password',
+    'updatedAt',
+  ] as const
+  $columns = DriverSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare email: string | null
+  @column()
+  declare firstName: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare lastName: string | null
+  @column()
+  declare mobileNumber: string | null
+  @column({ serializeAs: null })
+  declare password: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
