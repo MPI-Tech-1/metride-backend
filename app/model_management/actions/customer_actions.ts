@@ -23,17 +23,23 @@ export default class CustomerActions {
   }
 
   public static async getCustomerByEmail(email: string): Promise<Customer | null> {
-    return await Customer.query().where('email', email).first()
+    return await Customer.query().preload('customerRegistrationStep').where('email', email).first()
   }
 
   public static async getCustomerById(customerId: number): Promise<Customer | null> {
-    return await Customer.query().where('id', customerId).first()
+    return await Customer.query()
+      .preload('customerRegistrationStep')
+      .where('id', customerId)
+      .first()
   }
 
   public static async getCustomerByIdentifier(
     customerIdentifier: string
   ): Promise<Customer | null> {
-    return await Customer.query().where('identifier', customerIdentifier).first()
+    return await Customer.query()
+      .preload('customerRegistrationStep')
+      .where('identifier', customerIdentifier)
+      .first()
   }
 
   public static async getCustomer(
@@ -76,7 +82,7 @@ export default class CustomerActions {
   ): Promise<{ customerPayload: Customer[]; paginationMeta?: any }> {
     const { paginationPayload } = getCustomerRecordOptions
 
-    const customerQuery = Customer.query()
+    const customerQuery = Customer.query().preload('customerRegistrationStep')
 
     if (paginationPayload) {
       const customers = await customerQuery

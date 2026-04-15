@@ -48,6 +48,9 @@ export default class AuthenticateCustomerController {
         firstName: customer.firstName,
         lastName: customer.lastName,
         mobileNumber: customer.mobileNumber,
+        registrationSteps: {
+          hasVerifiedAccount: customer.customerRegistrationStep.hasActivatedAccount,
+        },
         accessCredentials,
       }
 

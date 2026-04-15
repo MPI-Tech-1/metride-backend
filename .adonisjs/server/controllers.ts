@@ -6,9 +6,19 @@
 export const controllers = {
   v1: {
     customer: {
+      accountActivation: {
+        RequestAccountActivationToken: () => import('#controllers/v1/customer/account_activation/request_account_activation_token_controller'),
+        VerifyAccountActivationToken: () => import('#controllers/v1/customer/account_activation/verify_account_activation_token_controller'),
+      },
       authentication: {
-        Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
         AuthenticateCustomer: () => import('#controllers/v1/customer/authentication/authenticate_customer_controller'),
+        Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
+      },
+      passwordManagement: {
+        resetPassword: {
+          RequestResetPasswordOtpToken: () => import('#controllers/v1/customer/password_management/reset_password/request_reset_password_otp_token_controller'),
+          ResetPassword: () => import('#controllers/v1/customer/password_management/reset_password/reset_password_controller'),
+        },
       },
     },
   },

@@ -10,14 +10,18 @@ import {
   SUCCESS,
 } from '#common/messages/system_messages'
 import Customer from '#models/customer'
+import db from '@adonisjs/lucid/services/db'
+import CustomerRegistrationStepActions from '#model_management/actions/customer_registration_step_actions'
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
-    try {
-      const { firstName, lastName, mobileNumber, password, fcmToken } = await request.validateUsing(
-        CustomerOnboardingRequestValidator
-      )
+    const { firstName, lastName, mobileNumber, password, fcmToken } = await request.validateUsing(
+      CustomerOnboardingRequestValidator
+    )
 
+    const dbTransaction = await db.transaction()
+
+    try {
       const customer = await CustomerActions.createCustomerRecord({
         createPayload: {
           firstName,
@@ -26,7 +30,15 @@ export default class OnboardingController {
           password: await hash.make(password),
           fcmToken,
         },
-        dbTransactionOptions: { useTransaction: false },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
+      })
+
+      await CustomerRegistrationStepActions.createCustomerRegistrationStepRecord({
+        createPayload: {
+          customerId: customer.id,
+          hasActivatedAccount: false,
+        },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
       const accessCredentials = await Customer.accessTokens.create(customer, ['*'], {
@@ -38,9 +50,13 @@ export default class OnboardingController {
         firstName: customer.firstName,
         lastName: customer.lastName,
         mobileNumber: customer.mobileNumber,
+        registrationSteps: {
+          hasVerifiedAccount: false,
+        },
         accessCredentials,
       }
 
+      await dbTransaction.commit()
       return response.status(HttpStatusCodesEnum.CREATED).send({
         status_code: HttpStatusCodesEnum.CREATED,
         status: SUCCESS,
@@ -48,6 +64,7 @@ export default class OnboardingController {
         results: mutatedCustomerPayload,
       })
     } catch (OnboardingControllerError) {
+      await dbTransaction.rollback()
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

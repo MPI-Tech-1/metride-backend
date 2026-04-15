@@ -55,6 +55,25 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class CustomerRegistrationStepSchema extends BaseModel {
+  static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'id', 'identifier', 'updatedAt'] as const
+  $columns = CustomerRegistrationStepSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare customerId: number | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare hasActivatedAccount: boolean | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class CustomerSchema extends BaseModel {
   static $columns = ['createdAt', 'deletedAt', 'email', 'fcmToken', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'password', 'updatedAt'] as const
   $columns = CustomerSchema.$columns
@@ -82,6 +101,25 @@ export class CustomerSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class DriverRegistrationStepSchema extends BaseModel {
+  static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'id', 'identifier', 'updatedAt'] as const
+  $columns = DriverRegistrationStepSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare customerId: number | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare hasActivatedAccount: boolean | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class DriverSchema extends BaseModel {
   static $columns = ['createdAt', 'deletedAt', 'email', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'password', 'updatedAt'] as const
   $columns = DriverSchema.$columns
@@ -103,6 +141,31 @@ export class DriverSchema extends BaseModel {
   declare mobileNumber: string | null
   @column({ serializeAs: null })
   declare password: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class OtpTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'email', 'expiresAt', 'id', 'identifier', 'purpose', 'status', 'token', 'updatedAt'] as const
+  $columns = OtpTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare email: string | null
+  @column.dateTime()
+  declare expiresAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare purpose: string | null
+  @column()
+  declare status: string | null
+  @column()
+  declare token: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

@@ -1,0 +1,9 @@
+import DriverRegistrationStepInterface from '#model_management/type_checking/driver_registration_step/driver_registration_step_interface'
+import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverRegistrationStepRecordPayload = Partial<DriverRegistrationStepInterface>
+
+type CreateDriverRegistrationStepRecordOptions =
+  CreateNewRecordGeneric<CreateDriverRegistrationStepRecordPayload>
+
+export default CreateDriverRegistrationStepRecordOptions

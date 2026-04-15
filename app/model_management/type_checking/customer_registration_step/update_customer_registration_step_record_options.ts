@@ -1,0 +1,10 @@
+import UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import CustomerRegistrationStepIdentifierOptions from '#model_management/type_checking/customer_registration_step/customer_registration_step_identifier_options'
+import CustomerRegistrationStepInterface from '#model_management/type_checking/customer_registration_step/customer_registration_step_interface'
+
+type UpdateCustomerRegistrationStepRecordOptions = UpdateRecordGeneric<
+  CustomerRegistrationStepIdentifierOptions,
+  Partial<CustomerRegistrationStepInterface>
+>
+
+export default UpdateCustomerRegistrationStepRecordOptions

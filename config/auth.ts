@@ -20,6 +20,13 @@ const authConfig = defineConfig({
       }),
     }),
 
+    customer: tokensGuard({
+      provider: tokensUserProvider({
+        tokens: 'accessTokens',
+        model: () => import('#models/customer'),
+      }),
+    }),
+
     /**
      * Session-based guard for browser authentication.
      */
