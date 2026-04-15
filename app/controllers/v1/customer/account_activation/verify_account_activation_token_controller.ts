@@ -28,7 +28,7 @@ export default class VerifyAccountActivationTokenController {
       if (otpToken.expiresAt && DateTime.now() > otpToken.expiresAt) {
         await OtpTokenActions.updateOtpTokenRecord({
           identifierOptions: { identifier: otpToken.id, identifierType: 'id' },
-          updatePayload: { status: '' },
+          updatePayload: { status: 'expired' },
           dbTransactionOptions: { useTransaction: false },
         })
 
@@ -49,7 +49,7 @@ export default class VerifyAccountActivationTokenController {
 
       await OtpTokenActions.updateOtpTokenRecord({
         identifierOptions: { identifier: otpToken.id, identifierType: 'id' },
-        updatePayload: { status: 'verified' },
+        updatePayload: { status: 'used' },
         dbTransactionOptions: { useTransaction: false },
       })
 
