@@ -1,7 +1,7 @@
-import { CustomerRegistrationStepSchema } from '#database/schema'
 import { column } from '@adonisjs/lucid/orm'
+import AbstractModel from '#models/abstract_model'
 
-export default class CustomerRegistrationStep extends CustomerRegistrationStepSchema {
+export default class CustomerRegistrationStep extends AbstractModel {
   @column()
   declare customerId: number
 

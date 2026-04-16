@@ -72,6 +72,7 @@
     "@japa/api-client": "^3.2.1",
     "@tuyau/core": "^1.2.2",
     "@vinejs/vine": "^4.3.0",
+    "axios": "^1.15.0",
     "better-sqlite3": "^12.8.0",
     "luxon": "^3.7.2",
     "mysql2": "^3.22.0",

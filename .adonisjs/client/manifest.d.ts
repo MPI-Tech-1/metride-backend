@@ -5,6 +5,7 @@
 
 /// <reference path="../../adonisrc.ts" />
 /// <reference path="../../config/auth.ts" />
+/// <reference path="../../config/bank_list_config.ts" />
 /// <reference path="../../config/cache.ts" />
 /// <reference path="../../config/hash.ts" />
 /// <reference path="../../config/logger.ts" />

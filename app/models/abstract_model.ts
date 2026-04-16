@@ -1,7 +1,7 @@
 import { BaseModel, beforeCreate, beforeFetch, beforeFind, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-// import { cuid } from '@adonisjs/core/helpers'
 import { ModelQueryBuilderContract } from '@adonisjs/lucid/types/model'
+import { randomUUID } from 'node:crypto'
 
 export default class AbstractModel extends BaseModel {
   @column({ isPrimary: true })
@@ -57,10 +57,6 @@ export default class AbstractModel extends BaseModel {
 
   @beforeCreate()
   public static async generateIdentifier(model: AbstractModel) {
-    model.identifier = this.cuid()
-  }
-
-  private static cuid(): string {
-    return ''
+    model.identifier = randomUUID()
   }
 }

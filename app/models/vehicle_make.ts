@@ -1,4 +1,7 @@
-import { VehicleMakeSchema } from '#database/schema'
+import { column } from '@adonisjs/lucid/orm'
+import AbstractModel from '#models/abstract_model'
 
-export default class VehicleMake extends VehicleMakeSchema {
+export default class VehicleMake extends AbstractModel {
+  @column()
+  declare name: string
 }

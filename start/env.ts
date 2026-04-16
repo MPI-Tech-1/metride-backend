@@ -45,5 +45,10 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   REDIS_HOST: Env.schema.string({ format: 'host' }),
   REDIS_PORT: Env.schema.number(),
-  REDIS_PASSWORD: Env.schema.secret.optional()
+  REDIS_PASSWORD: Env.schema.secret.optional(),
+
+  CURRENT_BANK_LIST_PROVIDER: Env.schema.string(),
+
+  PAYSTACK_BANK_LIST_PROVIDER_SECRET_KEY: Env.schema.string(),
+  PAYSTACK_BANK_LIST_PROVIDER_ENDPOINT: Env.schema.string(),
 })
