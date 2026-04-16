@@ -28,30 +28,30 @@ services:
       retries: 3
       start_period: 40s
 
-  # worker:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #     target: production
-  #   image: metride-backend-app
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - SKIP_MIGRATIONS=true
-  #   command: node ace queue:listen
-  #   depends_on:
-  #     app:
-  #       condition: service_healthy
-  #   networks:
-  #     - coolify
-  #   volumes:
-  #     - shared_tmp:/home/node/app/tmp
-  #   healthcheck:
-  #     test: ['CMD', 'pgrep', '-f', 'queue:listen']
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 3
-  #     start_period: 40s
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: metride-backend-app
+    env_file:
+      - .env
+    environment:
+      - SKIP_MIGRATIONS=true
+    command: node ace queue:work
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - coolify
+    volumes:
+      - shared_tmp:/home/node/app/tmp
+    healthcheck:
+      test: ['CMD', 'pgrep', '-f', 'queue:listen']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 networks:
   coolify:
