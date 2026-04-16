@@ -21,5 +21,10 @@ export const controllers = {
         },
       },
     },
+    driver: {
+      authentication: {
+        Onboarding: () => import('#controllers/v1/driver/authentication/onboarding_controller'),
+      },
+    },
   },
 }

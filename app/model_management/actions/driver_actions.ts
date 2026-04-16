@@ -23,15 +23,18 @@ export default class DriverActions {
   }
 
   public static async getDriverByEmail(email: string): Promise<Driver | null> {
-    return await Driver.query().where('email', email).first()
+    return await Driver.query().preload('driverRegistrationStep').where('email', email).first()
   }
 
   public static async getDriverById(driverId: number): Promise<Driver | null> {
-    return await Driver.query().where('id', driverId).first()
+    return await Driver.query().preload('driverRegistrationStep').where('id', driverId).first()
   }
 
   public static async getDriverByIdentifier(driverIdentifier: string): Promise<Driver | null> {
-    return await Driver.query().where('identifier', driverIdentifier).first()
+    return await Driver.query()
+      .preload('driverRegistrationStep')
+      .where('identifier', driverIdentifier)
+      .first()
   }
 
   public static async getDriver(

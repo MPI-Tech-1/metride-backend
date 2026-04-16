@@ -3,7 +3,7 @@ import AbstractModel from '#models/abstract_model'
 
 export default class DriverRegistrationStep extends AbstractModel {
   @column()
-  declare customerId: number
+  declare driverId: number
 
   @column({ consume: (value) => value === 1 })
   declare hasActivatedAccount: boolean
