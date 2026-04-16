@@ -55,6 +55,40 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class BankSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'id', 'identifier', 'name', 'updatedAt'] as const
+  $columns = BankSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare name: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CitySchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'id', 'identifier', 'name', 'updatedAt'] as const
+  $columns = CitySchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare name: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class CustomerRegistrationStepSchema extends BaseModel {
   static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'id', 'identifier', 'updatedAt'] as const
   $columns = CustomerRegistrationStepSchema.$columns
@@ -101,8 +135,83 @@ export class CustomerSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class DriverBankAccountSchema extends BaseModel {
+  static $columns = ['accountName', 'accountNumber', 'bankId', 'createdAt', 'deletedAt', 'driverId', 'id', 'identifier', 'updatedAt'] as const
+  $columns = DriverBankAccountSchema.$columns
+  @column()
+  declare accountName: string | null
+  @column()
+  declare accountNumber: string | null
+  @column()
+  declare bankId: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class DriverDocumentSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'driverId', 'driverLicenceUrl', 'id', 'identifier', 'passportPhotographUrl', 'updatedAt', 'vehiclePaperUrl', 'vehiclePhotoUrl'] as const
+  $columns = DriverDocumentSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number | null
+  @column()
+  declare driverLicenceUrl: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare passportPhotographUrl: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare vehiclePaperUrl: string | null
+  @column()
+  declare vehiclePhotoUrl: string | null
+}
+
+export class DriverPersonalInformationSchema extends BaseModel {
+  static $columns = ['cityId', 'createdAt', 'dateOfBirth', 'deletedAt', 'driverId', 'gender', 'homeAddress', 'id', 'identifier', 'nationalIdentificationNumber', 'updatedAt'] as const
+  $columns = DriverPersonalInformationSchema.$columns
+  @column()
+  declare cityId: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.date()
+  declare dateOfBirth: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number | null
+  @column()
+  declare gender: string | null
+  @column()
+  declare homeAddress: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare nationalIdentificationNumber: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class DriverRegistrationStepSchema extends BaseModel {
-  static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'id', 'identifier', 'updatedAt'] as const
+  static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'hasProvidedPersonalInformation', 'hasProvidedRequiredDocuments', 'hasProvidedVehicleInformation', 'id', 'identifier', 'updatedAt'] as const
   $columns = DriverRegistrationStepSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -112,12 +221,47 @@ export class DriverRegistrationStepSchema extends BaseModel {
   declare deletedAt: DateTime | null
   @column()
   declare hasActivatedAccount: boolean | null
+  @column()
+  declare hasProvidedPersonalInformation: boolean | null
+  @column()
+  declare hasProvidedRequiredDocuments: boolean | null
+  @column()
+  declare hasProvidedVehicleInformation: boolean | null
   @column({ isPrimary: true })
   declare id: number
   @column()
   declare identifier: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class DriverVehicleSchema extends BaseModel {
+  static $columns = ['colorOfVehicle', 'createdAt', 'deletedAt', 'driverId', 'id', 'identifier', 'plateNumber', 'seatCapacity', 'typeOfVehicle', 'updatedAt', 'vehicleMakeId', 'vehicleModelId'] as const
+  $columns = DriverVehicleSchema.$columns
+  @column()
+  declare colorOfVehicle: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare plateNumber: string | null
+  @column()
+  declare seatCapacity: number | null
+  @column()
+  declare typeOfVehicle: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare vehicleMakeId: number | null
+  @column()
+  declare vehicleModelId: number | null
 }
 
 export class DriverSchema extends BaseModel {
@@ -185,4 +329,40 @@ export class UserSchema extends BaseModel {
   declare password: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class VehicleMakeSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'id', 'identifier', 'name', 'updatedAt'] as const
+  $columns = VehicleMakeSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare name: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class VehicleModelSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'id', 'identifier', 'name', 'updatedAt', 'vehicleMakeId'] as const
+  $columns = VehicleModelSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare name: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare vehicleMakeId: number | null
 }
