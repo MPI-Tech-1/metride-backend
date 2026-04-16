@@ -1,0 +1,10 @@
+import UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import DriverPersonalInformationIdentifierOptions from '#model_management/type_checking/driver_personal_information/driver_personal_information_identifier_options'
+import DriverPersonalInformationInterface from '#model_management/type_checking/driver_personal_information/driver_personal_information_interface'
+
+type UpdateDriverPersonalInformationRecordOptions = UpdateRecordGeneric<
+  DriverPersonalInformationIdentifierOptions,
+  Partial<DriverPersonalInformationInterface>
+>
+
+export default UpdateDriverPersonalInformationRecordOptions

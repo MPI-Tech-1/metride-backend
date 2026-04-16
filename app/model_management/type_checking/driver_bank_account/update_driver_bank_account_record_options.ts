@@ -1,0 +1,10 @@
+import UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import DriverBankAccountIdentifierOptions from '#model_management/type_checking/driver_bank_account/driver_bank_account_identifier_options'
+import DriverBankAccountInterface from '#model_management/type_checking/driver_bank_account/driver_bank_account_interface'
+
+type UpdateDriverBankAccountRecordOptions = UpdateRecordGeneric<
+  DriverBankAccountIdentifierOptions,
+  Partial<DriverBankAccountInterface>
+>
+
+export default UpdateDriverBankAccountRecordOptions

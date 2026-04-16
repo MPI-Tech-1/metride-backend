@@ -1,0 +1,9 @@
+import DriverBankAccountInterface from '#model_management/type_checking/driver_bank_account/driver_bank_account_interface'
+import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverBankAccountRecordPayload = Partial<DriverBankAccountInterface>
+
+type CreateDriverBankAccountRecordOptions =
+  CreateNewRecordGeneric<CreateDriverBankAccountRecordPayload>
+
+export default CreateDriverBankAccountRecordOptions
