@@ -16,4 +16,7 @@ export default class DriverRegistrationStep extends AbstractModel {
 
   @column({ consume: (value) => value === 1 })
   declare hasProvidedRequiredDocuments: boolean
+
+  @column({ consume: (value) => value === 1 })
+  declare hasProvidedBankAccount: boolean
 }

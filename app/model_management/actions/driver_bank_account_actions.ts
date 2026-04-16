@@ -24,19 +24,22 @@ export default class DriverBankAccountActions {
   public static async getDriverBankAccountById(
     driverBankAccountId: number
   ): Promise<DriverBankAccount | null> {
-    return await DriverBankAccount.query().where('id', driverBankAccountId).first()
+    return await DriverBankAccount.query().preload('bank').where('id', driverBankAccountId).first()
   }
 
   public static async getDriverBankAccountByDriverId(
     driverId: number
   ): Promise<DriverBankAccount | null> {
-    return await DriverBankAccount.query().where('driver_id', driverId).first()
+    return await DriverBankAccount.query().preload('bank').where('driver_id', driverId).first()
   }
 
   public static async getDriverBankAccountByIdentifier(
     driverBankAccountIdentifier: string
   ): Promise<DriverBankAccount | null> {
-    return await DriverBankAccount.query().where('identifier', driverBankAccountIdentifier).first()
+    return await DriverBankAccount.query()
+      .preload('bank')
+      .where('identifier', driverBankAccountIdentifier)
+      .first()
   }
 
   public static async getDriverBankAccount(
@@ -80,7 +83,7 @@ export default class DriverBankAccountActions {
   ): Promise<{ driverBankAccountPayload: DriverBankAccount[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getDriverBankAccountRecordOptions
 
-    const driverBankAccountQuery = DriverBankAccount.query()
+    const driverBankAccountQuery = DriverBankAccount.query().preload('bank')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`
