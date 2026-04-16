@@ -27,6 +27,13 @@ const authConfig = defineConfig({
       }),
     }),
 
+    driver: tokensGuard({
+      provider: tokensUserProvider({
+        tokens: 'accessTokens',
+        model: () => import('#models/driver'),
+      }),
+    }),
+
     /**
      * Session-based guard for browser authentication.
      */

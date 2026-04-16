@@ -22,6 +22,10 @@ export const controllers = {
       },
     },
     driver: {
+      accountActivation: {
+        RequestAccountActivationToken: () => import('#controllers/v1/driver/account_activation/request_account_activation_token_controller'),
+        VerifyAccountActivationToken: () => import('#controllers/v1/driver/account_activation/verify_account_activation_token_controller'),
+      },
       authentication: {
         Onboarding: () => import('#controllers/v1/driver/authentication/onboarding_controller'),
       },
