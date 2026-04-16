@@ -24,7 +24,7 @@ export default class DriverRegistrationStepActions {
   public static async getDriverRegistrationStepById(
     id: number
   ): Promise<DriverRegistrationStep | null> {
-    return await DriverRegistrationStep.query().where('id', id).whereNull('deleted_at').first()
+    return await DriverRegistrationStep.query().where('id', id).first()
   }
 
   public static async getDriverRegistrationStepByIdentifier(
@@ -32,7 +32,7 @@ export default class DriverRegistrationStepActions {
   ): Promise<DriverRegistrationStep | null> {
     return await DriverRegistrationStep.query()
       .where('identifier', identifier)
-      .whereNull('deleted_at')
+
       .first()
   }
 
@@ -41,7 +41,7 @@ export default class DriverRegistrationStepActions {
   ): Promise<DriverRegistrationStep | null> {
     return await DriverRegistrationStep.query()
       .where('driver_id', driverId)
-      .whereNull('deleted_at')
+
       .first()
   }
 
@@ -53,8 +53,7 @@ export default class DriverRegistrationStepActions {
     const GetDriverRegistrationStepIdentifierOptions: Record<string, Function> = {
       id: async () => await this.getDriverRegistrationStepById(Number(identifier)),
 
-      identifier: async () =>
-        await this.getDriverRegistrationStepByIdentifier(String(identifier)),
+      identifier: async () => await this.getDriverRegistrationStepByIdentifier(String(identifier)),
 
       driverId: async () => await this.getDriverRegistrationStepByDriverId(Number(identifier)),
     }
@@ -85,9 +84,10 @@ export default class DriverRegistrationStepActions {
   public static async listDriverRegistrationSteps(
     listDriverRegistrationStepRecordsOptions: ListDriverRegistrationStepRecordsOptions
   ): Promise<{ driverRegistrationStepPayload: DriverRegistrationStep[]; paginationMeta?: any }> {
-    const { filterRecordOptionsPayload, paginationPayload } = listDriverRegistrationStepRecordsOptions
+    const { filterRecordOptionsPayload, paginationPayload } =
+      listDriverRegistrationStepRecordsOptions
 
-    const driverRegistrationStepQuery = DriverRegistrationStep.query().whereNull('deleted_at')
+    const driverRegistrationStepQuery = DriverRegistrationStep.query()
 
     if (filterRecordOptionsPayload?.driverId) {
       driverRegistrationStepQuery.where('driver_id', filterRecordOptionsPayload.driverId)

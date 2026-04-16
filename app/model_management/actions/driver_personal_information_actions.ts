@@ -27,6 +27,12 @@ export default class DriverPersonalInformationActions {
     return await DriverPersonalInformation.query().where('id', driverPersonalInformationId).first()
   }
 
+  public static async getDriverPersonalInformationByDriverId(
+    driverId: number
+  ): Promise<DriverPersonalInformation | null> {
+    return await DriverPersonalInformation.query().where('driver_id', driverId).first()
+  }
+
   public static async getDriverPersonalInformationByIdentifier(
     driverPersonalInformationIdentifier: string
   ): Promise<DriverPersonalInformation | null> {
@@ -45,6 +51,8 @@ export default class DriverPersonalInformationActions {
 
       identifier: async () =>
         await this.getDriverPersonalInformationByIdentifier(String(identifier)),
+
+      driverId: async () => await this.getDriverPersonalInformationByDriverId(Number(identifier)),
     }
 
     return await GetDriverPersonalInformationIdentifierOptions[identifierType]()

@@ -48,6 +48,8 @@ export default class DriverDocumentActions {
       id: async () => await this.getDriverDocumentById(Number(identifier)),
 
       identifier: async () => await this.getDriverDocumentByIdentifier(String(identifier)),
+
+      driverId: async () => await this.getDriverDocumentByDriverId(Number(identifier)),
     }
 
     return await GetDriverDocumentIdentifierOptions[identifierType]()

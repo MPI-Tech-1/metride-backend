@@ -6,7 +6,7 @@ type DriverDocumentIdentifierOptions =
   | {
       identifier: number
 
-      identifierType: 'id'
+      identifierType: 'id' | 'driverId'
     }
 
 export default DriverDocumentIdentifierOptions

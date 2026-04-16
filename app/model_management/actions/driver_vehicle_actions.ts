@@ -25,6 +25,10 @@ export default class DriverVehicleActions {
     return await DriverVehicle.query().where('id', driverVehicleId).first()
   }
 
+  public static async getDriverVehicleByDriverId(driverId: number): Promise<DriverVehicle | null> {
+    return await DriverVehicle.query().where('driver_id', driverId).first()
+  }
+
   public static async getDriverVehicleByIdentifier(
     driverVehicleIdentifier: string
   ): Promise<DriverVehicle | null> {
@@ -40,6 +44,8 @@ export default class DriverVehicleActions {
       id: async () => await this.getDriverVehicleById(Number(identifier)),
 
       identifier: async () => await this.getDriverVehicleByIdentifier(String(identifier)),
+
+      driverId: async () => await this.getDriverVehicleByDriverId(Number(identifier)),
     }
 
     return await GetDriverVehicleIdentifierOptions[identifierType]()

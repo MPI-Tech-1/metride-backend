@@ -22,18 +22,18 @@ export default class OtpTokenActions {
   }
 
   public static async getOtpTokenById(id: number): Promise<OtpToken | null> {
-    return await OtpToken.query().where('id', id).whereNull('deleted_at').first()
+    return await OtpToken.query().where('id', id).first()
   }
 
   public static async getOtpTokenByIdentifier(identifier: string): Promise<OtpToken | null> {
-    return await OtpToken.query().where('identifier', identifier).whereNull('deleted_at').first()
+    return await OtpToken.query().where('identifier', identifier).first()
   }
 
   public static async getOtpTokenByEmailAddress(email: string): Promise<OtpToken | null> {
     return await OtpToken.query()
       .where('email', email)
       .where('status', 'pending')
-      .whereNull('deleted_at')
+
       .orderBy('created_at', 'desc')
       .first()
   }
@@ -78,7 +78,7 @@ export default class OtpTokenActions {
   ): Promise<{ otpTokenPayload: OtpToken[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = listOtpTokenRecordsOptions
 
-    const otpTokenQuery = OtpToken.query().whereNull('deleted_at')
+    const otpTokenQuery = OtpToken.query()
 
     if (filterRecordOptionsPayload?.email) {
       otpTokenQuery.where('email', filterRecordOptionsPayload.email)

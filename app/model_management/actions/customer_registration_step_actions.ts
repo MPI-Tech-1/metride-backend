@@ -24,7 +24,7 @@ export default class CustomerRegistrationStepActions {
   public static async getCustomerRegistrationStepById(
     id: number
   ): Promise<CustomerRegistrationStep | null> {
-    return await CustomerRegistrationStep.query().where('id', id).whereNull('deleted_at').first()
+    return await CustomerRegistrationStep.query().where('id', id).first()
   }
 
   public static async getCustomerRegistrationStepByIdentifier(
@@ -32,7 +32,7 @@ export default class CustomerRegistrationStepActions {
   ): Promise<CustomerRegistrationStep | null> {
     return await CustomerRegistrationStep.query()
       .where('identifier', identifier)
-      .whereNull('deleted_at')
+
       .first()
   }
 
@@ -41,7 +41,7 @@ export default class CustomerRegistrationStepActions {
   ): Promise<CustomerRegistrationStep | null> {
     return await CustomerRegistrationStep.query()
       .where('customer_id', customerId)
-      .whereNull('deleted_at')
+
       .first()
   }
 
@@ -69,8 +69,7 @@ export default class CustomerRegistrationStepActions {
     const { identifierOptions, updatePayload, dbTransactionOptions } =
       updateCustomerRegistrationStepRecordOptions
 
-    const customerRegistrationStep =
-      await this.getCustomerRegistrationStep(identifierOptions)
+    const customerRegistrationStep = await this.getCustomerRegistrationStep(identifierOptions)
 
     if (customerRegistrationStep === null) return null
 
@@ -86,11 +85,14 @@ export default class CustomerRegistrationStepActions {
 
   public static async listCustomerRegistrationSteps(
     listCustomerRegistrationStepRecordsOptions: ListCustomerRegistrationStepRecordsOptions
-  ): Promise<{ customerRegistrationStepPayload: CustomerRegistrationStep[]; paginationMeta?: any }> {
+  ): Promise<{
+    customerRegistrationStepPayload: CustomerRegistrationStep[]
+    paginationMeta?: any
+  }> {
     const { filterRecordOptionsPayload, paginationPayload } =
       listCustomerRegistrationStepRecordsOptions
 
-    const customerRegistrationStepQuery = CustomerRegistrationStep.query().whereNull('deleted_at')
+    const customerRegistrationStepQuery = CustomerRegistrationStep.query()
 
     if (filterRecordOptionsPayload?.customerId) {
       customerRegistrationStepQuery.where('customer_id', filterRecordOptionsPayload.customerId)
