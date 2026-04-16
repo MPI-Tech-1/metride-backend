@@ -27,7 +27,14 @@ export const controllers = {
         VerifyAccountActivationToken: () => import('#controllers/v1/driver/account_activation/verify_account_activation_token_controller'),
       },
       authentication: {
+        AuthenticateDriver: () => import('#controllers/v1/driver/authentication/authenticate_driver_controller'),
         Onboarding: () => import('#controllers/v1/driver/authentication/onboarding_controller'),
+      },
+      passwordManagement: {
+        resetPassword: {
+          RequestResetPasswordOtpToken: () => import('#controllers/v1/driver/password_management/reset_password/request_reset_password_otp_token_controller'),
+          ResetPassword: () => import('#controllers/v1/driver/password_management/reset_password/reset_password_controller'),
+        },
       },
     },
   },

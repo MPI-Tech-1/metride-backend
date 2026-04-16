@@ -16,3 +16,4 @@ router
     router.post('/reset', [ResetPasswordController])
   })
   .prefix('/v1/customers/password-management')
+  .as('customer.password-management')

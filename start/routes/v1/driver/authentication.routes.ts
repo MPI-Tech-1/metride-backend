@@ -1,6 +1,6 @@
 import router from '@adonisjs/core/services/router'
 
-const OnboardingController = () =>
+const DriverOnboardingController = () =>
   import('#controllers/v1/driver/authentication/onboarding_controller')
 
 const AuthenticateDriverController = () =>
@@ -8,7 +8,8 @@ const AuthenticateDriverController = () =>
 
 router
   .group(() => {
-    router.post('/onboarding', [OnboardingController])
+    router.post('/onboarding', [DriverOnboardingController])
     router.post('/authenticate', [AuthenticateDriverController])
   })
   .prefix('/v1/drivers/authentication')
+  .as('driver.authentication')

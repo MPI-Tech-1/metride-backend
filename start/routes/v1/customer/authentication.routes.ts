@@ -12,3 +12,4 @@ router
     router.post('/authenticate', [AuthenticateCustomerController])
   })
   .prefix('/v1/customers/authentication')
+  .as('customer.authentication')

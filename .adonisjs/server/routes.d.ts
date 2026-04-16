@@ -4,20 +4,32 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'onboarding': { paramsTuple?: []; params?: {} }
-    'authenticate_customer': { paramsTuple?: []; params?: {} }
-    'request_account_activation_token': { paramsTuple?: []; params?: {} }
-    'verify_account_activation_token': { paramsTuple?: []; params?: {} }
-    'request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
-    'reset_password': { paramsTuple?: []; params?: {} }
+    'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
+    'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
+    'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
+    'customer.account-activation.verify_account_activation_token': { paramsTuple?: []; params?: {} }
+    'customer.password-management.request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
+    'customer.password-management.reset_password': { paramsTuple?: []; params?: {} }
+    'driver.authentication.driver_onboarding': { paramsTuple?: []; params?: {} }
+    'driver.authentication.authenticate_driver': { paramsTuple?: []; params?: {} }
+    'driver.account-activation.driver_request_account_activation_token': { paramsTuple?: []; params?: {} }
+    'driver.account-activation.driver_verify_account_activation_token': { paramsTuple?: []; params?: {} }
+    'driver.password-management.driver_request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
+    'driver.password-management.driver_reset_password': { paramsTuple?: []; params?: {} }
   }
   POST: {
-    'onboarding': { paramsTuple?: []; params?: {} }
-    'authenticate_customer': { paramsTuple?: []; params?: {} }
-    'request_account_activation_token': { paramsTuple?: []; params?: {} }
-    'verify_account_activation_token': { paramsTuple?: []; params?: {} }
-    'request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
-    'reset_password': { paramsTuple?: []; params?: {} }
+    'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
+    'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
+    'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
+    'customer.account-activation.verify_account_activation_token': { paramsTuple?: []; params?: {} }
+    'customer.password-management.request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
+    'customer.password-management.reset_password': { paramsTuple?: []; params?: {} }
+    'driver.authentication.driver_onboarding': { paramsTuple?: []; params?: {} }
+    'driver.authentication.authenticate_driver': { paramsTuple?: []; params?: {} }
+    'driver.account-activation.driver_request_account_activation_token': { paramsTuple?: []; params?: {} }
+    'driver.account-activation.driver_verify_account_activation_token': { paramsTuple?: []; params?: {} }
+    'driver.password-management.driver_request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
+    'driver.password-management.driver_reset_password': { paramsTuple?: []; params?: {} }
   }
   GET: {
   }

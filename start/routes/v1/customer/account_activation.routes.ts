@@ -17,4 +17,5 @@ router
     router.post('/verify-token', [VerifyAccountActivationTokenController])
   })
   .prefix('/v1/customers/account-activation')
+  .as('customer.account-activation')
   .use(middleware.auth({ guards: ['customer'] }))
