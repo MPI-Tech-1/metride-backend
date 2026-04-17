@@ -138,6 +138,18 @@ const routes = {
     tokens: [{"old":"/api/v1/common/finance/banks","type":0,"val":"api","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"v1","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"common","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"finance","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"banks","end":""}],
     types: placeholder as Registry['common.finance.fetch_banks']['types'],
   },
+  'common.vehicle.fetch_vehicle_models': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/common/vehicle/vehicle-models',
+    tokens: [{"old":"/api/v1/common/vehicle/vehicle-models","type":0,"val":"api","end":""},{"old":"/api/v1/common/vehicle/vehicle-models","type":0,"val":"v1","end":""},{"old":"/api/v1/common/vehicle/vehicle-models","type":0,"val":"common","end":""},{"old":"/api/v1/common/vehicle/vehicle-models","type":0,"val":"vehicle","end":""},{"old":"/api/v1/common/vehicle/vehicle-models","type":0,"val":"vehicle-models","end":""}],
+    types: placeholder as Registry['common.vehicle.fetch_vehicle_models']['types'],
+  },
+  'common.vehicle.fetch_vehicle_makes_controllers': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/common/vehicle/vehicle-makes',
+    tokens: [{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"api","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"v1","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"common","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"vehicle","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"vehicle-makes","end":""}],
+    types: placeholder as Registry['common.vehicle.fetch_vehicle_makes_controllers']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

@@ -26,6 +26,8 @@ export type ScannedRoutes = {
     'driver.profile.update_documents': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
+    'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
+    'common.vehicle.fetch_vehicle_makes_controllers': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
@@ -48,6 +50,8 @@ export type ScannedRoutes = {
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
+    'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
+    'common.vehicle.fetch_vehicle_makes_controllers': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
@@ -56,6 +60,8 @@ export type ScannedRoutes = {
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
+    'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
+    'common.vehicle.fetch_vehicle_makes_controllers': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
     'driver.profile.update_personal_information': { paramsTuple?: []; params?: {} }

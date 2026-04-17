@@ -271,4 +271,28 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/fetch_banks_controller').default['handle']>>>
     }
   }
+  'common.vehicle.fetch_vehicle_models': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/common/vehicle/vehicle-models'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'common.vehicle.fetch_vehicle_makes_controllers': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/common/vehicle/vehicle-makes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
 }

@@ -12,6 +12,10 @@ export const controllers = {
       location: {
         FetchCities: () => import('#controllers/v1/common/location/fetch_cities_controller'),
       },
+      vehicle: {
+        FetchVehicleMakes: () => import('#controllers/v1/common/vehicle/fetch_vehicle_makes_controller'),
+        FetchVehicleModels: () => import('#controllers/v1/common/vehicle/fetch_vehicle_models_controller'),
+      },
     },
     customer: {
       accountActivation: {

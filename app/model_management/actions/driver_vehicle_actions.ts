@@ -22,17 +22,29 @@ export default class DriverVehicleActions {
   }
 
   public static async getDriverVehicleById(driverVehicleId: number): Promise<DriverVehicle | null> {
-    return await DriverVehicle.query().where('id', driverVehicleId).first()
+    return await DriverVehicle.query()
+      .preload('vehicleMake')
+      .preload('vehicleModel')
+      .where('id', driverVehicleId)
+      .first()
   }
 
   public static async getDriverVehicleByDriverId(driverId: number): Promise<DriverVehicle | null> {
-    return await DriverVehicle.query().where('driver_id', driverId).first()
+    return await DriverVehicle.query()
+      .preload('vehicleMake')
+      .preload('vehicleModel')
+      .where('driver_id', driverId)
+      .first()
   }
 
   public static async getDriverVehicleByIdentifier(
     driverVehicleIdentifier: string
   ): Promise<DriverVehicle | null> {
-    return await DriverVehicle.query().where('identifier', driverVehicleIdentifier).first()
+    return await DriverVehicle.query()
+      .preload('vehicleMake')
+      .preload('vehicleModel')
+      .where('identifier', driverVehicleIdentifier)
+      .first()
   }
 
   public static async getDriverVehicle(
@@ -76,7 +88,7 @@ export default class DriverVehicleActions {
   ): Promise<{ driverVehiclePayload: DriverVehicle[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getDriverVehicleRecordOptions
 
-    const driverVehicleQuery = DriverVehicle.query()
+    const driverVehicleQuery = DriverVehicle.query().preload('vehicleMake').preload('vehicleModel')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`

@@ -47,5 +47,9 @@ export interface ApiDefinition {
     finance: {
       fetchBanks: typeof routes['common.finance.fetch_banks']
     }
+    vehicle: {
+      fetchVehicleModels: typeof routes['common.vehicle.fetch_vehicle_models']
+      fetchVehicleMakesControllers: typeof routes['common.vehicle.fetch_vehicle_makes_controllers']
+    }
   }
 }

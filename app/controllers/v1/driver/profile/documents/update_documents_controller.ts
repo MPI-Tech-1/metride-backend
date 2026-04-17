@@ -4,6 +4,7 @@ import UpdateDocumentsRequestValidator from '#validators/v1/driver/profile/docum
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
+import DriverRegistrationStepActions from '#model_management/actions/driver_registration_step_actions'
 
 export default class UpdateDocumentsController {
   async handle({ request, response, auth }: HttpContext) {
@@ -13,10 +14,24 @@ export default class UpdateDocumentsController {
     try {
       const loggedInDriver = auth.use('driver').user!
 
-      const documents = await DriverDocumentActions.updateDriverDocumentRecord({
+      await DriverDocumentActions.updateDriverDocumentRecord({
         identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: payload,
-        dbTransactionOptions: { useTransaction: false },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
+      })
+
+      await DriverRegistrationStepActions.updateDriverRegistrationStepRecord({
+        identifierOptions: {
+          identifierType: 'driverId',
+          identifier: loggedInDriver.id,
+        },
+        updatePayload: {
+          hasProvidedRequiredDocuments: true,
+        },
+        dbTransactionOptions: {
+          useTransaction: true,
+          dbTransaction,
+        },
       })
 
       await dbTransaction.commit()
@@ -24,7 +39,6 @@ export default class UpdateDocumentsController {
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Documents updated successfully.',
-        results: documents,
       })
     } catch (UpdateDocumentsControllerError) {
       await dbTransaction.rollback()

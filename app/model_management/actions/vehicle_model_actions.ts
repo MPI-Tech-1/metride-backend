@@ -22,13 +22,16 @@ export default class VehicleModelActions {
   }
 
   public static async getVehicleModelById(vehicleModelId: number): Promise<VehicleModel | null> {
-    return await VehicleModel.query().where('id', vehicleModelId).first()
+    return await VehicleModel.query().preload('vehicleMake').where('id', vehicleModelId).first()
   }
 
   public static async getVehicleModelByIdentifier(
     vehicleModelIdentifier: string
   ): Promise<VehicleModel | null> {
-    return await VehicleModel.query().where('identifier', vehicleModelIdentifier).first()
+    return await VehicleModel.query()
+      .preload('vehicleMake')
+      .where('identifier', vehicleModelIdentifier)
+      .first()
   }
 
   public static async getVehicleModel(
@@ -70,7 +73,11 @@ export default class VehicleModelActions {
   ): Promise<{ vehicleModelPayload: VehicleModel[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getVehicleModelRecordOptions
 
-    const vehicleModelQuery = VehicleModel.query()
+    const vehicleModelQuery = VehicleModel.query().preload('vehicleMake')
+
+    if (filterRecordOptionsPayload?.vehicleMakeId) {
+      vehicleModelQuery.where('vehicle_make_id', filterRecordOptionsPayload.vehicleMakeId)
+    }
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`

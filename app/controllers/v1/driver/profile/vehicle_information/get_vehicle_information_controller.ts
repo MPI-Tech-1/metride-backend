@@ -15,8 +15,19 @@ export default class GetVehicleInformationController {
 
       const mutatedResponse = {
         identifier: vehicleInformation?.identifier,
-        vehicleMakeId: vehicleInformation?.vehicleMakeId,
-        vehicleModelId: vehicleInformation?.vehicleModelId,
+
+        vehicleMake: vehicleInformation?.vehicleMake
+          ? {
+              identifier: vehicleInformation?.vehicleMake.identifier,
+              name: vehicleInformation?.vehicleMake.name,
+            }
+          : null,
+        vehicleModel: vehicleInformation?.vehicleModel
+          ? {
+              identifier: vehicleInformation?.vehicleModel.identifier,
+              name: vehicleInformation?.vehicleModel.name,
+            }
+          : null,
         colorOfVehicle: vehicleInformation?.colorOfVehicle,
         plateNumber: vehicleInformation?.plateNumber,
         seatCapacity: vehicleInformation?.seatCapacity,
