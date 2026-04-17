@@ -24,19 +24,26 @@ export default class DriverPersonalInformationActions {
   public static async getDriverPersonalInformationById(
     driverPersonalInformationId: number
   ): Promise<DriverPersonalInformation | null> {
-    return await DriverPersonalInformation.query().where('id', driverPersonalInformationId).first()
+    return await DriverPersonalInformation.query()
+      .preload('city')
+      .where('id', driverPersonalInformationId)
+      .first()
   }
 
   public static async getDriverPersonalInformationByDriverId(
     driverId: number
   ): Promise<DriverPersonalInformation | null> {
-    return await DriverPersonalInformation.query().where('driver_id', driverId).first()
+    return await DriverPersonalInformation.query()
+      .preload('city')
+      .where('driver_id', driverId)
+      .first()
   }
 
   public static async getDriverPersonalInformationByIdentifier(
     driverPersonalInformationIdentifier: string
   ): Promise<DriverPersonalInformation | null> {
     return await DriverPersonalInformation.query()
+      .preload('city')
       .where('identifier', driverPersonalInformationIdentifier)
       .first()
   }
@@ -87,7 +94,7 @@ export default class DriverPersonalInformationActions {
     const { filterRecordOptionsPayload, paginationPayload } =
       getDriverPersonalInformationRecordOptions
 
-    const driverPersonalInformationQuery = DriverPersonalInformation.query()
+    const driverPersonalInformationQuery = DriverPersonalInformation.query().preload('city')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`

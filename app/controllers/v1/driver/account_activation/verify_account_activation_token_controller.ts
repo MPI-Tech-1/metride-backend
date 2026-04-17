@@ -8,14 +8,14 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 
 export default class VerifyAccountActivationTokenController {
   async handle({ request, response, auth }: HttpContext) {
-    const { emailAddress, token } = await request.validateUsing(
+    const { token } = await request.validateUsing(
       DriverVerifyAccountActivationTokenRequestValidator
     )
 
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
-      const otpToken = await OtpTokenActions.getOtpTokenByEmailAddress(emailAddress)
+      const otpToken = await OtpTokenActions.getOtpTokenByEmailAddress(loggedInDriver.email)
 
       if (!otpToken) {
         return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
@@ -54,7 +54,7 @@ export default class VerifyAccountActivationTokenController {
       })
 
       await DriverRegistrationStepActions.updateDriverRegistrationStepRecord({
-        identifierOptions: { identifier: loggedDriver.id, identifierType: 'driverId' },
+        identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: { hasActivatedAccount: true },
         dbTransactionOptions: { useTransaction: false },
       })
@@ -63,9 +63,6 @@ export default class VerifyAccountActivationTokenController {
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Account successfully activated.',
-        results: {
-          driverIdentifier: loggedDriver.identifier,
-        },
       })
     } catch (VerifyAccountActivationTokenControllerError) {
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({

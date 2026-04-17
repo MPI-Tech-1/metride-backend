@@ -1,11 +1,12 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const customerVerifyAccountActivationTokenRequestSchema = vine.object({
-  emailAddress: vine.string().trim().escape().email(),
-  token: vine.string().trim(),
+  token: vine.string().trim().escape(),
 })
 
-const messages = {}
+const messages = {
+  'token.required': 'Token is required',
+}
 
 const CustomerVerifyAccountActivationTokenRequestValidator = vine.compile(
   customerVerifyAccountActivationTokenRequestSchema

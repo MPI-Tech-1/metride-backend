@@ -22,8 +22,8 @@ export default class AuthenticateCustomerController {
       })
 
       if (customer === null) {
-        return response.status(HttpStatusCodesEnum.UNAUTHORIZED).send({
-          status_code: HttpStatusCodesEnum.UNAUTHORIZED,
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
           status: ERROR,
           message: 'Invalid credentials.',
         })
@@ -32,8 +32,8 @@ export default class AuthenticateCustomerController {
       const isPasswordValid = await hash.verify(customer.password!, password)
 
       if (!isPasswordValid) {
-        return response.status(HttpStatusCodesEnum.UNAUTHORIZED).send({
-          status_code: HttpStatusCodesEnum.UNAUTHORIZED,
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
           status: ERROR,
           message: 'Invalid credentials.',
         })

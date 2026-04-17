@@ -16,6 +16,16 @@ export type ScannedRoutes = {
     'driver.account-activation.driver_verify_account_activation_token': { paramsTuple?: []; params?: {} }
     'driver.password-management.driver_request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
     'driver.password-management.driver_reset_password': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_personal_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_vehicle_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_bank_account': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_documents': { paramsTuple?: []; params?: {} }
+    'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
+    'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
@@ -32,8 +42,26 @@ export type ScannedRoutes = {
     'driver.password-management.driver_reset_password': { paramsTuple?: []; params?: {} }
   }
   GET: {
+    'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
+    'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
+    'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
+    'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
+  }
+  PATCH: {
+    'driver.profile.update_personal_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_vehicle_information': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_bank_account': { paramsTuple?: []; params?: {} }
+    'driver.profile.update_documents': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

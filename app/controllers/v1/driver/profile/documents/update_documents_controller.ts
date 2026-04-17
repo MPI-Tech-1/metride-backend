@@ -11,10 +11,10 @@ export default class UpdateDocumentsController {
 
     const dbTransaction = await db.transaction()
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
       const documents = await DriverDocumentActions.updateDriverDocumentRecord({
-        identifierOptions: { identifier: loggedDriver.id, identifierType: 'driverId' },
+        identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: payload,
         dbTransactionOptions: { useTransaction: false },
       })

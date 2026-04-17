@@ -1,10 +1,13 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const customerRequestResetPasswordOtpTokenRequestSchema = vine.object({
-  emailAddress: vine.string().trim().escape().email(),
+  email: vine.string().trim().escape().email(),
 })
 
-const messages = {}
+const messages = {
+  'email.required': 'Email address is required',
+  'email.email': 'Please enter a valid email address',
+}
 
 const CustomerRequestResetPasswordOtpTokenRequestValidator = vine.compile(
   customerRequestResetPasswordOtpTokenRequestSchema

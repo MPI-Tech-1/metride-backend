@@ -6,10 +6,10 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 export default class GetVehicleInformationController {
   async handle({ response, auth }: HttpContext) {
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
       const vehicleInformation = await DriverVehicleActions.getDriverVehicle({
-        identifier: loggedDriver.id,
+        identifier: loggedInDriver.id,
         identifierType: 'driverId',
       })
 

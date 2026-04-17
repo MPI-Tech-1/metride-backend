@@ -9,13 +9,13 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 
 export default class ResetPasswordController {
   async handle({ request, response }: HttpContext) {
-    const { emailAddress, otpToken, newPassword } = await request.validateUsing(
+    const { email, otpToken, newPassword } = await request.validateUsing(
       CustomerResetPasswordRequestValidator
     )
 
     try {
       const customer = await CustomerActions.getCustomer({
-        identifier: emailAddress,
+        identifier: email,
         identifierType: 'email',
       })
 
@@ -27,7 +27,7 @@ export default class ResetPasswordController {
         })
       }
 
-      const otpTokenRecord = await OtpTokenActions.getOtpTokenByEmailAddress(emailAddress)
+      const otpTokenRecord = await OtpTokenActions.getOtpTokenByEmailAddress(email)
 
       if (!otpTokenRecord || otpTokenRecord.purpose !== 'password-reset') {
         return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
@@ -71,7 +71,7 @@ export default class ResetPasswordController {
       })
 
       await CustomerActions.updateCustomerRecord({
-        identifierOptions: { identifier: emailAddress, identifierType: 'email' },
+        identifierOptions: { identifier: email, identifierType: 'email' },
         updatePayload: { password: await hash.make(newPassword) },
         dbTransactionOptions: { useTransaction: false },
       })

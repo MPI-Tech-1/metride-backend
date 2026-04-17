@@ -8,14 +8,14 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 
 export default class VerifyAccountActivationTokenController {
   async handle({ request, response, auth }: HttpContext) {
-    const { emailAddress, token } = await request.validateUsing(
+    const { token } = await request.validateUsing(
       CustomerVerifyAccountActivationTokenRequestValidator
     )
 
     try {
-      const loggedCustomer = auth.use('customer').user!
+      const loggedInCustomer = auth.use('customer').user!
 
-      const otpToken = await OtpTokenActions.getOtpTokenByEmailAddress(emailAddress)
+      const otpToken = await OtpTokenActions.getOtpTokenByEmailAddress(loggedInCustomer.email)
 
       if (!otpToken) {
         return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
@@ -54,8 +54,8 @@ export default class VerifyAccountActivationTokenController {
       })
 
       await CustomerRegistrationStepActions.updateCustomerRegistrationStepRecord({
-        identifierOptions: { identifier: loggedCustomer.id, identifierType: 'customerId' },
-        updatePayload: { hasActivatedAccount: true },
+        identifierOptions: { identifier: loggedInCustomer.id, identifierType: 'customerId' },
+        updatePayload: { hasActivatedAccount: true, deletedAt: DateTime.now() },
         dbTransactionOptions: { useTransaction: false },
       })
 
@@ -63,9 +63,6 @@ export default class VerifyAccountActivationTokenController {
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Account successfully activated.',
-        results: {
-          customerIdentifier: loggedCustomer.identifier,
-        },
       })
     } catch (VerifyAccountActivationTokenControllerError) {
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({

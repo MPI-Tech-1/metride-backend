@@ -8,13 +8,13 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 
 export default class RequestResetPasswordOtpTokenController {
   async handle({ request, response }: HttpContext) {
-    const { emailAddress } = await request.validateUsing(
+    const { email } = await request.validateUsing(
       DriverRequestResetPasswordOtpTokenRequestValidator
     )
 
     try {
       const driver = await DriverActions.getDriver({
-        identifier: emailAddress,
+        identifier: email,
         identifierType: 'email',
       })
 
@@ -27,7 +27,7 @@ export default class RequestResetPasswordOtpTokenController {
       }
 
       await OtpTokenActions.updateOtpTokenRecord({
-        identifierOptions: { identifier: emailAddress, identifierType: 'email' },
+        identifierOptions: { identifier: email, identifierType: 'email' },
         updatePayload: { status: 'used' },
         dbTransactionOptions: { useTransaction: false },
       })
@@ -36,7 +36,7 @@ export default class RequestResetPasswordOtpTokenController {
 
       await OtpTokenActions.createOtpTokenRecord({
         createPayload: {
-          email: emailAddress,
+          email: email,
           token,
           purpose: 'password-reset',
           status: 'pending',
@@ -48,7 +48,7 @@ export default class RequestResetPasswordOtpTokenController {
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
-        message: `An OTP token has been sent to ${emailAddress}.`,
+        message: `An OTP token has been sent to ${email}.`,
       })
     } catch (RequestResetPasswordOtpTokenControllerError) {
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({

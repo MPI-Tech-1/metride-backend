@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('email').index()
       table.string('mobile_number')
       table.string('password')
+      table.string('fcm_token').nullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

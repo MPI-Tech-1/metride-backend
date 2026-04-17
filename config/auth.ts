@@ -7,18 +7,12 @@ const authConfig = defineConfig({
   /**
    * Default guard used when no guard is explicitly specified.
    */
-  default: 'api',
+  default: 'customer',
 
   guards: {
     /**
      * Token-based guard for stateless API authentication.
      */
-    api: tokensGuard({
-      provider: tokensUserProvider({
-        tokens: 'accessTokens',
-        model: () => import('#models/user'),
-      }),
-    }),
 
     customer: tokensGuard({
       provider: tokensUserProvider({

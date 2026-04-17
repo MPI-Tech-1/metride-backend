@@ -15,7 +15,7 @@ export default class UpdateBankAccountController {
 
     const dbTransaction = await db.transaction()
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
       const bank = await BankActions.getBank({
         identifierType: 'identifier',
@@ -23,7 +23,7 @@ export default class UpdateBankAccountController {
       })
 
       await DriverBankAccountActions.updateDriverBankAccountRecord({
-        identifierOptions: { identifier: loggedDriver.id, identifierType: 'driverId' },
+        identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: {
           bankId: bank?.id,
           accountName,
@@ -38,7 +38,7 @@ export default class UpdateBankAccountController {
       await DriverRegistrationStepActions.updateDriverRegistrationStepRecord({
         identifierOptions: {
           identifierType: 'driverId',
-          identifier: loggedDriver.id,
+          identifier: loggedInDriver.id,
         },
         updatePayload: {
           hasProvidedBankAccount: true,

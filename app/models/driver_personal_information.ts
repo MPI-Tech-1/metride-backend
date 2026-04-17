@@ -1,6 +1,8 @@
-import { column } from '@adonisjs/lucid/orm'
+import { belongsTo, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import AbstractModel from '#models/abstract_model'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import City from '#models/city'
 
 export default class DriverPersonalInformation extends AbstractModel {
   @column()
@@ -20,4 +22,7 @@ export default class DriverPersonalInformation extends AbstractModel {
 
   @column()
   declare nationalIdentificationNumber: string
+
+  @belongsTo(() => City)
+  declare city: BelongsTo<typeof City>
 }

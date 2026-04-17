@@ -5,7 +5,11 @@ const driverAuthenticateRequestSchema = vine.object({
   password: vine.string(),
 })
 
-const messages = {}
+const messages = {
+  'email.required': 'Email address is required',
+  'email.email': 'Please enter a valid email address',
+  'password.required': 'Password is required',
+}
 
 const DriverAuthenticateRequestValidator = vine.compile(driverAuthenticateRequestSchema)
 

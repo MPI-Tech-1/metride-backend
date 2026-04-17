@@ -29,5 +29,23 @@ export interface ApiDefinition {
       driverRequestResetPasswordOtpToken: typeof routes['driver.password-management.driver_request_reset_password_otp_token']
       driverResetPassword: typeof routes['driver.password-management.driver_reset_password']
     }
+    profile: {
+      getPersonalInformation: typeof routes['driver.profile.get_personal_information']
+      updatePersonalInformation: typeof routes['driver.profile.update_personal_information']
+      getVehicleInformation: typeof routes['driver.profile.get_vehicle_information']
+      updateVehicleInformation: typeof routes['driver.profile.update_vehicle_information']
+      getBankAccount: typeof routes['driver.profile.get_bank_account']
+      updateBankAccount: typeof routes['driver.profile.update_bank_account']
+      getDocuments: typeof routes['driver.profile.get_documents']
+      updateDocuments: typeof routes['driver.profile.update_documents']
+    }
+  }
+  common: {
+    location: {
+      fetchCities: typeof routes['common.location.fetch_cities']
+    }
+    finance: {
+      fetchBanks: typeof routes['common.finance.fetch_banks']
+    }
   }
 }

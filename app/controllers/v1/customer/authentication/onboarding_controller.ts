@@ -15,9 +15,8 @@ import CustomerRegistrationStepActions from '#model_management/actions/customer_
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
-    const { firstName, lastName, mobileNumber, password, fcmToken } = await request.validateUsing(
-      CustomerOnboardingRequestValidator
-    )
+    const { firstName, lastName, mobileNumber, password, fcmToken, email } =
+      await request.validateUsing(CustomerOnboardingRequestValidator)
 
     const dbTransaction = await db.transaction()
 
@@ -26,6 +25,7 @@ export default class OnboardingController {
         createPayload: {
           firstName,
           lastName,
+          email,
           mobileNumber,
           password: await hash.make(password),
           fcmToken,

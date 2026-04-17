@@ -5,17 +5,13 @@ const GetPersonalInformationController = () =>
   import('#controllers/v1/driver/profile/personal_information/get_personal_information_controller')
 
 const UpdatePersonalInformationController = () =>
-  import(
-    '#controllers/v1/driver/profile/personal_information/update_personal_information_controller'
-  )
+  import('#controllers/v1/driver/profile/personal_information/update_personal_information_controller')
 
 const GetVehicleInformationController = () =>
   import('#controllers/v1/driver/profile/vehicle_information/get_vehicle_information_controller')
 
 const UpdateVehicleInformationController = () =>
-  import(
-    '#controllers/v1/driver/profile/vehicle_information/update_vehicle_information_controller'
-  )
+  import('#controllers/v1/driver/profile/vehicle_information/update_vehicle_information_controller')
 
 const GetBankAccountController = () =>
   import('#controllers/v1/driver/profile/bank_account/get_bank_account_controller')
@@ -43,6 +39,6 @@ router
     router.get('/documents', [GetDocumentsController])
     router.patch('/documents', [UpdateDocumentsController])
   })
-  .prefix('/v1/drivers/profile')
+  .prefix('/api/v1/drivers/profile')
   .as('driver.profile')
   .use(middleware.auth({ guards: ['driver'] }))

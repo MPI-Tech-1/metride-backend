@@ -5,6 +5,14 @@
 
 export const controllers = {
   v1: {
+    common: {
+      finance: {
+        FetchBanks: () => import('#controllers/v1/common/finance/fetch_banks_controller'),
+      },
+      location: {
+        FetchCities: () => import('#controllers/v1/common/location/fetch_cities_controller'),
+      },
+    },
     customer: {
       accountActivation: {
         RequestAccountActivationToken: () => import('#controllers/v1/customer/account_activation/request_account_activation_token_controller'),
@@ -34,6 +42,24 @@ export const controllers = {
         resetPassword: {
           RequestResetPasswordOtpToken: () => import('#controllers/v1/driver/password_management/reset_password/request_reset_password_otp_token_controller'),
           ResetPassword: () => import('#controllers/v1/driver/password_management/reset_password/reset_password_controller'),
+        },
+      },
+      profile: {
+        bankAccount: {
+          GetBankAccount: () => import('#controllers/v1/driver/profile/bank_account/get_bank_account_controller'),
+          UpdateBankAccount: () => import('#controllers/v1/driver/profile/bank_account/update_bank_account_controller'),
+        },
+        documents: {
+          GetDocuments: () => import('#controllers/v1/driver/profile/documents/get_documents_controller'),
+          UpdateDocuments: () => import('#controllers/v1/driver/profile/documents/update_documents_controller'),
+        },
+        personalInformation: {
+          GetPersonalInformation: () => import('#controllers/v1/driver/profile/personal_information/get_personal_information_controller'),
+          UpdatePersonalInformation: () => import('#controllers/v1/driver/profile/personal_information/update_personal_information_controller'),
+        },
+        vehicleInformation: {
+          GetVehicleInformation: () => import('#controllers/v1/driver/profile/vehicle_information/get_vehicle_information_controller'),
+          UpdateVehicleInformation: () => import('#controllers/v1/driver/profile/vehicle_information/update_vehicle_information_controller'),
         },
       },
     },

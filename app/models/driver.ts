@@ -23,7 +23,7 @@ export default class Driver extends AbstractModel {
   @column()
   declare fcmToken: string
 
-  @hasOne(() => DriverRegistrationStep, { foreignKey: 'customerId' })
+  @hasOne(() => DriverRegistrationStep)
   declare driverRegistrationStep: HasOne<typeof DriverRegistrationStep>
 
   static accessTokens = DbAccessTokensProvider.forModel(Driver, {

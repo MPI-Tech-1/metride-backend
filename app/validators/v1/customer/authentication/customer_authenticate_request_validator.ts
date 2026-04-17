@@ -5,7 +5,11 @@ const customerAuthenticateRequestSchema = vine.object({
   password: vine.string(),
 })
 
-const messages = {}
+const messages = {
+  'email.required': 'Email address is required',
+  'email.email': 'Please enter a valid email address',
+  'password.required': 'Password is required',
+}
 
 const CustomerAuthenticateRequestValidator = vine.compile(customerAuthenticateRequestSchema)
 

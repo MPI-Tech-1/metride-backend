@@ -6,17 +6,22 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 export default class GetPersonalInformationController {
   async handle({ response, auth }: HttpContext) {
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
       const personalInformation =
         await DriverPersonalInformationActions.getDriverPersonalInformation({
-          identifier: loggedDriver.id,
+          identifier: loggedInDriver.id,
           identifierType: 'driverId',
         })
 
       const mutatedResponse = {
         identifier: personalInformation?.identifier,
-        cityId: personalInformation?.cityId,
+        city: personalInformation?.cityId
+          ? {
+              identifier: personalInformation?.city.identifier,
+              name: personalInformation?.city.name,
+            }
+          : null,
         dateOfBirth: personalInformation?.dateOfBirth,
         gender: personalInformation?.gender,
         homeAddress: personalInformation?.homeAddress,

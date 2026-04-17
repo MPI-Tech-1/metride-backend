@@ -11,5 +11,5 @@ router
     router.post('/onboarding', [OnboardingController])
     router.post('/authenticate', [AuthenticateCustomerController])
   })
-  .prefix('/v1/customers/authentication')
+  .prefix('/api/v1/customers/authentication')
   .as('customer.authentication')

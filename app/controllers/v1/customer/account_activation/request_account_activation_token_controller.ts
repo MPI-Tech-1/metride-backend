@@ -7,10 +7,10 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 export default class RequestAccountActivationTokenController {
   async handle({ response, auth }: HttpContext) {
     try {
-      const loggedCustomer = auth.use('customer').user!
+      const loggedInCustomer = auth.use('customer').user!
 
       await OtpTokenActions.updateOtpTokenRecord({
-        identifierOptions: { identifier: loggedCustomer.email!, identifierType: 'email' },
+        identifierOptions: { identifier: loggedInCustomer.email!, identifierType: 'email' },
         updatePayload: { status: 'used' },
         dbTransactionOptions: { useTransaction: false },
       })
@@ -19,7 +19,7 @@ export default class RequestAccountActivationTokenController {
 
       await OtpTokenActions.createOtpTokenRecord({
         createPayload: {
-          email: loggedCustomer.email,
+          email: loggedInCustomer.email,
           token,
           purpose: 'account-activation',
           status: 'pending',
@@ -31,7 +31,7 @@ export default class RequestAccountActivationTokenController {
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
-        message: `An activation token has been sent to ${loggedCustomer.email}.`,
+        message: `An activation token has been sent to ${loggedInCustomer.email}.`,
       })
     } catch (RequestAccountActivationTokenControllerError) {
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({

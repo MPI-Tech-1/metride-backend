@@ -19,9 +19,8 @@ import DriverBankAccountActions from '#model_management/actions/driver_bank_acco
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
-    const { firstName, lastName, mobileNumber, password, fcmToken } = await request.validateUsing(
-      DriverOnboardingRequestValidator
-    )
+    const { firstName, lastName, mobileNumber, password, fcmToken, email } =
+      await request.validateUsing(DriverOnboardingRequestValidator)
 
     const dbTransaction = await db.transaction()
 
@@ -30,6 +29,7 @@ export default class OnboardingController {
         createPayload: {
           firstName,
           lastName,
+          email,
           mobileNumber,
           password: await hash.make(password),
           fcmToken,
@@ -103,6 +103,7 @@ export default class OnboardingController {
       })
     } catch (OnboardingControllerError) {
       await dbTransaction.rollback()
+      console.log('OnboardingControllerError -> ', OnboardingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

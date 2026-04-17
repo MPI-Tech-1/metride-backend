@@ -9,10 +9,10 @@ export default class UpdateVehicleInformationController {
     const payload = await request.validateUsing(UpdateVehicleInformationRequestValidator)
 
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
       const vehicleInformation = await DriverVehicleActions.updateDriverVehicleRecord({
-        identifierOptions: { identifier: loggedDriver.id, identifierType: 'driverId' },
+        identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: payload,
         dbTransactionOptions: { useTransaction: false },
       })

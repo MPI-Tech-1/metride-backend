@@ -22,8 +22,8 @@ export default class AuthenticateDriverController {
       })
 
       if (driver === null) {
-        return response.status(HttpStatusCodesEnum.UNAUTHORIZED).send({
-          status_code: HttpStatusCodesEnum.UNAUTHORIZED,
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
           status: ERROR,
           message: 'Invalid credentials.',
         })
@@ -32,8 +32,8 @@ export default class AuthenticateDriverController {
       const isPasswordValid = await hash.verify(driver.password!, password)
 
       if (!isPasswordValid) {
-        return response.status(HttpStatusCodesEnum.UNAUTHORIZED).send({
-          status_code: HttpStatusCodesEnum.UNAUTHORIZED,
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
           status: ERROR,
           message: 'Invalid credentials.',
         })
@@ -52,7 +52,8 @@ export default class AuthenticateDriverController {
           hasVerifiedAccount: driver.driverRegistrationStep.hasActivatedAccount,
           hasProvidedPersonalInformation:
             driver.driverRegistrationStep.hasProvidedPersonalInformation,
-          hasProvidedVehicleInformation: driver.driverRegistrationStep.hasProvidedVehicleInformation,
+          hasProvidedVehicleInformation:
+            driver.driverRegistrationStep.hasProvidedVehicleInformation,
           hasProvidedRequiredDocuments: driver.driverRegistrationStep.hasProvidedRequiredDocuments,
         },
         accessCredentials,
@@ -65,6 +66,7 @@ export default class AuthenticateDriverController {
         results: mutatedDriverPayload,
       })
     } catch (AuthenticateDriverControllerError) {
+      console.log(AuthenticateDriverControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

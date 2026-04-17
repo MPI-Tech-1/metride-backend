@@ -6,20 +6,22 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 export default class GetBankAccountController {
   async handle({ response, auth }: HttpContext) {
     try {
-      const loggedDriver = auth.use('driver').user!
+      const loggedInDriver = auth.use('driver').user!
 
       const bankAccount = await DriverBankAccountActions.getDriverBankAccount({
-        identifier: loggedDriver.id,
+        identifier: loggedInDriver.id,
         identifierType: 'driverId',
       })
 
       const mutatedResponse = {
         identifier: bankAccount?.identifier,
 
-        bank: {
-          identifier: bankAccount?.bank.identifier,
-          name: bankAccount?.bank.name,
-        },
+        bank: bankAccount?.bankId
+          ? {
+              identifier: bankAccount?.bank.identifier,
+              name: bankAccount?.bank.name,
+            }
+          : null,
         accountName: bankAccount?.accountName,
 
         accountNumber: bankAccount?.accountNumber,
@@ -32,6 +34,7 @@ export default class GetBankAccountController {
         results: mutatedResponse,
       })
     } catch (GetBankAccountControllerError) {
+      return GetBankAccountControllerError
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

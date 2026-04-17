@@ -11,5 +11,5 @@ router
     router.post('/onboarding', [DriverOnboardingController])
     router.post('/authenticate', [AuthenticateDriverController])
   })
-  .prefix('/v1/drivers/authentication')
+  .prefix('/api/v1/drivers/authentication')
   .as('driver.authentication')
