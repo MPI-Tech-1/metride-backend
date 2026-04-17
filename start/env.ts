@@ -51,4 +51,16 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   PAYSTACK_BANK_LIST_PROVIDER_SECRET_KEY: Env.schema.string(),
   PAYSTACK_BANK_LIST_PROVIDER_ENDPOINT: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring image upload
+  |----------------------------------------------------------
+  */
+  CURRENT_MEDIA_UPLOAD_PROVIDER: Env.schema.string(),
+
+  CLOUDINARY_CLOUD_NAME: Env.schema.string(),
+  CLOUDINARY_API_KEY: Env.schema.string(),
+  CLOUDINARY_API_SECRET: Env.schema.secret(),
+  CLOUDINARY_DEFAULT_FOLDER: Env.schema.string(),
 })

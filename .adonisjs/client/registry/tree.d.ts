@@ -51,5 +51,8 @@ export interface ApiDefinition {
       fetchVehicleModels: typeof routes['common.vehicle.fetch_vehicle_models']
       fetchVehicleMakesControllers: typeof routes['common.vehicle.fetch_vehicle_makes_controllers']
     }
+    media: {
+      uploadImage: typeof routes['common.media.upload_image']
+    }
   }
 }

@@ -295,4 +295,16 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'common.media.upload_image': {
+    methods: ["POST"]
+    pattern: '/api/v1/common/media/image'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/common/media/upload_image_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/common/media/upload_image_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/common/media/upload_image_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/media/upload_image_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
 }

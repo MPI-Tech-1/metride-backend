@@ -150,6 +150,12 @@ const routes = {
     tokens: [{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"api","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"v1","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"common","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"vehicle","end":""},{"old":"/api/v1/common/vehicle/vehicle-makes","type":0,"val":"vehicle-makes","end":""}],
     types: placeholder as Registry['common.vehicle.fetch_vehicle_makes_controllers']['types'],
   },
+  'common.media.upload_image': {
+    methods: ["POST"],
+    pattern: '/api/v1/common/media/image',
+    tokens: [{"old":"/api/v1/common/media/image","type":0,"val":"api","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"v1","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"common","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"media","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"image","end":""}],
+    types: placeholder as Registry['common.media.upload_image']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

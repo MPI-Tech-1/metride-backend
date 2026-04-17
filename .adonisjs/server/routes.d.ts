@@ -28,6 +28,7 @@ export type ScannedRoutes = {
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_makes_controllers': { paramsTuple?: []; params?: {} }
+    'common.media.upload_image': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
@@ -42,6 +43,7 @@ export type ScannedRoutes = {
     'driver.account-activation.driver_verify_account_activation_token': { paramsTuple?: []; params?: {} }
     'driver.password-management.driver_request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
     'driver.password-management.driver_reset_password': { paramsTuple?: []; params?: {} }
+    'common.media.upload_image': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
