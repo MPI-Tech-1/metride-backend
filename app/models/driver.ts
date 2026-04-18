@@ -3,6 +3,7 @@ import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
 import AbstractModel from '#models/abstract_model'
 import DriverRegistrationStep from '#models/driver_registration_step'
+import { DateTime } from 'luxon'
 
 export default class Driver extends AbstractModel {
   @column()
@@ -22,6 +23,9 @@ export default class Driver extends AbstractModel {
 
   @column()
   declare fcmToken: string
+
+  @column()
+  declare lastLoggedInAt: DateTime
 
   @hasOne(() => DriverRegistrationStep)
   declare driverRegistrationStep: HasOne<typeof DriverRegistrationStep>

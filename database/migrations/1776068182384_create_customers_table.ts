@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.string('mobile_number')
       table.string('password')
       table.text('fcm_token').nullable()
+      table.timestamp('last_logged_in_at').nullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

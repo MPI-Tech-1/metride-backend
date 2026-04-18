@@ -1,10 +1,16 @@
 import { HttpContext } from '@adonisjs/core/http'
-import { DateTime } from 'luxon'
 import OtpTokenActions from '#model_management/actions/otp_token_actions'
 import CustomerActions from '#model_management/actions/customer_actions'
 import CustomerRequestResetPasswordOtpTokenRequestValidator from '#validators/v1/customer/password_management/customer_request_reset_password_otp_token_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
-import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import {
+  ERROR,
+  OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES,
+  SOMETHING_WENT_WRONG,
+  SUCCESS,
+} from '#common/messages/system_messages'
+import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
+import generateFutureDateTime from '#common/helper_functions/generate_future_date_time'
 
 export default class RequestResetPasswordOtpTokenController {
   async handle({ request, response }: HttpContext) {
@@ -32,17 +38,24 @@ export default class RequestResetPasswordOtpTokenController {
         dbTransactionOptions: { useTransaction: false },
       })
 
-      const token = Math.floor(100000 + Math.random() * 900000).toString()
-
-      await OtpTokenActions.createOtpTokenRecord({
+      const createdOtpToken = await OtpTokenActions.createOtpTokenRecord({
         createPayload: {
           email: email,
-          token,
+          token: OtpTokenActions.generateOtpToken(),
           purpose: 'password-reset',
           status: 'pending',
-          expiresAt: DateTime.now().plus({ minutes: 15 }),
+          expiresAt: generateFutureDateTime({
+            timeComponent: 'minutes',
+            futureTimeDuration: OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES,
+          }),
         },
         dbTransactionOptions: { useTransaction: false },
+      })
+
+      await NotificationDispatchClient.sendResetPasswordNotificationJob({
+        email: customer.email,
+        name: customer.firstName,
+        otpToken: createdOtpToken.token,
       })
 
       return response.status(HttpStatusCodesEnum.OK).send({

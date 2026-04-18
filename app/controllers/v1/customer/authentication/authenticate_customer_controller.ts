@@ -10,10 +10,13 @@ import {
   SUCCESS,
 } from '#common/messages/system_messages'
 import CustomerActions from '#model_management/actions/customer_actions'
+import { DateTime } from 'luxon'
 
 export default class AuthenticateCustomerController {
   async handle({ request, response }: HttpContext) {
-    const { email, password } = await request.validateUsing(CustomerAuthenticateRequestValidator)
+    const { email, password, fcmToken } = await request.validateUsing(
+      CustomerAuthenticateRequestValidator
+    )
 
     try {
       const customer = await CustomerActions.getCustomer({
@@ -39,6 +42,19 @@ export default class AuthenticateCustomerController {
         })
       }
 
+      await CustomerActions.updateCustomerRecord({
+        identifierOptions: {
+          identifierType: 'email',
+          identifier: email,
+        },
+        updatePayload: {
+          fcmToken,
+          lastLoggedInAt: DateTime.now(),
+        },
+        dbTransactionOptions: {
+          useTransaction: false,
+        },
+      })
       const accessCredentials = await Customer.accessTokens.create(customer, ['*'], {
         expiresIn: `${ACCESS_TOKEN_EXPIRATION_TIME_FRAME_IN_MINUTES} minutes`,
       })

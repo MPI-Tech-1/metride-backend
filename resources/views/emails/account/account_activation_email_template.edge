@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <meta name="viewport" content="width=device-width">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Activate Your Account</title>
+          
+          <style>
+            @media only screen and (max-width: 620px) {
+            table[class=body] p,
+            table[class=body] td,
+            table[class=body] span {
+            font-size: 16px !important;
+            }
+            
+            table[class=body] .wrapper {
+            padding: 10px !important;
+            }
+            
+            table[class=body] .container {
+            width: 100% !important;
+            padding: 0 !important;
+            }
+            }
+            
+            body,
+            p {
+            font-family: Arial, sans-serif;
+            }
+            
+            .otp-box {
+            background: #f8f4ef;
+            padding: 20px;
+            text-align: center;
+            border-radius: 6px;
+            margin: 25px 0;
+            border: 1px solid #bb9267;
+            }
+            
+            .otp-code {
+            font-size: 30px;
+            letter-spacing: 6px;
+            font-weight: bold;
+            color: #bb9267;
+            }
+          </style>
+  </head>
+  
+  <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
+    <table class="body" width="100%" style="background-color: #f6f6f6;">
+      <tr>
+        <td></td>
+          <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
+            <div class="content" style="max-width: 580px; margin: 0 auto;">
+              
+              <table class="main" width="100%" style="background: #ffffff; border-radius: 6px;">
+                
+                <!-- HEADER BAR -->
+                <tr style="background-color: #bb9267;">
+          <td style="padding: 15px;"></td>
+                </tr>
+                
+                <tr>
+                  <td style="padding: 25px 35px;">
+                    
+                    <!-- LOGO -->
+                    <img src="https://res.cloudinary.com/dy4l3lrx1/image/upload/v1776506387/general/jnereh5fodzx08ejftds.png"
+                    width="120"
+                    style="display:block; border:none; outline:none;"
+                    alt="logo">
+                    
+                    <h2 style="color: #333; margin-top: 20px;">
+                      Activate Your Account
+                    </h2>
+                    
+                    <p>Hello {{ recipientFirstName }},</p>
+                      
+                      <p>
+                        Welcome to <strong>{{ sentenceCase(env('BUSINESS_NAME')) }}</strong> 🎉<br><br>
+                              To complete your registration, please use the One-Time Password (OTP) below:
+                      </p>
+                      
+                      <!-- OTP -->
+                      <div class="otp-box">
+                        <div class="otp-code">
+                          {{ otpToken }}
+                        </div>
+                      </div>
+                      
+                      <p>
+                        This code will expire in <strong>{{ env('OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES') }} minutes</strong>.
+                      </p>
+                      
+                      <p>
+                        <strong style="color:#bb9267;">Do not share this code with anyone.</strong>
+                      </p>
+                      
+                      <p>
+                        If you did not create this account, you can safely ignore this email.
+                      </p>
+                      
+                      <p>
+                        Warm Regards,<br>
+                        <strong>The {{ sentenceCase(env('BUSINESS_NAME')) }} Team</strong>
+                      </p>
+                      
+                  </td>
+                </tr>
+                
+                <!-- FOOTER -->
+                <tr>
+                  <td style="padding: 20px 35px; background-color: #fafbfd;">
+                    <p style="font-size: 11px; color: #666;">
+                      Do not reply to this email as it was automatically generated.
+                    </p>
+                    
+                    <p style="font-size: 11px; color: #666;">
+                      You are receiving this email because you registered on {{ sentenceCase(env('BUSINESS_NAME')) }}.
+                    </p>
+                    
+                    <p style="font-size: 11px; color: #666;">
+                      &copy; {{ currentYear() }} {{ sentenceCase(env('BUSINESS_NAME')) }}. All Rights Reserved.
+                    </p>
+                  </td>
+                </tr>
+                
+              </table>
+              
+            </div>
+          </td>
+        <td></td>
+      </tr>
+    </table>
+  </body>
+  
+</html>

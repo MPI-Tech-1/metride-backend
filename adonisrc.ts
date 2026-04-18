@@ -29,7 +29,8 @@ export default defineConfig({
     () => import('@adonisjs/lucid/commands'),
     () => import('@adonisjs/session/commands'),
     () => import('@adonisjs/queue/commands'),
-    () => import('@adonisjs/cache/commands')
+    () => import('@adonisjs/cache/commands'),
+    () => import('@adonisjs/mail/commands'),
   ],
 
   /*
@@ -57,7 +58,9 @@ export default defineConfig({
     () => import('#providers/api_provider'),
     () => import('@adonisjs/queue/queue_provider'),
     () => import('@adonisjs/cache/cache_provider'),
-    () => import('@adonisjs/redis/redis_provider')
+    () => import('@adonisjs/redis/redis_provider'),
+    () => import('@adonisjs/mail/mail_provider'),
+    () => import('@adonisjs/core/providers/edge_provider'),
   ],
 
   /*
@@ -72,10 +75,11 @@ export default defineConfig({
     () => import('#start/routes'),
     () => import('#start/kernel'),
     () => import('#start/validator'),
+    () => import('#start/views'),
     {
       file: () => import('#start/scheduler'),
       environment: ['web'],
-    }
+    },
   ],
 
   /*
@@ -112,7 +116,12 @@ export default defineConfig({
   | the production build.
   |
   */
-  metaFiles: [],
+  metaFiles: [
+    {
+      pattern: 'resources/views/**/*.edge',
+      reloadServer: false,
+    },
+  ],
 
   hooks: {
     init: [

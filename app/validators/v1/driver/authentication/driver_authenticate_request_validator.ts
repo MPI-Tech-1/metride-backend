@@ -3,6 +3,7 @@ import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 const driverAuthenticateRequestSchema = vine.object({
   email: vine.string().trim().escape(),
   password: vine.string(),
+  fcmToken: vine.string().trim().escape().optional(),
 })
 
 const messages = {

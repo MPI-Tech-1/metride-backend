@@ -10,10 +10,13 @@ import {
   SUCCESS,
 } from '#common/messages/system_messages'
 import DriverActions from '#model_management/actions/driver_actions'
+import { DateTime } from 'luxon'
 
 export default class AuthenticateDriverController {
   async handle({ request, response }: HttpContext) {
-    const { email, password } = await request.validateUsing(DriverAuthenticateRequestValidator)
+    const { email, password, fcmToken } = await request.validateUsing(
+      DriverAuthenticateRequestValidator
+    )
 
     try {
       const driver = await DriverActions.getDriver({
@@ -38,6 +41,20 @@ export default class AuthenticateDriverController {
           message: 'Invalid credentials.',
         })
       }
+
+      await DriverActions.updateDriverRecord({
+        identifierOptions: {
+          identifierType: 'email',
+          identifier: email,
+        },
+        updatePayload: {
+          fcmToken,
+          lastLoggedInAt: DateTime.now(),
+        },
+        dbTransactionOptions: {
+          useTransaction: false,
+        },
+      })
 
       const accessCredentials = await Driver.accessTokens.create(driver, ['*'], {
         expiresIn: `${ACCESS_TOKEN_EXPIRATION_TIME_FRAME_IN_MINUTES} minutes`,

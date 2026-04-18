@@ -63,4 +63,21 @@ export default await Env.create(new URL('../', import.meta.url), {
   CLOUDINARY_API_KEY: Env.schema.string(),
   CLOUDINARY_API_SECRET: Env.schema.secret(),
   CLOUDINARY_DEFAULT_FOLDER: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the mail package
+  |----------------------------------------------------------
+  */
+  MAIL_MAILER: Env.schema.enum(['smtp'] as const),
+  MAIL_FROM_NAME: Env.schema.string(),
+  MAIL_FROM_ADDRESS: Env.schema.string(),
+  SMTP_HOST: Env.schema.string(),
+  SMTP_PORT: Env.schema.number(),
+  SMTP_USERNAME: Env.schema.string(),
+  SMTP_PASSWORD: Env.schema.string(),
+  BUSINESS_NAME: Env.schema.string(),
+
+  ACCESS_TOKEN_EXPIRATION_TIME_FRAME_IN_MINUTES: Env.schema.number(),
+  OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES: Env.schema.number(),
 })
