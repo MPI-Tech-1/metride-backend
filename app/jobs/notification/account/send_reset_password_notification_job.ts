@@ -3,7 +3,6 @@ import {
   RESET_PASSWORD_EMAIL_TEMPLATE,
 } from '#common/messages/email_types'
 import MailClient from '#infrastructure_providers/internals/mail_client'
-import { SEND_RESET_PASSWORD_NOTIFICATION_JOB } from '#jobs/job_queue_names'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 
@@ -15,7 +14,7 @@ export interface SendResetPasswordNotificationJobPayload {
 
 export default class SendResetPasswordNotificationJob extends Job<SendResetPasswordNotificationJobPayload> {
   static options: JobOptions = {
-    queue: SEND_RESET_PASSWORD_NOTIFICATION_JOB,
+    queue: 'default',
     maxRetries: 3,
   }
 

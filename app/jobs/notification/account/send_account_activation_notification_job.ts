@@ -3,7 +3,6 @@ import {
   ACCOUNT_ACTIVATION_EMAIL_TEMPLATE,
 } from '#common/messages/email_types'
 import MailClient from '#infrastructure_providers/internals/mail_client'
-import { SEND_ACCOUNT_ACTIVATION_NOTIFICATION_JOB } from '#jobs/job_queue_names'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 
@@ -15,7 +14,7 @@ export interface SendAccountActivationNotificationJobPayload {
 
 export default class SendAccountActivationNotificationJob extends Job<SendAccountActivationNotificationJobPayload> {
   static options: JobOptions = {
-    queue: SEND_ACCOUNT_ACTIVATION_NOTIFICATION_JOB,
+    queue: 'default',
     maxRetries: 3,
   }
 
