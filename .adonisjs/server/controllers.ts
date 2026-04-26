@@ -9,6 +9,14 @@ export const controllers = {
       authentication: {
         AuthenticateAdmin: () => import('#controllers/v1/admin/authentication/authenticate_admin_controller'),
       },
+      customerManagement: {
+        FetchCustomers: () => import('#controllers/v1/admin/customer_management/fetch_customers_controller'),
+        GetCustomer: () => import('#controllers/v1/admin/customer_management/get_customer_controller'),
+      },
+      driverManagement: {
+        FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),
+        GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
+      },
     },
     common: {
       finance: {
