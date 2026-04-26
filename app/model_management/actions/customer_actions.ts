@@ -80,9 +80,19 @@ export default class CustomerActions {
   public static async listCustomers(
     getCustomerRecordOptions: ListCustomerRecordsOptions
   ): Promise<{ customerPayload: Customer[]; paginationMeta?: any }> {
-    const { paginationPayload } = getCustomerRecordOptions
+    const { filterRecordOptionsPayload, paginationPayload } = getCustomerRecordOptions
 
     const customerQuery = Customer.query().preload('customerRegistrationStep')
+
+    if (filterRecordOptionsPayload?.searchQuery) {
+      const searchValue = `${filterRecordOptionsPayload.searchQuery}%`
+
+      customerQuery
+        .whereILike('first_name', searchValue)
+        .orWhereILike('last_name', searchValue)
+        .orWhereILike('email', searchValue)
+        .orWhereILike('mobile_number', searchValue)
+    }
 
     if (paginationPayload) {
       const customers = await customerQuery
