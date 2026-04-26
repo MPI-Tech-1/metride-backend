@@ -5,6 +5,11 @@
 
 export const controllers = {
   v1: {
+    admin: {
+      authentication: {
+        AuthenticateAdmin: () => import('#controllers/v1/admin/authentication/authenticate_admin_controller'),
+      },
+    },
     common: {
       finance: {
         FetchBanks: () => import('#controllers/v1/common/finance/fetch_banks_controller'),

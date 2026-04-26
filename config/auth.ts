@@ -28,6 +28,13 @@ const authConfig = defineConfig({
       }),
     }),
 
+    admin: tokensGuard({
+      provider: tokensUserProvider({
+        tokens: 'accessTokens',
+        model: () => import('#models/admin'),
+      }),
+    }),
+
     /**
      * Session-based guard for browser authentication.
      */
