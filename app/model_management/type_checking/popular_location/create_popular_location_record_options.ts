@@ -1,0 +1,9 @@
+import PopularLocationInterface from '#model_management/type_checking/popular_location/popular_location_interface'
+import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreatePopularLocationRecordPayload = Partial<PopularLocationInterface>
+
+type CreatePopularLocationRecordOptions =
+  CreateNewRecordGeneric<CreatePopularLocationRecordPayload>
+
+export default CreatePopularLocationRecordOptions

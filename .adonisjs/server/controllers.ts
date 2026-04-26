@@ -17,8 +17,28 @@ export const controllers = {
         FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
       },
+      settings: {
+        booking: {
+          popularLocations: {
+            CreatePopularLocation: () => import('#controllers/v1/admin/settings/booking/popular_locations/create_popular_location_controller'),
+            FetchPopularLocations: () => import('#controllers/v1/admin/settings/booking/popular_locations/fetch_popular_locations_controller'),
+            GetPopularLocation: () => import('#controllers/v1/admin/settings/booking/popular_locations/get_popular_location_controller'),
+            UpdatePopularLocation: () => import('#controllers/v1/admin/settings/booking/popular_locations/update_popular_location_controller'),
+          },
+          rideTypes: {
+            CreateRideType: () => import('#controllers/v1/admin/settings/booking/ride_types/create_ride_type_controller'),
+            FetchRideTypes: () => import('#controllers/v1/admin/settings/booking/ride_types/fetch_ride_types_controller'),
+            GetRideType: () => import('#controllers/v1/admin/settings/booking/ride_types/get_ride_type_controller'),
+            UpdateRideType: () => import('#controllers/v1/admin/settings/booking/ride_types/update_ride_type_controller'),
+          },
+        },
+      },
     },
     common: {
+      booking: {
+        FetchPopularLocations: () => import('#controllers/v1/common/booking/fetch_popular_locations_controller'),
+        FetchRideTypes: () => import('#controllers/v1/common/booking/fetch_ride_types_controller'),
+      },
       finance: {
         FetchBanks: () => import('#controllers/v1/common/finance/fetch_banks_controller'),
       },

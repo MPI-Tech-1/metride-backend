@@ -10,6 +10,15 @@ const FetchRideTypesController = () =>
 const GetRideTypeController = () =>
   import('#controllers/v1/admin/settings/booking/ride_types/get_ride_type_controller')
 
+const CreatePopularLocationController = () =>
+  import('#controllers/v1/admin/settings/booking/popular_locations/create_popular_location_controller')
+const UpdatePopularLocationController = () =>
+  import('#controllers/v1/admin/settings/booking/popular_locations/update_popular_location_controller')
+const FetchPopularLocationsController = () =>
+  import('#controllers/v1/admin/settings/booking/popular_locations/fetch_popular_locations_controller')
+const GetPopularLocationController = () =>
+  import('#controllers/v1/admin/settings/booking/popular_locations/get_popular_location_controller')
+
 router
   .group(() => {
     router
@@ -22,6 +31,14 @@ router
             router.get('/:identifier', [GetRideTypeController])
           })
           .prefix('/ride-types')
+        router
+          .group(() => {
+            router.post('/', [CreatePopularLocationController])
+            router.patch('/:identifier', [UpdatePopularLocationController])
+            router.get('/', [FetchPopularLocationsController])
+            router.get('/:identifier', [GetPopularLocationController])
+          })
+          .prefix('/popular-locations')
       })
       .prefix('/booking')
   })
