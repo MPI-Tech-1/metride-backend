@@ -1,7 +1,7 @@
-import CreateCityRecordOptions from '#model_management/type_checking/city/create_city_record_options'
-import ListCityRecordsOptions from '#model_management/type_checking/city/list_city_records_options'
-import UpdateCityRecordOptions from '#model_management/type_checking/city/update_city_record_options'
-import CityIdentifierOptions from '#model_management/type_checking/city/city_identifier_options'
+import type CreateCityRecordOptions from '#model_management/type_checking/city/create_city_record_options'
+import type ListCityRecordsOptions from '#model_management/type_checking/city/list_city_records_options'
+import type UpdateCityRecordOptions from '#model_management/type_checking/city/update_city_record_options'
+import type CityIdentifierOptions from '#model_management/type_checking/city/city_identifier_options'
 import City from '#models/city'
 
 export default class CityActions {

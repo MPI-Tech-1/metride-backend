@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import hash from '@adonisjs/core/services/hash'
 import Driver from '#models/driver'
 import DriverAuthenticateRequestValidator from '#validators/v1/driver/authentication/driver_authenticate_request_validator'

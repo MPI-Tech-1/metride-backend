@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import hash from '@adonisjs/core/services/hash'
 import CustomerActions from '#model_management/actions/customer_actions'
 import CustomerOnboardingRequestValidator from '#validators/v1/customer/authentication/customer_onboarding_request_validator'

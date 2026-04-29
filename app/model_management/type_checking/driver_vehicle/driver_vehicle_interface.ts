@@ -1,3 +1,3 @@
-import DriverVehicle from '#models/driver_vehicle'
+import type DriverVehicle from '#models/driver_vehicle'
 
 export default interface DriverVehicleInterface extends DriverVehicle {}

@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import hash from '@adonisjs/core/services/hash'
 import DriverActions from '#model_management/actions/driver_actions'
 import DriverOnboardingRequestValidator from '#validators/v1/driver/authentication/driver_onboarding_request_validator'
@@ -16,6 +16,7 @@ import DriverPersonalInformationActions from '#model_management/actions/driver_p
 import DriverVehicleActions from '#model_management/actions/driver_vehicle_actions'
 import DriverDocumentActions from '#model_management/actions/driver_document_actions'
 import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
+import DriverApprovalStepActions from '#model_management/actions/driver_approval_step_actions'
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
@@ -72,6 +73,14 @@ export default class OnboardingController {
       await DriverBankAccountActions.createDriverBankAccountRecord({
         createPayload: {
           driverId: driver.id,
+        },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
+      })
+
+      await DriverApprovalStepActions.createDriverApprovalStepRecord({
+        createPayload: {
+          driverId: driver.id,
+          status: 'pending',
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })

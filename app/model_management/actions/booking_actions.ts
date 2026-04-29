@@ -1,7 +1,7 @@
-import CreateBookingRecordOptions from '#model_management/type_checking/booking/create_booking_record_options'
-import ListBookingRecordsOptions from '#model_management/type_checking/booking/list_booking_records_options'
-import UpdateBookingRecordOptions from '#model_management/type_checking/booking/update_booking_record_options'
-import BookingIdentifierOptions from '#model_management/type_checking/booking/booking_identifier_options'
+import type CreateBookingRecordOptions from '#model_management/type_checking/booking/create_booking_record_options'
+import type ListBookingRecordsOptions from '#model_management/type_checking/booking/list_booking_records_options'
+import type UpdateBookingRecordOptions from '#model_management/type_checking/booking/update_booking_record_options'
+import type BookingIdentifierOptions from '#model_management/type_checking/booking/booking_identifier_options'
 import Booking from '#models/booking'
 
 export default class BookingActions {
@@ -22,7 +22,11 @@ export default class BookingActions {
   }
 
   public static async getBookingById(bookingId: number): Promise<Booking | null> {
-    return await Booking.query().preload('rideType').preload('bookingPayment').where('id', bookingId).first()
+    return await Booking.query()
+      .preload('rideType')
+      .preload('bookingPayment')
+      .where('id', bookingId)
+      .first()
   }
 
   public static async getBookingByIdentifier(bookingIdentifier: string): Promise<Booking | null> {
@@ -33,7 +37,9 @@ export default class BookingActions {
       .first()
   }
 
-  public static async getBooking(getBookingOptions: BookingIdentifierOptions): Promise<Booking | null> {
+  public static async getBooking(
+    getBookingOptions: BookingIdentifierOptions
+  ): Promise<Booking | null> {
     const { identifier, identifierType } = getBookingOptions
 
     const GetBookingIdentifierOptions: Record<string, Function> = {

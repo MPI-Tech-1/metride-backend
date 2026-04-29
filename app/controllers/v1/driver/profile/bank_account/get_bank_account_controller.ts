@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
@@ -34,7 +34,6 @@ export default class GetBankAccountController {
         results: mutatedResponse,
       })
     } catch (GetBankAccountControllerError) {
-      return GetBankAccountControllerError
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

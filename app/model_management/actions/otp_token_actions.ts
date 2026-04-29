@@ -1,7 +1,7 @@
-import CreateOtpTokenRecordOptions from '#model_management/type_checking/otp_token/create_otp_token_record_options'
-import ListOtpTokenRecordsOptions from '#model_management/type_checking/otp_token/list_otp_token_records_options'
-import UpdateOtpTokenRecordOptions from '#model_management/type_checking/otp_token/update_otp_token_record_options'
-import OtpTokenIdentifierOptions from '#model_management/type_checking/otp_token/otp_token_identifier_options'
+import type CreateOtpTokenRecordOptions from '#model_management/type_checking/otp_token/create_otp_token_record_options'
+import type ListOtpTokenRecordsOptions from '#model_management/type_checking/otp_token/list_otp_token_records_options'
+import type UpdateOtpTokenRecordOptions from '#model_management/type_checking/otp_token/update_otp_token_record_options'
+import type OtpTokenIdentifierOptions from '#model_management/type_checking/otp_token/otp_token_identifier_options'
 import OtpToken from '#models/otp_token'
 
 export default class OtpTokenActions {

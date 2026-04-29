@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import OtpTokenActions from '#model_management/actions/otp_token_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import {

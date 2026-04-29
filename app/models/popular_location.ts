@@ -1,4 +1,3 @@
-
 import AbstractModel from '#models/abstract_model'
 import { column } from '@adonisjs/lucid/orm'
 export default class PopularLocation extends AbstractModel {

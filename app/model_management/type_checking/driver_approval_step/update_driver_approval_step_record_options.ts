@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverApprovalStepIdentifierOptions from '#model_management/type_checking/driver_approval_step/driver_approval_step_identifier_options'
+import type DriverApprovalStepInterface from '#model_management/type_checking/driver_approval_step/driver_approval_step_interface'
+
+type UpdateDriverApprovalStepRecordOptions = UpdateRecordGeneric<
+  DriverApprovalStepIdentifierOptions,
+  Partial<DriverApprovalStepInterface>
+>
+
+export default UpdateDriverApprovalStepRecordOptions

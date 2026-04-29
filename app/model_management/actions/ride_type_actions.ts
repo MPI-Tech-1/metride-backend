@@ -1,7 +1,7 @@
-import CreateRideTypeRecordOptions from '#model_management/type_checking/ride_type/create_ride_type_record_options'
-import ListRideTypeRecordsOptions from '#model_management/type_checking/ride_type/list_ride_type_records_options'
-import UpdateRideTypeRecordOptions from '#model_management/type_checking/ride_type/update_ride_type_record_options'
-import RideTypeIdentifierOptions from '#model_management/type_checking/ride_type/ride_type_identifier_options'
+import type CreateRideTypeRecordOptions from '#model_management/type_checking/ride_type/create_ride_type_record_options'
+import type ListRideTypeRecordsOptions from '#model_management/type_checking/ride_type/list_ride_type_records_options'
+import type UpdateRideTypeRecordOptions from '#model_management/type_checking/ride_type/update_ride_type_record_options'
+import type RideTypeIdentifierOptions from '#model_management/type_checking/ride_type/ride_type_identifier_options'
 import RideType from '#models/ride_type'
 
 export default class RideTypeActions {
@@ -25,7 +25,9 @@ export default class RideTypeActions {
     return await RideType.query().where('id', rideTypeId).first()
   }
 
-  public static async getRideTypeByIdentifier(rideTypeIdentifier: string): Promise<RideType | null> {
+  public static async getRideTypeByIdentifier(
+    rideTypeIdentifier: string
+  ): Promise<RideType | null> {
     return await RideType.query().where('identifier', rideTypeIdentifier).first()
   }
 

@@ -1,3 +1,3 @@
-import DriverBankAccount from '#models/driver_bank_account'
+import type DriverBankAccount from '#models/driver_bank_account'
 
 export default interface DriverBankAccountInterface extends DriverBankAccount {}

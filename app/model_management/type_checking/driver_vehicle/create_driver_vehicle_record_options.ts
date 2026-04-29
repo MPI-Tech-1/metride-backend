@@ -1,5 +1,5 @@
-import DriverVehicleInterface from '#model_management/type_checking/driver_vehicle/driver_vehicle_interface'
-import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+import type DriverVehicleInterface from '#model_management/type_checking/driver_vehicle/driver_vehicle_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
 
 type CreateDriverVehicleRecordPayload = Partial<DriverVehicleInterface>
 

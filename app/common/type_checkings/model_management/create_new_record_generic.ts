@@ -1,4 +1,4 @@
-import DbTransactionOptions from '#common/type_checkings/model_management/db_transaction_options'
+import type DbTransactionOptions from '#common/type_checkings/model_management/db_transaction_options'
 
 /*
 |-------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import DriverDocumentActions from '#model_management/actions/driver_document_actions'
 import UpdateDocumentsRequestValidator from '#validators/v1/driver/profile/documents/update_documents_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'

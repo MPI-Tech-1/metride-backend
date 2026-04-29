@@ -1,7 +1,7 @@
-import CreateDriverDocumentRecordOptions from '#model_management/type_checking/driver_document/create_driver_document_record_options'
-import ListDriverDocumentRecordsOptions from '#model_management/type_checking/driver_document/list_driver_document_records_options'
-import UpdateDriverDocumentRecordOptions from '#model_management/type_checking/driver_document/update_driver_document_record_options'
-import DriverDocumentIdentifierOptions from '#model_management/type_checking/driver_document/driver_document_identifier_options'
+import type CreateDriverDocumentRecordOptions from '#model_management/type_checking/driver_document/create_driver_document_record_options'
+import type ListDriverDocumentRecordsOptions from '#model_management/type_checking/driver_document/list_driver_document_records_options'
+import type UpdateDriverDocumentRecordOptions from '#model_management/type_checking/driver_document/update_driver_document_record_options'
+import type DriverDocumentIdentifierOptions from '#model_management/type_checking/driver_document/driver_document_identifier_options'
 import DriverDocument from '#models/driver_document'
 
 export default class DriverDocumentActions {

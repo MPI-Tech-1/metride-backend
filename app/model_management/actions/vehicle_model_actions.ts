@@ -1,7 +1,7 @@
-import CreateVehicleModelRecordOptions from '#model_management/type_checking/vehicle_model/create_vehicle_model_record_options'
-import ListVehicleModelRecordsOptions from '#model_management/type_checking/vehicle_model/list_vehicle_model_records_options'
-import UpdateVehicleModelRecordOptions from '#model_management/type_checking/vehicle_model/update_vehicle_model_record_options'
-import VehicleModelIdentifierOptions from '#model_management/type_checking/vehicle_model/vehicle_model_identifier_options'
+import type CreateVehicleModelRecordOptions from '#model_management/type_checking/vehicle_model/create_vehicle_model_record_options'
+import type ListVehicleModelRecordsOptions from '#model_management/type_checking/vehicle_model/list_vehicle_model_records_options'
+import type UpdateVehicleModelRecordOptions from '#model_management/type_checking/vehicle_model/update_vehicle_model_record_options'
+import type VehicleModelIdentifierOptions from '#model_management/type_checking/vehicle_model/vehicle_model_identifier_options'
 import VehicleModel from '#models/vehicle_model'
 
 export default class VehicleModelActions {

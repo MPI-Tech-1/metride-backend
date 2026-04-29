@@ -1,5 +1,5 @@
-import DriverPersonalInformationInterface from '#model_management/type_checking/driver_personal_information/driver_personal_information_interface'
-import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+import type DriverPersonalInformationInterface from '#model_management/type_checking/driver_personal_information/driver_personal_information_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
 
 type CreateDriverPersonalInformationRecordPayload = Partial<DriverPersonalInformationInterface>
 

@@ -1,8 +1,8 @@
 import SendAccountActivationNotificationJob, {
-  SendAccountActivationNotificationJobPayload,
+  type SendAccountActivationNotificationJobPayload,
 } from '#jobs/notification/account/send_account_activation_notification_job'
 import SendResetPasswordNotificationJob, {
-  SendResetPasswordNotificationJobPayload,
+  type SendResetPasswordNotificationJobPayload,
 } from '#jobs/notification/account/send_reset_password_notification_job'
 
 export default class NotificationDispatchClient {

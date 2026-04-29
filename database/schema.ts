@@ -8,7 +8,17 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AdminSchema extends BaseModel {
-  static $columns = ['createdAt', 'deletedAt', 'email', 'firstName', 'id', 'identifier', 'lastName', 'password', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'firstName',
+    'id',
+    'identifier',
+    'lastName',
+    'password',
+    'updatedAt',
+  ] as const
   $columns = AdminSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -31,7 +41,18 @@ export class AdminSchema extends BaseModel {
 }
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
+  static $columns = [
+    'abilities',
+    'createdAt',
+    'expiresAt',
+    'hash',
+    'id',
+    'lastUsedAt',
+    'name',
+    'tokenableId',
+    'type',
+    'updatedAt',
+  ] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -90,7 +111,15 @@ export class CitySchema extends BaseModel {
 }
 
 export class CustomerRegistrationStepSchema extends BaseModel {
-  static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'id', 'identifier', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'customerId',
+    'deletedAt',
+    'hasActivatedAccount',
+    'id',
+    'identifier',
+    'updatedAt',
+  ] as const
   $columns = CustomerRegistrationStepSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -109,7 +138,19 @@ export class CustomerRegistrationStepSchema extends BaseModel {
 }
 
 export class CustomerSchema extends BaseModel {
-  static $columns = ['createdAt', 'deletedAt', 'email', 'fcmToken', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'password', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'fcmToken',
+    'firstName',
+    'id',
+    'identifier',
+    'lastName',
+    'mobileNumber',
+    'password',
+    'updatedAt',
+  ] as const
   $columns = CustomerSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -136,7 +177,17 @@ export class CustomerSchema extends BaseModel {
 }
 
 export class DriverBankAccountSchema extends BaseModel {
-  static $columns = ['accountName', 'accountNumber', 'bankId', 'createdAt', 'deletedAt', 'driverId', 'id', 'identifier', 'updatedAt'] as const
+  static $columns = [
+    'accountName',
+    'accountNumber',
+    'bankId',
+    'createdAt',
+    'deletedAt',
+    'driverId',
+    'id',
+    'identifier',
+    'updatedAt',
+  ] as const
   $columns = DriverBankAccountSchema.$columns
   @column()
   declare accountName: string | null
@@ -159,7 +210,18 @@ export class DriverBankAccountSchema extends BaseModel {
 }
 
 export class DriverDocumentSchema extends BaseModel {
-  static $columns = ['createdAt', 'deletedAt', 'driverId', 'driverLicenceUrl', 'id', 'identifier', 'passportPhotographUrl', 'updatedAt', 'vehiclePaperUrl', 'vehiclePhotoUrl'] as const
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'driverId',
+    'driverLicenceUrl',
+    'id',
+    'identifier',
+    'passportPhotographUrl',
+    'updatedAt',
+    'vehiclePaperUrl',
+    'vehiclePhotoUrl',
+  ] as const
   $columns = DriverDocumentSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -184,7 +246,19 @@ export class DriverDocumentSchema extends BaseModel {
 }
 
 export class DriverPersonalInformationSchema extends BaseModel {
-  static $columns = ['cityId', 'createdAt', 'dateOfBirth', 'deletedAt', 'driverId', 'gender', 'homeAddress', 'id', 'identifier', 'nationalIdentificationNumber', 'updatedAt'] as const
+  static $columns = [
+    'cityId',
+    'createdAt',
+    'dateOfBirth',
+    'deletedAt',
+    'driverId',
+    'gender',
+    'homeAddress',
+    'id',
+    'identifier',
+    'nationalIdentificationNumber',
+    'updatedAt',
+  ] as const
   $columns = DriverPersonalInformationSchema.$columns
   @column()
   declare cityId: number | null
@@ -211,7 +285,18 @@ export class DriverPersonalInformationSchema extends BaseModel {
 }
 
 export class DriverRegistrationStepSchema extends BaseModel {
-  static $columns = ['createdAt', 'customerId', 'deletedAt', 'hasActivatedAccount', 'hasProvidedPersonalInformation', 'hasProvidedRequiredDocuments', 'hasProvidedVehicleInformation', 'id', 'identifier', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'customerId',
+    'deletedAt',
+    'hasActivatedAccount',
+    'hasProvidedPersonalInformation',
+    'hasProvidedRequiredDocuments',
+    'hasProvidedVehicleInformation',
+    'id',
+    'identifier',
+    'updatedAt',
+  ] as const
   $columns = DriverRegistrationStepSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -236,7 +321,20 @@ export class DriverRegistrationStepSchema extends BaseModel {
 }
 
 export class DriverVehicleSchema extends BaseModel {
-  static $columns = ['colorOfVehicle', 'createdAt', 'deletedAt', 'driverId', 'id', 'identifier', 'plateNumber', 'seatCapacity', 'typeOfVehicle', 'updatedAt', 'vehicleMakeId', 'vehicleModelId'] as const
+  static $columns = [
+    'colorOfVehicle',
+    'createdAt',
+    'deletedAt',
+    'driverId',
+    'id',
+    'identifier',
+    'plateNumber',
+    'seatCapacity',
+    'typeOfVehicle',
+    'updatedAt',
+    'vehicleMakeId',
+    'vehicleModelId',
+  ] as const
   $columns = DriverVehicleSchema.$columns
   @column()
   declare colorOfVehicle: string | null
@@ -265,7 +363,18 @@ export class DriverVehicleSchema extends BaseModel {
 }
 
 export class DriverSchema extends BaseModel {
-  static $columns = ['createdAt', 'deletedAt', 'email', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'password', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'firstName',
+    'id',
+    'identifier',
+    'lastName',
+    'mobileNumber',
+    'password',
+    'updatedAt',
+  ] as const
   $columns = DriverSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -290,7 +399,18 @@ export class DriverSchema extends BaseModel {
 }
 
 export class OtpTokenSchema extends BaseModel {
-  static $columns = ['createdAt', 'deletedAt', 'email', 'expiresAt', 'id', 'identifier', 'purpose', 'status', 'token', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'email',
+    'expiresAt',
+    'id',
+    'identifier',
+    'purpose',
+    'status',
+    'token',
+    'updatedAt',
+  ] as const
   $columns = OtpTokenSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -349,7 +469,15 @@ export class VehicleMakeSchema extends BaseModel {
 }
 
 export class VehicleModelSchema extends BaseModel {
-  static $columns = ['createdAt', 'deletedAt', 'id', 'identifier', 'name', 'updatedAt', 'vehicleMakeId'] as const
+  static $columns = [
+    'createdAt',
+    'deletedAt',
+    'id',
+    'identifier',
+    'name',
+    'updatedAt',
+    'vehicleMakeId',
+  ] as const
   $columns = VehicleModelSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null

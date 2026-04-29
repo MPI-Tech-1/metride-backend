@@ -1,7 +1,7 @@
-import CreateVehicleMakeRecordOptions from '#model_management/type_checking/vehicle_make/create_vehicle_make_record_options'
-import ListVehicleMakeRecordsOptions from '#model_management/type_checking/vehicle_make/list_vehicle_make_records_options'
-import UpdateVehicleMakeRecordOptions from '#model_management/type_checking/vehicle_make/update_vehicle_make_record_options'
-import VehicleMakeIdentifierOptions from '#model_management/type_checking/vehicle_make/vehicle_make_identifier_options'
+import type CreateVehicleMakeRecordOptions from '#model_management/type_checking/vehicle_make/create_vehicle_make_record_options'
+import type ListVehicleMakeRecordsOptions from '#model_management/type_checking/vehicle_make/list_vehicle_make_records_options'
+import type UpdateVehicleMakeRecordOptions from '#model_management/type_checking/vehicle_make/update_vehicle_make_record_options'
+import type VehicleMakeIdentifierOptions from '#model_management/type_checking/vehicle_make/vehicle_make_identifier_options'
 import VehicleMake from '#models/vehicle_make'
 
 export default class VehicleMakeActions {

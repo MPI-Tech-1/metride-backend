@@ -1,5 +1,7 @@
-import FetchVehicleMakesControllers from '#controllers/v1/common/vehicle/fetch_vehicle_makes_controller'
-import FetchVehicleModelsController from '#controllers/v1/common/vehicle/fetch_vehicle_models_controller'
+const FetchVehicleMakesControllers = () =>
+  import('#controllers/v1/common/vehicle/fetch_vehicle_makes_controller')
+const FetchVehicleModelsController = () =>
+  import('#controllers/v1/common/vehicle/fetch_vehicle_models_controller')
 import router from '@adonisjs/core/services/router'
 
 router

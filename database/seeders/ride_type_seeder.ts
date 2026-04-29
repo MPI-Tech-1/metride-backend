@@ -28,7 +28,7 @@ export default class extends BaseSeeder {
         pricePerKilometer: 40000,
         basePrice: 200000,
         minimumPrice: 30000,
-      }
+      },
     ]
 
     db.raw('SET FOREIGN_KEY_CHECKS = 0;')

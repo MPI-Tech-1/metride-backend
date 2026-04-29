@@ -1,3 +1,3 @@
-import PopularLocation from '#models/popular_location'
+import type PopularLocation from '#models/popular_location'
 
 export default interface PopularLocationInterface extends PopularLocation {}

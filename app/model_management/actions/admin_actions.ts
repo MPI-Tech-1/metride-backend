@@ -1,7 +1,7 @@
-import CreateAdminRecordOptions from '#model_management/type_checking/admin/create_admin_record_options'
-import ListAdminRecordsOptions from '#model_management/type_checking/admin/list_admin_records_options'
-import UpdateAdminRecordOptions from '#model_management/type_checking/admin/update_admin_record_options'
-import AdminIdentifierOptions from '#model_management/type_checking/admin/admin_identifier_options'
+import type CreateAdminRecordOptions from '#model_management/type_checking/admin/create_admin_record_options'
+import type ListAdminRecordsOptions from '#model_management/type_checking/admin/list_admin_records_options'
+import type UpdateAdminRecordOptions from '#model_management/type_checking/admin/update_admin_record_options'
+import type AdminIdentifierOptions from '#model_management/type_checking/admin/admin_identifier_options'
 import Admin from '#models/admin'
 import db from '@adonisjs/lucid/services/db'
 
@@ -34,9 +34,7 @@ export default class AdminActions {
     return await Admin.query().where('identifier', adminIdentifier).first()
   }
 
-  public static async getAdmin(
-    getAdminOptions: AdminIdentifierOptions
-  ): Promise<Admin | null> {
+  public static async getAdmin(getAdminOptions: AdminIdentifierOptions): Promise<Admin | null> {
     const { identifier, identifierType } = getAdminOptions
 
     const GetAdminIdentifierOptions: Record<string, Function> = {

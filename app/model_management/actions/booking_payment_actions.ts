@@ -1,7 +1,7 @@
-import CreateBookingPaymentRecordOptions from '#model_management/type_checking/booking_payment/create_booking_payment_record_options'
-import ListBookingPaymentRecordsOptions from '#model_management/type_checking/booking_payment/list_booking_payment_records_options'
-import UpdateBookingPaymentRecordOptions from '#model_management/type_checking/booking_payment/update_booking_payment_record_options'
-import BookingPaymentIdentifierOptions from '#model_management/type_checking/booking_payment/booking_payment_identifier_options'
+import type CreateBookingPaymentRecordOptions from '#model_management/type_checking/booking_payment/create_booking_payment_record_options'
+import type ListBookingPaymentRecordsOptions from '#model_management/type_checking/booking_payment/list_booking_payment_records_options'
+import type UpdateBookingPaymentRecordOptions from '#model_management/type_checking/booking_payment/update_booking_payment_record_options'
+import type BookingPaymentIdentifierOptions from '#model_management/type_checking/booking_payment/booking_payment_identifier_options'
 import BookingPayment from '#models/booking_payment'
 
 export default class BookingPaymentActions {
@@ -21,7 +21,9 @@ export default class BookingPaymentActions {
     return bookingPayment
   }
 
-  public static async getBookingPaymentById(bookingPaymentId: number): Promise<BookingPayment | null> {
+  public static async getBookingPaymentById(
+    bookingPaymentId: number
+  ): Promise<BookingPayment | null> {
     return await BookingPayment.query().preload('booking').where('id', bookingPaymentId).first()
   }
 

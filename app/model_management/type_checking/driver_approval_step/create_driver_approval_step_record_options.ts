@@ -1,0 +1,9 @@
+import type DriverApprovalStepInterface from '#model_management/type_checking/driver_approval_step/driver_approval_step_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverApprovalStepRecordPayload = Partial<DriverApprovalStepInterface>
+
+type CreateDriverApprovalStepRecordOptions =
+  CreateNewRecordGeneric<CreateDriverApprovalStepRecordPayload>
+
+export default CreateDriverApprovalStepRecordOptions

@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
 import UpdateBankAccountRequestValidator from '#validators/v1/driver/profile/bank_account/update_bank_account_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'

@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import OtpTokenActions from '#model_management/actions/otp_token_actions'
 import CustomerActions from '#model_management/actions/customer_actions'
 import CustomerRequestResetPasswordOtpTokenRequestValidator from '#validators/v1/customer/password_management/customer_request_reset_password_otp_token_request_validator'

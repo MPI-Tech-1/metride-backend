@@ -1,5 +1,5 @@
-import CustomerRegistrationStepInterface from '#model_management/type_checking/customer_registration_step/customer_registration_step_interface'
-import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+import type CustomerRegistrationStepInterface from '#model_management/type_checking/customer_registration_step/customer_registration_step_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
 
 type CreateCustomerRegistrationStepRecordPayload = Partial<CustomerRegistrationStepInterface>
 

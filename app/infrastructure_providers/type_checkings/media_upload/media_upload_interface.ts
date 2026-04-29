@@ -1,4 +1,4 @@
-import { MultipartFile } from '@adonisjs/core/bodyparser'
+import { type MultipartFile } from '@adonisjs/core/bodyparser'
 
 export type UploadedMedia = {
   url: string

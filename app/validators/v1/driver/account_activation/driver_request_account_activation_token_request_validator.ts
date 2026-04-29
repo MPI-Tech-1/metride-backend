@@ -10,7 +10,8 @@ const DriverRequestAccountActivationTokenRequestValidator = vine.compile(
   driverRequestAccountActivationTokenRequestSchema
 )
 
-DriverRequestAccountActivationTokenRequestValidator.messagesProvider =
-  new SimpleMessagesProvider(messages)
+DriverRequestAccountActivationTokenRequestValidator.messagesProvider = new SimpleMessagesProvider(
+  messages
+)
 
 export default DriverRequestAccountActivationTokenRequestValidator

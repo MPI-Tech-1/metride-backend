@@ -1,4 +1,4 @@
-import { TransactionClientContract } from '@adonisjs/lucid/types/database'
+import { type TransactionClientContract } from '@adonisjs/lucid/types/database'
 
 type DbTransactionOptions =
   | {

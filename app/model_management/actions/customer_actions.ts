@@ -1,7 +1,7 @@
-import CreateCustomerRecordOptions from '#model_management/type_checking/customer/create_customer_record_options'
-import ListCustomerRecordsOptions from '#model_management/type_checking/customer/list_customer_records_options'
-import UpdateCustomerRecordOptions from '#model_management/type_checking/customer/update_customer_record_options'
-import CustomerIdentifierOptions from '#model_management/type_checking/customer/customer_identifier_options'
+import type CreateCustomerRecordOptions from '#model_management/type_checking/customer/create_customer_record_options'
+import type ListCustomerRecordsOptions from '#model_management/type_checking/customer/list_customer_records_options'
+import type UpdateCustomerRecordOptions from '#model_management/type_checking/customer/update_customer_record_options'
+import type CustomerIdentifierOptions from '#model_management/type_checking/customer/customer_identifier_options'
 import Customer from '#models/customer'
 import db from '@adonisjs/lucid/services/db'
 

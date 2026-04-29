@@ -1,7 +1,7 @@
-import CreateDriverRecordOptions from '#model_management/type_checking/driver/create_driver_record_options'
-import ListDriverRecordsOptions from '#model_management/type_checking/driver/list_driver_records_options'
-import UpdateDriverRecordOptions from '#model_management/type_checking/driver/update_driver_record_options'
-import DriverIdentifierOptions from '#model_management/type_checking/driver/driver_identifier_options'
+import type CreateDriverRecordOptions from '#model_management/type_checking/driver/create_driver_record_options'
+import type ListDriverRecordsOptions from '#model_management/type_checking/driver/list_driver_records_options'
+import type UpdateDriverRecordOptions from '#model_management/type_checking/driver/update_driver_record_options'
+import type DriverIdentifierOptions from '#model_management/type_checking/driver/driver_identifier_options'
 import Driver from '#models/driver'
 import db from '@adonisjs/lucid/services/db'
 
@@ -37,9 +37,7 @@ export default class DriverActions {
       .first()
   }
 
-  public static async getDriver(
-    getDriverOptions: DriverIdentifierOptions
-  ): Promise<Driver | null> {
+  public static async getDriver(getDriverOptions: DriverIdentifierOptions): Promise<Driver | null> {
     const { identifier, identifierType } = getDriverOptions
 
     const GetDriverIdentifierOptions: Record<string, Function> = {

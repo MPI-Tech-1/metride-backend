@@ -1,7 +1,7 @@
-import CreateBankRecordOptions from '#model_management/type_checking/bank/create_bank_record_options'
-import ListBankRecordsOptions from '#model_management/type_checking/bank/list_bank_records_options'
-import UpdateBankRecordOptions from '#model_management/type_checking/bank/update_bank_record_options'
-import BankIdentifierOptions from '#model_management/type_checking/bank/bank_identifier_options'
+import type CreateBankRecordOptions from '#model_management/type_checking/bank/create_bank_record_options'
+import type ListBankRecordsOptions from '#model_management/type_checking/bank/list_bank_records_options'
+import type UpdateBankRecordOptions from '#model_management/type_checking/bank/update_bank_record_options'
+import type BankIdentifierOptions from '#model_management/type_checking/bank/bank_identifier_options'
 import Bank from '#models/bank'
 
 export default class BankActions {

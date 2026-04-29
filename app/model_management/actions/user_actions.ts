@@ -1,7 +1,7 @@
-import CreateUserRecordOptions from '#model_management/type_checking/user/create_user_record_options'
-import ListUserRecordsOptions from '#model_management/type_checking/user/list_user_records_options'
-import UpdateUserRecordOptions from '#model_management/type_checking/user/update_user_record_options'
-import UserIdentifierOptions from '#model_management/type_checking/user/user_identifier_options'
+import type CreateUserRecordOptions from '#model_management/type_checking/user/create_user_record_options'
+import type ListUserRecordsOptions from '#model_management/type_checking/user/list_user_records_options'
+import type UpdateUserRecordOptions from '#model_management/type_checking/user/update_user_record_options'
+import type UserIdentifierOptions from '#model_management/type_checking/user/user_identifier_options'
 import User from '#models/user'
 import db from '@adonisjs/lucid/services/db'
 

@@ -1,3 +1,3 @@
-import VehicleMake from '#models/vehicle_make'
+import type VehicleMake from '#models/vehicle_make'
 
 export default interface VehicleMakeInterface extends VehicleMake {}

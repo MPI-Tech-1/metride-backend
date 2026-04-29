@@ -1,7 +1,7 @@
-import CreateDriverVehicleRecordOptions from '#model_management/type_checking/driver_vehicle/create_driver_vehicle_record_options'
-import ListDriverVehicleRecordsOptions from '#model_management/type_checking/driver_vehicle/list_driver_vehicle_records_options'
-import UpdateDriverVehicleRecordOptions from '#model_management/type_checking/driver_vehicle/update_driver_vehicle_record_options'
-import DriverVehicleIdentifierOptions from '#model_management/type_checking/driver_vehicle/driver_vehicle_identifier_options'
+import type CreateDriverVehicleRecordOptions from '#model_management/type_checking/driver_vehicle/create_driver_vehicle_record_options'
+import type ListDriverVehicleRecordsOptions from '#model_management/type_checking/driver_vehicle/list_driver_vehicle_records_options'
+import type UpdateDriverVehicleRecordOptions from '#model_management/type_checking/driver_vehicle/update_driver_vehicle_record_options'
+import type DriverVehicleIdentifierOptions from '#model_management/type_checking/driver_vehicle/driver_vehicle_identifier_options'
 import DriverVehicle from '#models/driver_vehicle'
 
 export default class DriverVehicleActions {

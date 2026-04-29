@@ -1,5 +1,5 @@
-import BookingPaymentInterface from '#model_management/type_checking/booking_payment/booking_payment_interface'
-import CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+import type BookingPaymentInterface from '#model_management/type_checking/booking_payment/booking_payment_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
 
 type CreateBookingPaymentRecordPayload = Partial<BookingPaymentInterface>
 

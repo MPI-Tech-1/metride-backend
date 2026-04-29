@@ -21,7 +21,7 @@ export default class extends BaseSeeder {
         lastName: 'Admin',
         email: 'normaladmin@metride.app',
         password: hashedPassword,
-      }
+      },
     ]
 
     db.raw('SET FOREIGN_KEY_CHECKS = 0;')

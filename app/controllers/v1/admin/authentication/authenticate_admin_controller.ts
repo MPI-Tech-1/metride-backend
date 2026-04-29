@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import hash from '@adonisjs/core/services/hash'
 import Admin from '#models/admin'
 import AdminAuthenticateRequestValidator from '#validators/v1/admin/authentication/admin_authenticate_request_validator'

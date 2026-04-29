@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import CustomerActions from '#model_management/actions/customer_actions'
 import ListCustomersRequestValidator from '#validators/v1/admin/customer_management/list_customers_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'

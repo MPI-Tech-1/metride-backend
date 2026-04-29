@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import { type HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
 import OtpTokenActions from '#model_management/actions/otp_token_actions'
 import CustomerRegistrationStepActions from '#model_management/actions/customer_registration_step_actions'

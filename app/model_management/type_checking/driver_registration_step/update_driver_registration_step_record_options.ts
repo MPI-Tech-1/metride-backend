@@ -1,6 +1,6 @@
-import UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
-import DriverRegistrationStepIdentifierOptions from '#model_management/type_checking/driver_registration_step/driver_registration_step_identifier_options'
-import DriverRegistrationStepInterface from '#model_management/type_checking/driver_registration_step/driver_registration_step_interface'
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverRegistrationStepIdentifierOptions from '#model_management/type_checking/driver_registration_step/driver_registration_step_identifier_options'
+import type DriverRegistrationStepInterface from '#model_management/type_checking/driver_registration_step/driver_registration_step_interface'
 
 type UpdateDriverRegistrationStepRecordOptions = UpdateRecordGeneric<
   DriverRegistrationStepIdentifierOptions,
