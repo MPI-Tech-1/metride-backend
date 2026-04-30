@@ -6,29 +6,35 @@ import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
 import RideTypeActions from '#model_management/actions/ride_type_actions'
+import calculateDistanceBetween2Points from '#common/helper_functions/calculate_distance_between_2_points'
 
 export default class CreateBookingController {
   async handle({ request, auth, response }: HttpContext) {
     const payload = await request.validateUsing(CreateBookingRequestValidator)
 
+    const {
+      typeOfBooking,
+      departureLocationName,
+      departureLocationGpsCoordinates,
+      departureLocationType,
+      destinationLocationName,
+      destinationLocationGpsCoordinates,
+      destinationLocationType,
+      rideTypeIdentifier,
+      isRecurringBooking,
+      dateOfRide,
+      recurringBookingDates,
+    } = payload
+
+    const distance = await calculateDistanceBetween2Points(
+      departureLocationGpsCoordinates,
+      destinationLocationGpsCoordinates
+    )
+
     const dbTransaction = await db.transaction()
 
     try {
       const loggedInCustomer = auth.use('customer').user!
-
-      const {
-        typeOfBooking,
-        departureLocationName,
-        departureLocationGpsCoordinates,
-        departureLocationType,
-        destinationLocationName,
-        destinationLocationGpsCoordinates,
-        destinationLocationType,
-        rideTypeIdentifier,
-        isRecurringBooking,
-        dateOfRide,
-        recurringBookingDates,
-      } = payload
 
       const rideType = await RideTypeActions.getRideType({
         identifierType: 'identifier',
@@ -56,7 +62,7 @@ export default class CreateBookingController {
       await BookingPaymentActions.createBookingPaymentRecord({
         createPayload: {
           bookingId: booking.id,
-          basePrice: 0,
+          basePrice: distance.distanceInKilometers * rideType!.pricePerKilometer,
           discountAmount: 0,
           amountPaid: 0,
         },
@@ -89,8 +95,8 @@ export default class CreateBookingController {
         bookingPayment: {
           identifier: finalBooking!.bookingPayment.identifier,
           basePrice: finalBooking!.bookingPayment.basePrice,
-          discountAmount: finalBooking!.bookingPayment.basePrice,
-          amountPaid: finalBooking!.bookingPayment.basePrice,
+          discountAmount: finalBooking!.bookingPayment.discountAmount,
+          amountPaid: finalBooking!.bookingPayment.amountPaid,
         },
       }
 

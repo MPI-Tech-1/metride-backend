@@ -20,6 +20,8 @@ export default class extends BaseSchema {
       table.boolean('is_recurring_booking').defaultTo(false)
       table.dateTime('date_of_ride')
       table.json('recurring_booking_dates')
+      table.string('status').defaultTo('created')
+      table.string('trip_progress').defaultTo('not-started')
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

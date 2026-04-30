@@ -7,10 +7,10 @@ export type ScannedRoutes = {
     'admin.authentication.authenticate_admin': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.driver_management.drivers.fetch_drivers': { paramsTuple?: []; params?: {} }
-    'admin.driver_management.drivers.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.driver_management.drivers.approve_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.driver_management.drivers.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
+    'admin.driver_management.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.approve_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.create_ride_type': { paramsTuple?: []; params?: {} }
     'admin.settings.update_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_ride_types': { paramsTuple?: []; params?: {} }
@@ -21,18 +21,21 @@ export type ScannedRoutes = {
     'admin.settings.get_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.bookings.assign_booking_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.bookings.cancel_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.bookings.complete_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
     'customer.account-activation.verify_account_activation_token': { paramsTuple?: []; params?: {} }
     'customer.password-management.request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
     'customer.password-management.reset_password': { paramsTuple?: []; params?: {} }
-    'create_booking': { paramsTuple?: []; params?: {} }
-    'fetch_bookings': { paramsTuple?: []; params?: {} }
-    'get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
-    'checkout_booking_with_card': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
-    'fetch_notifications': { paramsTuple?: []; params?: {} }
-    'mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
+    'customer.bookings.create_booking': { paramsTuple?: []; params?: {} }
+    'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
+    'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.bookings.checkout_booking_with_card': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
+    'customer.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
     'driver.authentication.driver_onboarding': { paramsTuple?: []; params?: {} }
     'driver.authentication.authenticate_driver': { paramsTuple?: []; params?: {} }
     'driver.account-activation.driver_request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -47,6 +50,13 @@ export type ScannedRoutes = {
     'driver.profile.update_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
     'driver.profile.update_documents': { paramsTuple?: []; params?: {} }
+    'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
+    'driver.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
+    'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
+    'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.bookings.accept_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.bookings.reject_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
@@ -57,8 +67,8 @@ export type ScannedRoutes = {
   }
   POST: {
     'admin.authentication.authenticate_admin': { paramsTuple?: []; params?: {} }
-    'admin.driver_management.drivers.approve_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.driver_management.drivers.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.approve_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.create_ride_type': { paramsTuple?: []; params?: {} }
     'admin.settings.create_popular_location': { paramsTuple?: []; params?: {} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
@@ -67,8 +77,8 @@ export type ScannedRoutes = {
     'customer.account-activation.verify_account_activation_token': { paramsTuple?: []; params?: {} }
     'customer.password-management.request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
     'customer.password-management.reset_password': { paramsTuple?: []; params?: {} }
-    'create_booking': { paramsTuple?: []; params?: {} }
-    'checkout_booking_with_card': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.bookings.create_booking': { paramsTuple?: []; params?: {} }
+    'customer.bookings.checkout_booking_with_card': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'driver.authentication.driver_onboarding': { paramsTuple?: []; params?: {} }
     'driver.authentication.authenticate_driver': { paramsTuple?: []; params?: {} }
     'driver.account-activation.driver_request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -80,21 +90,24 @@ export type ScannedRoutes = {
   GET: {
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.driver_management.drivers.fetch_drivers': { paramsTuple?: []; params?: {} }
-    'admin.driver_management.drivers.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
+    'admin.driver_management.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_ride_types': { paramsTuple?: []; params?: {} }
     'admin.settings.get_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_popular_locations': { paramsTuple?: []; params?: {} }
     'admin.settings.get_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'fetch_bookings': { paramsTuple?: []; params?: {} }
-    'get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
-    'fetch_notifications': { paramsTuple?: []; params?: {} }
+    'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
+    'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
+    'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
+    'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
@@ -105,21 +118,24 @@ export type ScannedRoutes = {
   HEAD: {
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.driver_management.drivers.fetch_drivers': { paramsTuple?: []; params?: {} }
-    'admin.driver_management.drivers.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
+    'admin.driver_management.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_ride_types': { paramsTuple?: []; params?: {} }
     'admin.settings.get_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_popular_locations': { paramsTuple?: []; params?: {} }
     'admin.settings.get_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'fetch_bookings': { paramsTuple?: []; params?: {} }
-    'get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
-    'fetch_notifications': { paramsTuple?: []; params?: {} }
+    'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
+    'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
+    'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
+    'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
@@ -130,11 +146,18 @@ export type ScannedRoutes = {
   PATCH: {
     'admin.settings.update_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.update_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
+    'admin.bookings.assign_booking_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.bookings.cancel_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.bookings.complete_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'customer.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
     'driver.profile.update_personal_information': { paramsTuple?: []; params?: {} }
     'driver.profile.update_vehicle_information': { paramsTuple?: []; params?: {} }
     'driver.profile.update_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.update_documents': { paramsTuple?: []; params?: {} }
+    'driver.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
+    'driver.bookings.accept_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.bookings.reject_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

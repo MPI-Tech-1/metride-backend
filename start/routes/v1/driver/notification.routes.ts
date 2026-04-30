@@ -12,4 +12,5 @@ router
     router.patch('/notifications/:notificationIdentifier/read', [MarkNotificationAsReadController])
   })
   .use(middleware.auth({ guards: ['driver'] }))
+  .as('driver.notifications')
   .prefix('api/v1/driver')

@@ -18,5 +18,5 @@ router
     router.post('/:identifier/reject', [RejectDriverController])
   })
   .prefix('/api/v1/admins/driver-management/drivers')
-  .as('admin.driver_management.drivers')
+  .as('admin.driver_management')
   .use(middleware.auth({ guards: ['admin'] }))

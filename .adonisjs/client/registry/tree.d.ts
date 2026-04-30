@@ -13,12 +13,10 @@ export interface ApiDefinition {
       }
     }
     driverManagement: {
-      drivers: {
-        fetchDrivers: typeof routes['admin.driver_management.drivers.fetch_drivers']
-        getDriver: typeof routes['admin.driver_management.drivers.get_driver']
-        approveDriver: typeof routes['admin.driver_management.drivers.approve_driver']
-        rejectDriver: typeof routes['admin.driver_management.drivers.reject_driver']
-      }
+      fetchDrivers: typeof routes['admin.driver_management.fetch_drivers']
+      getDriver: typeof routes['admin.driver_management.get_driver']
+      approveDriver: typeof routes['admin.driver_management.approve_driver']
+      rejectDriver: typeof routes['admin.driver_management.reject_driver']
     }
     settings: {
       createRideType: typeof routes['admin.settings.create_ride_type']
@@ -33,6 +31,9 @@ export interface ApiDefinition {
     bookings: {
       fetchBookings: typeof routes['admin.bookings.fetch_bookings']
       getBooking: typeof routes['admin.bookings.get_booking']
+      assignBookingDriver: typeof routes['admin.bookings.assign_booking_driver']
+      cancelBooking: typeof routes['admin.bookings.cancel_booking']
+      completeBooking: typeof routes['admin.bookings.complete_booking']
     }
   }
   customer: {
@@ -48,13 +49,17 @@ export interface ApiDefinition {
       requestResetPasswordOtpToken: typeof routes['customer.password-management.request_reset_password_otp_token']
       resetPassword: typeof routes['customer.password-management.reset_password']
     }
+    bookings: {
+      createBooking: typeof routes['customer.bookings.create_booking']
+      fetchBookings: typeof routes['customer.bookings.fetch_bookings']
+      getBooking: typeof routes['customer.bookings.get_booking']
+      checkoutBookingWithCard: typeof routes['customer.bookings.checkout_booking_with_card']
+    }
+    notifications: {
+      fetchNotifications: typeof routes['customer.notifications.fetch_notifications']
+      markNotificationAsRead: typeof routes['customer.notifications.mark_notification_as_read']
+    }
   }
-  createBooking: typeof routes['create_booking']
-  fetchBookings: typeof routes['fetch_bookings']
-  getBooking: typeof routes['get_booking']
-  checkoutBookingWithCard: typeof routes['checkout_booking_with_card']
-  fetchNotifications: typeof routes['fetch_notifications']
-  markNotificationAsRead: typeof routes['mark_notification_as_read']
   driver: {
     authentication: {
       driverOnboarding: typeof routes['driver.authentication.driver_onboarding']
@@ -77,6 +82,17 @@ export interface ApiDefinition {
       updateBankAccount: typeof routes['driver.profile.update_bank_account']
       getDocuments: typeof routes['driver.profile.get_documents']
       updateDocuments: typeof routes['driver.profile.update_documents']
+    }
+    notifications: {
+      fetchNotifications: typeof routes['driver.notifications.fetch_notifications']
+      markNotificationAsRead: typeof routes['driver.notifications.mark_notification_as_read']
+    }
+    bookings: {
+      fetchBookings: typeof routes['driver.bookings.fetch_bookings']
+      getBooking: typeof routes['driver.bookings.get_booking']
+      acceptBooking: typeof routes['driver.bookings.accept_booking']
+      rejectBooking: typeof routes['driver.bookings.reject_booking']
+      updateBookingTripProgress: typeof routes['driver.bookings.update_booking_trip_progress']
     }
   }
   common: {

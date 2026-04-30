@@ -17,4 +17,5 @@ router
     router.post('/bookings/:bookingIdentifier/checkout/card', [CheckoutBookingWithCardController])
   })
   .use(middleware.auth({ guards: ['customer'] }))
+  .as('customer.bookings')
   .prefix('api/v1/customer')

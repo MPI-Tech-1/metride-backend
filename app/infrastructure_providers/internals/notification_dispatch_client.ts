@@ -4,6 +4,24 @@ import SendAccountActivationNotificationJob, {
 import SendResetPasswordNotificationJob, {
   type SendResetPasswordNotificationJobPayload,
 } from '#jobs/notification/account/send_reset_password_notification_job'
+import SendBookingDriverAssignmentNotificationJob, {
+  type SendBookingDriverAssignmentNotificationJobPayload,
+} from '#jobs/notification/booking/send_booking_driver_assignment_notification_job'
+import SendBookingDriverCancellationNotificationJob, {
+  type SendBookingDriverCancellationNotificationJobPayload,
+} from '#jobs/notification/booking/send_booking_driver_cancellation_notification_job'
+import SendBookingCompletedNotificationJob, {
+  type SendBookingCompletedNotificationJobPayload,
+} from '#jobs/notification/booking/send_booking_completed_notification_job'
+import SendBookingTripProgressNotificationJob, {
+  type SendBookingTripProgressNotificationJobPayload,
+} from '#jobs/notification/booking/send_booking_trip_progress_notification_job'
+import SendBookingDriverAcceptedNotificationJob, {
+  type SendBookingDriverAcceptedNotificationJobPayload,
+} from '#jobs/notification/booking/send_booking_driver_accepted_notification_job'
+import SendBookingRejectedNotificationJob, {
+  type SendBookingRejectedNotificationJobPayload,
+} from '#jobs/notification/booking/send_booking_rejected_notification_job'
 
 export default class NotificationDispatchClient {
   public static async sendAccountActivationNotificationJob(
@@ -21,5 +39,49 @@ export default class NotificationDispatchClient {
     //   sendResetPasswordNotificationJobPayload
     // ).toQueue(SEND_RESET_PASSWORD_NOTIFICATION_JOB)
     await SendResetPasswordNotificationJob.dispatch(sendResetPasswordNotificationJobPayload)
+  }
+
+  public static async sendBookingDriverAssignmentNotificationJob(
+    sendBookingDriverAssignmentNotificationJobPayload: SendBookingDriverAssignmentNotificationJobPayload
+  ) {
+    await SendBookingDriverAssignmentNotificationJob.dispatch(
+      sendBookingDriverAssignmentNotificationJobPayload
+    )
+  }
+
+  public static async sendBookingDriverCancellationNotificationJob(
+    sendBookingDriverCancellationNotificationJobPayload: SendBookingDriverCancellationNotificationJobPayload
+  ) {
+    await SendBookingDriverCancellationNotificationJob.dispatch(
+      sendBookingDriverCancellationNotificationJobPayload
+    )
+  }
+
+  public static async sendBookingCompletedNotificationJob(
+    sendBookingCompletedNotificationJobPayload: SendBookingCompletedNotificationJobPayload
+  ) {
+    await SendBookingCompletedNotificationJob.dispatch(sendBookingCompletedNotificationJobPayload)
+  }
+
+  public static async sendBookingTripProgressNotificationJob(
+    sendBookingTripProgressNotificationJobPayload: SendBookingTripProgressNotificationJobPayload
+  ) {
+    await SendBookingTripProgressNotificationJob.dispatch(
+      sendBookingTripProgressNotificationJobPayload
+    )
+  }
+
+  public static async sendBookingDriverAcceptedNotificationJob(
+    sendBookingDriverAcceptedNotificationJobPayload: SendBookingDriverAcceptedNotificationJobPayload
+  ) {
+    await SendBookingDriverAcceptedNotificationJob.dispatch(
+      sendBookingDriverAcceptedNotificationJobPayload
+    )
+  }
+
+  public static async sendBookingRejectedNotificationJob(
+    sendBookingRejectedNotificationJobPayload: SendBookingRejectedNotificationJobPayload
+  ) {
+    await SendBookingRejectedNotificationJob.dispatch(sendBookingRejectedNotificationJobPayload)
   }
 }

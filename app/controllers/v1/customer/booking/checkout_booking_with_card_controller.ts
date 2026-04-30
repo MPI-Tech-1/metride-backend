@@ -39,7 +39,7 @@ export default class CheckoutBookingController {
 
     const { transactionStatus, initiateTransactionInformation } =
       await cardPaymentProvider.initiateTransaction({
-        amount: '10000',
+        amount: `${booking.bookingPayment.basePrice}`,
         paymentChannel: ['card'],
         emailAddress: booking.customer.email,
       })
@@ -76,6 +76,7 @@ export default class CheckoutBookingController {
         message: 'Checkout successful',
         results: {
           checkoutUrl: initiateTransactionInformation?.checkoutUrl,
+          transactionReference: initiateTransactionInformation?.transactionReference,
         },
       })
     } catch (CheckoutBookingControllerError) {

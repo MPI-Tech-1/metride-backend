@@ -12,4 +12,5 @@ router
     router.patch('/notifications/:notificationIdentifier/read', [MarkNotificationAsReadController])
   })
   .use(middleware.auth({ guards: ['customer'] }))
+  .as('customer.notifications')
   .prefix('api/v1/customer')

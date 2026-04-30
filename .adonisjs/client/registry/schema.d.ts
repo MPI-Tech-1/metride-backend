@@ -43,7 +43,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/customer_management/get_customer_controller').default['handle']>>>
     }
   }
-  'admin.driver_management.drivers.fetch_drivers': {
+  'admin.driver_management.fetch_drivers': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/driver-management/drivers'
     types: {
@@ -55,7 +55,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'admin.driver_management.drivers.get_driver': {
+  'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/driver-management/drivers/:identifier'
     types: {
@@ -67,7 +67,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/get_driver_controller').default['handle']>>>
     }
   }
-  'admin.driver_management.drivers.approve_driver': {
+  'admin.driver_management.approve_driver': {
     methods: ["POST"]
     pattern: '/api/v1/admins/driver-management/drivers/:identifier/approve'
     types: {
@@ -79,7 +79,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/approve_driver_controller').default['handle']>>>
     }
   }
-  'admin.driver_management.drivers.reject_driver': {
+  'admin.driver_management.reject_driver': {
     methods: ["POST"]
     pattern: '/api/v1/admins/driver-management/drivers/:identifier/reject'
     types: {
@@ -211,6 +211,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/get_booking_controller').default['handle']>>>
     }
   }
+  'admin.bookings.assign_booking_driver': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/bookings/:identifier/assign-driver'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/booking_management/assign_booking_driver_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/booking_management/assign_booking_driver_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/assign_booking_driver_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/assign_booking_driver_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.bookings.cancel_booking': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/bookings/:identifier/cancel'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/cancel_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/cancel_booking_controller').default['handle']>>>
+    }
+  }
+  'admin.bookings.complete_booking': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/bookings/:identifier/complete'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/complete_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/complete_booking_controller').default['handle']>>>
+    }
+  }
   'customer.authentication.onboarding': {
     methods: ["POST"]
     pattern: '/api/v1/customers/authentication/onboarding'
@@ -283,7 +319,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/password_management/reset_password/reset_password_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'create_booking': {
+  'customer.bookings.create_booking': {
     methods: ["POST"]
     pattern: '/api/v1/customer/bookings'
     types: {
@@ -295,7 +331,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'fetch_bookings': {
+  'customer.bookings.fetch_bookings': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/customer/bookings'
     types: {
@@ -307,7 +343,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'get_booking': {
+  'customer.bookings.get_booking': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/customer/bookings/:bookingIdentifier'
     types: {
@@ -319,7 +355,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/get_booking_controller').default['handle']>>>
     }
   }
-  'checkout_booking_with_card': {
+  'customer.bookings.checkout_booking_with_card': {
     methods: ["POST"]
     pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card'
     types: {
@@ -331,7 +367,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
     }
   }
-  'fetch_notifications': {
+  'customer.notifications.fetch_notifications': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/customer/notifications'
     types: {
@@ -343,7 +379,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/notifications/fetch_notifications_controller').default['handle']>>>
     }
   }
-  'mark_notification_as_read': {
+  'customer.notifications.mark_notification_as_read': {
     methods: ["PATCH"]
     pattern: '/api/v1/customer/notifications/:notificationIdentifier/read'
     types: {
@@ -521,6 +557,90 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/v1/driver/profile/documents/update_documents_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/documents/update_documents_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/documents/update_documents_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'driver.notifications.fetch_notifications': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/notifications'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/notifications/fetch_notifications_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/notifications/fetch_notifications_controller').default['handle']>>>
+    }
+  }
+  'driver.notifications.mark_notification_as_read': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/driver/notifications/:notificationIdentifier/read'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { notificationIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/notifications/mark_notification_as_read_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/notifications/mark_notification_as_read_controller').default['handle']>>>
+    }
+  }
+  'driver.bookings.fetch_bookings': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/bookings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/driver/booking_management/fetch_bookings_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/fetch_bookings_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/fetch_bookings_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'driver.bookings.get_booking': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/bookings/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/get_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/get_booking_controller').default['handle']>>>
+    }
+  }
+  'driver.bookings.accept_booking': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/driver/bookings/:identifier/accept'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/accept_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/accept_booking_controller').default['handle']>>>
+    }
+  }
+  'driver.bookings.reject_booking': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/driver/bookings/:identifier/reject'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/reject_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/reject_booking_controller').default['handle']>>>
+    }
+  }
+  'driver.bookings.update_booking_trip_progress': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/driver/bookings/:identifier/trip-progress'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/driver/booking_management/update_booking_trip_progress_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/driver/booking_management/update_booking_trip_progress_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'common.location.fetch_cities': {

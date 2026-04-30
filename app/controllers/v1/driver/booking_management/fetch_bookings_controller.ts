@@ -1,27 +1,23 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import BookingActions from '#model_management/actions/booking_actions'
-import ListBookingsRequestValidator from '#validators/v1/admin/booking_management/list_bookings_request_validator'
+import FetchBookingsRequestValidator from '#validators/v1/driver/booking_management/fetch_bookings_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 
 export default class FetchBookingsController {
-  async handle({ request, response }: HttpContext) {
+  async handle({ request, auth, response }: HttpContext) {
     const {
       page = 1,
       limit = 10,
-      searchQuery,
-      rideTypeId,
-      typeOfBooking,
-      isRecurringBooking,
-    } = await request.validateUsing(ListBookingsRequestValidator)
+      status,
+    } = await request.validateUsing(FetchBookingsRequestValidator)
 
     try {
+      const loggedInDriverId = auth.use('driver').user!
       const { bookingPayload: bookings, paginationMeta } = await BookingActions.listBookings({
         filterRecordOptionsPayload: {
-          searchQuery,
-          rideTypeId,
-          typeOfBooking,
-          isRecurringBooking,
+          assignedDriverId: loggedInDriverId.id,
+          status,
         },
         paginationPayload: {
           page,
@@ -47,14 +43,6 @@ export default class FetchBookingsController {
                 firstName: booking.customer?.firstName,
                 lastName: booking.customer?.lastName,
                 email: booking.customer?.email,
-              }
-            : null,
-          assignedDriver: booking.assignedDriver
-            ? {
-                identifier: booking.assignedDriver?.identifier,
-                firstName: booking.assignedDriver?.firstName,
-                lastName: booking.assignedDriver?.lastName,
-                email: booking.assignedDriver?.email,
               }
             : null,
           destinationLocation: {

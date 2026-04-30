@@ -38,6 +38,23 @@ export default class Booking extends AbstractModel {
   @column()
   declare rideTypeId: number
 
+  @column()
+  declare tripProgress:
+    | 'not-started'
+    | 'heading-to-pickup'
+    | 'arrived-at-pickup'
+    | 'enroute-to-dropoff'
+    | 'completed'
+
+  @column()
+  declare status:
+    | 'created'
+    | 'assigned-a-driver'
+    | 'accepted'
+    | 'completed'
+    | 'cancelled'
+    | 'rejected'
+
   @column({ consume: (value) => value === 1 })
   declare isRecurringBooking: boolean
 

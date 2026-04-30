@@ -97,4 +97,6 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   ACCESS_TOKEN_EXPIRATION_TIME_FRAME_IN_MINUTES: Env.schema.number(),
   OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES: Env.schema.number(),
+
+  CURRENT_GEOLOCATION_PROVIDER: Env.schema.string(),
 })

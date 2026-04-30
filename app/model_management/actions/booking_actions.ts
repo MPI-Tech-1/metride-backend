@@ -98,12 +98,12 @@ export default class BookingActions {
       bookingQuery.where('ride_type_id', filterRecordOptionsPayload.rideTypeId)
     }
 
-    if (filterRecordOptionsPayload?.isRecurringBooking !== undefined) {
+    if (typeof filterRecordOptionsPayload?.isRecurringBooking === 'boolean') {
       bookingQuery.where('is_recurring_booking', filterRecordOptionsPayload.isRecurringBooking)
     }
 
-    if (filterRecordOptionsPayload?.typeOfBooking) {
-      bookingQuery.where('type_of_booking', filterRecordOptionsPayload.typeOfBooking)
+    if (filterRecordOptionsPayload?.status) {
+      bookingQuery.where('status', filterRecordOptionsPayload.status)
     }
 
     if (filterRecordOptionsPayload?.customerId) {

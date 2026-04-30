@@ -10,6 +10,9 @@ export const controllers = {
         AuthenticateAdmin: () => import('#controllers/v1/admin/authentication/authenticate_admin_controller'),
       },
       bookingManagement: {
+        AssignBookingDriver: () => import('#controllers/v1/admin/booking_management/assign_booking_driver_controller'),
+        CancelBooking: () => import('#controllers/v1/admin/booking_management/cancel_booking_controller'),
+        CompleteBooking: () => import('#controllers/v1/admin/booking_management/complete_booking_controller'),
         FetchBookings: () => import('#controllers/v1/admin/booking_management/fetch_bookings_controller'),
         GetBooking: () => import('#controllers/v1/admin/booking_management/get_booking_controller'),
       },
@@ -93,6 +96,13 @@ export const controllers = {
       authentication: {
         AuthenticateDriver: () => import('#controllers/v1/driver/authentication/authenticate_driver_controller'),
         Onboarding: () => import('#controllers/v1/driver/authentication/onboarding_controller'),
+      },
+      bookingManagement: {
+        AcceptBooking: () => import('#controllers/v1/driver/booking_management/accept_booking_controller'),
+        FetchBookings: () => import('#controllers/v1/driver/booking_management/fetch_bookings_controller'),
+        GetBooking: () => import('#controllers/v1/driver/booking_management/get_booking_controller'),
+        RejectBooking: () => import('#controllers/v1/driver/booking_management/reject_booking_controller'),
+        UpdateBookingTripProgress: () => import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller'),
       },
       notifications: {
         FetchNotifications: () => import('#controllers/v1/driver/notifications/fetch_notifications_controller'),

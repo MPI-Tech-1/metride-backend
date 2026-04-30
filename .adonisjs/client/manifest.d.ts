@@ -8,6 +8,7 @@
 /// <reference path="../../config/bank_list_config.ts" />
 /// <reference path="../../config/cache.ts" />
 /// <reference path="../../config/card_payment_config.ts" />
+/// <reference path="../../config/geolocation_config.ts" />
 /// <reference path="../../config/hash.ts" />
 /// <reference path="../../config/image_upload_config.ts" />
 /// <reference path="../../config/logger.ts" />
