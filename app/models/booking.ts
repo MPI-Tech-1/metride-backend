@@ -4,8 +4,12 @@ import { DateTime } from 'luxon'
 import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
 import RideType from '#models/ride_type'
 import BookingPayment from '#models/booking_payment'
+import Customer from '#models/customer'
 
 export default class Booking extends AbstractModel {
+  @column()
+  declare customerId: number
+
   @column()
   declare typeOfBooking: 'instant' | 'shuttle'
 
@@ -44,4 +48,7 @@ export default class Booking extends AbstractModel {
 
   @hasOne(() => BookingPayment)
   declare bookingPayment: HasOne<typeof BookingPayment>
+
+  @belongsTo(() => Customer)
+  declare customer: BelongsTo<typeof Customer>
 }

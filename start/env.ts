@@ -54,6 +54,17 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   /*
   |----------------------------------------------------------
+  | Variables for configuring card payment
+  |----------------------------------------------------------
+  */
+  CURRENT_CARD_PAYMENT_PROVIDER: Env.schema.string(),
+
+  PAYSTACK_CARD_PAYMENT_PROVIDER_SECRET_KEY: Env.schema.string(),
+  PAYSTACK_CARD_PAYMENT_PROVIDER_INTITIATE_TRANSACTION_ENDPOINT: Env.schema.string(),
+  PAYSTACK_CARD_PAYMENT_PROVIDER_VERIFY_TRANSACTION_ENDPOINT: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
   | Variables for configuring image upload
   |----------------------------------------------------------
   */
@@ -77,6 +88,12 @@ export default await Env.create(new URL('../', import.meta.url), {
   SMTP_USERNAME: Env.schema.string(),
   SMTP_PASSWORD: Env.schema.string(),
   BUSINESS_NAME: Env.schema.string(),
+
+  CURRENT_PUSH_NOTIFICATION_PROVIDER: Env.schema.string(),
+  FIREBASE_PUSH_NOTIFICATION_PROVIDER_SERVICE_ACCOUNT_BASE64: Env.schema.string(),
+
+  DATE_TIME_FORMAT: Env.schema.string(),
+  DATE_FORMAT: Env.schema.string(),
 
   ACCESS_TOKEN_EXPIRATION_TIME_FRAME_IN_MINUTES: Env.schema.number(),
   OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES: Env.schema.number(),

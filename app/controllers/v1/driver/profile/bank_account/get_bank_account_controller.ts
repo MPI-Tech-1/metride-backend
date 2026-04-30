@@ -34,6 +34,7 @@ export default class GetBankAccountController {
         results: mutatedResponse,
       })
     } catch (GetBankAccountControllerError) {
+      console.log('GetBankAccountControllerError -> ', GetBankAccountControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

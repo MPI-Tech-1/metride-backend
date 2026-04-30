@@ -28,6 +28,7 @@ export default class GetPopularLocationController {
         results: popularLocation,
       })
     } catch (GetPopularLocationControllerError) {
+      console.log('GetPopularLocationControllerError -> ', GetPopularLocationControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -65,6 +65,7 @@ export default class OnboardingController {
       })
     } catch (OnboardingControllerError) {
       await dbTransaction.rollback()
+      console.log('OnboardingControllerError -> ', OnboardingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

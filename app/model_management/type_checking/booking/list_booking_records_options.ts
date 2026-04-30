@@ -5,6 +5,7 @@ type ListBookingRecordsOptionsFilterOptions = {
   rideTypeId?: number
   isRecurringBooking?: boolean
   typeOfBooking?: 'instant' | 'shuttle'
+  customerId?: number
 }
 
 type ListBookingRecordsOptions = ListRecordsGeneric<ListBookingRecordsOptionsFilterOptions>

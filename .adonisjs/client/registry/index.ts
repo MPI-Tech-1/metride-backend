@@ -6,6 +6,108 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'admin.authentication.authenticate_admin': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/authentication/authenticate',
+    tokens: [{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"api","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"authentication","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"authenticate","end":""}],
+    types: placeholder as Registry['admin.authentication.authenticate_admin']['types'],
+  },
+  'admin.customer_management.customers.fetch_customers': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/customer-management/customers',
+    tokens: [{"old":"/api/v1/admins/customer-management/customers","type":0,"val":"api","end":""},{"old":"/api/v1/admins/customer-management/customers","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/customer-management/customers","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/customer-management/customers","type":0,"val":"customer-management","end":""},{"old":"/api/v1/admins/customer-management/customers","type":0,"val":"customers","end":""}],
+    types: placeholder as Registry['admin.customer_management.customers.fetch_customers']['types'],
+  },
+  'admin.customer_management.customers.get_customer': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/customer-management/customers/:identifier',
+    tokens: [{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"customer-management","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"customers","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.customer_management.customers.get_customer']['types'],
+  },
+  'admin.driver_management.drivers.fetch_drivers': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/driver-management/drivers',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"drivers","end":""}],
+    types: placeholder as Registry['admin.driver_management.drivers.fetch_drivers']['types'],
+  },
+  'admin.driver_management.drivers.get_driver': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.driver_management.drivers.get_driver']['types'],
+  },
+  'admin.driver_management.drivers.approve_driver': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/approve',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/approve","type":0,"val":"approve","end":""}],
+    types: placeholder as Registry['admin.driver_management.drivers.approve_driver']['types'],
+  },
+  'admin.driver_management.drivers.reject_driver': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/reject',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"reject","end":""}],
+    types: placeholder as Registry['admin.driver_management.drivers.reject_driver']['types'],
+  },
+  'admin.settings.create_ride_type': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/settings/booking/ride-types',
+    tokens: [{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"ride-types","end":""}],
+    types: placeholder as Registry['admin.settings.create_ride_type']['types'],
+  },
+  'admin.settings.update_ride_type': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/settings/booking/ride-types/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"ride-types","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.update_ride_type']['types'],
+  },
+  'admin.settings.fetch_ride_types': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/booking/ride-types',
+    tokens: [{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/ride-types","type":0,"val":"ride-types","end":""}],
+    types: placeholder as Registry['admin.settings.fetch_ride_types']['types'],
+  },
+  'admin.settings.get_ride_type': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/booking/ride-types/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":0,"val":"ride-types","end":""},{"old":"/api/v1/admins/settings/booking/ride-types/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.get_ride_type']['types'],
+  },
+  'admin.settings.create_popular_location': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/settings/booking/popular-locations',
+    tokens: [{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"popular-locations","end":""}],
+    types: placeholder as Registry['admin.settings.create_popular_location']['types'],
+  },
+  'admin.settings.update_popular_location': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/settings/booking/popular-locations/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"popular-locations","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.update_popular_location']['types'],
+  },
+  'admin.settings.fetch_popular_locations': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/booking/popular-locations',
+    tokens: [{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations","type":0,"val":"popular-locations","end":""}],
+    types: placeholder as Registry['admin.settings.fetch_popular_locations']['types'],
+  },
+  'admin.settings.get_popular_location': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/booking/popular-locations/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"popular-locations","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.get_popular_location']['types'],
+  },
+  'admin.bookings.fetch_bookings': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/bookings',
+    tokens: [{"old":"/api/v1/admins/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/admins/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/bookings","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/bookings","type":0,"val":"bookings","end":""}],
+    types: placeholder as Registry['admin.bookings.fetch_bookings']['types'],
+  },
+  'admin.bookings.get_booking': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/bookings/:identifier',
+    tokens: [{"old":"/api/v1/admins/bookings/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/bookings/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/bookings/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/bookings/:identifier","type":0,"val":"bookings","end":""},{"old":"/api/v1/admins/bookings/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.bookings.get_booking']['types'],
+  },
   'customer.authentication.onboarding': {
     methods: ["POST"],
     pattern: '/api/v1/customers/authentication/onboarding',
@@ -41,6 +143,42 @@ const routes = {
     pattern: '/api/v1/customers/password-management/reset',
     tokens: [{"old":"/api/v1/customers/password-management/reset","type":0,"val":"api","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"v1","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"customers","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"password-management","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"reset","end":""}],
     types: placeholder as Registry['customer.password-management.reset_password']['types'],
+  },
+  'create_booking': {
+    methods: ["POST"],
+    pattern: '/api/v1/customer/bookings',
+    tokens: [{"old":"/api/v1/customer/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"bookings","end":""}],
+    types: placeholder as Registry['create_booking']['types'],
+  },
+  'fetch_bookings': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/customer/bookings',
+    tokens: [{"old":"/api/v1/customer/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"bookings","end":""}],
+    types: placeholder as Registry['fetch_bookings']['types'],
+  },
+  'get_booking': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier',
+    tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":1,"val":"bookingIdentifier","end":""}],
+    types: placeholder as Registry['get_booking']['types'],
+  },
+  'checkout_booking_with_card': {
+    methods: ["POST"],
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card',
+    tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":1,"val":"bookingIdentifier","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"checkout","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"card","end":""}],
+    types: placeholder as Registry['checkout_booking_with_card']['types'],
+  },
+  'fetch_notifications': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/customer/notifications',
+    tokens: [{"old":"/api/v1/customer/notifications","type":0,"val":"api","end":""},{"old":"/api/v1/customer/notifications","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/notifications","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/notifications","type":0,"val":"notifications","end":""}],
+    types: placeholder as Registry['fetch_notifications']['types'],
+  },
+  'mark_notification_as_read': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/customer/notifications/:notificationIdentifier/read',
+    tokens: [{"old":"/api/v1/customer/notifications/:notificationIdentifier/read","type":0,"val":"api","end":""},{"old":"/api/v1/customer/notifications/:notificationIdentifier/read","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/notifications/:notificationIdentifier/read","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/notifications/:notificationIdentifier/read","type":0,"val":"notifications","end":""},{"old":"/api/v1/customer/notifications/:notificationIdentifier/read","type":1,"val":"notificationIdentifier","end":""},{"old":"/api/v1/customer/notifications/:notificationIdentifier/read","type":0,"val":"read","end":""}],
+    types: placeholder as Registry['mark_notification_as_read']['types'],
   },
   'driver.authentication.driver_onboarding': {
     methods: ["POST"],
@@ -155,6 +293,18 @@ const routes = {
     pattern: '/api/v1/common/media/image',
     tokens: [{"old":"/api/v1/common/media/image","type":0,"val":"api","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"v1","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"common","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"media","end":""},{"old":"/api/v1/common/media/image","type":0,"val":"image","end":""}],
     types: placeholder as Registry['common.media.upload_image']['types'],
+  },
+  'common.bookings.fetch_ride_types': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/common/bookings/ride-types',
+    tokens: [{"old":"/api/v1/common/bookings/ride-types","type":0,"val":"api","end":""},{"old":"/api/v1/common/bookings/ride-types","type":0,"val":"v1","end":""},{"old":"/api/v1/common/bookings/ride-types","type":0,"val":"common","end":""},{"old":"/api/v1/common/bookings/ride-types","type":0,"val":"bookings","end":""},{"old":"/api/v1/common/bookings/ride-types","type":0,"val":"ride-types","end":""}],
+    types: placeholder as Registry['common.bookings.fetch_ride_types']['types'],
+  },
+  'common.bookings.fetch_popular_locations': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/common/bookings/popular-locations',
+    tokens: [{"old":"/api/v1/common/bookings/popular-locations","type":0,"val":"api","end":""},{"old":"/api/v1/common/bookings/popular-locations","type":0,"val":"v1","end":""},{"old":"/api/v1/common/bookings/popular-locations","type":0,"val":"common","end":""},{"old":"/api/v1/common/bookings/popular-locations","type":0,"val":"bookings","end":""},{"old":"/api/v1/common/bookings/popular-locations","type":0,"val":"popular-locations","end":""}],
+    types: placeholder as Registry['common.bookings.fetch_popular_locations']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

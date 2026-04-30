@@ -77,6 +77,7 @@ export default class AuthenticateCustomerController {
         results: mutatedCustomerPayload,
       })
     } catch (AuthenticateCustomerControllerError) {
+      console.log('AuthenticateCustomerControllerError -> ', AuthenticateCustomerControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

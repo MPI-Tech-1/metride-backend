@@ -82,6 +82,7 @@ export default class ResetPasswordController {
         message: 'Password reset successfully.',
       })
     } catch (ResetPasswordControllerError) {
+      console.log('ResetPasswordControllerError -> ', ResetPasswordControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

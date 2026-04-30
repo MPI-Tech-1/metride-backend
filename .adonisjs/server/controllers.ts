@@ -9,13 +9,19 @@ export const controllers = {
       authentication: {
         AuthenticateAdmin: () => import('#controllers/v1/admin/authentication/authenticate_admin_controller'),
       },
+      bookingManagement: {
+        FetchBookings: () => import('#controllers/v1/admin/booking_management/fetch_bookings_controller'),
+        GetBooking: () => import('#controllers/v1/admin/booking_management/get_booking_controller'),
+      },
       customerManagement: {
         FetchCustomers: () => import('#controllers/v1/admin/customer_management/fetch_customers_controller'),
         GetCustomer: () => import('#controllers/v1/admin/customer_management/get_customer_controller'),
       },
       driverManagement: {
+        ApproveDriver: () => import('#controllers/v1/admin/driver_management/approve_driver_controller'),
         FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
+        RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
       },
       settings: {
         booking: {
@@ -62,6 +68,16 @@ export const controllers = {
         AuthenticateCustomer: () => import('#controllers/v1/customer/authentication/authenticate_customer_controller'),
         Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
       },
+      booking: {
+        CheckoutBookingWithCard: () => import('#controllers/v1/customer/booking/checkout_booking_with_card_controller'),
+        CreateBooking: () => import('#controllers/v1/customer/booking/create_booking_controller'),
+        FetchBookings: () => import('#controllers/v1/customer/booking/fetch_bookings_controller'),
+        GetBooking: () => import('#controllers/v1/customer/booking/get_booking_controller'),
+      },
+      notifications: {
+        FetchNotifications: () => import('#controllers/v1/customer/notifications/fetch_notifications_controller'),
+        MarkNotificationAsRead: () => import('#controllers/v1/customer/notifications/mark_notification_as_read_controller'),
+      },
       passwordManagement: {
         resetPassword: {
           RequestResetPasswordOtpToken: () => import('#controllers/v1/customer/password_management/reset_password/request_reset_password_otp_token_controller'),
@@ -77,6 +93,10 @@ export const controllers = {
       authentication: {
         AuthenticateDriver: () => import('#controllers/v1/driver/authentication/authenticate_driver_controller'),
         Onboarding: () => import('#controllers/v1/driver/authentication/onboarding_controller'),
+      },
+      notifications: {
+        FetchNotifications: () => import('#controllers/v1/driver/notifications/fetch_notifications_controller'),
+        MarkNotificationAsRead: () => import('#controllers/v1/driver/notifications/mark_notification_as_read_controller'),
       },
       passwordManagement: {
         resetPassword: {

@@ -1,0 +1,8 @@
+import type CustomerWalletInterface from '#model_management/type_checking/customer_wallet/customer_wallet_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateCustomerWalletRecordPayload = Partial<CustomerWalletInterface>
+
+type CreateCustomerWalletRecordOptions = CreateNewRecordGeneric<CreateCustomerWalletRecordPayload>
+
+export default CreateCustomerWalletRecordOptions

@@ -32,6 +32,7 @@ export default class GetDocumentsController {
         results: responsePayload,
       })
     } catch (GetDocumentsControllerError) {
+      console.log('GetDocumentsControllerError -> ', GetDocumentsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

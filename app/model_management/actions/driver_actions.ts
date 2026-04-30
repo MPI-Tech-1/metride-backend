@@ -23,16 +23,40 @@ export default class DriverActions {
   }
 
   public static async getDriverByEmail(email: string): Promise<Driver | null> {
-    return await Driver.query().preload('driverRegistrationStep').where('email', email).first()
+    return await Driver.query()
+      .preload('driverRegistrationStep')
+      .preload('driverBankAccount', (driverBankAccountQuery) =>
+        driverBankAccountQuery.preload('bank')
+      )
+      .preload('driverDocument')
+      .preload('driverPersonalInformation')
+      .preload('driverApprovalSteps')
+      .where('email', email)
+      .first()
   }
 
   public static async getDriverById(driverId: number): Promise<Driver | null> {
-    return await Driver.query().preload('driverRegistrationStep').where('id', driverId).first()
+    return await Driver.query()
+      .preload('driverRegistrationStep')
+      .preload('driverBankAccount', (driverBankAccountQuery) =>
+        driverBankAccountQuery.preload('bank')
+      )
+      .preload('driverDocument')
+      .preload('driverPersonalInformation')
+      .preload('driverApprovalSteps')
+      .where('id', driverId)
+      .first()
   }
 
   public static async getDriverByIdentifier(driverIdentifier: string): Promise<Driver | null> {
     return await Driver.query()
       .preload('driverRegistrationStep')
+      .preload('driverBankAccount', (driverBankAccountQuery) =>
+        driverBankAccountQuery.preload('bank')
+      )
+      .preload('driverDocument')
+      .preload('driverPersonalInformation')
+      .preload('driverApprovalSteps')
       .where('identifier', driverIdentifier)
       .first()
   }

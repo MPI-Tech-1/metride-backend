@@ -11,3 +11,6 @@ export const OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES = env.get(
   'OTP_TOKEN_EXPIRATION_TIMEFRAME_IN_MINUTES'
 )
 export const SERVICE_PROVIDER_NOT_PROFILED = 'Service Provider Not Profiled'
+
+export const DATE_TIME_FORMAT = env.get('DATE_TIME_FORMAT')
+export const DATE_FORMAT = env.get('DATE_FORMAT')

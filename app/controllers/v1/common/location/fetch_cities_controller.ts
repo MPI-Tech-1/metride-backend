@@ -22,6 +22,7 @@ export default class FetchCitiesController {
         results: mutatedPayload,
       })
     } catch (FetchCitiesControllerError) {
+      console.log('FetchCitiesControllerError -> ', FetchCitiesControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

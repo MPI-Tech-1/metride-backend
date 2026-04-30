@@ -65,6 +65,7 @@ export default class VerifyAccountActivationTokenController {
         message: 'Account successfully activated.',
       })
     } catch (VerifyAccountActivationTokenControllerError) {
+      console.log('VerifyAccountActivationTokenControllerError -> ', VerifyAccountActivationTokenControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

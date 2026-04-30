@@ -42,6 +42,7 @@ export default class UpdateDocumentsController {
       })
     } catch (UpdateDocumentsControllerError) {
       await dbTransaction.rollback()
+      console.log('UpdateDocumentsControllerError -> ', UpdateDocumentsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -16,6 +16,18 @@ export default class BookingPayment extends AbstractModel {
   @column()
   declare amountPaid: number
 
+  @column()
+  declare paymentMethod: 'wallet' | 'card'
+
+  @column()
+  declare paymentStatus: 'pending' | 'completed' | 'failed'
+
+  @column()
+  declare systemGeneratedProviderReference: string
+
+  @column()
+  declare paymentProviderReference: string
+
   @belongsTo(() => Booking)
   declare booking: BelongsTo<typeof Booking>
 }

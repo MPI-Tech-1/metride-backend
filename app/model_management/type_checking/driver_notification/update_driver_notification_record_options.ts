@@ -1,0 +1,12 @@
+import type DriverNotificationInterface from '#model_management/type_checking/driver_notification/driver_notification_interface'
+import type DriverNotificationIdentifierOptions from '#model_management/type_checking/driver_notification/driver_notification_identifier_options'
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+
+type UpdateDriverNotificationRecordPayload = Partial<DriverNotificationInterface>
+
+type UpdateDriverNotificationRecordOptions = UpdateRecordGeneric<
+  DriverNotificationIdentifierOptions,
+  UpdateDriverNotificationRecordPayload
+>
+
+export default UpdateDriverNotificationRecordOptions

@@ -21,13 +21,23 @@ export default class GetCustomerController {
         })
       }
 
+      const mutatedResponsePayload = {
+        id: customer.id,
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        email: customer.email,
+        mobileNumber: customer.mobileNumber,
+        lastLoggedInAt: customer.lastLoggedInAt,
+      }
+
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Customer fetched successfully.',
-        results: customer,
+        results: mutatedResponsePayload,
       })
     } catch (GetCustomerControllerError) {
+      console.log('GetCustomerControllerError -> ', GetCustomerControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -1,0 +1,9 @@
+import type DriverNotificationInterface from '#model_management/type_checking/driver_notification/driver_notification_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverNotificationRecordPayload = Partial<DriverNotificationInterface>
+
+type CreateDriverNotificationRecordOptions =
+  CreateNewRecordGeneric<CreateDriverNotificationRecordPayload>
+
+export default CreateDriverNotificationRecordOptions

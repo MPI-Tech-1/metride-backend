@@ -1,0 +1,9 @@
+import type CustomerNotificationInterface from '#model_management/type_checking/customer_notification/customer_notification_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateCustomerNotificationRecordPayload = Partial<CustomerNotificationInterface>
+
+type CreateCustomerNotificationRecordOptions =
+  CreateNewRecordGeneric<CreateCustomerNotificationRecordPayload>
+
+export default CreateCustomerNotificationRecordOptions

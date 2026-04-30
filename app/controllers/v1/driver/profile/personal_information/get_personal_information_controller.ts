@@ -35,6 +35,7 @@ export default class GetPersonalInformationController {
         results: mutatedResponse,
       })
     } catch (GetPersonalInformationControllerError) {
+      console.log('GetPersonalInformationControllerError -> ', GetPersonalInformationControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

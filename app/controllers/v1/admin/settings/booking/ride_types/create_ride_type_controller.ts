@@ -21,6 +21,7 @@ export default class CreateRideTypeController {
         results: rideType,
       })
     } catch (CreateRideTypeControllerError) {
+      console.log('CreateRideTypeControllerError -> ', CreateRideTypeControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

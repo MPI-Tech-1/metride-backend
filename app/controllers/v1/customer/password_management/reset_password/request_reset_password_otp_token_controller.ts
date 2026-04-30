@@ -64,6 +64,7 @@ export default class RequestResetPasswordOtpTokenController {
         message: `An OTP token has been sent to ${email}.`,
       })
     } catch (RequestResetPasswordOtpTokenControllerError) {
+      console.log('RequestResetPasswordOtpTokenControllerError -> ', RequestResetPasswordOtpTokenControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

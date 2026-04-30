@@ -1,0 +1,12 @@
+import type CustomerWalletTransactionInterface from '#model_management/type_checking/customer_wallet_transaction/customer_wallet_transaction_interface'
+import type CustomerWalletTransactionIdentifierOptions from '#model_management/type_checking/customer_wallet_transaction/customer_wallet_transaction_identifier_options'
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+
+type UpdateCustomerWalletTransactionRecordPayload = Partial<CustomerWalletTransactionInterface>
+
+type UpdateCustomerWalletTransactionRecordOptions = UpdateRecordGeneric<
+  CustomerWalletTransactionIdentifierOptions,
+  UpdateCustomerWalletTransactionRecordPayload
+>
+
+export default UpdateCustomerWalletTransactionRecordOptions

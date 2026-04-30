@@ -41,6 +41,7 @@ export default class FetchVehicleModelsController {
         results: mutatedPayload,
       })
     } catch (FetchVehicleModelsControllerError) {
+      console.log('FetchVehicleModelsControllerError -> ', FetchVehicleModelsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

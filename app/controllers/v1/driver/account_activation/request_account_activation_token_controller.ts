@@ -47,6 +47,7 @@ export default class RequestAccountActivationTokenController {
         message: `An activation token has been sent to ${loggedInDriver.email}.`,
       })
     } catch (RequestAccountActivationTokenControllerError) {
+      console.log('RequestAccountActivationTokenControllerError -> ', RequestAccountActivationTokenControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

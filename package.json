@@ -80,6 +80,7 @@
     "better-sqlite3": "^12.8.0",
     "cloudinary": "^2.9.0",
     "edge.js": "^6.5.0",
+    "firebase-admin": "^13.8.0",
     "luxon": "^3.7.2",
     "mysql2": "^3.22.0",
     "reflect-metadata": "^0.2.2"

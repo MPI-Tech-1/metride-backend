@@ -6,29 +6,44 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 
 export default class FetchDriversController {
   async handle({ request, response }: HttpContext) {
-    const { page, limit, searchQuery } = await request.validateUsing(ListDriversRequestValidator)
+    const {
+      page = 1,
+      limit = 10,
+      searchQuery,
+    } = await request.validateUsing(ListDriversRequestValidator)
 
     try {
-      const { driverPayload, paginationMeta } = await DriverActions.listDrivers({
+      const { driverPayload: drivers, paginationMeta } = await DriverActions.listDrivers({
         filterRecordOptionsPayload: {
           searchQuery,
         },
         paginationPayload: {
-          page: page || 1,
-          limit: limit || 10,
+          page,
+          limit,
         },
       })
 
+      const mutatedResponsePayload = drivers.map((driver) => {
+        return {
+          identifier: driver.identifier,
+          firstName: driver.firstName,
+          lastName: driver.lastName,
+          email: driver.email,
+          mobileNumber: driver.mobileNumber,
+          lastLoggedInAt: driver.lastLoggedInAt,
+        }
+      })
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Drivers fetched successfully.',
         results: {
-          data: driverPayload,
+          drivers: mutatedResponsePayload,
           meta: paginationMeta,
         },
       })
     } catch (FetchDriversControllerError) {
+      console.log('FetchDriversControllerError -> ', FetchDriversControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

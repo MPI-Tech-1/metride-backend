@@ -21,17 +21,19 @@ export default class BookingActions {
     return booking
   }
 
-  public static async getBookingById(bookingId: number): Promise<Booking | null> {
+  private static async getBookingById(bookingId: number): Promise<Booking | null> {
     return await Booking.query()
       .preload('rideType')
+      .preload('customer')
       .preload('bookingPayment')
       .where('id', bookingId)
       .first()
   }
 
-  public static async getBookingByIdentifier(bookingIdentifier: string): Promise<Booking | null> {
+  private static async getBookingByIdentifier(bookingIdentifier: string): Promise<Booking | null> {
     return await Booking.query()
       .preload('rideType')
+      .preload('customer')
       .preload('bookingPayment')
       .where('identifier', bookingIdentifier)
       .first()
@@ -75,7 +77,10 @@ export default class BookingActions {
   ): Promise<{ bookingPayload: Booking[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getBookingRecordOptions
 
-    const bookingQuery = Booking.query().preload('rideType').preload('bookingPayment')
+    const bookingQuery = Booking.query()
+      .preload('rideType')
+      .preload('customer')
+      .preload('bookingPayment')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`
@@ -96,6 +101,10 @@ export default class BookingActions {
 
     if (filterRecordOptionsPayload?.typeOfBooking) {
       bookingQuery.where('type_of_booking', filterRecordOptionsPayload.typeOfBooking)
+    }
+
+    if (filterRecordOptionsPayload?.customerId) {
+      bookingQuery.where('customer_id', filterRecordOptionsPayload.customerId)
     }
 
     if (paginationPayload) {

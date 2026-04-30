@@ -14,6 +14,7 @@ export default class extends BaseSchema {
       table.string('password')
       table.string('fcm_token').nullable()
       table.timestamp('last_logged_in_at').nullable()
+      table.string('status').defaultTo('pending')
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

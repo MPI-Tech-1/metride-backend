@@ -83,7 +83,7 @@ export default class AuthenticateDriverController {
         results: mutatedDriverPayload,
       })
     } catch (AuthenticateDriverControllerError) {
-      console.log(AuthenticateDriverControllerError)
+      console.log('AuthenticateDriverControllerError -> ', AuthenticateDriverControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

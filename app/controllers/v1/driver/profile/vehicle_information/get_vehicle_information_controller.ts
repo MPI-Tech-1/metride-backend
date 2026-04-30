@@ -41,6 +41,7 @@ export default class GetVehicleInformationController {
         results: mutatedResponse,
       })
     } catch (GetVehicleInformationControllerError) {
+      console.log('GetVehicleInformationControllerError -> ', GetVehicleInformationControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

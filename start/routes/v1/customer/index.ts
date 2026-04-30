@@ -1,3 +1,5 @@
 await import('#start/routes/v1/customer/authentication.routes')
 await import('#start/routes/v1/customer/account_activation.routes')
 await import('#start/routes/v1/customer/password_management.routes')
+await import('#start/routes/v1/customer/booking.routes')
+await import('#start/routes/v1/customer/notification.routes')

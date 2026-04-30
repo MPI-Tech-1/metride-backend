@@ -22,6 +22,7 @@ export default class UploadImageController {
         results: { url },
       })
     } catch (UploadImageControllerError) {
+      console.log('UploadImageControllerError -> ', UploadImageControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

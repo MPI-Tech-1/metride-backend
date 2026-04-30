@@ -2,6 +2,39 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  admin: {
+    authentication: {
+      authenticateAdmin: typeof routes['admin.authentication.authenticate_admin']
+    }
+    customerManagement: {
+      customers: {
+        fetchCustomers: typeof routes['admin.customer_management.customers.fetch_customers']
+        getCustomer: typeof routes['admin.customer_management.customers.get_customer']
+      }
+    }
+    driverManagement: {
+      drivers: {
+        fetchDrivers: typeof routes['admin.driver_management.drivers.fetch_drivers']
+        getDriver: typeof routes['admin.driver_management.drivers.get_driver']
+        approveDriver: typeof routes['admin.driver_management.drivers.approve_driver']
+        rejectDriver: typeof routes['admin.driver_management.drivers.reject_driver']
+      }
+    }
+    settings: {
+      createRideType: typeof routes['admin.settings.create_ride_type']
+      updateRideType: typeof routes['admin.settings.update_ride_type']
+      fetchRideTypes: typeof routes['admin.settings.fetch_ride_types']
+      getRideType: typeof routes['admin.settings.get_ride_type']
+      createPopularLocation: typeof routes['admin.settings.create_popular_location']
+      updatePopularLocation: typeof routes['admin.settings.update_popular_location']
+      fetchPopularLocations: typeof routes['admin.settings.fetch_popular_locations']
+      getPopularLocation: typeof routes['admin.settings.get_popular_location']
+    }
+    bookings: {
+      fetchBookings: typeof routes['admin.bookings.fetch_bookings']
+      getBooking: typeof routes['admin.bookings.get_booking']
+    }
+  }
   customer: {
     authentication: {
       onboarding: typeof routes['customer.authentication.onboarding']
@@ -16,6 +49,12 @@ export interface ApiDefinition {
       resetPassword: typeof routes['customer.password-management.reset_password']
     }
   }
+  createBooking: typeof routes['create_booking']
+  fetchBookings: typeof routes['fetch_bookings']
+  getBooking: typeof routes['get_booking']
+  checkoutBookingWithCard: typeof routes['checkout_booking_with_card']
+  fetchNotifications: typeof routes['fetch_notifications']
+  markNotificationAsRead: typeof routes['mark_notification_as_read']
   driver: {
     authentication: {
       driverOnboarding: typeof routes['driver.authentication.driver_onboarding']
@@ -53,6 +92,10 @@ export interface ApiDefinition {
     }
     media: {
       uploadImage: typeof routes['common.media.upload_image']
+    }
+    bookings: {
+      fetchRideTypes: typeof routes['common.bookings.fetch_ride_types']
+      fetchPopularLocations: typeof routes['common.bookings.fetch_popular_locations']
     }
   }
 }
