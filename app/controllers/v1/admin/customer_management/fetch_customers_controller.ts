@@ -38,7 +38,7 @@ export default class FetchCustomersController {
         message: 'Customers fetched successfully.',
         results: {
           customers: mutatedResponsePayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchCustomersControllerError) {

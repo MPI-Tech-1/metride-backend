@@ -26,6 +26,7 @@ export default class BookingActions {
       .preload('rideType')
       .preload('customer')
       .preload('bookingPayment')
+      .preload('assignedDriver')
       .where('id', bookingId)
       .first()
   }
@@ -35,6 +36,7 @@ export default class BookingActions {
       .preload('rideType')
       .preload('customer')
       .preload('bookingPayment')
+      .preload('assignedDriver')
       .where('identifier', bookingIdentifier)
       .first()
   }
@@ -81,6 +83,7 @@ export default class BookingActions {
       .preload('rideType')
       .preload('customer')
       .preload('bookingPayment')
+      .preload('assignedDriver')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`

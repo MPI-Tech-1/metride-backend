@@ -39,7 +39,7 @@ export default class FetchDriversController {
         message: 'Drivers fetched successfully.',
         results: {
           drivers: mutatedResponsePayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchDriversControllerError) {

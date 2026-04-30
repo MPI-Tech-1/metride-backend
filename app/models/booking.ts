@@ -5,10 +5,14 @@ import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
 import RideType from '#models/ride_type'
 import BookingPayment from '#models/booking_payment'
 import Customer from '#models/customer'
+import Driver from '#models/driver'
 
 export default class Booking extends AbstractModel {
   @column()
   declare customerId: number
+
+  @column()
+  declare assignedDriverId: number | null
 
   @column()
   declare typeOfBooking: 'instant' | 'shuttle'
@@ -51,4 +55,9 @@ export default class Booking extends AbstractModel {
 
   @belongsTo(() => Customer)
   declare customer: BelongsTo<typeof Customer>
+
+  @belongsTo(() => Driver, {
+    foreignKey: 'assignedDriverId',
+  })
+  declare assignedDriver: BelongsTo<typeof Driver>
 }

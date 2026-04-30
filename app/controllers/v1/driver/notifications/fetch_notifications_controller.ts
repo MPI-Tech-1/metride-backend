@@ -36,7 +36,7 @@ export default class FetchNotificationsController {
         message: 'Notifications fetched successfully.',
         results: {
           notifications: mutatedResponsePayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchNotificationsControllerError) {

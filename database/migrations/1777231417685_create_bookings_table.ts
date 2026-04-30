@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('identifier').index()
       table.integer('customer_id').index()
+      table.integer('assigned_driver_id').nullable().index()
       table.string('type_of_booking').defaultTo('shuttle')
       table.string('departure_location_name').nullable()
       table.string('departure_location_gps_coordinates')

@@ -35,6 +35,14 @@ export default class FetchBookingsController {
             gpsCoordinates: booking.departureLocationGpsCoordinates,
             type: booking.departureLocationType,
           },
+          assignedDriver: booking.assignedDriver
+            ? {
+                identifier: booking.assignedDriver?.identifier,
+                firstName: booking.assignedDriver?.firstName,
+                lastName: booking.assignedDriver?.lastName,
+                email: booking.assignedDriver?.email,
+              }
+            : null,
           destinationLocation: {
             name: booking.destinationLocationName,
             gpsCoordinates: booking.destinationLocationGpsCoordinates,
@@ -50,7 +58,7 @@ export default class FetchBookingsController {
         message: 'Bookings fetched successfully.',
         results: {
           bookings: mutatedResponsePayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchBookingsControllerError) {

@@ -19,7 +19,7 @@ export default class FetchRideTypesController {
         message: 'Fetched list of ride types successfully',
         results: {
           data: rideTypePayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchRideTypesControllerError) {

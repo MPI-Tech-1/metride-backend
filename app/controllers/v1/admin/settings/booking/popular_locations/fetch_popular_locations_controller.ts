@@ -25,7 +25,7 @@ export default class FetchPopularLocationsController {
         message: 'Fetched list of popular locations successfully',
         results: {
           data: popularLocationPayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchPopularLocationsControllerError) {

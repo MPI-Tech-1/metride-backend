@@ -6,7 +6,8 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 
 export default class FetchBookingsController {
   async handle({ request, response }: HttpContext) {
-    const { page, limit, searchQuery, rideTypeId, typeOfBooking, isRecurringBooking } = await request.validateUsing(ListBookingsRequestValidator)
+    const { page, limit, searchQuery, rideTypeId, typeOfBooking, isRecurringBooking } =
+      await request.validateUsing(ListBookingsRequestValidator)
 
     try {
       const { bookingPayload, paginationMeta } = await BookingActions.listBookings({
@@ -28,7 +29,7 @@ export default class FetchBookingsController {
         message: 'Bookings fetched successfully.',
         results: {
           data: bookingPayload,
-          meta: paginationMeta,
+          paginationMeta,
         },
       })
     } catch (FetchBookingsControllerError) {
