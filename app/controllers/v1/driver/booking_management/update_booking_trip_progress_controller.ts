@@ -62,7 +62,7 @@ export default class UpdateBookingTripProgress {
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
-        message: 'Driver accepted the booking successfully.',
+        message: 'Driver updated the booking trip progress successfully.',
       })
     } catch (UpdateBookingTripProgressError) {
       console.log('UpdateBookingTripProgressError -> ', UpdateBookingTripProgressError)

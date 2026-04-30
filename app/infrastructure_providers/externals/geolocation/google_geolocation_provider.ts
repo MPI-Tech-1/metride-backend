@@ -46,7 +46,9 @@ export default class GoogleGeolocationProvider implements GeolocationInterface {
       }
 
       const routes = apiResponse.routes[0]
-      const distanceInMeters = routes[0].distanceMeters
+
+      const distanceInMeters = routes.distanceMeters
+
       const distanceInKilometers = distanceInMeters / 1000
 
       return {
