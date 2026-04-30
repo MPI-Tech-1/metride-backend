@@ -7,6 +7,12 @@ export default class MockGeolocationProvider implements GeolocationInterface {
     calculateDistanceInputOptions: CalculateDistanceInputOptions
   ): Promise<CalculateDistanceOutputOptions> {
     console.log('calculateDistanceInputOptions => ', calculateDistanceInputOptions)
-    return Promise.resolve({ distanceInKilometers: 10, distanceInMeters: 10000 })
+    return Promise.resolve({
+      mutatedPayload: {
+        distanceInKilometers: 10,
+        distanceInMeters: 10000,
+      },
+      infrastructureResults: {},
+    })
   }
 }

@@ -26,10 +26,18 @@ export default class CreateBookingController {
       recurringBookingDates,
     } = payload
 
-    const distance = await calculateDistanceBetween2Points(
+    const { mutatedPayload: distance } = await calculateDistanceBetween2Points(
       departureLocationGpsCoordinates,
       destinationLocationGpsCoordinates
     )
+
+    if (!distance) {
+      return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
+        status: ERROR,
+        status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
+        message: 'Unable to calculate distance between locations',
+      })
+    }
 
     const dbTransaction = await db.transaction()
 

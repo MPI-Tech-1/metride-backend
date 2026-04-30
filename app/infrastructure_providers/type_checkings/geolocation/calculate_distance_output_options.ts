@@ -1,7 +1,9 @@
 type CalculateDistanceOutputOptions = {
-  distanceInKilometers: number
-
-  distanceInMeters: number
+  mutatedPayload: {
+    distanceInKilometers: number
+    distanceInMeters: number
+  } | null
+  infrastructureResults: Record<string, unknown>
 }
 
 export default CalculateDistanceOutputOptions
