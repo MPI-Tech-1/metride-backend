@@ -55,6 +55,7 @@ export default class FetchBookingsController {
               firstName: booking.customer?.firstName,
               lastName: booking.customer?.lastName,
               email: booking.customer?.email,
+              mobileNumber: booking.customer?.mobileNumber,
             }
           : null,
         assignedDriver: booking.assignedDriver
@@ -63,6 +64,7 @@ export default class FetchBookingsController {
               firstName: booking.assignedDriver?.firstName,
               lastName: booking.assignedDriver?.lastName,
               email: booking.assignedDriver?.email,
+              mobileNumber: booking.assignedDriver?.mobileNumber,
             }
           : null,
         destinationLocation: {
