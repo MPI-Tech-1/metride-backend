@@ -5,10 +5,11 @@ import AbstractModel from '#models/abstract_model'
 import DriverRegistrationStep from '#models/driver_registration_step'
 import { DateTime } from 'luxon'
 import DriverApprovalStep from '#models/driver_approval_step'
-import DriverVehicle from './driver_vehicle.ts'
-import DriverBankAccount from './driver_bank_account.ts'
-import DriverDocument from './driver_document.ts'
-import DriverPersonalInformation from './driver_personal_information.ts'
+import DriverVehicle from '#models/driver_vehicle'
+import DriverBankAccount from '#models/driver_bank_account'
+import DriverDocument from '#models/driver_document'
+import DriverPersonalInformation from '#models/driver_personal_information'
+import Booking from '#models/booking'
 
 export default class Driver extends AbstractModel {
   @column()
@@ -34,6 +35,11 @@ export default class Driver extends AbstractModel {
 
   @column()
   declare status: 'pending' | 'approved' | 'rejected'
+
+  @hasMany(() => Booking, {
+    foreignKey: 'assignedDriverId',
+  })
+  declare assignedBookings: HasMany<typeof Booking>
 
   @hasOne(() => DriverRegistrationStep)
   declare driverRegistrationStep: HasOne<typeof DriverRegistrationStep>

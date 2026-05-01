@@ -30,6 +30,7 @@ export default class FetchDriversController {
           lastName: driver.lastName,
           email: driver.email,
           mobileNumber: driver.mobileNumber,
+          status: driver.status,
           lastLoggedInAt: driver.lastLoggedInAt,
         }
       })

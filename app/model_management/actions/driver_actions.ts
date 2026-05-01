@@ -99,7 +99,7 @@ export default class DriverActions {
   ): Promise<{ driverPayload: Driver[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getDriverRecordOptions
 
-    const driverQuery = Driver.query()
+    const driverQuery = Driver.query().preload('assignedBookings')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`
