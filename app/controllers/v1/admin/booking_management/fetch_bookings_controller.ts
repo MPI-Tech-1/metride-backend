@@ -3,6 +3,8 @@ import BookingActions from '#model_management/actions/booking_actions'
 import ListBookingsRequestValidator from '#validators/v1/admin/booking_management/list_bookings_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import CustomerActions from '#model_management/actions/customer_actions'
+import DriverActions from '#model_management/actions/driver_actions'
 
 export default class FetchBookingsController {
   async handle({ request, response }: HttpContext) {
@@ -10,16 +12,27 @@ export default class FetchBookingsController {
       page = 1,
       limit = 10,
       searchQuery,
-      rideTypeId,
+      customerIdentifier,
+      assignedDriverIdentifier,
       typeOfBooking,
       isRecurringBooking,
     } = await request.validateUsing(ListBookingsRequestValidator)
 
+    const customer = await CustomerActions.getCustomer({
+      identifierType: 'identifier',
+      identifier: customerIdentifier ?? '',
+    })
+
+    const assignedDriver = await DriverActions.getDriver({
+      identifierType: 'identifier',
+      identifier: assignedDriverIdentifier ?? '',
+    })
     try {
       const { bookingPayload: bookings, paginationMeta } = await BookingActions.listBookings({
         filterRecordOptionsPayload: {
           searchQuery,
-          rideTypeId,
+          customerId: customer?.id,
+          assignedDriverId: assignedDriver?.id,
           typeOfBooking,
           isRecurringBooking,
         },

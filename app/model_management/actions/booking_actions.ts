@@ -110,6 +110,10 @@ export default class BookingActions {
       bookingQuery.where('customer_id', filterRecordOptionsPayload.customerId)
     }
 
+    if (filterRecordOptionsPayload?.assignedDriverId) {
+      bookingQuery.where('assigned_driver_id', filterRecordOptionsPayload.assignedDriverId)
+    }
+
     if (paginationPayload) {
       const bookings = await bookingQuery
         .orderBy('created_at', 'desc')
