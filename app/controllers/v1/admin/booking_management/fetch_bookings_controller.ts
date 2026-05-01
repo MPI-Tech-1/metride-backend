@@ -31,37 +31,50 @@ export default class FetchBookingsController {
 
       const mutatedResponsePayload = bookings.map((booking) => ({
         identifier: booking.identifier,
-        customer: {
-          identifier: booking.customer.identifier,
-          firstName: booking.customer.firstName,
-          lastName: booking.customer.lastName,
-          email: booking.customer.email,
-          departureLocation: {
-            name: booking.departureLocationName,
-            gpsCoordinates: booking.departureLocationGpsCoordinates,
-            type: booking.departureLocationType,
-          },
-          customer: booking.customer
-            ? {
-                identifier: booking.customer?.identifier,
-                firstName: booking.customer?.firstName,
-                lastName: booking.customer?.lastName,
-                email: booking.customer?.email,
-              }
-            : null,
-          assignedDriver: booking.assignedDriver
-            ? {
-                identifier: booking.assignedDriver?.identifier,
-                firstName: booking.assignedDriver?.firstName,
-                lastName: booking.assignedDriver?.lastName,
-                email: booking.assignedDriver?.email,
-              }
-            : null,
-          destinationLocation: {
-            name: booking.destinationLocationName,
-            gpsCoordinates: booking.destinationLocationGpsCoordinates,
-            type: booking.destinationLocationType,
-          },
+        typeOfBooking: booking.typeOfBooking,
+        status: booking.status,
+        tripProgress: booking.tripProgress,
+        isRecurringBooking: booking.isRecurringBooking,
+        dateOfRide: booking.dateOfRide,
+        recurringBookingDates: booking.recurringBookingDates,
+        rideType: {
+          identifier: booking.rideType.identifier,
+          name: booking.rideType.name,
+          numberOfSeats: booking.rideType.numberOfSeats,
+          pricePerKilometer: booking.rideType.pricePerKilometer,
+          minimumPrice: booking.rideType.minimumPrice,
+        },
+        bookingPayment: {
+          identifier: booking.bookingPayment.identifier,
+          paymentMethod: booking.bookingPayment.paymentMethod,
+          basePrice: booking.bookingPayment.basePrice,
+          paymentStatus: booking.bookingPayment.paymentStatus,
+        },
+        departureLocation: {
+          name: booking.departureLocationName,
+          gpsCoordinates: booking.departureLocationGpsCoordinates,
+          type: booking.departureLocationType,
+        },
+        customer: booking.customer
+          ? {
+              identifier: booking.customer?.identifier,
+              firstName: booking.customer?.firstName,
+              lastName: booking.customer?.lastName,
+              email: booking.customer?.email,
+            }
+          : null,
+        assignedDriver: booking.assignedDriver
+          ? {
+              identifier: booking.assignedDriver?.identifier,
+              firstName: booking.assignedDriver?.firstName,
+              lastName: booking.assignedDriver?.lastName,
+              email: booking.assignedDriver?.email,
+            }
+          : null,
+        destinationLocation: {
+          name: booking.destinationLocationName,
+          gpsCoordinates: booking.destinationLocationGpsCoordinates,
+          type: booking.destinationLocationType,
         },
         createdAt: booking.createdAt,
       }))
