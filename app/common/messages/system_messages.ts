@@ -14,3 +14,4 @@ export const SERVICE_PROVIDER_NOT_PROFILED = 'Service Provider Not Profiled'
 
 export const DATE_TIME_FORMAT = env.get('DATE_TIME_FORMAT')
 export const DATE_FORMAT = env.get('DATE_FORMAT')
+export const METRIDE_ADMIN_DASHBOARD_URL = env.get('METRIDE_ADMIN_DASHBOARD_URL')

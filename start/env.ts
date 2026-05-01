@@ -101,4 +101,6 @@ export default await Env.create(new URL('../', import.meta.url), {
   CURRENT_GEOLOCATION_PROVIDER: Env.schema.string(),
   GOOGLE_GEOLOCATION_PROVIDER_API_KEY: Env.schema.string(),
   GOOGLE_GEOLOCATION_PROVIDER_ENDPOINT: Env.schema.string(),
+
+  METRIDE_ADMIN_DASHBOARD_URL: Env.schema.string(),
 })

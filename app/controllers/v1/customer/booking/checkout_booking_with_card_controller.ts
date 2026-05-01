@@ -2,7 +2,12 @@ import { type HttpContext } from '@adonisjs/core/http'
 import BookingActions from '#model_management/actions/booking_actions'
 import BookingPaymentActions from '#model_management/actions/booking_payment_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
-import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import {
+  ERROR,
+  METRIDE_ADMIN_DASHBOARD_URL,
+  SOMETHING_WENT_WRONG,
+  SUCCESS,
+} from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
 import configureCardPaymentProvider from '#infrastructure_providers/helpers/configure_card_payment_provider'
 import { randomUUID } from 'node:crypto'
@@ -40,8 +45,8 @@ export default class CheckoutBookingController {
     const { transactionStatus, initiateTransactionInformation } =
       await cardPaymentProvider.initiateTransaction({
         amount: `${booking.bookingPayment.basePrice}`,
-        paymentChannel: ['card'],
         emailAddress: booking.customer.email,
+        redirectTransactionRedirectUrl: `${METRIDE_ADMIN_DASHBOARD_URL}/payment-success`,
       })
 
     if (transactionStatus !== 'success') {
