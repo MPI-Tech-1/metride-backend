@@ -39,7 +39,7 @@ export default class UpdateBookingTripProgress {
         return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
           status_code: HttpStatusCodesEnum.BAD_REQUEST,
           status: ERROR,
-          message: 'This booking cannot be updated at the moment',
+          message: 'Booking must be accepted before updating trip progress',
         })
       }
 
