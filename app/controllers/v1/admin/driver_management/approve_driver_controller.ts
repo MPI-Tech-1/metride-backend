@@ -4,6 +4,7 @@ import DriverActions from '#model_management/actions/driver_actions'
 import DriverApprovalStepActions from '#model_management/actions/driver_approval_step_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 
 export default class ApproveDriverController {
   async handle({ request, response }: HttpContext) {
@@ -54,6 +55,9 @@ export default class ApproveDriverController {
 
       await dbTransaction.commit()
 
+      await NotificationDispatchClient.sendDriverAccountApprovedNotificationJob({
+        driverId: driver.id,
+      })
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,

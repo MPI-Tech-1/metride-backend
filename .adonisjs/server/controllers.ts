@@ -50,6 +50,7 @@ export const controllers = {
       },
       finance: {
         FetchBanks: () => import('#controllers/v1/common/finance/fetch_banks_controller'),
+        ProcessPaystackWebhook: () => import('#controllers/v1/common/finance/process_paystack_webhook_controller'),
       },
       location: {
         FetchCities: () => import('#controllers/v1/common/location/fetch_cities_controller'),

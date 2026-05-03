@@ -101,6 +101,7 @@ export interface ApiDefinition {
     }
     finance: {
       fetchBanks: typeof routes['common.finance.fetch_banks']
+      processPaystackWebhook: typeof routes['common.finance.process_paystack_webhook']
     }
     vehicle: {
       fetchVehicleModels: typeof routes['common.vehicle.fetch_vehicle_models']

@@ -5,6 +5,7 @@ import DriverApprovalStepActions from '#model_management/actions/driver_approval
 import RejectDriverRequestValidator from '#validators/v1/admin/driver_management/reject_driver_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 
 export default class RejectDriverController {
   async handle({ request, response }: HttpContext) {
@@ -12,7 +13,7 @@ export default class RejectDriverController {
 
     const { reason } = await request.validateUsing(RejectDriverRequestValidator)
 
-    const trx = await db.transaction()
+    const dbTransaction = await db.transaction()
 
     try {
       const driver = await DriverActions.getDriver({
@@ -21,7 +22,7 @@ export default class RejectDriverController {
       })
 
       if (!driver) {
-        await trx.rollback()
+        await dbTransaction.rollback()
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
           status_code: HttpStatusCodesEnum.NOT_FOUND,
           status: ERROR,
@@ -39,7 +40,7 @@ export default class RejectDriverController {
         },
         dbTransactionOptions: {
           useTransaction: true,
-          dbTransaction: trx,
+          dbTransaction,
         },
       })
 
@@ -51,11 +52,15 @@ export default class RejectDriverController {
         },
         dbTransactionOptions: {
           useTransaction: true,
-          dbTransaction: trx,
+          dbTransaction,
         },
       })
 
-      await trx.commit()
+      await dbTransaction.commit()
+
+      await NotificationDispatchClient.sendDriverAccountRejectedNotificationJob({
+        driverId: driver.id,
+      })
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
@@ -63,7 +68,7 @@ export default class RejectDriverController {
         message: 'Driver rejected successfully.',
       })
     } catch (RejectDriverControllerError) {
-      await trx.rollback()
+      await dbTransaction.rollback()
       console.log('RejectDriverControllerError -> ', RejectDriverControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,

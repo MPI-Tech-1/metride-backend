@@ -1,7 +1,7 @@
 type BookingPaymentIdentifierOptions =
   | {
       identifier: string
-      identifierType: 'identifier'
+      identifierType: 'identifier' | 'paymentProviderReference'
     }
   | {
       identifier: number

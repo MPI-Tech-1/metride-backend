@@ -667,6 +667,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/fetch_banks_controller').default['handle']>>>
     }
   }
+  'common.finance.process_paystack_webhook': {
+    methods: ["POST"]
+    pattern: '/api/v1/common/finance/webhooks/paystack'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/process_paystack_webhook_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/process_paystack_webhook_controller').default['handle']>>>
+    }
+  }
   'common.vehicle.fetch_vehicle_models': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/common/vehicle/vehicle-models'

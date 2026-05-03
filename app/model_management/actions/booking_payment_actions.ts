@@ -21,18 +21,27 @@ export default class BookingPaymentActions {
     return bookingPayment
   }
 
-  public static async getBookingPaymentById(
+  private static async getBookingPaymentById(
     bookingPaymentId: number
   ): Promise<BookingPayment | null> {
     return await BookingPayment.query().preload('booking').where('id', bookingPaymentId).first()
   }
 
-  public static async getBookingPaymentByIdentifier(
+  private static async getBookingPaymentByIdentifier(
     bookingPaymentIdentifier: string
   ): Promise<BookingPayment | null> {
     return await BookingPayment.query()
       .preload('booking')
       .where('identifier', bookingPaymentIdentifier)
+      .first()
+  }
+
+  private static async getBookingPaymentByPaymentProviderReference(
+    paymentProviderReference: string
+  ): Promise<BookingPayment | null> {
+    return await BookingPayment.query()
+      .preload('booking', (bookingQuery) => bookingQuery.preload('customer'))
+      .where('payment_provider_reference', paymentProviderReference)
       .first()
   }
 
@@ -45,6 +54,9 @@ export default class BookingPaymentActions {
       id: async () => await this.getBookingPaymentById(Number(identifier)),
 
       identifier: async () => await this.getBookingPaymentByIdentifier(String(identifier)),
+
+      paymentProviderReference: async () =>
+        await this.getBookingPaymentByPaymentProviderReference(String(identifier)),
     }
 
     return await GetBookingPaymentIdentifierOptions[identifierType]()

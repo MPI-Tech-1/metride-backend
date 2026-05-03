@@ -336,6 +336,12 @@ const routes = {
     tokens: [{"old":"/api/v1/common/finance/banks","type":0,"val":"api","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"v1","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"common","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"finance","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"banks","end":""}],
     types: placeholder as Registry['common.finance.fetch_banks']['types'],
   },
+  'common.finance.process_paystack_webhook': {
+    methods: ["POST"],
+    pattern: '/api/v1/common/finance/webhooks/paystack',
+    tokens: [{"old":"/api/v1/common/finance/webhooks/paystack","type":0,"val":"api","end":""},{"old":"/api/v1/common/finance/webhooks/paystack","type":0,"val":"v1","end":""},{"old":"/api/v1/common/finance/webhooks/paystack","type":0,"val":"common","end":""},{"old":"/api/v1/common/finance/webhooks/paystack","type":0,"val":"finance","end":""},{"old":"/api/v1/common/finance/webhooks/paystack","type":0,"val":"webhooks","end":""},{"old":"/api/v1/common/finance/webhooks/paystack","type":0,"val":"paystack","end":""}],
+    types: placeholder as Registry['common.finance.process_paystack_webhook']['types'],
+  },
   'common.vehicle.fetch_vehicle_models': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/common/vehicle/vehicle-models',
