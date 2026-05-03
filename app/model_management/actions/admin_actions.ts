@@ -22,15 +22,15 @@ export default class AdminActions {
     return admin
   }
 
-  public static async getAdminByEmail(email: string): Promise<Admin | null> {
+  private static async getAdminByEmail(email: string): Promise<Admin | null> {
     return await Admin.query().where('email', email).first()
   }
 
-  public static async getAdminById(adminId: number): Promise<Admin | null> {
+  private static async getAdminById(adminId: number): Promise<Admin | null> {
     return await Admin.query().where('id', adminId).first()
   }
 
-  public static async getAdminByIdentifier(adminIdentifier: string): Promise<Admin | null> {
+  private static async getAdminByIdentifier(adminIdentifier: string): Promise<Admin | null> {
     return await Admin.query().where('identifier', adminIdentifier).first()
   }
 

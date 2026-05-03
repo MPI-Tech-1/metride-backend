@@ -33,6 +33,14 @@ export default class AssignBookingDriverController {
         })
       }
 
+      if (booking.bookingPayment.paymentStatus !== 'completed') {
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
+          status: ERROR,
+          message: 'Only completed payments can be assigned to a booking.',
+        })
+      }
+
       const driver = await DriverActions.getDriver({
         identifierType: 'identifier',
         identifier: driverIdentifier,

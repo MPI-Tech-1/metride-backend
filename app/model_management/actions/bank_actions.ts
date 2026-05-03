@@ -21,11 +21,11 @@ export default class BankActions {
     return bank
   }
 
-  public static async getBankById(bankId: number): Promise<Bank | null> {
+  private static async getBankById(bankId: number): Promise<Bank | null> {
     return await Bank.query().where('id', bankId).first()
   }
 
-  public static async getBankByIdentifier(bankIdentifier: string): Promise<Bank | null> {
+  private static async getBankByIdentifier(bankIdentifier: string): Promise<Bank | null> {
     return await Bank.query().where('identifier', bankIdentifier).first()
   }
 
