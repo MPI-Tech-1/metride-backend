@@ -1,4 +1,9 @@
+import {
+  BOOKING_COMPLETED_EMAIL_SUBJECT,
+  BOOKING_COMPLETED_EMAIL_TEMPLATE,
+} from '#common/messages/email_types'
 import configurePushNotificationProvider from '#infrastructure_providers/helpers/configure_push_notification_provider'
+import MailClient from '#infrastructure_providers/internals/mail_client'
 import BookingActions from '#model_management/actions/booking_actions'
 import CustomerNotificationActions from '#model_management/actions/customer_notification_actions'
 import DriverNotificationActions from '#model_management/actions/driver_notification_actions'
@@ -88,6 +93,19 @@ export default class SendBookingCompletedNotificationJob extends Job<SendBooking
           data: {},
         })
       }
+
+      await MailClient.sendMail({
+        recipientEmail: booking.customer.email,
+        recipientName: `${booking.customer.firstName} ${booking.customer.lastName}`,
+        emailSubject: BOOKING_COMPLETED_EMAIL_SUBJECT,
+        emailTemplate: BOOKING_COMPLETED_EMAIL_TEMPLATE,
+        emailPayload: {
+          recipientFirstName: booking.customer.firstName,
+          departureLocationName: booking.departureLocationName,
+          destinationLocationName: booking.destinationLocationName,
+          amountPaid: booking.bookingPayment.amountPaid,
+        },
+      })
     } catch (sendBookingCompletedNotificationJobError) {
       await dbTransaction.rollback()
       console.log(

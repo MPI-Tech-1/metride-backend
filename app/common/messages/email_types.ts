@@ -11,3 +11,7 @@ export const DRIVER_ACCOUNT_APPROVED_EMAIL_TEMPLATE =
 export const DRIVER_ACCOUNT_REJECTED_EMAIL_SUBJECT = 'Update on your driver account application'
 export const DRIVER_ACCOUNT_REJECTED_EMAIL_TEMPLATE =
   'emails/account/driver_account_rejected_email_template'
+
+export const BOOKING_COMPLETED_EMAIL_SUBJECT = 'Thank you for riding with us!'
+export const BOOKING_COMPLETED_EMAIL_TEMPLATE =
+  'emails/booking/booking_completed_email_template'
