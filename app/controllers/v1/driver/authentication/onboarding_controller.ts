@@ -17,6 +17,7 @@ import DriverVehicleActions from '#model_management/actions/driver_vehicle_actio
 import DriverDocumentActions from '#model_management/actions/driver_document_actions'
 import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
 import DriverApprovalStepActions from '#model_management/actions/driver_approval_step_actions'
+import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
@@ -81,6 +82,13 @@ export default class OnboardingController {
         createPayload: {
           driverId: driver.id,
           status: 'pending',
+        },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
+      })
+
+      await DriverWalletActions.createDriverWalletRecord({
+        createPayload: {
+          driverId: driver.id,
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })

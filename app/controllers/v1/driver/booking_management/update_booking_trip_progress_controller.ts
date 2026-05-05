@@ -4,6 +4,7 @@ import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import UpdateBookingTripProgressRequestValidator from '#validators/v1/driver/booking_management/update_booking_trip_progress_request_validator'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
+import BackgroundDispatchClient from '#infrastructure_providers/internals/background_dispatch_client'
 
 export default class UpdateBookingTripProgress {
   async handle({ auth, request, response }: HttpContext) {
@@ -58,6 +59,12 @@ export default class UpdateBookingTripProgress {
       await NotificationDispatchClient.sendBookingTripProgressNotificationJob({
         bookingId: booking.id,
       })
+
+      if (tripProgress === 'completed') {
+        await BackgroundDispatchClient.processDriverWalletEarningJob({
+          bookingId: booking.id,
+        })
+      }
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
