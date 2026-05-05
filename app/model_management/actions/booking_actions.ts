@@ -3,6 +3,7 @@ import type ListBookingRecordsOptions from '#model_management/type_checking/book
 import type UpdateBookingRecordOptions from '#model_management/type_checking/booking/update_booking_record_options'
 import type BookingIdentifierOptions from '#model_management/type_checking/booking/booking_identifier_options'
 import Booking from '#models/booking'
+import db from '@adonisjs/lucid/services/db'
 
 export default class BookingActions {
   public static async createBookingRecord(
@@ -142,5 +143,30 @@ export default class BookingActions {
     return {
       bookingPayload: bookings,
     }
+  }
+
+  public static async getTotalDriverBookingEarnings(driverId: number): Promise<number> {
+    const bookingEarnings = await db
+      .from('bookings')
+      .join('booking_payments', 'booking_payments.booking_id', 'bookings.id')
+      .where('bookings.assigned_driver_id', driverId)
+      .where('bookings.has_earning_been_credited_to_driver', true)
+      .whereNull('bookings.deleted_at')
+      .sum('booking_payments.amount_paid as total_earnings')
+      .first()
+
+    return bookingEarnings?.total_earnings ?? 0
+  }
+
+  public static async getTotalDriverCompletedBookings(driverId: number): Promise<number> {
+    const bookingTotal = await db
+      .from('bookings')
+      .where('assigned_driver_id', driverId)
+      .where('status', 'completed')
+      .whereNull('deleted_at')
+      .count('* as total')
+      .first()
+
+    return bookingTotal?.total ?? 0
   }
 }

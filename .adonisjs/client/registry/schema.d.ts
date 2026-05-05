@@ -679,6 +679,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/get_wallet_transaction_controller').default['handle']>>>
     }
   }
+  'driver.dashboard.fetch_bookings_metrics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/dashboard/bookings-metrics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller').default['handle']>>>
+    }
+  }
   'common.location.fetch_cities': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/common/location/cities'

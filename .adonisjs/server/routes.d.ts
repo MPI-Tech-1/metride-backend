@@ -60,6 +60,7 @@ export type ScannedRoutes = {
     'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
     'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'driver.dashboard.fetch_bookings_metrics': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.finance.process_paystack_webhook': { paramsTuple?: []; params?: {} }
@@ -116,6 +117,7 @@ export type ScannedRoutes = {
     'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
     'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'driver.dashboard.fetch_bookings_metrics': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
@@ -147,6 +149,7 @@ export type ScannedRoutes = {
     'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
     'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'driver.dashboard.fetch_bookings_metrics': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }

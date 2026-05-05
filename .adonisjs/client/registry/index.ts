@@ -342,6 +342,12 @@ const routes = {
     tokens: [{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"wallet","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"transactions","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":1,"val":"transactionIdentifier","end":""}],
     types: placeholder as Registry['driver.wallet.get_wallet_transaction']['types'],
   },
+  'driver.dashboard.fetch_bookings_metrics': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/driver/dashboard/bookings-metrics',
+    tokens: [{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"api","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"dashboard","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"bookings-metrics","end":""}],
+    types: placeholder as Registry['driver.dashboard.fetch_bookings_metrics']['types'],
+  },
   'common.location.fetch_cities': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/common/location/cities',

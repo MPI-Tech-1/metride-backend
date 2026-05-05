@@ -99,6 +99,9 @@ export interface ApiDefinition {
       fetchWalletTransactions: typeof routes['driver.wallet.fetch_wallet_transactions']
       getWalletTransaction: typeof routes['driver.wallet.get_wallet_transaction']
     }
+    dashboard: {
+      fetchBookingsMetrics: typeof routes['driver.dashboard.fetch_bookings_metrics']
+    }
   }
   common: {
     location: {
