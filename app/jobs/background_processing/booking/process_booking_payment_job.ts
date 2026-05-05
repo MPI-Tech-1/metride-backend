@@ -32,7 +32,7 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
 
     const cardPaymentProvider = configureCardPaymentProvider()
 
-    const { transactionStatus } =
+    const { transactionStatus, transactionVerificationInformation } =
       await cardPaymentProvider.verifyTransaction(paymentProviderReference)
 
     if (transactionStatus === 'success') {
@@ -42,6 +42,7 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
           identifier: bookingPayment.id,
         },
         updatePayload: {
+          amountPaid: transactionVerificationInformation?.amount,
           paymentStatus: 'completed',
         },
         dbTransactionOptions: { useTransaction: false },
