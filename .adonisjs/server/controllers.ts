@@ -20,6 +20,13 @@ export const controllers = {
         FetchCustomers: () => import('#controllers/v1/admin/customer_management/fetch_customers_controller'),
         GetCustomer: () => import('#controllers/v1/admin/customer_management/get_customer_controller'),
       },
+      dashboard: {
+        FetchBookingMetrics: () => import('#controllers/v1/admin/dashboard/fetch_booking_metrics_controller'),
+        FetchCustomerMetrics: () => import('#controllers/v1/admin/dashboard/fetch_customer_metrics_controller'),
+        FetchDriverMetrics: () => import('#controllers/v1/admin/dashboard/fetch_driver_metrics_controller'),
+        FetchPayoutMetrics: () => import('#controllers/v1/admin/dashboard/fetch_payout_metrics_controller'),
+        FetchWalletTransactionMetrics: () => import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller'),
+      },
       driverManagement: {
         ApproveDriver: () => import('#controllers/v1/admin/driver_management/approve_driver_controller'),
         FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),

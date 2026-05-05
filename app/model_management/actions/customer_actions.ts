@@ -4,6 +4,7 @@ import type UpdateCustomerRecordOptions from '#model_management/type_checking/cu
 import type CustomerIdentifierOptions from '#model_management/type_checking/customer/customer_identifier_options'
 import Customer from '#models/customer'
 import db from '@adonisjs/lucid/services/db'
+import { DateTime } from 'luxon'
 
 export default class CustomerActions {
   public static async createCustomerRecord(
@@ -112,5 +113,50 @@ export default class CustomerActions {
 
   public static async deleteCustomerAuthenticationToken(customerId: number) {
     await db.from('auth_access_tokens').where('tokenable_id', customerId).delete()
+  }
+
+  public static async getCustomerMetrics(): Promise<{
+    totalCustomerCount: number
+    totalActiveCustomerForTheMonth: number
+    totalNewCustomerForTheMonth: number
+    totalInActiveCustomer: number
+  }> {
+    const thirtyDaysAgo = DateTime.now().minus({ days: 30 }).toSQL()
+    const ninetyDaysAgo = DateTime.now().minus({ days: 90 }).toSQL()
+
+    const [totalCountResult, totalActiveResult, totalNewResult, totalInactiveResult] =
+      await Promise.all([
+        db.from('customers').whereNull('deleted_at').count('* as total').first(),
+
+        db
+          .from('customers')
+          .whereNull('deleted_at')
+          .where('last_logged_in_at', '>=', thirtyDaysAgo)
+          .count('* as total')
+          .first(),
+
+        db
+          .from('customers')
+          .whereNull('deleted_at')
+          .where('created_at', '>=', thirtyDaysAgo)
+          .count('* as total')
+          .first(),
+
+        db
+          .from('customers')
+          .whereNull('deleted_at')
+          .where((query) => {
+            query.where('last_logged_in_at', '<', ninetyDaysAgo).orWhereNull('last_logged_in_at')
+          })
+          .count('* as total')
+          .first(),
+      ])
+
+    return {
+      totalCustomerCount: Number(totalCountResult?.total ?? 0),
+      totalActiveCustomerForTheMonth: Number(totalActiveResult?.total ?? 0),
+      totalNewCustomerForTheMonth: Number(totalNewResult?.total ?? 0),
+      totalInActiveCustomer: Number(totalInactiveResult?.total ?? 0),
+    }
   }
 }

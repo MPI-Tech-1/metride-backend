@@ -4,6 +4,8 @@ import type UpdateDriverWalletTransactionRecordOptions from '#model_management/t
 import type DriverWalletTransactionIdentifierOptions from '#model_management/type_checking/driver_wallet_transaction/driver_wallet_transaction_identifier_options'
 import type DbTransactionOptions from '#common/type_checkings/model_management/db_transaction_options'
 import DriverWalletTransaction from '#models/driver_wallet_transaction'
+import db from '@adonisjs/lucid/services/db'
+import { DateTime } from 'luxon'
 
 export default class DriverWalletTransactionActions {
   public static async createDriverWalletTransactionRecord(
@@ -137,6 +139,34 @@ export default class DriverWalletTransactionActions {
     )
     return {
       driverWalletTransactionPayload: driverWalletTransactions,
+    }
+  }
+
+  public static async getWalletTransactionMetrics(): Promise<{
+    totalCreditTransactionsForPastMonth: number
+    totalDebitTransactionsForPastMonth: number
+    totalCreditAmountForPastMonth: number
+    totalDebitAmountForPastMonth: number
+  }> {
+    const thirtyDaysAgo = DateTime.now().minus({ days: 30 }).toSQL()
+
+    const result = await db
+      .from('driver_wallet_transactions')
+      .whereNull('deleted_at')
+      .where('created_at', '>=', thirtyDaysAgo)
+      .select(
+        db.raw("SUM(CASE WHEN type_of_transaction = 'credit' THEN 1 ELSE 0 END) as total_credit_count"),
+        db.raw("SUM(CASE WHEN type_of_transaction = 'debit' THEN 1 ELSE 0 END) as total_debit_count"),
+        db.raw("SUM(CASE WHEN type_of_transaction = 'credit' THEN amount ELSE 0 END) as total_credit_amount"),
+        db.raw("SUM(CASE WHEN type_of_transaction = 'debit' THEN amount ELSE 0 END) as total_debit_amount")
+      )
+      .first()
+
+    return {
+      totalCreditTransactionsForPastMonth: Number(result?.total_credit_count ?? 0),
+      totalDebitTransactionsForPastMonth: Number(result?.total_debit_count ?? 0),
+      totalCreditAmountForPastMonth: Number(result?.total_credit_amount ?? 0),
+      totalDebitAmountForPastMonth: Number(result?.total_debit_amount ?? 0),
     }
   }
 }

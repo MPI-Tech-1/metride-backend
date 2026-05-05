@@ -4,6 +4,7 @@ import type UpdateDriverRecordOptions from '#model_management/type_checking/driv
 import type DriverIdentifierOptions from '#model_management/type_checking/driver/driver_identifier_options'
 import Driver from '#models/driver'
 import db from '@adonisjs/lucid/services/db'
+import { DateTime } from 'luxon'
 
 export default class DriverActions {
   public static async createDriverRecord(
@@ -129,5 +130,62 @@ export default class DriverActions {
 
   public static async deleteDriverAuthenticationToken(driverId: number) {
     await db.from('auth_access_tokens').where('tokenable_id', driverId).delete()
+  }
+
+  public static async getDriverMetrics(): Promise<{
+    totalNumberOfTrips: number
+    totalAcceptanceRate: number
+    totalNumberOfActiveDrivers: number
+    totalCancellationRate: number
+  }> {
+    const thirtyDaysAgo = DateTime.now().minus({ days: 30 }).toSQL()
+    const twentyFourHoursAgo = DateTime.now().minus({ hours: 24 }).toSQL()
+
+    const [totalTripsResult, acceptanceStats, activeDriversResult, cancellationStats] =
+      await Promise.all([
+        db.from('bookings').whereNull('deleted_at').where('status', 'completed').count('* as total').first(),
+
+        db
+          .from('bookings')
+          .whereNull('deleted_at')
+          .whereNotNull('assigned_driver_id')
+          .where('created_at', '>=', thirtyDaysAgo)
+          .select(
+            db.raw('COUNT(*) as total_assigned'),
+            db.raw(
+              "SUM(CASE WHEN status IN ('accepted', 'completed', 'enroute-to-pickup', 'enroute-to-dropoff') THEN 1 ELSE 0 END) as total_accepted"
+            )
+          )
+          .first(),
+
+        db
+          .from('drivers')
+          .whereNull('deleted_at')
+          .where('last_logged_in_at', '>=', twentyFourHoursAgo)
+          .count('* as total')
+          .first(),
+
+        db
+          .from('bookings')
+          .whereNull('deleted_at')
+          .where('created_at', '>=', thirtyDaysAgo)
+          .select(
+            db.raw('COUNT(*) as total'),
+            db.raw("SUM(CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) as total_cancelled")
+          )
+          .first(),
+      ])
+
+    const totalAssigned = Number(acceptanceStats?.total_assigned ?? 0)
+    const totalAccepted = Number(acceptanceStats?.total_accepted ?? 0)
+    const totalBookings = Number(cancellationStats?.total ?? 0)
+    const totalCancelled = Number(cancellationStats?.total_cancelled ?? 0)
+
+    return {
+      totalNumberOfTrips: Number(totalTripsResult?.total ?? 0),
+      totalNumberOfActiveDrivers: Number(activeDriversResult?.total ?? 0),
+      totalAcceptanceRate: totalAssigned > 0 ? Math.round((totalAccepted / totalAssigned) * 100) : 0,
+      totalCancellationRate: totalBookings > 0 ? Math.round((totalCancelled / totalBookings) * 100) : 0,
+    }
   }
 }

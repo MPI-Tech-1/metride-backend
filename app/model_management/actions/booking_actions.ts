@@ -4,6 +4,7 @@ import type UpdateBookingRecordOptions from '#model_management/type_checking/boo
 import type BookingIdentifierOptions from '#model_management/type_checking/booking/booking_identifier_options'
 import Booking from '#models/booking'
 import db from '@adonisjs/lucid/services/db'
+import { DateTime } from 'luxon'
 
 export default class BookingActions {
   public static async createBookingRecord(
@@ -168,5 +169,30 @@ export default class BookingActions {
       .first()
 
     return bookingTotal?.total ?? 0
+  }
+
+  public static async getBookingMetrics(): Promise<{
+    totalBookingsForPastMonth: number
+    totalCompletedBookingsForPastMonth: number
+    totalCancelledBookingsForPastMonth: number
+  }> {
+    const thirtyDaysAgo = DateTime.now().minus({ days: 30 }).toSQL()
+
+    const result = await db
+      .from('bookings')
+      .whereNull('deleted_at')
+      .where('created_at', '>=', thirtyDaysAgo)
+      .select(
+        db.raw('COUNT(*) as total'),
+        db.raw("SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as total_completed"),
+        db.raw("SUM(CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) as total_cancelled")
+      )
+      .first()
+
+    return {
+      totalBookingsForPastMonth: Number(result?.total ?? 0),
+      totalCompletedBookingsForPastMonth: Number(result?.total_completed ?? 0),
+      totalCancelledBookingsForPastMonth: Number(result?.total_cancelled ?? 0),
+    }
   }
 }
