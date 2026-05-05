@@ -37,6 +37,10 @@ export default class FetchWalletWithdrawalRequestsController {
       const mutatedResponsePayload = withdrawalRequests.map((withdrawalRequest) => ({
         identifier: withdrawalRequest.identifier,
         amount: withdrawalRequest.amount,
+        driver: {
+          identifier: withdrawalRequest.driver.identifier,
+          fullName: withdrawalRequest.driver.fullName,
+        },
         status: withdrawalRequest.status,
         createdAt: withdrawalRequest.createdAt,
       }))

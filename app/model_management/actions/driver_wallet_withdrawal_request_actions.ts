@@ -26,7 +26,10 @@ export default class DriverWalletWithdrawalRequestActions {
     driverWalletWithdrawalRequestId: number,
     dbTransactionOptions?: DbTransactionOptions
   ): Promise<DriverWalletWithdrawalRequest | null> {
-    const query = DriverWalletWithdrawalRequest.query().where('id', driverWalletWithdrawalRequestId)
+    const query = DriverWalletWithdrawalRequest.query()
+      .preload('driver')
+      .preload('driverWallet')
+      .where('id', driverWalletWithdrawalRequestId)
     if (dbTransactionOptions?.useTransaction) {
       query.useTransaction(dbTransactionOptions.dbTransaction).forUpdate()
     }
@@ -37,10 +40,10 @@ export default class DriverWalletWithdrawalRequestActions {
     driverWalletWithdrawalRequestIdentifier: string,
     dbTransactionOptions?: DbTransactionOptions
   ): Promise<DriverWalletWithdrawalRequest | null> {
-    const query = DriverWalletWithdrawalRequest.query().where(
-      'identifier',
-      driverWalletWithdrawalRequestIdentifier
-    )
+    const query = DriverWalletWithdrawalRequest.query()
+      .preload('driver')
+      .preload('driverWallet')
+      .where('identifier', driverWalletWithdrawalRequestIdentifier)
     if (dbTransactionOptions?.useTransaction) {
       query.useTransaction(dbTransactionOptions.dbTransaction).forUpdate()
     }
@@ -73,9 +76,8 @@ export default class DriverWalletWithdrawalRequestActions {
     const { identifierOptions, updatePayload, dbTransactionOptions } =
       updateDriverWalletWithdrawalRequestRecordOptions
 
-    const driverWalletWithdrawalRequest = await this.getDriverWalletWithdrawalRequest(
-      identifierOptions
-    )
+    const driverWalletWithdrawalRequest =
+      await this.getDriverWalletWithdrawalRequest(identifierOptions)
 
     if (driverWalletWithdrawalRequest === null) return null
 
@@ -99,6 +101,8 @@ export default class DriverWalletWithdrawalRequestActions {
       getDriverWalletWithdrawalRequestRecordOptions
 
     const driverWalletWithdrawalRequestQuery = DriverWalletWithdrawalRequest.query()
+      .preload('driver')
+      .preload('driverWallet')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`
