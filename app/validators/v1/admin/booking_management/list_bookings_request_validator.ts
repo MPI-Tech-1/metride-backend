@@ -1,8 +1,8 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const listBookingsRequestSchema = vine.object({
-  page: vine.number().optional(),
-  limit: vine.number().optional(),
+  page: vine.number().min(1).optional(),
+  limit: vine.number().max(100).optional(),
   searchQuery: vine.string().trim().escape().optional(),
   customerIdentifier: vine.string().trim().escape().optional(),
   assignedDriverIdentifier: vine.string().trim().escape().optional(),

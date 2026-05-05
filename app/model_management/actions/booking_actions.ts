@@ -136,7 +136,7 @@ export default class BookingActions {
   }> {
     const bookings = await Booking.query()
       .where('status', 'completed')
-      .where('driver_earnings_credited', false)
+      .where('has_earning_been_credited_to_driver', false)
       .orderBy('created_at', 'asc')
 
     return {

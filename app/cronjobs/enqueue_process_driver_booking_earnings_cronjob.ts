@@ -4,6 +4,7 @@ import BookingActions from '#model_management/actions/booking_actions'
 export default async function enqueueProcessDriverBookingEarningsCronjob() {
   const { bookingPayload: uncreditedBookings } =
     await BookingActions.listBookingsWithUncreditedDriverEarnings()
+
   const uncreditedBookingsPromise = uncreditedBookings.map(async (booking) => {
     await BackgroundDispatchClient.processDriverWalletEarningJob({ bookingId: booking.id })
   })
