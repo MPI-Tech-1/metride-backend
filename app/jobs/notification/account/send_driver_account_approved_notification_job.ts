@@ -1,4 +1,9 @@
+import {
+  DRIVER_ACCOUNT_APPROVED_EMAIL_SUBJECT,
+  DRIVER_ACCOUNT_APPROVED_EMAIL_TEMPLATE,
+} from '#common/messages/email_types'
 import configurePushNotificationProvider from '#infrastructure_providers/helpers/configure_push_notification_provider'
+import MailClient from '#infrastructure_providers/internals/mail_client'
 import DriverActions from '#model_management/actions/driver_actions'
 import DriverNotificationActions from '#model_management/actions/driver_notification_actions'
 import db from '@adonisjs/lucid/services/db'
@@ -68,6 +73,16 @@ export default class SendDriverAccountApprovedNotificationJob extends Job<SendDr
           },
         })
       }
+
+      await MailClient.sendMail({
+        recipientEmail: driver.email,
+        recipientName: `${driver.firstName} ${driver.lastName}`,
+        emailSubject: DRIVER_ACCOUNT_APPROVED_EMAIL_SUBJECT,
+        emailTemplate: DRIVER_ACCOUNT_APPROVED_EMAIL_TEMPLATE,
+        emailPayload: {
+          recipientFirstName: driver.firstName,
+        },
+      })
     } catch (sendDriverAccountApprovedNotificationJobError) {
       await dbTransaction.rollback()
       console.log(

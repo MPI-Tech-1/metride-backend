@@ -1,4 +1,9 @@
+import {
+  DRIVER_ACCOUNT_REJECTED_EMAIL_SUBJECT,
+  DRIVER_ACCOUNT_REJECTED_EMAIL_TEMPLATE,
+} from '#common/messages/email_types'
 import configurePushNotificationProvider from '#infrastructure_providers/helpers/configure_push_notification_provider'
+import MailClient from '#infrastructure_providers/internals/mail_client'
 import DriverActions from '#model_management/actions/driver_actions'
 import DriverNotificationActions from '#model_management/actions/driver_notification_actions'
 import db from '@adonisjs/lucid/services/db'
@@ -7,6 +12,7 @@ import type { JobOptions } from '@adonisjs/queue/types'
 
 export interface SendDriverAccountRejectedNotificationJobPayload {
   driverId: number
+  rejectionReason: string
 }
 
 export default class SendDriverAccountRejectedNotificationJob extends Job<SendDriverAccountRejectedNotificationJobPayload> {
@@ -17,7 +23,7 @@ export default class SendDriverAccountRejectedNotificationJob extends Job<SendDr
 
   async execute() {
     console.log('Processing SendDriverAccountRejectedNotificationJob', this.payload)
-    const { driverId } = this.payload
+    const { driverId, rejectionReason } = this.payload
 
     const driver = await DriverActions.getDriver({
       identifierType: 'id',
@@ -68,6 +74,17 @@ export default class SendDriverAccountRejectedNotificationJob extends Job<SendDr
           },
         })
       }
+
+      await MailClient.sendMail({
+        recipientEmail: driver.email,
+        recipientName: `${driver.firstName} ${driver.lastName}`,
+        emailSubject: DRIVER_ACCOUNT_REJECTED_EMAIL_SUBJECT,
+        emailTemplate: DRIVER_ACCOUNT_REJECTED_EMAIL_TEMPLATE,
+        emailPayload: {
+          recipientFirstName: driver.firstName,
+          rejectionReason,
+        },
+      })
     } catch (sendDriverAccountRejectedNotificationJobError) {
       await dbTransaction.rollback()
       console.log(
