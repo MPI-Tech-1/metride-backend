@@ -3,6 +3,7 @@ import BookingActions from '#model_management/actions/booking_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
+import BackgroundDispatchClient from '#infrastructure_providers/internals/background_dispatch_client'
 
 export default class CompleteBookingController {
   async handle({ request, response }: HttpContext) {
@@ -42,6 +43,10 @@ export default class CompleteBookingController {
       })
 
       await NotificationDispatchClient.sendBookingTripProgressNotificationJob({
+        bookingId: booking.id,
+      })
+
+      await BackgroundDispatchClient.processDriverWalletEarningJob({
         bookingId: booking.id,
       })
 

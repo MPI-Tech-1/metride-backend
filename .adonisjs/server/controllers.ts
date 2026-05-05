@@ -44,9 +44,9 @@ export const controllers = {
       },
       wallet: {
         driver: {
+          ApproveWalletPayout: () => import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller'),
           FetchWalletTransactions: () => import('#controllers/v1/admin/wallet/driver/fetch_wallet_transactions_controller'),
           GetWalletTransaction: () => import('#controllers/v1/admin/wallet/driver/get_wallet_transaction_controller'),
-          ApproveWalletPayout: () => import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller'),
           RejectWalletPayout: () => import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller'),
         },
       },
