@@ -35,6 +35,12 @@ export interface ApiDefinition {
       cancelBooking: typeof routes['admin.bookings.cancel_booking']
       completeBooking: typeof routes['admin.bookings.complete_booking']
     }
+    walletManagement: {
+      fetchWalletTransactions: typeof routes['admin.wallet_management.fetch_wallet_transactions']
+      getWalletTransaction: typeof routes['admin.wallet_management.get_wallet_transaction']
+      approveWalletPayout: typeof routes['admin.wallet_management.approve_wallet_payout']
+      rejectWalletPayout: typeof routes['admin.wallet_management.reject_wallet_payout']
+    }
   }
   customer: {
     authentication: {

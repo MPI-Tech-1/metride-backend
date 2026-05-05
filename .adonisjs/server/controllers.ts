@@ -42,6 +42,14 @@ export const controllers = {
           },
         },
       },
+      wallet: {
+        driver: {
+          FetchWalletTransactions: () => import('#controllers/v1/admin/wallet/driver/fetch_wallet_transactions_controller'),
+          GetWalletTransaction: () => import('#controllers/v1/admin/wallet/driver/get_wallet_transaction_controller'),
+          ApproveWalletPayout: () => import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller'),
+          RejectWalletPayout: () => import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller'),
+        },
+      },
     },
     common: {
       booking: {
@@ -105,9 +113,6 @@ export const controllers = {
         RejectBooking: () => import('#controllers/v1/driver/booking_management/reject_booking_controller'),
         UpdateBookingTripProgress: () => import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller'),
       },
-      dashboard: {
-        FetchBookingsMetrics: () => import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller'),
-      },
       notifications: {
         FetchNotifications: () => import('#controllers/v1/driver/notifications/fetch_notifications_controller'),
         MarkNotificationAsRead: () => import('#controllers/v1/driver/notifications/mark_notification_as_read_controller'),
@@ -141,6 +146,9 @@ export const controllers = {
         GetWallet: () => import('#controllers/v1/driver/wallet/get_wallet_controller'),
         GetWalletTransaction: () => import('#controllers/v1/driver/wallet/get_wallet_transaction_controller'),
         InitiateWalletWithdrawal: () => import('#controllers/v1/driver/wallet/initiate_wallet_withdrawal_controller'),
+      },
+      dashboard: {
+        FetchBookingsMetrics: () => import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller'),
       },
     },
   },

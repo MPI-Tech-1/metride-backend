@@ -1,5 +1,8 @@
 import AbstractModel from '#models/abstract_model'
-import { column } from '@adonisjs/lucid/orm'
+import { belongsTo, column } from '@adonisjs/lucid/orm'
+import { type BelongsTo } from '@adonisjs/lucid/types/relations'
+import Driver from '#models/driver'
+import DriverWallet from '#models/driver_wallet'
 
 export default class DriverWalletTransaction extends AbstractModel {
   @column()
@@ -28,4 +31,10 @@ export default class DriverWalletTransaction extends AbstractModel {
 
   @column()
   declare transactionLogs: string | null
+
+  @belongsTo(() => Driver)
+  declare driver: BelongsTo<typeof Driver>
+
+  @belongsTo(() => DriverWallet)
+  declare driverWallet: BelongsTo<typeof DriverWallet>
 }

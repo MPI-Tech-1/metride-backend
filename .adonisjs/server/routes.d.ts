@@ -24,6 +24,10 @@ export type ScannedRoutes = {
     'admin.bookings.assign_booking_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.cancel_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.complete_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
+    'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
+    'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -77,6 +81,8 @@ export type ScannedRoutes = {
     'admin.driver_management.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.create_ride_type': { paramsTuple?: []; params?: {} }
     'admin.settings.create_popular_location': { paramsTuple?: []; params?: {} }
+    'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
+    'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -106,6 +112,8 @@ export type ScannedRoutes = {
     'admin.settings.get_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
+    'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
@@ -138,6 +146,8 @@ export type ScannedRoutes = {
     'admin.settings.get_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
+    'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }

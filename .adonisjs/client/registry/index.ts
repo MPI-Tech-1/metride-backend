@@ -126,6 +126,30 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/bookings/:identifier/complete","type":0,"val":"api","end":""},{"old":"/api/v1/admins/bookings/:identifier/complete","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/bookings/:identifier/complete","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/bookings/:identifier/complete","type":0,"val":"bookings","end":""},{"old":"/api/v1/admins/bookings/:identifier/complete","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/bookings/:identifier/complete","type":0,"val":"complete","end":""}],
     types: placeholder as Registry['admin.bookings.complete_booking']['types'],
   },
+  'admin.wallet_management.fetch_wallet_transactions': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/wallet-management/driver/transactions',
+    tokens: [{"old":"/api/v1/admins/wallet-management/driver/transactions","type":0,"val":"api","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions","type":0,"val":"wallet-management","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions","type":0,"val":"driver","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions","type":0,"val":"transactions","end":""}],
+    types: placeholder as Registry['admin.wallet_management.fetch_wallet_transactions']['types'],
+  },
+  'admin.wallet_management.get_wallet_transaction': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier',
+    tokens: [{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":0,"val":"wallet-management","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":0,"val":"driver","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":0,"val":"transactions","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier","type":1,"val":"transactionIdentifier","end":""}],
+    types: placeholder as Registry['admin.wallet_management.get_wallet_transaction']['types'],
+  },
+  'admin.wallet_management.approve_wallet_payout': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve',
+    tokens: [{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"api","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"wallet-management","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"driver","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"transactions","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":1,"val":"walletTransactionIdentifier","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve","type":0,"val":"approve","end":""}],
+    types: placeholder as Registry['admin.wallet_management.approve_wallet_payout']['types'],
+  },
+  'admin.wallet_management.reject_wallet_payout': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject',
+    tokens: [{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"api","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"wallet-management","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"driver","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"transactions","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":1,"val":"walletTransactionIdentifier","end":""},{"old":"/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject","type":0,"val":"reject","end":""}],
+    types: placeholder as Registry['admin.wallet_management.reject_wallet_payout']['types'],
+  },
   'customer.authentication.onboarding': {
     methods: ["POST"],
     pattern: '/api/v1/customers/authentication/onboarding',

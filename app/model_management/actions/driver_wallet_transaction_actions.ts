@@ -2,6 +2,7 @@ import type CreateDriverWalletTransactionRecordOptions from '#model_management/t
 import type ListDriverWalletTransactionRecordsOptions from '#model_management/type_checking/driver_wallet_transaction/list_driver_wallet_transaction_records_options'
 import type UpdateDriverWalletTransactionRecordOptions from '#model_management/type_checking/driver_wallet_transaction/update_driver_wallet_transaction_record_options'
 import type DriverWalletTransactionIdentifierOptions from '#model_management/type_checking/driver_wallet_transaction/driver_wallet_transaction_identifier_options'
+import type DbTransactionOptions from '#common/type_checkings/model_management/db_transaction_options'
 import DriverWalletTransaction from '#models/driver_wallet_transaction'
 
 export default class DriverWalletTransactionActions {
@@ -22,28 +23,44 @@ export default class DriverWalletTransactionActions {
   }
 
   private static async getDriverWalletTransactionById(
-    driverWalletTransactionId: number
+    driverWalletTransactionId: number,
+    dbTransactionOptions?: DbTransactionOptions
   ): Promise<DriverWalletTransaction | null> {
-    return await DriverWalletTransaction.query().where('id', driverWalletTransactionId).first()
+    const query = DriverWalletTransaction.query()
+      .preload('driver')
+      .preload('driverWallet')
+      .where('id', driverWalletTransactionId)
+    if (dbTransactionOptions?.useTransaction) {
+      query.useTransaction(dbTransactionOptions.dbTransaction).forUpdate()
+    }
+    return await query.first()
   }
 
   private static async getDriverWalletTransactionByIdentifier(
-    driverWalletTransactionIdentifier: string
+    driverWalletTransactionIdentifier: string,
+    dbTransactionOptions?: DbTransactionOptions
   ): Promise<DriverWalletTransaction | null> {
-    return await DriverWalletTransaction.query()
+    const query = DriverWalletTransaction.query()
+      .preload('driver')
+      .preload('driverWallet')
       .where('identifier', driverWalletTransactionIdentifier)
-      .first()
+    if (dbTransactionOptions?.useTransaction) {
+      query.useTransaction(dbTransactionOptions.dbTransaction).forUpdate()
+    }
+    return await query.first()
   }
 
   public static async getDriverWalletTransaction(
     getDriverWalletTransactionOptions: DriverWalletTransactionIdentifierOptions
   ): Promise<DriverWalletTransaction | null> {
-    const { identifier, identifierType } = getDriverWalletTransactionOptions
+    const { identifier, identifierType, dbTransactionOptions } = getDriverWalletTransactionOptions
 
     const GetDriverWalletTransactionIdentifierOptions: Record<string, Function> = {
-      id: async () => await this.getDriverWalletTransactionById(Number(identifier)),
+      id: async () =>
+        await this.getDriverWalletTransactionById(Number(identifier), dbTransactionOptions),
 
-      identifier: async () => await this.getDriverWalletTransactionByIdentifier(String(identifier)),
+      identifier: async () =>
+        await this.getDriverWalletTransactionByIdentifier(String(identifier), dbTransactionOptions),
     }
 
     return await GetDriverWalletTransactionIdentifierOptions[identifierType]()
@@ -76,6 +93,8 @@ export default class DriverWalletTransactionActions {
       getDriverWalletTransactionRecordOptions
 
     const driverWalletTransactionQuery = DriverWalletTransaction.query()
+      .preload('driver')
+      .preload('driverWallet')
 
     if (filterRecordOptionsPayload?.driverWalletId) {
       driverWalletTransactionQuery.where(

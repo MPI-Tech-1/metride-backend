@@ -247,6 +247,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/booking_management/complete_booking_controller').default['handle']>>>
     }
   }
+  'admin.wallet_management.fetch_wallet_transactions': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/wallet-management/driver/transactions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/wallet/driver/fetch_driver_wallet_transactions_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/fetch_wallet_transactions_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/fetch_wallet_transactions_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.wallet_management.get_wallet_transaction': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/wallet-management/driver/transactions/:transactionIdentifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { transactionIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/get_wallet_transaction_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/get_wallet_transaction_controller').default['handle']>>>
+    }
+  }
+  'admin.wallet_management.approve_wallet_payout': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { walletTransactionIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller').default['handle']>>>
+    }
+  }
+  'admin.wallet_management.reject_wallet_payout': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { walletTransactionIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller').default['handle']>>>
+    }
+  }
   'customer.authentication.onboarding': {
     methods: ["POST"]
     pattern: '/api/v1/customers/authentication/onboarding'

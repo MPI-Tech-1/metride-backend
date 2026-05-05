@@ -1,4 +1,4 @@
-import { column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import { column, computed, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import AbstractModel from '#models/abstract_model'
@@ -23,6 +23,11 @@ export default class Driver extends AbstractModel {
 
   @column()
   declare mobileNumber: string
+
+  @computed()
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`
+  }
 
   @column({ serializeAs: null })
   declare password: string
