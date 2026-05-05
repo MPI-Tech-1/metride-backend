@@ -98,6 +98,7 @@ export interface ApiDefinition {
       getWallet: typeof routes['driver.wallet.get_wallet']
       fetchWalletTransactions: typeof routes['driver.wallet.fetch_wallet_transactions']
       getWalletTransaction: typeof routes['driver.wallet.get_wallet_transaction']
+      initiateWalletWithdrawal: typeof routes['driver.wallet.initiate_wallet_withdrawal']
     }
     dashboard: {
       fetchBookingsMetrics: typeof routes['driver.dashboard.fetch_bookings_metrics']

@@ -679,6 +679,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/get_wallet_transaction_controller').default['handle']>>>
     }
   }
+  'driver.wallet.initiate_wallet_withdrawal': {
+    methods: ["POST"]
+    pattern: '/api/v1/driver/wallet/withdraw'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/driver/wallet/initiate_wallet_withdrawal_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/driver/wallet/initiate_wallet_withdrawal_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/initiate_wallet_withdrawal_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/initiate_wallet_withdrawal_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'driver.dashboard.fetch_bookings_metrics': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/driver/dashboard/bookings-metrics'

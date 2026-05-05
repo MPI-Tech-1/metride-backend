@@ -140,6 +140,7 @@ export const controllers = {
         FetchWalletTransactions: () => import('#controllers/v1/driver/wallet/fetch_wallet_transactions_controller'),
         GetWallet: () => import('#controllers/v1/driver/wallet/get_wallet_controller'),
         GetWalletTransaction: () => import('#controllers/v1/driver/wallet/get_wallet_transaction_controller'),
+        InitiateWalletWithdrawal: () => import('#controllers/v1/driver/wallet/initiate_wallet_withdrawal_controller'),
       },
     },
   },

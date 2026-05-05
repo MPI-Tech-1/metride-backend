@@ -6,12 +6,15 @@ const FetchWalletTransactionsController = () =>
   import('#controllers/v1/driver/wallet/fetch_wallet_transactions_controller')
 const GetWalletTransactionController = () =>
   import('#controllers/v1/driver/wallet/get_wallet_transaction_controller')
+const InitiateWalletWithdrawalController = () =>
+  import('#controllers/v1/driver/wallet/initiate_wallet_withdrawal_controller')
 
 router
   .group(() => {
     router.get('/wallet', [GetWalletController])
     router.get('/wallet/transactions', [FetchWalletTransactionsController])
     router.get('/wallet/transactions/:transactionIdentifier', [GetWalletTransactionController])
+    router.post('/wallet/withdraw', [InitiateWalletWithdrawalController])
   })
   .use(middleware.auth({ guards: ['driver'] }))
   .as('driver.wallet')

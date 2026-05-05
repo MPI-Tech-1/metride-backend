@@ -342,6 +342,12 @@ const routes = {
     tokens: [{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"wallet","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"transactions","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":1,"val":"transactionIdentifier","end":""}],
     types: placeholder as Registry['driver.wallet.get_wallet_transaction']['types'],
   },
+  'driver.wallet.initiate_wallet_withdrawal': {
+    methods: ["POST"],
+    pattern: '/api/v1/driver/wallet/withdraw',
+    tokens: [{"old":"/api/v1/driver/wallet/withdraw","type":0,"val":"api","end":""},{"old":"/api/v1/driver/wallet/withdraw","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/wallet/withdraw","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/wallet/withdraw","type":0,"val":"wallet","end":""},{"old":"/api/v1/driver/wallet/withdraw","type":0,"val":"withdraw","end":""}],
+    types: placeholder as Registry['driver.wallet.initiate_wallet_withdrawal']['types'],
+  },
   'driver.dashboard.fetch_bookings_metrics': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/driver/dashboard/bookings-metrics',

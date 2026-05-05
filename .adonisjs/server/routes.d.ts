@@ -60,6 +60,7 @@ export type ScannedRoutes = {
     'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
     'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'driver.wallet.initiate_wallet_withdrawal': { paramsTuple?: []; params?: {} }
     'driver.dashboard.fetch_bookings_metrics': { paramsTuple?: []; params?: {} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
@@ -90,6 +91,7 @@ export type ScannedRoutes = {
     'driver.account-activation.driver_verify_account_activation_token': { paramsTuple?: []; params?: {} }
     'driver.password-management.driver_request_reset_password_otp_token': { paramsTuple?: []; params?: {} }
     'driver.password-management.driver_reset_password': { paramsTuple?: []; params?: {} }
+    'driver.wallet.initiate_wallet_withdrawal': { paramsTuple?: []; params?: {} }
     'common.finance.process_paystack_webhook': { paramsTuple?: []; params?: {} }
     'common.media.upload_image': { paramsTuple?: []; params?: {} }
   }

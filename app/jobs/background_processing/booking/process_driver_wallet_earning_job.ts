@@ -41,20 +41,24 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
       throw new Error('ProcessDriverWalletEarningJob: booking has no assigned driver')
     }
 
-    const wallet = await DriverWalletActions.getDriverWallet({
-      identifierType: 'driverId',
-      identifier: booking.assignedDriverId,
-    })
-
-    if (!wallet) {
-      throw new Error('ProcessDriverWalletEarningJob: driver wallet not found')
-    }
-
-    const earningAmount = booking.bookingPayment.amountPaid
-
     const dbTransaction = await db.transaction()
 
     try {
+      const wallet = await DriverWalletActions.getDriverWallet({
+        identifierType: 'driverId',
+        identifier: booking.assignedDriverId,
+        dbTransactionOptions: {
+          useTransaction: true,
+          dbTransaction,
+        },
+      })
+
+      if (!wallet) {
+        throw new Error('ProcessDriverWalletEarningJob: driver wallet not found')
+      }
+
+      const earningAmount = booking.bookingPayment.amountPaid
+
       await DriverWalletTransactionActions.createDriverWalletTransactionRecord({
         createPayload: {
           driverId: wallet.driverId,
