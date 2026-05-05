@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>
+      Wallet Payout Update
+    </title>
+
+    <style>
+      @media only screen and (max-width: 620px) {
+        table[class=body] p,
+        table[class=body] td,
+        table[class=body] span {
+          font-size: 16px !important;
+        }
+
+        table[class=body] .wrapper {
+          padding: 10px !important;
+        }
+
+        table[class=body] .container {
+          width: 100% !important;
+          padding: 0 !important;
+        }
+      }
+
+      body,
+      p {
+        font-family: Arial, sans-serif;
+      }
+
+      .summary-box {
+        background: #fff8f0;
+        border: 1px solid #bb9267;
+        border-left: 4px solid #bb9267;
+        border-radius: 6px;
+        padding: 20px 24px;
+        margin: 25px 0;
+      }
+
+      .summary-label {
+        font-size: 12px;
+        font-weight: bold;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+      }
+
+      .summary-value {
+        font-size: 15px;
+        color: #333;
+        margin-bottom: 14px;
+      }
+
+      .amount-value {
+        font-size: 22px;
+        font-weight: bold;
+        color: #bb9267;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
+    <table class="body" width="100%" style="background-color: #f6f6f6;">
+      <tr>
+        <td></td>
+        <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
+          <div class="content" style="max-width: 580px; margin: 0 auto;">
+
+            <table class="main" width="100%" style="background: #ffffff; border-radius: 6px;">
+
+              <!-- HEADER BAR -->
+              <tr style="background-color: #bb9267;">
+                <td style="padding: 15px;"></td>
+              </tr>
+
+              <tr>
+                <td style="padding: 25px 35px;">
+
+                  <!-- LOGO -->
+                  <img
+                    src="https://res.cloudinary.com/dy4l3lrx1/image/upload/v1776506387/general/jnereh5fodzx08ejftds.png"
+                    width="120"
+                    style="display:block; border:none; outline:none;"
+                    alt="logo"
+                  />
+
+                  <h2 style="color: #333; margin-top: 20px;">
+                    Update on Your Payout Request
+                  </h2>
+
+                  <p>
+                    Hello {{ recipientFirstName }},
+                  </p>
+
+                  <p>
+                    We have reviewed your wallet payout request and unfortunately it could not be processed at this time. The requested amount has been refunded back to your wallet balance.
+                  </p>
+
+                  <div class="summary-box">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="padding-bottom: 14px;">
+                          <div class="summary-label">Amount</div>
+                          <div class="amount-value">{{ amount }}</div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding-bottom: 14px;">
+                          <div class="summary-label">Transaction Reference</div>
+                          <div class="summary-value">{{ transactionReference }}</div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="summary-label">Status</div>
+                          <div class="summary-value" style="color: #c62828; font-weight: bold;">Not Processed</div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <p>
+                    If you believe this was an error or need further assistance, please reach out to our support team and we will be happy to help.
+                  </p>
+
+                  <p>
+                    Warm Regards,<br />
+                    <strong>The {{ sentenceCase(env('BUSINESS_NAME')) }} Team</strong>
+                  </p>
+
+                </td>
+              </tr>
+
+              <!-- FOOTER -->
+              <tr>
+                <td style="padding: 20px 35px; background-color: #fafbfd;">
+                  <p style="font-size: 11px; color: #666;">
+                    Do not reply to this email as it was automatically generated.
+                  </p>
+
+                  <p style="font-size: 11px; color: #666;">
+                    &copy; {{ currentYear() }} {{ sentenceCase(env('BUSINESS_NAME')) }}. All Rights Reserved.
+                  </p>
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </body>
+
+</html>

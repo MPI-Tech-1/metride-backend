@@ -14,3 +14,11 @@ export const DRIVER_ACCOUNT_REJECTED_EMAIL_TEMPLATE =
 
 export const BOOKING_COMPLETED_EMAIL_SUBJECT = 'Thank you for riding with us!'
 export const BOOKING_COMPLETED_EMAIL_TEMPLATE = 'emails/booking/booking_completed_email_template'
+
+export const WALLET_PAYOUT_APPROVED_EMAIL_SUBJECT = 'Your wallet payout has been approved'
+export const WALLET_PAYOUT_APPROVED_EMAIL_TEMPLATE =
+  'emails/wallet/wallet_payout_approved_email_template'
+
+export const WALLET_PAYOUT_REJECTED_EMAIL_SUBJECT = 'Update on your wallet payout request'
+export const WALLET_PAYOUT_REJECTED_EMAIL_TEMPLATE =
+  'emails/wallet/wallet_payout_rejected_email_template'

@@ -34,6 +34,12 @@ import SendBookingPaymentSuccessNotificationJob, {
 import SendBookingPaymentFailedNotificationJob, {
   type SendBookingPaymentFailedNotificationJobPayload,
 } from '#jobs/notification/booking/send_booking_payment_failed_notification_job'
+import SendWalletPayoutApprovedNotificationJob, {
+  type SendWalletPayoutApprovedNotificationJobPayload,
+} from '#jobs/notification/wallet/send_wallet_payout_approved_notification_job'
+import SendWalletPayoutRejectedNotificationJob, {
+  type SendWalletPayoutRejectedNotificationJobPayload,
+} from '#jobs/notification/wallet/send_wallet_payout_rejected_notification_job'
 
 export default class NotificationDispatchClient {
   public static async sendAccountActivationNotificationJob(
@@ -126,6 +132,22 @@ export default class NotificationDispatchClient {
   ) {
     await SendBookingPaymentFailedNotificationJob.dispatch(
       sendBookingPaymentFailedNotificationJobPayload
+    )
+  }
+
+  public static async sendWalletPayoutApprovedNotificationJob(
+    sendWalletPayoutApprovedNotificationJobPayload: SendWalletPayoutApprovedNotificationJobPayload
+  ) {
+    await SendWalletPayoutApprovedNotificationJob.dispatch(
+      sendWalletPayoutApprovedNotificationJobPayload
+    )
+  }
+
+  public static async sendWalletPayoutRejectedNotificationJob(
+    sendWalletPayoutRejectedNotificationJobPayload: SendWalletPayoutRejectedNotificationJobPayload
+  ) {
+    await SendWalletPayoutRejectedNotificationJob.dispatch(
+      sendWalletPayoutRejectedNotificationJobPayload
     )
   }
 }

@@ -1,6 +1,7 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
 import DriverWalletTransactionActions from '#model_management/actions/driver_wallet_transaction_actions'
+import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
@@ -76,6 +77,10 @@ export default class ApproveWalletPayoutController {
       })
 
       await dbTransaction.commit()
+
+      await NotificationDispatchClient.sendWalletPayoutApprovedNotificationJob({
+        walletTransactionId: walletTransaction.id,
+      })
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
