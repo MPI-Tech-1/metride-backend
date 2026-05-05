@@ -57,6 +57,9 @@ export type ScannedRoutes = {
     'driver.bookings.accept_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'driver.bookings.reject_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
+    'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
+    'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.finance.process_paystack_webhook': { paramsTuple?: []; params?: {} }
@@ -110,6 +113,9 @@ export type ScannedRoutes = {
     'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
+    'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
+    'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }
@@ -138,6 +144,9 @@ export type ScannedRoutes = {
     'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'driver.wallet.get_wallet': { paramsTuple?: []; params?: {} }
+    'driver.wallet.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
+    'driver.wallet.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'common.location.fetch_cities': { paramsTuple?: []; params?: {} }
     'common.finance.fetch_banks': { paramsTuple?: []; params?: {} }
     'common.vehicle.fetch_vehicle_models': { paramsTuple?: []; params?: {} }

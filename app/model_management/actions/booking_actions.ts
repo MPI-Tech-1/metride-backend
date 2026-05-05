@@ -130,4 +130,17 @@ export default class BookingActions {
       bookingPayload: bookings,
     }
   }
+
+  public static async listBookingsWithUncreditedDriverEarnings(): Promise<{
+    bookingPayload: Booking[]
+  }> {
+    const bookings = await Booking.query()
+      .where('status', 'completed')
+      .where('driver_earnings_credited', false)
+      .orderBy('created_at', 'asc')
+
+    return {
+      bookingPayload: bookings,
+    }
+  }
 }

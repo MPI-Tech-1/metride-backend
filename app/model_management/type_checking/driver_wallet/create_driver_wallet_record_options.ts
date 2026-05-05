@@ -1,0 +1,8 @@
+import type DriverWalletInterface from '#model_management/type_checking/driver_wallet/driver_wallet_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverWalletRecordPayload = Partial<DriverWalletInterface>
+
+type CreateDriverWalletRecordOptions = CreateNewRecordGeneric<CreateDriverWalletRecordPayload>
+
+export default CreateDriverWalletRecordOptions

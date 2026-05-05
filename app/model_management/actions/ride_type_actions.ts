@@ -21,11 +21,11 @@ export default class RideTypeActions {
     return rideType
   }
 
-  public static async getRideTypeById(rideTypeId: number): Promise<RideType | null> {
+  private static async getRideTypeById(rideTypeId: number): Promise<RideType | null> {
     return await RideType.query().where('id', rideTypeId).first()
   }
 
-  public static async getRideTypeByIdentifier(
+  private static async getRideTypeByIdentifier(
     rideTypeIdentifier: string
   ): Promise<RideType | null> {
     return await RideType.query().where('identifier', rideTypeIdentifier).first()

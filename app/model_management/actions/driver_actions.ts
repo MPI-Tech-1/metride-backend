@@ -22,7 +22,7 @@ export default class DriverActions {
     return driver
   }
 
-  public static async getDriverByEmail(email: string): Promise<Driver | null> {
+  private static async getDriverByEmail(email: string): Promise<Driver | null> {
     return await Driver.query()
       .preload('driverRegistrationStep')
       .preload('driverBankAccount', (driverBankAccountQuery) =>
@@ -35,7 +35,7 @@ export default class DriverActions {
       .first()
   }
 
-  public static async getDriverById(driverId: number): Promise<Driver | null> {
+  private static async getDriverById(driverId: number): Promise<Driver | null> {
     return await Driver.query()
       .preload('driverRegistrationStep')
       .preload('driverBankAccount', (driverBankAccountQuery) =>
@@ -48,7 +48,7 @@ export default class DriverActions {
       .first()
   }
 
-  public static async getDriverByIdentifier(driverIdentifier: string): Promise<Driver | null> {
+  private static async getDriverByIdentifier(driverIdentifier: string): Promise<Driver | null> {
     return await Driver.query()
       .preload('driverRegistrationStep')
       .preload('driverBankAccount', (driverBankAccountQuery) =>

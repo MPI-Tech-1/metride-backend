@@ -16,22 +16,22 @@
         table[class=body] span {
           font-size: 16px !important;
         }
-
+      
         table[class=body] .wrapper {
           padding: 10px !important;
         }
-
+      
         table[class=body] .container {
           width: 100% !important;
           padding: 0 !important;
         }
       }
-
+      
       body,
       p {
         font-family: Arial, sans-serif;
       }
-
+      
       .badge {
         background: #e8f5e9;
         border: 1px solid #4caf50;
@@ -40,7 +40,7 @@
         margin: 25px 0;
         text-align: center;
       }
-
+      
       .badge-text {
         font-size: 18px;
         font-weight: bold;
@@ -52,7 +52,8 @@
   <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
     <table class="body" width="100%" style="background-color: #f6f6f6;">
       <tr>
-        <td></td>
+        <td>
+        </td>
         <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
           <div class="content" style="max-width: 580px; margin: 0 auto;">
 
@@ -60,7 +61,8 @@
 
               <!-- HEADER BAR -->
               <tr style="background-color: #bb9267;">
-                <td style="padding: 15px;"></td>
+                <td style="padding: 15px;">
+                </td>
               </tr>
 
               <tr>
@@ -83,11 +85,13 @@
                   </p>
 
                   <p>
-                    Great news! Your driver account application with <strong>{{ sentenceCase(env('BUSINESS_NAME')) }}</strong> has been reviewed and <strong style="color: #2e7d32;">approved</strong>.
+                    Great news! Your driver account application with <strong>{{ sentenceCase(env('BUSINESS_NAME')) }}</strong>has been reviewed and <strong style="color: #2e7d32;">approved</strong>.
                   </p>
 
                   <div class="badge">
-                    <div class="badge-text">Account Approved ✓</div>
+                    <div class="badge-text">
+                      Account Approved ✓
+                    </div>
                   </div>
 
                   <p>
@@ -123,7 +127,8 @@
 
           </div>
         </td>
-        <td></td>
+        <td>
+        </td>
       </tr>
     </table>
   </body>

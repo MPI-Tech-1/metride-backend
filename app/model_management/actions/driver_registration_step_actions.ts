@@ -21,13 +21,13 @@ export default class DriverRegistrationStepActions {
     return driverRegistrationStep
   }
 
-  public static async getDriverRegistrationStepById(
+  private static async getDriverRegistrationStepById(
     id: number
   ): Promise<DriverRegistrationStep | null> {
     return await DriverRegistrationStep.query().where('id', id).first()
   }
 
-  public static async getDriverRegistrationStepByIdentifier(
+  private static async getDriverRegistrationStepByIdentifier(
     identifier: string
   ): Promise<DriverRegistrationStep | null> {
     return await DriverRegistrationStep.query()
@@ -36,7 +36,7 @@ export default class DriverRegistrationStepActions {
       .first()
   }
 
-  public static async getDriverRegistrationStepByDriverId(
+  private static async getDriverRegistrationStepByDriverId(
     driverId: number
   ): Promise<DriverRegistrationStep | null> {
     return await DriverRegistrationStep.query()
@@ -45,7 +45,7 @@ export default class DriverRegistrationStepActions {
       .first()
   }
 
-  public static async getDriverRegistrationStep(
+  private static async getDriverRegistrationStep(
     getDriverRegistrationStepOptions: DriverRegistrationStepIdentifierOptions
   ): Promise<DriverRegistrationStep | null> {
     const { identifier, identifierType } = getDriverRegistrationStepOptions

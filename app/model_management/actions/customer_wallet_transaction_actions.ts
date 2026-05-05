@@ -21,13 +21,13 @@ export default class CustomerWalletTransactionActions {
     return customerWalletTransaction
   }
 
-  public static async getCustomerWalletTransactionById(
+  private static async getCustomerWalletTransactionById(
     customerWalletTransactionId: number
   ): Promise<CustomerWalletTransaction | null> {
     return await CustomerWalletTransaction.query().where('id', customerWalletTransactionId).first()
   }
 
-  public static async getCustomerWalletTransactionByIdentifier(
+  private static async getCustomerWalletTransactionByIdentifier(
     customerWalletTransactionIdentifier: string
   ): Promise<CustomerWalletTransaction | null> {
     return await CustomerWalletTransaction.query()
@@ -35,7 +35,7 @@ export default class CustomerWalletTransactionActions {
       .first()
   }
 
-  public static async getCustomerWalletTransaction(
+  private static async getCustomerWalletTransaction(
     getCustomerWalletTransactionOptions: CustomerWalletTransactionIdentifierOptions
   ): Promise<CustomerWalletTransaction | null> {
     const { identifier, identifierType } = getCustomerWalletTransactionOptions
@@ -72,7 +72,10 @@ export default class CustomerWalletTransactionActions {
 
   public static async listCustomerWalletTransactions(
     getCustomerWalletTransactionRecordOptions: ListCustomerWalletTransactionRecordsOptions
-  ): Promise<{ customerWalletTransactionPayload: CustomerWalletTransaction[]; paginationMeta?: any }> {
+  ): Promise<{
+    customerWalletTransactionPayload: CustomerWalletTransaction[]
+    paginationMeta?: any
+  }> {
     const { filterRecordOptionsPayload, paginationPayload } =
       getCustomerWalletTransactionRecordOptions
 

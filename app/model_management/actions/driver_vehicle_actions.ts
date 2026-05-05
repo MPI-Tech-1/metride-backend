@@ -21,7 +21,9 @@ export default class DriverVehicleActions {
     return driverVehicle
   }
 
-  public static async getDriverVehicleById(driverVehicleId: number): Promise<DriverVehicle | null> {
+  private static async getDriverVehicleById(
+    driverVehicleId: number
+  ): Promise<DriverVehicle | null> {
     return await DriverVehicle.query()
       .preload('vehicleMake')
       .preload('vehicleModel')
@@ -29,7 +31,7 @@ export default class DriverVehicleActions {
       .first()
   }
 
-  public static async getDriverVehicleByDriverId(driverId: number): Promise<DriverVehicle | null> {
+  private static async getDriverVehicleByDriverId(driverId: number): Promise<DriverVehicle | null> {
     return await DriverVehicle.query()
       .preload('vehicleMake')
       .preload('vehicleModel')
@@ -37,7 +39,7 @@ export default class DriverVehicleActions {
       .first()
   }
 
-  public static async getDriverVehicleByIdentifier(
+  private static async getDriverVehicleByIdentifier(
     driverVehicleIdentifier: string
   ): Promise<DriverVehicle | null> {
     return await DriverVehicle.query()

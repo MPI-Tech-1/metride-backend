@@ -16,22 +16,22 @@
         table[class=body] span {
           font-size: 16px !important;
         }
-
+      
         table[class=body] .wrapper {
           padding: 10px !important;
         }
-
+      
         table[class=body] .container {
           width: 100% !important;
           padding: 0 !important;
         }
       }
-
+      
       body,
       p {
         font-family: Arial, sans-serif;
       }
-
+      
       .reason-box {
         background: #fff8f0;
         border: 1px solid #bb9267;
@@ -40,7 +40,7 @@
         padding: 16px 20px;
         margin: 25px 0;
       }
-
+      
       .reason-label {
         font-size: 12px;
         font-weight: bold;
@@ -49,7 +49,7 @@
         letter-spacing: 1px;
         margin-bottom: 6px;
       }
-
+      
       .reason-text {
         font-size: 15px;
         color: #333;
@@ -60,7 +60,8 @@
   <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
     <table class="body" width="100%" style="background-color: #f6f6f6;">
       <tr>
-        <td></td>
+        <td>
+        </td>
         <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
           <div class="content" style="max-width: 580px; margin: 0 auto;">
 
@@ -68,7 +69,8 @@
 
               <!-- HEADER BAR -->
               <tr style="background-color: #bb9267;">
-                <td style="padding: 15px;"></td>
+                <td style="padding: 15px;">
+                </td>
               </tr>
 
               <tr>
@@ -91,12 +93,16 @@
                   </p>
 
                   <p>
-                    Thank you for your interest in joining <strong>{{ sentenceCase(env('BUSINESS_NAME')) }}</strong> as a driver. After reviewing your application, we regret to inform you that we are unable to approve your account at this time.
+                    Thank you for your interest in joining <strong>{{ sentenceCase(env('BUSINESS_NAME')) }}</strong>as a driver. After reviewing your application, we regret to inform you that we are unable to approve your account at this time.
                   </p>
 
                   <div class="reason-box">
-                    <div class="reason-label">Reason for Rejection</div>
-                    <div class="reason-text">{{ rejectionReason }}</div>
+                    <div class="reason-label">
+                      Reason for Rejection
+                    </div>
+                    <div class="reason-text">
+                      {{ rejectionReason }}
+                    </div>
                   </div>
 
                   <p>
@@ -132,7 +138,8 @@
 
           </div>
         </td>
-        <td></td>
+        <td>
+        </td>
       </tr>
     </table>
   </body>

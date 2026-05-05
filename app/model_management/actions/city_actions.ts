@@ -21,11 +21,11 @@ export default class CityActions {
     return city
   }
 
-  public static async getCityById(cityId: number): Promise<City | null> {
+  private static async getCityById(cityId: number): Promise<City | null> {
     return await City.query().where('id', cityId).first()
   }
 
-  public static async getCityByIdentifier(cityIdentifier: string): Promise<City | null> {
+  private static async getCityByIdentifier(cityIdentifier: string): Promise<City | null> {
     return await City.query().where('identifier', cityIdentifier).first()
   }
 

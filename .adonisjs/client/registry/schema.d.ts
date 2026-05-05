@@ -643,6 +643,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'driver.wallet.get_wallet': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/wallet'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/get_wallet_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/get_wallet_controller').default['handle']>>>
+    }
+  }
+  'driver.wallet.fetch_wallet_transactions': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/wallet/transactions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/driver/wallet/fetch_wallet_transactions_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/fetch_wallet_transactions_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/fetch_wallet_transactions_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'driver.wallet.get_wallet_transaction': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/wallet/transactions/:transactionIdentifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { transactionIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/get_wallet_transaction_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/wallet/get_wallet_transaction_controller').default['handle']>>>
+    }
+  }
   'common.location.fetch_cities': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/common/location/cities'

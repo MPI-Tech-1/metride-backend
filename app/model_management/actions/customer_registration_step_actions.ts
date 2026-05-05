@@ -21,13 +21,13 @@ export default class CustomerRegistrationStepActions {
     return customerRegistrationStep
   }
 
-  public static async getCustomerRegistrationStepById(
+  private static async getCustomerRegistrationStepById(
     id: number
   ): Promise<CustomerRegistrationStep | null> {
     return await CustomerRegistrationStep.query().where('id', id).first()
   }
 
-  public static async getCustomerRegistrationStepByIdentifier(
+  private static async getCustomerRegistrationStepByIdentifier(
     identifier: string
   ): Promise<CustomerRegistrationStep | null> {
     return await CustomerRegistrationStep.query()
@@ -36,7 +36,7 @@ export default class CustomerRegistrationStepActions {
       .first()
   }
 
-  public static async getCustomerRegistrationStepByCustomerId(
+  private static async getCustomerRegistrationStepByCustomerId(
     customerId: number
   ): Promise<CustomerRegistrationStep | null> {
     return await CustomerRegistrationStep.query()
@@ -45,7 +45,7 @@ export default class CustomerRegistrationStepActions {
       .first()
   }
 
-  public static async getCustomerRegistrationStep(
+  private static async getCustomerRegistrationStep(
     getCustomerRegistrationStepOptions: CustomerRegistrationStepIdentifierOptions
   ): Promise<CustomerRegistrationStep | null> {
     const { identifier, identifierType } = getCustomerRegistrationStepOptions

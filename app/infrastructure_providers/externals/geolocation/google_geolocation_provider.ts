@@ -33,7 +33,7 @@ export default class GoogleGeolocationProvider implements GeolocationInterface {
         headerOptions: {
           headers: {
             'X-Goog-Api-Key': this.apiKey,
-            'X-Goog-FieldMask': 'routes.distanceMeters',
+            'X-Goog-FieldMask': 'routes.distanceMeters,routes.duration',
           },
         },
       })
@@ -45,14 +45,14 @@ export default class GoogleGeolocationProvider implements GeolocationInterface {
         }
       }
 
-      const routes = apiResponse.routes[0]
-
-      const distanceInMeters = routes.distanceMeters
-
-      const distanceInKilometers = distanceInMeters / 1000
+      const route = apiResponse.routes[0]
+      const distanceInMeters: number = route.distanceMeters
+      const distanceInKilometers: number = distanceInMeters / 1000
+      const estimatedDurationInSeconds: number = Number.parseInt(route.duration, 10)
 
       return {
         mutatedPayload: {
+          estimatedDurationInSeconds,
           distanceInKilometers,
           distanceInMeters,
         },

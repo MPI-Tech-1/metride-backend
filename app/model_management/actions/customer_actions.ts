@@ -22,18 +22,18 @@ export default class CustomerActions {
     return customer
   }
 
-  public static async getCustomerByEmail(email: string): Promise<Customer | null> {
+  private static async getCustomerByEmail(email: string): Promise<Customer | null> {
     return await Customer.query().preload('customerRegistrationStep').where('email', email).first()
   }
 
-  public static async getCustomerById(customerId: number): Promise<Customer | null> {
+  private static async getCustomerById(customerId: number): Promise<Customer | null> {
     return await Customer.query()
       .preload('customerRegistrationStep')
       .where('id', customerId)
       .first()
   }
 
-  public static async getCustomerByIdentifier(
+  private static async getCustomerByIdentifier(
     customerIdentifier: string
   ): Promise<Customer | null> {
     return await Customer.query()

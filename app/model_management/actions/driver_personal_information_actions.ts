@@ -21,7 +21,7 @@ export default class DriverPersonalInformationActions {
     return driverPersonalInformation
   }
 
-  public static async getDriverPersonalInformationById(
+  private static async getDriverPersonalInformationById(
     driverPersonalInformationId: number
   ): Promise<DriverPersonalInformation | null> {
     return await DriverPersonalInformation.query()
@@ -30,7 +30,7 @@ export default class DriverPersonalInformationActions {
       .first()
   }
 
-  public static async getDriverPersonalInformationByDriverId(
+  private static async getDriverPersonalInformationByDriverId(
     driverId: number
   ): Promise<DriverPersonalInformation | null> {
     return await DriverPersonalInformation.query()
@@ -39,7 +39,7 @@ export default class DriverPersonalInformationActions {
       .first()
   }
 
-  public static async getDriverPersonalInformationByIdentifier(
+  private static async getDriverPersonalInformationByIdentifier(
     driverPersonalInformationIdentifier: string
   ): Promise<DriverPersonalInformation | null> {
     return await DriverPersonalInformation.query()

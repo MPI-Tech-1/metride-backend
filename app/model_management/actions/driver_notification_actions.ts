@@ -21,16 +21,18 @@ export default class DriverNotificationActions {
     return driverNotification
   }
 
-  public static async getDriverNotificationById(
+  private static async getDriverNotificationById(
     driverNotificationId: number
   ): Promise<DriverNotification | null> {
     return await DriverNotification.query().where('id', driverNotificationId).first()
   }
 
-  public static async getDriverNotificationByIdentifier(
+  private static async getDriverNotificationByIdentifier(
     driverNotificationIdentifier: string
   ): Promise<DriverNotification | null> {
-    return await DriverNotification.query().where('identifier', driverNotificationIdentifier).first()
+    return await DriverNotification.query()
+      .where('identifier', driverNotificationIdentifier)
+      .first()
   }
 
   public static async getDriverNotification(

@@ -22,15 +22,15 @@ export default class UserActions {
     return user
   }
 
-  public static async getUserByEmail(email: string): Promise<User | null> {
+  private static async getUserByEmail(email: string): Promise<User | null> {
     return await User.query().where('email', email).first()
   }
 
-  public static async getUserById(userId: number): Promise<User | null> {
+  private static async getUserById(userId: number): Promise<User | null> {
     return await User.query().where('id', userId).first()
   }
 
-  public static async getUser(getUserOptions: UserIdentifierOptions): Promise<User | null> {
+  private static async getUser(getUserOptions: UserIdentifierOptions): Promise<User | null> {
     const { identifier, identifierType } = getUserOptions
 
     const GetUserIdentifierOptions: Record<string, Function> = {

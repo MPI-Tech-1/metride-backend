@@ -16,22 +16,22 @@
         table[class=body] span {
           font-size: 16px !important;
         }
-
+      
         table[class=body] .wrapper {
           padding: 10px !important;
         }
-
+      
         table[class=body] .container {
           width: 100% !important;
           padding: 0 !important;
         }
       }
-
+      
       body,
       p {
         font-family: Arial, sans-serif;
       }
-
+      
       .trip-summary {
         background: #f8f4ef;
         border: 1px solid #bb9267;
@@ -39,12 +39,12 @@
         padding: 20px 24px;
         margin: 25px 0;
       }
-
+      
       .trip-row {
         display: flex;
         margin-bottom: 10px;
       }
-
+      
       .trip-label {
         font-size: 12px;
         font-weight: bold;
@@ -53,7 +53,7 @@
         letter-spacing: 1px;
         margin-bottom: 2px;
       }
-
+      
       .trip-value {
         font-size: 15px;
         color: #333;
@@ -64,7 +64,8 @@
   <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
     <table class="body" width="100%" style="background-color: #f6f6f6;">
       <tr>
-        <td></td>
+        <td>
+        </td>
         <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
           <div class="content" style="max-width: 580px; margin: 0 auto;">
 
@@ -72,7 +73,8 @@
 
               <!-- HEADER BAR -->
               <tr style="background-color: #bb9267;">
-                <td style="padding: 15px;"></td>
+                <td style="padding: 15px;">
+                </td>
               </tr>
 
               <tr>
@@ -103,20 +105,32 @@
                     <table width="100%" cellpadding="0" cellspacing="0">
                       <tr>
                         <td style="padding-bottom: 14px;">
-                          <div class="trip-label">From</div>
-                          <div class="trip-value">{{ departureLocationName }}</div>
+                          <div class="trip-label">
+                            From
+                          </div>
+                          <div class="trip-value">
+                            {{ departureLocationName }}
+                          </div>
                         </td>
                       </tr>
                       <tr>
                         <td style="padding-bottom: 14px;">
-                          <div class="trip-label">To</div>
-                          <div class="trip-value">{{ destinationLocationName }}</div>
+                          <div class="trip-label">
+                            To
+                          </div>
+                          <div class="trip-value">
+                            {{ destinationLocationName }}
+                          </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <div class="trip-label">Amount Paid</div>
-                          <div class="trip-value" style="font-weight: bold; color: #bb9267;">{{ amountPaid }}</div>
+                          <div class="trip-label">
+                            Amount Paid
+                          </div>
+                          <div class="trip-value" style="font-weight: bold; color: #bb9267;">
+                            {{ amountPaid }}
+                          </div>
                         </td>
                       </tr>
                     </table>
@@ -151,7 +165,8 @@
 
           </div>
         </td>
-        <td></td>
+        <td>
+        </td>
       </tr>
     </table>
   </body>

@@ -21,11 +21,11 @@ export default class OtpTokenActions {
     return otpToken
   }
 
-  public static async getOtpTokenById(id: number): Promise<OtpToken | null> {
+  private static async getOtpTokenById(id: number): Promise<OtpToken | null> {
     return await OtpToken.query().where('id', id).first()
   }
 
-  public static async getOtpTokenByIdentifier(identifier: string): Promise<OtpToken | null> {
+  private static async getOtpTokenByIdentifier(identifier: string): Promise<OtpToken | null> {
     return await OtpToken.query().where('identifier', identifier).first()
   }
 
@@ -38,7 +38,7 @@ export default class OtpTokenActions {
       .first()
   }
 
-  public static async getOtpToken(
+  private static async getOtpToken(
     getOtpTokenOptions: OtpTokenIdentifierOptions
   ): Promise<OtpToken | null> {
     const { identifier, identifierType } = getOtpTokenOptions

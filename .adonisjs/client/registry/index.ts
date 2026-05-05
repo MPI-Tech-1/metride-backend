@@ -324,6 +324,24 @@ const routes = {
     tokens: [{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"api","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"bookings","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":1,"val":"identifier","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"trip-progress","end":""}],
     types: placeholder as Registry['driver.bookings.update_booking_trip_progress']['types'],
   },
+  'driver.wallet.get_wallet': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/driver/wallet',
+    tokens: [{"old":"/api/v1/driver/wallet","type":0,"val":"api","end":""},{"old":"/api/v1/driver/wallet","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/wallet","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/wallet","type":0,"val":"wallet","end":""}],
+    types: placeholder as Registry['driver.wallet.get_wallet']['types'],
+  },
+  'driver.wallet.fetch_wallet_transactions': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/driver/wallet/transactions',
+    tokens: [{"old":"/api/v1/driver/wallet/transactions","type":0,"val":"api","end":""},{"old":"/api/v1/driver/wallet/transactions","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/wallet/transactions","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/wallet/transactions","type":0,"val":"wallet","end":""},{"old":"/api/v1/driver/wallet/transactions","type":0,"val":"transactions","end":""}],
+    types: placeholder as Registry['driver.wallet.fetch_wallet_transactions']['types'],
+  },
+  'driver.wallet.get_wallet_transaction': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/driver/wallet/transactions/:transactionIdentifier',
+    tokens: [{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"wallet","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":0,"val":"transactions","end":""},{"old":"/api/v1/driver/wallet/transactions/:transactionIdentifier","type":1,"val":"transactionIdentifier","end":""}],
+    types: placeholder as Registry['driver.wallet.get_wallet_transaction']['types'],
+  },
   'common.location.fetch_cities': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/common/location/cities',

@@ -60,6 +60,7 @@ export default class RejectDriverController {
 
       await NotificationDispatchClient.sendDriverAccountRejectedNotificationJob({
         driverId: driver.id,
+        rejectionReason: reason,
       })
 
       return response.status(HttpStatusCodesEnum.OK).send({

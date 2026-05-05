@@ -21,17 +21,19 @@ export default class CustomerWalletActions {
     return customerWallet
   }
 
-  public static async getCustomerWalletById(customerWalletId: number): Promise<CustomerWallet | null> {
+  private static async getCustomerWalletById(
+    customerWalletId: number
+  ): Promise<CustomerWallet | null> {
     return await CustomerWallet.query().where('id', customerWalletId).first()
   }
 
-  public static async getCustomerWalletByIdentifier(
+  private static async getCustomerWalletByIdentifier(
     customerWalletIdentifier: string
   ): Promise<CustomerWallet | null> {
     return await CustomerWallet.query().where('identifier', customerWalletIdentifier).first()
   }
 
-  public static async getCustomerWallet(
+  private static async getCustomerWallet(
     getCustomerWalletOptions: CustomerWalletIdentifierOptions
   ): Promise<CustomerWallet | null> {
     const { identifier, identifierType } = getCustomerWalletOptions
@@ -48,7 +50,8 @@ export default class CustomerWalletActions {
   public static async updateCustomerWalletRecord(
     updateCustomerWalletRecordOptions: UpdateCustomerWalletRecordOptions
   ): Promise<CustomerWallet | null> {
-    const { identifierOptions, updatePayload, dbTransactionOptions } = updateCustomerWalletRecordOptions
+    const { identifierOptions, updatePayload, dbTransactionOptions } =
+      updateCustomerWalletRecordOptions
 
     const customerWallet = await this.getCustomerWallet(identifierOptions)
 

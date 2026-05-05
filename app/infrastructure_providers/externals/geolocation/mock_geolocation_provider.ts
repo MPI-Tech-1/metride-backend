@@ -11,6 +11,7 @@ export default class MockGeolocationProvider implements GeolocationInterface {
       mutatedPayload: {
         distanceInKilometers: 10,
         distanceInMeters: 10000,
+        estimatedDurationInSeconds: 300,
       },
       infrastructureResults: {},
     })

@@ -21,11 +21,11 @@ export default class VehicleModelActions {
     return vehicleModel
   }
 
-  public static async getVehicleModelById(vehicleModelId: number): Promise<VehicleModel | null> {
+  private static async getVehicleModelById(vehicleModelId: number): Promise<VehicleModel | null> {
     return await VehicleModel.query().preload('vehicleMake').where('id', vehicleModelId).first()
   }
 
-  public static async getVehicleModelByIdentifier(
+  private static async getVehicleModelByIdentifier(
     vehicleModelIdentifier: string
   ): Promise<VehicleModel | null> {
     return await VehicleModel.query()

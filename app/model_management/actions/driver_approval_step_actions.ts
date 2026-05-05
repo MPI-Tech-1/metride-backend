@@ -21,11 +21,11 @@ export default class DriverApprovalStepActions {
     return driverApprovalStep
   }
 
-  public static async getDriverApprovalStepById(id: number): Promise<DriverApprovalStep | null> {
+  private static async getDriverApprovalStepById(id: number): Promise<DriverApprovalStep | null> {
     return await DriverApprovalStep.query().where('id', id).first()
   }
 
-  public static async getDriverApprovalStepByIdentifier(
+  private static async getDriverApprovalStepByIdentifier(
     identifier: string
   ): Promise<DriverApprovalStep | null> {
     return await DriverApprovalStep.query()
@@ -34,7 +34,7 @@ export default class DriverApprovalStepActions {
       .first()
   }
 
-  public static async getDriverApprovalStepByDriverId(
+  private static async getDriverApprovalStepByDriverId(
     driverId: number
   ): Promise<DriverApprovalStep | null> {
     return await DriverApprovalStep.query()
@@ -43,7 +43,7 @@ export default class DriverApprovalStepActions {
       .first()
   }
 
-  public static async getDriverApprovalStep(
+  private static async getDriverApprovalStep(
     getDriverApprovalStepOptions: DriverApprovalStepIdentifierOptions
   ): Promise<DriverApprovalStep | null> {
     const { identifier, identifierType } = getDriverApprovalStepOptions

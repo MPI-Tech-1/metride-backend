@@ -133,6 +133,11 @@ export const controllers = {
           UpdateVehicleInformation: () => import('#controllers/v1/driver/profile/vehicle_information/update_vehicle_information_controller'),
         },
       },
+      wallet: {
+        FetchWalletTransactions: () => import('#controllers/v1/driver/wallet/fetch_wallet_transactions_controller'),
+        GetWallet: () => import('#controllers/v1/driver/wallet/get_wallet_controller'),
+        GetWalletTransaction: () => import('#controllers/v1/driver/wallet/get_wallet_transaction_controller'),
+      },
     },
   },
 }

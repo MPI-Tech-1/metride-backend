@@ -24,6 +24,15 @@ export default class Booking extends AbstractModel {
   declare departureLocationGpsCoordinates: string
 
   @column()
+  declare estimatedDurationInSeconds: number
+
+  @column()
+  declare estimatedDistanceInMeters: number
+
+  @column({ consume: (value) => value === 1 })
+  declare hasEarningBeenCreditedToDriver: boolean
+
+  @column()
   declare departureLocationType: 'home' | 'work' | 'office' | 'mall' | 'market' | 'others'
 
   @column()

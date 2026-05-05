@@ -21,19 +21,19 @@ export default class DriverBankAccountActions {
     return driverBankAccount
   }
 
-  public static async getDriverBankAccountById(
+  private static async getDriverBankAccountById(
     driverBankAccountId: number
   ): Promise<DriverBankAccount | null> {
     return await DriverBankAccount.query().preload('bank').where('id', driverBankAccountId).first()
   }
 
-  public static async getDriverBankAccountByDriverId(
+  private static async getDriverBankAccountByDriverId(
     driverId: number
   ): Promise<DriverBankAccount | null> {
     return await DriverBankAccount.query().preload('bank').where('driver_id', driverId).first()
   }
 
-  public static async getDriverBankAccountByIdentifier(
+  private static async getDriverBankAccountByIdentifier(
     driverBankAccountIdentifier: string
   ): Promise<DriverBankAccount | null> {
     return await DriverBankAccount.query()

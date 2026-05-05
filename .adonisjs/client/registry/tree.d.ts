@@ -94,6 +94,11 @@ export interface ApiDefinition {
       rejectBooking: typeof routes['driver.bookings.reject_booking']
       updateBookingTripProgress: typeof routes['driver.bookings.update_booking_trip_progress']
     }
+    wallet: {
+      getWallet: typeof routes['driver.wallet.get_wallet']
+      fetchWalletTransactions: typeof routes['driver.wallet.fetch_wallet_transactions']
+      getWalletTransaction: typeof routes['driver.wallet.get_wallet_transaction']
+    }
   }
   common: {
     location: {

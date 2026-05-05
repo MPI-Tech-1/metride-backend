@@ -32,6 +32,8 @@ export default class GetBookingController {
         destinationLocationName: booking.destinationLocationName,
         destinationLocationGpsCoordinates: booking.destinationLocationGpsCoordinates,
         destinationLocationType: booking.destinationLocationType,
+        estimatedDurationInSeconds: booking.estimatedDurationInSeconds,
+        estimatedDistanceInMeters: booking.estimatedDistanceInMeters,
         tripProgress: booking.tripProgress,
         status: booking.status,
         rideType: {

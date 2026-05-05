@@ -21,13 +21,13 @@ export default class CustomerNotificationActions {
     return customerNotification
   }
 
-  public static async getCustomerNotificationById(
+  private static async getCustomerNotificationById(
     customerNotificationId: number
   ): Promise<CustomerNotification | null> {
     return await CustomerNotification.query().where('id', customerNotificationId).first()
   }
 
-  public static async getCustomerNotificationByIdentifier(
+  private static async getCustomerNotificationByIdentifier(
     customerNotificationIdentifier: string
   ): Promise<CustomerNotification | null> {
     return await CustomerNotification.query()

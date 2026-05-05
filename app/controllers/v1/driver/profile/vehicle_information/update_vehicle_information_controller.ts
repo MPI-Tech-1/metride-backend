@@ -56,7 +56,10 @@ export default class UpdateVehicleInformationController {
       })
     } catch (UpdateVehicleInformationControllerError) {
       await dbTransaction.rollback()
-      console.log('UpdateVehicleInformationControllerError -> ', UpdateVehicleInformationControllerError)
+      console.log(
+        'UpdateVehicleInformationControllerError -> ',
+        UpdateVehicleInformationControllerError
+      )
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

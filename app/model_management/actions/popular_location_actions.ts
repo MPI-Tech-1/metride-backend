@@ -21,13 +21,13 @@ export default class PopularLocationActions {
     return popularLocation
   }
 
-  public static async getPopularLocationById(
+  private static async getPopularLocationById(
     popularLocationId: number
   ): Promise<PopularLocation | null> {
     return await PopularLocation.query().where('id', popularLocationId).first()
   }
 
-  public static async getPopularLocationByIdentifier(
+  private static async getPopularLocationByIdentifier(
     popularLocationIdentifier: string
   ): Promise<PopularLocation | null> {
     return await PopularLocation.query().where('identifier', popularLocationIdentifier).first()

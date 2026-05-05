@@ -1,0 +1,12 @@
+import type DriverWalletTransactionInterface from '#model_management/type_checking/driver_wallet_transaction/driver_wallet_transaction_interface'
+import type DriverWalletTransactionIdentifierOptions from '#model_management/type_checking/driver_wallet_transaction/driver_wallet_transaction_identifier_options'
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+
+type UpdateDriverWalletTransactionRecordPayload = Partial<DriverWalletTransactionInterface>
+
+type UpdateDriverWalletTransactionRecordOptions = UpdateRecordGeneric<
+  DriverWalletTransactionIdentifierOptions,
+  UpdateDriverWalletTransactionRecordPayload
+>
+
+export default UpdateDriverWalletTransactionRecordOptions

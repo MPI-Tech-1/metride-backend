@@ -21,19 +21,19 @@ export default class DriverDocumentActions {
     return driverDocument
   }
 
-  public static async getDriverDocumentById(
+  private static async getDriverDocumentById(
     driverDocumentId: number
   ): Promise<DriverDocument | null> {
     return await DriverDocument.query().where('id', driverDocumentId).first()
   }
 
-  public static async getDriverDocumentByDriverId(
+  private static async getDriverDocumentByDriverId(
     driverId: number
   ): Promise<DriverDocument | null> {
     return await DriverDocument.query().where('driver_id', driverId).first()
   }
 
-  public static async getDriverDocumentByIdentifier(
+  private static async getDriverDocumentByIdentifier(
     driverDocumentIdentifier: string
   ): Promise<DriverDocument | null> {
     return await DriverDocument.query().where('identifier', driverDocumentIdentifier).first()

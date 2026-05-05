@@ -25,6 +25,7 @@
     "#jobs/*": "./app/jobs/*.js",
     "#cron_jobs/*": "./app/cron_jobs/*.js",
     "#common/*": "./app/common/*.js",
+    "#cronjobs/*": "./app/cronjobs/*.js",
     "#infrastructure_providers/*": "./app/infrastructure_providers/*.js",
     "#model_management/*": "./app/model_management/*.js",
     "#exceptions/*": "./app/exceptions/*.js",
