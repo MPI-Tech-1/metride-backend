@@ -1,0 +1,9 @@
+import type DriverWalletWithdrawalRequestInterface from '#model_management/type_checking/driver_wallet_withdrawal_request/driver_wallet_withdrawal_request_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverWalletWithdrawalRequestRecordPayload = Partial<DriverWalletWithdrawalRequestInterface>
+
+type CreateDriverWalletWithdrawalRequestRecordOptions =
+  CreateNewRecordGeneric<CreateDriverWalletWithdrawalRequestRecordPayload>
+
+export default CreateDriverWalletWithdrawalRequestRecordOptions

@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverWalletWithdrawalRequestIdentifierOptions from '#model_management/type_checking/driver_wallet_withdrawal_request/driver_wallet_withdrawal_request_identifier_options'
+import type DriverWalletWithdrawalRequestInterface from '#model_management/type_checking/driver_wallet_withdrawal_request/driver_wallet_withdrawal_request_interface'
+
+type UpdateDriverWalletWithdrawalRequestRecordOptions = UpdateRecordGeneric<
+  DriverWalletWithdrawalRequestIdentifierOptions,
+  Partial<DriverWalletWithdrawalRequestInterface>
+>
+
+export default UpdateDriverWalletWithdrawalRequestRecordOptions

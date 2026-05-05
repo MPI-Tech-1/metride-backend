@@ -1,5 +1,5 @@
 import { type HttpContext } from '@adonisjs/core/http'
-import DriverWalletTransactionActions from '#model_management/actions/driver_wallet_transaction_actions'
+import DriverWalletWithdrawalRequestActions from '#model_management/actions/driver_wallet_withdrawal_request_actions'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
@@ -7,45 +7,46 @@ import db from '@adonisjs/lucid/services/db'
 
 export default class RejectWalletPayoutController {
   async handle({ params, response }: HttpContext) {
-    const { walletTransactionIdentifier } = params
+    const { withdrawalRequestIdentifier } = params
 
     const dbTransaction = await db.transaction()
 
     try {
-      const walletTransaction = await DriverWalletTransactionActions.getDriverWalletTransaction({
-        identifierType: 'identifier',
-        identifier: walletTransactionIdentifier,
-        dbTransactionOptions: { useTransaction: true, dbTransaction },
-      })
+      const withdrawalRequest =
+        await DriverWalletWithdrawalRequestActions.getDriverWalletWithdrawalRequest({
+          identifierType: 'identifier',
+          identifier: withdrawalRequestIdentifier,
+          dbTransactionOptions: { useTransaction: true, dbTransaction },
+        })
 
-      if (!walletTransaction) {
+      if (!withdrawalRequest) {
         await dbTransaction.rollback()
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
           status_code: HttpStatusCodesEnum.NOT_FOUND,
           status: ERROR,
-          message: 'Wallet transaction not found.',
+          message: 'Withdrawal request not found.',
         })
       }
 
-      if (walletTransaction.status !== 'pending') {
+      if (withdrawalRequest.status !== 'pending') {
         await dbTransaction.rollback()
         return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
           status_code: HttpStatusCodesEnum.BAD_REQUEST,
           status: ERROR,
-          message: 'Only pending transactions can be rejected.',
+          message: 'Only pending withdrawal requests can be rejected.',
         })
       }
 
-      await DriverWalletTransactionActions.updateDriverWalletTransactionRecord({
-        identifierOptions: { identifierType: 'id', identifier: walletTransaction.id },
-        updatePayload: { status: 'failed' },
+      await DriverWalletWithdrawalRequestActions.updateDriverWalletWithdrawalRequestRecord({
+        identifierOptions: { identifierType: 'id', identifier: withdrawalRequest.id },
+        updatePayload: { status: 'rejected' },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
       await dbTransaction.commit()
 
       await NotificationDispatchClient.sendWalletPayoutRejectedNotificationJob({
-        walletTransactionId: walletTransaction.id,
+        withdrawalRequestId: withdrawalRequest.id,
       })
 
       return response.status(HttpStatusCodesEnum.OK).send({
@@ -53,9 +54,9 @@ export default class RejectWalletPayoutController {
         status: SUCCESS,
         message: 'Wallet payout rejected successfully.',
         results: {
-          identifier: walletTransaction.identifier,
-          amount: walletTransaction.amount,
-          status: 'failed',
+          identifier: withdrawalRequest.identifier,
+          amount: withdrawalRequest.amount,
+          status: 'rejected',
         },
       })
     } catch (RejectWalletPayoutControllerError) {

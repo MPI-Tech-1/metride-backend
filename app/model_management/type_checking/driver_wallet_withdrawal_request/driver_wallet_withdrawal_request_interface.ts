@@ -1,0 +1,3 @@
+import type DriverWalletWithdrawalRequest from '#models/driver_wallet_withdrawal_request'
+
+export default interface DriverWalletWithdrawalRequestInterface extends DriverWalletWithdrawalRequest {}

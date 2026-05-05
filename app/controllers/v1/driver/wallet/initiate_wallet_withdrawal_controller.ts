@@ -1,11 +1,10 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
-import DriverWalletTransactionActions from '#model_management/actions/driver_wallet_transaction_actions'
+import DriverWalletWithdrawalRequestActions from '#model_management/actions/driver_wallet_withdrawal_request_actions'
 import InitiateWalletWithdrawalRequestValidator from '#validators/v1/driver/wallet/initiate_wallet_withdrawal_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
-import { randomUUID } from 'node:crypto'
 
 export default class InitiateWalletWithdrawalController {
   async handle({ request, auth, response }: HttpContext) {
@@ -40,48 +39,32 @@ export default class InitiateWalletWithdrawalController {
         })
       }
 
-      const walletTransaction =
-        await DriverWalletTransactionActions.createDriverWalletTransactionRecord({
+      const withdrawalRequest =
+        await DriverWalletWithdrawalRequestActions.createDriverWalletWithdrawalRequestRecord({
           createPayload: {
             driverId: loggedInDriver.id,
             driverWalletId: wallet.id,
             amount,
-            systemGeneratedTransactionReference: randomUUID(),
-            providerTransactionReference: null,
-            remark: 'Wallet withdrawal',
-            typeOfTransaction: 'debit',
             status: 'pending',
           },
           dbTransactionOptions: { useTransaction: true, dbTransaction },
         })
-
-      await DriverWalletActions.updateDriverWalletRecord({
-        identifierOptions: { identifierType: 'id', identifier: wallet.id },
-        updatePayload: {
-          balance: wallet.balance - amount,
-          totalOutflowFunds: wallet.totalOutflowFunds + amount,
-        },
-        dbTransactionOptions: { useTransaction: true, dbTransaction },
-      })
 
       await dbTransaction.commit()
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
-        message: 'Wallet withdrawal initiated successfully.',
+        message: 'Wallet withdrawal request submitted successfully.',
         results: {
-          transaction: {
-            identifier: walletTransaction.identifier,
-            amount: walletTransaction.amount,
-            typeOfTransaction: walletTransaction.typeOfTransaction,
-            status: walletTransaction.status,
-            systemGeneratedTransactionReference:
-              walletTransaction.systemGeneratedTransactionReference,
+          withdrawalRequest: {
+            identifier: withdrawalRequest.identifier,
+            amount: withdrawalRequest.amount,
+            status: withdrawalRequest.status,
           },
           wallet: {
             identifier: wallet.identifier,
-            balance: wallet.balance - amount,
+            balance: wallet.balance,
           },
         },
       })

@@ -145,7 +145,7 @@ export default class NotificationDispatchClient {
 
   public static async sendWalletPayoutRejectedNotificationJob(
     sendWalletPayoutRejectedNotificationJobPayload: SendWalletPayoutRejectedNotificationJobPayload
-  ) {
+  ): Promise<void> {
     await SendWalletPayoutRejectedNotificationJob.dispatch(
       sendWalletPayoutRejectedNotificationJobPayload
     )

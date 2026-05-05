@@ -4,14 +4,15 @@ import {
 } from '#common/messages/email_types'
 import configurePushNotificationProvider from '#infrastructure_providers/helpers/configure_push_notification_provider'
 import MailClient from '#infrastructure_providers/internals/mail_client'
+import DriverActions from '#model_management/actions/driver_actions'
 import DriverNotificationActions from '#model_management/actions/driver_notification_actions'
-import DriverWalletTransactionActions from '#model_management/actions/driver_wallet_transaction_actions'
+import DriverWalletWithdrawalRequestActions from '#model_management/actions/driver_wallet_withdrawal_request_actions'
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 
 export interface SendWalletPayoutRejectedNotificationJobPayload {
-  walletTransactionId: number
+  withdrawalRequestId: number
 }
 
 export default class SendWalletPayoutRejectedNotificationJob extends Job<SendWalletPayoutRejectedNotificationJobPayload> {
@@ -22,21 +23,31 @@ export default class SendWalletPayoutRejectedNotificationJob extends Job<SendWal
 
   async execute() {
     console.log('Processing SendWalletPayoutRejectedNotificationJob', this.payload)
-    const { walletTransactionId } = this.payload
+    const { withdrawalRequestId } = this.payload
 
-    const walletTransaction = await DriverWalletTransactionActions.getDriverWalletTransaction({
-      identifierType: 'id',
-      identifier: walletTransactionId,
-    })
+    const withdrawalRequest =
+      await DriverWalletWithdrawalRequestActions.getDriverWalletWithdrawalRequest({
+        identifierType: 'id',
+        identifier: withdrawalRequestId,
+      })
 
-    if (!walletTransaction) {
-      throw new Error('SendWalletPayoutRejectedNotificationJob: wallet transaction not found')
+    if (!withdrawalRequest) {
+      throw new Error('SendWalletPayoutRejectedNotificationJob: withdrawal request not found')
     }
 
-    if (walletTransaction.status !== 'failed') {
+    if (withdrawalRequest.status !== 'rejected') {
       throw new Error(
-        'SendWalletPayoutRejectedNotificationJob: wallet transaction has not been rejected'
+        'SendWalletPayoutRejectedNotificationJob: withdrawal request has not been rejected'
       )
+    }
+
+    const driver = await DriverActions.getDriver({
+      identifier: withdrawalRequest.driverId,
+      identifierType: 'id',
+    })
+
+    if (!driver) {
+      throw new Error('SendWalletPayoutRejectedNotificationJob: driver not found')
     }
 
     const dbTransaction = await db.transaction()
@@ -44,11 +55,11 @@ export default class SendWalletPayoutRejectedNotificationJob extends Job<SendWal
     try {
       const driverNotification = await DriverNotificationActions.createDriverNotificationRecord({
         createPayload: {
-          driverId: walletTransaction.driverId,
-          content: `Your payout request of ${walletTransaction.amount} could not be processed. The amount has been refunded to your wallet.`,
+          driverId: withdrawalRequest.driverId,
+          content: `Your payout request of ${withdrawalRequest.amount} could not be processed.`,
           isNotificationRead: false,
           payload: {
-            identifier: walletTransaction.identifier,
+            identifier: withdrawalRequest.identifier,
           },
           notificationType: 'wallet:payout_rejected',
         },
@@ -56,8 +67,6 @@ export default class SendWalletPayoutRejectedNotificationJob extends Job<SendWal
       })
 
       await dbTransaction.commit()
-
-      const driver = walletTransaction.driver
 
       if (driver.fcmToken) {
         const pushNotificationProvider = configurePushNotificationProvider()
@@ -82,8 +91,8 @@ export default class SendWalletPayoutRejectedNotificationJob extends Job<SendWal
         emailTemplate: WALLET_PAYOUT_REJECTED_EMAIL_TEMPLATE,
         emailPayload: {
           recipientFirstName: driver.firstName,
-          amount: walletTransaction.amount,
-          transactionReference: walletTransaction.systemGeneratedTransactionReference,
+          amount: withdrawalRequest.amount,
+          transactionReference: withdrawalRequest.identifier,
         },
       })
     } catch (sendWalletPayoutRejectedNotificationJobError) {
