@@ -1,0 +1,8 @@
+import type BookingGpsLogInterface from '#model_management/type_checking/booking_gps_log/booking_gps_log_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateBookingGpsLogRecordPayload = Partial<BookingGpsLogInterface>
+
+type CreateBookingGpsLogRecordOptions = CreateNewRecordGeneric<CreateBookingGpsLogRecordPayload>
+
+export default CreateBookingGpsLogRecordOptions

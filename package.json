@@ -22,6 +22,7 @@
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
+    "#socket_handlers/*": "./app/socket_handlers/*.js",
     "#jobs/*": "./app/jobs/*.js",
     "#cron_jobs/*": "./app/cron_jobs/*.js",
     "#common/*": "./app/common/*.js",

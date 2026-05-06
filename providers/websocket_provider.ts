@@ -1,5 +1,7 @@
 import type { ApplicationService } from '@adonisjs/core/types'
 import WebsocketServer from '#infrastructure_providers/internals/websocket_server'
+import { registerCustomerSocketHandler } from '#socket_handlers/register_customer_socket_handler'
+import { logBookingGpsCoordinatesSocketHandler } from '#socket_handlers/log_booking_gps_coordinates_socket_handler'
 
 export default class WebsocketProvider {
   constructor(protected app: ApplicationService) {}
@@ -25,28 +27,20 @@ export default class WebsocketProvider {
   async ready() {
     if (this.app.getEnvironment() === 'web') {
       const adonisServer = await this.app.container.make('server')
-
       const httpServer = adonisServer.getNodeServer()
 
       if (!httpServer) {
         throw new Error('HTTP server not available')
       }
 
-      // Boot with the actual Node.js HTTP server
       WebsocketServer.boot(httpServer)
-
       const io = WebsocketServer.getInstanceOfServer()
 
-      io.on('connection', (socket) => {
+      io.on('connection', async (socket) => {
         console.log('New Websocket Connection => ', socket.id)
 
-        socket.on('new-gps-message-from-driver-app', (data) => {
-          console.log('New GPS Message from Driver App => ', data)
-        })
-
-        socket.on('disconnect', (disconnectedSocket) => {
-          console.log('Websocket Disconnected => ', disconnectedSocket)
-        })
+        await registerCustomerSocketHandler(socket)
+        await logBookingGpsCoordinatesSocketHandler(io, socket)
       })
     }
   }

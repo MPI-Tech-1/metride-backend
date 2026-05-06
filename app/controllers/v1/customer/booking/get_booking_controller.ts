@@ -62,6 +62,11 @@ export default class GetBookingController {
           discountAmount: booking.bookingPayment.discountAmount,
           amountPaid: booking.bookingPayment.amountPaid,
         },
+        bookingGpsLogs: booking.bookingGpsLogs.map((log) => ({
+          identifier: log.identifier,
+          gpsCoordinates: log.gpsCoordinates,
+          createdAt: log.createdAt,
+        })),
         createdAt: booking.createdAt,
       }
 

@@ -1,3 +1,6 @@
+import LogBookingGpsCoordinatesBackgroundProcessingJob, {
+  type LogBookingGpsCoordinatesBackgroundProcessingJobPayload,
+} from '#jobs/background_processing/booking/log_booking_gps_coordinates_background_processing_job'
 import ProcessBookingPaymentJob, {
   type ProcessBookingPaymentJobPayload,
 } from '#jobs/background_processing/booking/process_booking_payment_job'
@@ -16,5 +19,13 @@ export default class BackgroundDispatchClient {
     processDriverWalletEarningJobPayload: ProcessDriverWalletEarningJobPayload
   ) {
     await ProcessDriverWalletEarningJob.dispatch(processDriverWalletEarningJobPayload)
+  }
+
+  public static async logBookingGpsCoordinatesBackgroundProcessingJob(
+    logBookingGpsCoordinatesBackgroundProcessingJobPayload: LogBookingGpsCoordinatesBackgroundProcessingJobPayload
+  ) {
+    await LogBookingGpsCoordinatesBackgroundProcessingJob.dispatch(
+      logBookingGpsCoordinatesBackgroundProcessingJobPayload
+    )
   }
 }
