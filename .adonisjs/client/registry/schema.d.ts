@@ -271,13 +271,25 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/get_wallet_transaction_controller').default['handle']>>>
     }
   }
+  'admin.wallet_management.fetch_wallet_withdrawal_requests': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/wallet-management/driver/withdrawal-requests'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/wallet/driver/fetch_driver_wallet_withdrawal_requests_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/fetch_wallet_withdrawal_requests_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/fetch_wallet_withdrawal_requests_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'admin.wallet_management.approve_wallet_payout': {
     methods: ["POST"]
-    pattern: '/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/approve'
+    pattern: '/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/approve'
     types: {
       body: {}
       paramsTuple: [ParamValue]
-      params: { walletTransactionIdentifier: ParamValue }
+      params: { withdrawalRequestIdentifier: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/approve_wallet_payout_controller').default['handle']>>>
@@ -285,14 +297,74 @@ export interface Registry {
   }
   'admin.wallet_management.reject_wallet_payout': {
     methods: ["POST"]
-    pattern: '/api/v1/admins/wallet-management/driver/transactions/:walletTransactionIdentifier/reject'
+    pattern: '/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject'
     types: {
       body: {}
       paramsTuple: [ParamValue]
-      params: { walletTransactionIdentifier: ParamValue }
+      params: { withdrawalRequestIdentifier: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller').default['handle']>>>
+    }
+  }
+  'admin.dashboard.fetch_customer_metrics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/dashboard/customer-metrics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_customer_metrics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_customer_metrics_controller').default['handle']>>>
+    }
+  }
+  'admin.dashboard.fetch_driver_metrics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/dashboard/driver-metrics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_driver_metrics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_driver_metrics_controller').default['handle']>>>
+    }
+  }
+  'admin.dashboard.fetch_booking_metrics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/dashboard/booking-metrics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_booking_metrics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_booking_metrics_controller').default['handle']>>>
+    }
+  }
+  'admin.dashboard.fetch_payout_metrics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/dashboard/payout-metrics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_payout_metrics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_payout_metrics_controller').default['handle']>>>
+    }
+  }
+  'admin.dashboard.fetch_wallet_transaction_metrics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/dashboard/wallet-transaction-metrics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller').default['handle']>>>
     }
   }
   'customer.authentication.onboarding': {

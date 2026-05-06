@@ -26,8 +26,14 @@ export type ScannedRoutes = {
     'admin.bookings.complete_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
-    'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
-    'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
+    'admin.wallet_management.fetch_wallet_withdrawal_requests': { paramsTuple?: []; params?: {} }
+    'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
+    'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
+    'admin.dashboard.fetch_customer_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_driver_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -81,8 +87,8 @@ export type ScannedRoutes = {
     'admin.driver_management.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.create_ride_type': { paramsTuple?: []; params?: {} }
     'admin.settings.create_popular_location': { paramsTuple?: []; params?: {} }
-    'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
-    'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'walletTransactionIdentifier': ParamValue} }
+    'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
+    'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -114,6 +120,12 @@ export type ScannedRoutes = {
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'admin.wallet_management.fetch_wallet_withdrawal_requests': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_customer_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_driver_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
@@ -148,6 +160,12 @@ export type ScannedRoutes = {
     'admin.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
+    'admin.wallet_management.fetch_wallet_withdrawal_requests': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_customer_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_driver_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }

@@ -38,8 +38,16 @@ export interface ApiDefinition {
     walletManagement: {
       fetchWalletTransactions: typeof routes['admin.wallet_management.fetch_wallet_transactions']
       getWalletTransaction: typeof routes['admin.wallet_management.get_wallet_transaction']
+      fetchWalletWithdrawalRequests: typeof routes['admin.wallet_management.fetch_wallet_withdrawal_requests']
       approveWalletPayout: typeof routes['admin.wallet_management.approve_wallet_payout']
       rejectWalletPayout: typeof routes['admin.wallet_management.reject_wallet_payout']
+    }
+    dashboard: {
+      fetchCustomerMetrics: typeof routes['admin.dashboard.fetch_customer_metrics']
+      fetchDriverMetrics: typeof routes['admin.dashboard.fetch_driver_metrics']
+      fetchBookingMetrics: typeof routes['admin.dashboard.fetch_booking_metrics']
+      fetchPayoutMetrics: typeof routes['admin.dashboard.fetch_payout_metrics']
+      fetchWalletTransactionMetrics: typeof routes['admin.dashboard.fetch_wallet_transaction_metrics']
     }
   }
   customer: {
