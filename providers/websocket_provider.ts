@@ -2,6 +2,7 @@ import type { ApplicationService } from '@adonisjs/core/types'
 import WebsocketServer from '#infrastructure_providers/internals/websocket_server'
 import { registerCustomerSocketHandler } from '#socket_handlers/register_customer_socket_handler'
 import { logBookingGpsCoordinatesSocketHandler } from '#socket_handlers/log_booking_gps_coordinates_socket_handler'
+import { joinAdminRoomSocketHandler } from '#socket_handlers/join_admin_room_socket_handler'
 
 export default class WebsocketProvider {
   constructor(protected app: ApplicationService) {}
@@ -39,6 +40,7 @@ export default class WebsocketProvider {
       io.on('connection', async (socket) => {
         console.log('New Websocket Connection => ', socket.id)
 
+        joinAdminRoomSocketHandler(socket)
         await registerCustomerSocketHandler(socket)
         await logBookingGpsCoordinatesSocketHandler(io, socket)
       })

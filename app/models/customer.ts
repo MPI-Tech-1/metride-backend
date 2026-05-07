@@ -1,4 +1,4 @@
-import { column, hasOne } from '@adonisjs/lucid/orm'
+import { column, computed, hasOne } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import CustomerRegistrationStep from '#models/customer_registration_step'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
@@ -20,6 +20,11 @@ export default class Customer extends AbstractModel {
 
   @column({ serializeAs: null })
   declare password: string
+
+  @computed()
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`
+  }
 
   @column()
   declare fcmToken: string
