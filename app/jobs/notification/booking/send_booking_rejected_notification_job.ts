@@ -4,6 +4,7 @@ import CustomerNotificationActions from '#model_management/actions/customer_noti
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendBookingRejectedNotificationJobPayload {
   bookingId: number
@@ -72,10 +73,12 @@ export default class SendBookingRejectedNotificationJob extends Job<SendBookingR
         'sendBookingRejectedNotificationJobError => ',
         sendBookingRejectedNotificationJobError
       )
+      await logApplicationError(sendBookingRejectedNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendBookingRejectedNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

@@ -11,6 +11,7 @@ import {
 import db from '@adonisjs/lucid/services/db'
 import configureCardPaymentProvider from '#infrastructure_providers/helpers/configure_card_payment_provider'
 import { randomUUID } from 'node:crypto'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class CheckoutBookingController {
   async handle({ request, response }: HttpContext) {
@@ -85,7 +86,9 @@ export default class CheckoutBookingController {
         },
       })
     } catch (CheckoutBookingControllerError) {
+      await dbTransaction.rollback()
       console.log('CheckoutBookingControllerError -> ', CheckoutBookingControllerError)
+      await logApplicationError(CheckoutBookingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

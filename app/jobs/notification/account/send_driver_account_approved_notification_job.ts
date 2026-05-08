@@ -9,6 +9,7 @@ import DriverNotificationActions from '#model_management/actions/driver_notifica
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendDriverAccountApprovedNotificationJobPayload {
   driverId: number
@@ -89,10 +90,12 @@ export default class SendDriverAccountApprovedNotificationJob extends Job<SendDr
         'sendDriverAccountApprovedNotificationJobError => ',
         sendDriverAccountApprovedNotificationJobError
       )
+      await logApplicationError(sendDriverAccountApprovedNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendDriverAccountApprovedNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

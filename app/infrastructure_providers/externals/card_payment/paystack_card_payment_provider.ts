@@ -5,6 +5,7 @@ import type InitiateTransactionInputOptions from '#infrastructure_providers/type
 import type InitiateTransactionOutputOptions from '#infrastructure_providers/type_checkings/card_payment/initiate_transaction_output_options'
 import type VerifyTransactionOutputOptions from '#infrastructure_providers/type_checkings/card_payment/verify_transaction_output_options'
 import { DateTime } from 'luxon'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class PaystackPaymentProvider implements CardPaymentInterface {
   private secretKey: string = cardPaymentConfig.paystack.secretKey
@@ -89,6 +90,7 @@ export default class PaystackPaymentProvider implements CardPaymentInterface {
       }
     } catch (initiateTransactionError) {
       console.log('PaystackPaymentProvider.initiateTransactionError -> ', initiateTransactionError)
+      await logApplicationError(initiateTransactionError)
       return {
         transactionStatus: 'failed',
         infrastructureResults: null,
@@ -150,6 +152,7 @@ export default class PaystackPaymentProvider implements CardPaymentInterface {
       }
     } catch (verifyTransactionError) {
       console.log('PaystackPaymentProvider.verifyTransactionError -> ', verifyTransactionError)
+      await logApplicationError(verifyTransactionError)
       return {
         transactionStatus: 'failed',
         infrastructureResults: null,

@@ -10,6 +10,7 @@ import DriverWalletWithdrawalRequestActions from '#model_management/actions/driv
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendWalletPayoutRejectedNotificationJobPayload {
   withdrawalRequestId: number
@@ -101,10 +102,12 @@ export default class SendWalletPayoutRejectedNotificationJob extends Job<SendWal
         'sendWalletPayoutRejectedNotificationJobError => ',
         sendWalletPayoutRejectedNotificationJobError
       )
+      await logApplicationError(sendWalletPayoutRejectedNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendWalletPayoutRejectedNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

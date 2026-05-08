@@ -3,6 +3,7 @@ import HttpClient from '#infrastructure_providers/internals/http_client'
 import type CalculateDistanceInputOptions from '#infrastructure_providers/type_checkings/geolocation/calculate_distance_input_options'
 import type CalculateDistanceOutputOptions from '#infrastructure_providers/type_checkings/geolocation/calculate_distance_output_options'
 import type GeolocationInterface from '#infrastructure_providers/type_checkings/geolocation/geolocation_interface'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class GoogleGeolocationProvider implements GeolocationInterface {
   private endpointUrl: string = geolocationConfig.google.endpoint
@@ -60,6 +61,7 @@ export default class GoogleGeolocationProvider implements GeolocationInterface {
       }
     } catch (calculateDistanceError) {
       console.log('GoogleGeolocationProvider.calculateDistance => ', calculateDistanceError)
+      await logApplicationError(calculateDistanceError)
       return {
         mutatedPayload: null,
         infrastructureResults: {},

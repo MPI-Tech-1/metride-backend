@@ -2,6 +2,7 @@ import { type HttpContext } from '@adonisjs/core/http'
 import BookingActions from '#model_management/actions/booking_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class GetBookingController {
   async handle({ params, response }: HttpContext) {
@@ -76,6 +77,7 @@ export default class GetBookingController {
       })
     } catch (GetBookingControllerError) {
       console.log('GetBookingControllerError -> ', GetBookingControllerError)
+      await logApplicationError(GetBookingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

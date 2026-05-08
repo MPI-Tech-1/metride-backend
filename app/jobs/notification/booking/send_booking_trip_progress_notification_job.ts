@@ -4,6 +4,7 @@ import CustomerNotificationActions from '#model_management/actions/customer_noti
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendBookingTripProgressNotificationJobPayload {
   bookingId: number
@@ -91,10 +92,12 @@ export default class SendBookingTripProgressNotificationJob extends Job<SendBook
         'sendBookingTripProgressNotificationJobError => ',
         sendBookingTripProgressNotificationJobError
       )
+      await logApplicationError(sendBookingTripProgressNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendBookingTripProgressNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

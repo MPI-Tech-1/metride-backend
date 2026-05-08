@@ -5,6 +5,7 @@ import DriverRegistrationStepActions from '#model_management/actions/driver_regi
 import DriverVerifyAccountActivationTokenRequestValidator from '#validators/v1/driver/account_activation/driver_verify_account_activation_token_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class VerifyAccountActivationTokenController {
   async handle({ request, response, auth }: HttpContext) {
@@ -69,6 +70,7 @@ export default class VerifyAccountActivationTokenController {
         'VerifyAccountActivationTokenControllerError -> ',
         VerifyAccountActivationTokenControllerError
       )
+      await logApplicationError(VerifyAccountActivationTokenControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -1,5 +1,5 @@
 interface ApplicationLoggerInterface {
-  logError(error: Error): Promise<void>
+  logError(error: Error | unknown): Promise<void>
 
   logPayload(message: any): Promise<void>
 }

@@ -11,6 +11,7 @@ import {
 } from '#common/messages/system_messages'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import generateFutureDateTime from '#common/helper_functions/generate_future_date_time'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class RequestResetPasswordOtpTokenController {
   async handle({ request, response }: HttpContext) {
@@ -68,6 +69,7 @@ export default class RequestResetPasswordOtpTokenController {
         'RequestResetPasswordOtpTokenControllerError -> ',
         RequestResetPasswordOtpTokenControllerError
       )
+      await logApplicationError(RequestResetPasswordOtpTokenControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

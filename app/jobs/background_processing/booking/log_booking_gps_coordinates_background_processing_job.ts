@@ -2,6 +2,7 @@ import BookingActions from '#model_management/actions/booking_actions'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import BookingGpsLogActions from '#model_management/actions/booking_gps_log_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface LogBookingGpsCoordinatesBackgroundProcessingJobPayload {
   bookingIdentifier: string
@@ -52,5 +53,6 @@ export default class LogBookingGpsCoordinatesBackgroundProcessingJob extends Job
 
   async failed(error: Error) {
     console.error('LogBookingGpsCoordinatesBackgroundProcessingJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

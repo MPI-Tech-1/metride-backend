@@ -9,6 +9,7 @@ import {
 } from '#common/messages/system_messages'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import generateFutureDateTime from '#common/helper_functions/generate_future_date_time'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class RequestAccountActivationTokenController {
   async handle({ response, auth }: HttpContext) {
@@ -51,6 +52,7 @@ export default class RequestAccountActivationTokenController {
         'RequestAccountActivationTokenControllerError -> ',
         RequestAccountActivationTokenControllerError
       )
+      await logApplicationError(RequestAccountActivationTokenControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

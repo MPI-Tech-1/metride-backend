@@ -2,6 +2,7 @@ import { type HttpContext } from '@adonisjs/core/http'
 import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class GetWalletController {
   async handle({ auth, response }: HttpContext) {
@@ -35,6 +36,7 @@ export default class GetWalletController {
       })
     } catch (GetWalletControllerError) {
       console.log('GetWalletControllerError -> ', GetWalletControllerError)
+      await logApplicationError(GetWalletControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

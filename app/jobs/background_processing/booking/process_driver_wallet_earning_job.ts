@@ -5,6 +5,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import { randomUUID } from 'node:crypto'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface ProcessDriverWalletEarningJobPayload {
   bookingId: number
@@ -86,10 +87,12 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
     } catch (processDriverWalletEarningJobError) {
       await dbTransaction.rollback()
       console.log('processDriverWalletEarningJobError => ', processDriverWalletEarningJobError)
+      await logApplicationError(processDriverWalletEarningJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('ProcessDriverWalletEarningJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

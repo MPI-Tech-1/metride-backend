@@ -4,6 +4,7 @@ import cardPaymentConfig from '#config/card_payment_config'
 import BackgroundDispatchClient from '#infrastructure_providers/internals/background_dispatch_client'
 import type { HttpContext } from '@adonisjs/core/http'
 import crypto from 'node:crypto'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class ProcessPaystackWebhookController {
   public async handle({ request, response }: HttpContext) {
@@ -35,6 +36,7 @@ export default class ProcessPaystackWebhookController {
         paymentProviderReference: reference,
       })
     } catch (ProcessPaystackWebhookControllerError) {
+      await logApplicationError(ProcessPaystackWebhookControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status: ERROR,
         statusCode: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,

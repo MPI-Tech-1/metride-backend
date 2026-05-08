@@ -6,6 +6,7 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 import db from '@adonisjs/lucid/services/db'
 import DriverRegistrationStepActions from '#model_management/actions/driver_registration_step_actions'
 import CityActions from '#model_management/actions/city_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class UpdatePersonalInformationController {
   async handle({ request, response, auth }: HttpContext) {
@@ -56,6 +57,7 @@ export default class UpdatePersonalInformationController {
         'UpdatePersonalInformationControllerError -> ',
         UpdatePersonalInformationControllerError
       )
+      await logApplicationError(UpdatePersonalInformationControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -4,6 +4,7 @@ import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import BackgroundDispatchClient from '#infrastructure_providers/internals/background_dispatch_client'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class CompleteBookingController {
   async handle({ request, response }: HttpContext) {
@@ -57,6 +58,7 @@ export default class CompleteBookingController {
       })
     } catch (CompleteBookingControllerError) {
       console.log('CompleteBookingControllerError -> ', CompleteBookingControllerError)
+      await logApplicationError(CompleteBookingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

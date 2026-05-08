@@ -1,6 +1,7 @@
 import configureCardPaymentProvider from '#infrastructure_providers/helpers/configure_card_payment_provider'
 import BookingPaymentActions from '#model_management/actions/booking_payment_actions'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
+import logApplicationError from '#common/helper_functions/log_application_error'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 
@@ -92,5 +93,6 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
 
   async failed(error: Error) {
     console.error('ProcessBookingPaymentJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

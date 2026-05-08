@@ -10,6 +10,7 @@ import {
   SUCCESS,
 } from '#common/messages/system_messages'
 import AdminActions from '#model_management/actions/admin_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class AuthenticateAdminController {
   async handle({ request, response }: HttpContext) {
@@ -59,6 +60,7 @@ export default class AuthenticateAdminController {
       })
     } catch (AuthenticateAdminControllerError) {
       console.log('AuthenticateAdminControllerError -> ', AuthenticateAdminControllerError)
+      await logApplicationError(AuthenticateAdminControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

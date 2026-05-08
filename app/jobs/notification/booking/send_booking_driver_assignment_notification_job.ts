@@ -5,6 +5,7 @@ import DriverNotificationActions from '#model_management/actions/driver_notifica
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendBookingDriverAssignmentNotificationJobPayload {
   bookingId: number
@@ -101,10 +102,12 @@ export default class SendBookingDriverAssignmentNotificationJob extends Job<Send
         'sendBookingDriverAssignmentNotificationJobError => ',
         sendBookingDriverAssignmentNotificationJobError
       )
+      await logApplicationError(sendBookingDriverAssignmentNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendBookingDriverAssignmentNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

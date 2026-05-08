@@ -4,6 +4,7 @@ import type PushNotificationInterface from '#infrastructure_providers/type_check
 import type PushNotificationMessageType from '#infrastructure_providers/type_checkings/push_notification/push_notification_message_type'
 import pushNotificationConfig from '#config/push_notification_config'
 import convertBase64ToString from '#common/helper_functions/convert_base64_to_string'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FirebasePushNotificationProvider implements PushNotificationInterface {
   constructor() {
@@ -25,6 +26,7 @@ export default class FirebasePushNotificationProvider implements PushNotificatio
         `FirebaseMessageProvider.processSendNotificationError =>`,
         processSendNotificationError
       )
+      await logApplicationError(processSendNotificationError)
     }
   }
 }

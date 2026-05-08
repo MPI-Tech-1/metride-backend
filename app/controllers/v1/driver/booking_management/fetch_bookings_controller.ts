@@ -3,6 +3,7 @@ import BookingActions from '#model_management/actions/booking_actions'
 import FetchBookingsRequestValidator from '#validators/v1/driver/booking_management/fetch_bookings_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FetchBookingsController {
   async handle({ request, auth, response }: HttpContext) {
@@ -90,6 +91,7 @@ export default class FetchBookingsController {
       })
     } catch (FetchBookingsControllerError) {
       console.log('FetchBookingsControllerError -> ', FetchBookingsControllerError)
+      await logApplicationError(FetchBookingsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

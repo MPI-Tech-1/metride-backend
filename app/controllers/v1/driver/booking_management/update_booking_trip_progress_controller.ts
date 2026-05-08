@@ -5,6 +5,7 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 import UpdateBookingTripProgressRequestValidator from '#validators/v1/driver/booking_management/update_booking_trip_progress_request_validator'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import BackgroundDispatchClient from '#infrastructure_providers/internals/background_dispatch_client'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class UpdateBookingTripProgress {
   async handle({ auth, request, response }: HttpContext) {
@@ -73,6 +74,7 @@ export default class UpdateBookingTripProgress {
       })
     } catch (UpdateBookingTripProgressError) {
       console.log('UpdateBookingTripProgressError -> ', UpdateBookingTripProgressError)
+      await logApplicationError(UpdateBookingTripProgressError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

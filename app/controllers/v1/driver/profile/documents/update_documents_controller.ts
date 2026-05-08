@@ -5,6 +5,7 @@ import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
 import DriverRegistrationStepActions from '#model_management/actions/driver_registration_step_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class UpdateDocumentsController {
   async handle({ request, response, auth }: HttpContext) {
@@ -43,6 +44,7 @@ export default class UpdateDocumentsController {
     } catch (UpdateDocumentsControllerError) {
       await dbTransaction.rollback()
       console.log('UpdateDocumentsControllerError -> ', UpdateDocumentsControllerError)
+      await logApplicationError(UpdateDocumentsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

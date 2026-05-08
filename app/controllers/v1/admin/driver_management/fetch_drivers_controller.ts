@@ -3,6 +3,7 @@ import DriverActions from '#model_management/actions/driver_actions'
 import ListDriversRequestValidator from '#validators/v1/admin/driver_management/list_drivers_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FetchDriversController {
   async handle({ request, response }: HttpContext) {
@@ -45,6 +46,7 @@ export default class FetchDriversController {
       })
     } catch (FetchDriversControllerError) {
       console.log('FetchDriversControllerError -> ', FetchDriversControllerError)
+      await logApplicationError(FetchDriversControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

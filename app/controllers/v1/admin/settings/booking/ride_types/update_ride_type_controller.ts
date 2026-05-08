@@ -3,6 +3,7 @@ import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import RideTypeActions from '#model_management/actions/ride_type_actions'
 import UpdateRideTypeRequestValidator from '#validators/v1/admin/settings/booking/ride_types/update_ride_type_request_validator'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class UpdateRideTypeController {
   async handle({ request, response, params }: HttpContext) {
@@ -32,6 +33,7 @@ export default class UpdateRideTypeController {
       })
     } catch (UpdateRideTypeControllerError) {
       console.log('UpdateRideTypeControllerError -> ', UpdateRideTypeControllerError)
+      await logApplicationError(UpdateRideTypeControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -5,6 +5,7 @@ import DriverNotificationActions from '#model_management/actions/driver_notifica
 import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendBookingDriverCancellationNotificationJobPayload {
   bookingId: number
@@ -94,10 +95,12 @@ export default class SendBookingDriverCancellationNotificationJob extends Job<Se
         'sendBookingDriverCancellationNotificationJobError => ',
         sendBookingDriverCancellationNotificationJobError
       )
+      await logApplicationError(sendBookingDriverCancellationNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendBookingDriverCancellationNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

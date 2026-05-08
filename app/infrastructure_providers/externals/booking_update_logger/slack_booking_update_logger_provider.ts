@@ -2,6 +2,7 @@ import loggerConfig from '#config/booking_update_logger'
 import env from '#start/env'
 import type BookingUpdateLoggerInterface from '#infrastructure_providers/type_checkings/booking_update_logger/booking_update_logger_interface'
 import HttpClient from '#infrastructure_providers/internals/http_client'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class SlackBookingUpdateLoggerProvider implements BookingUpdateLoggerInterface {
   private webhookUrl: string = loggerConfig.slack.bookingUpdateWebhookUrl
@@ -70,6 +71,7 @@ export default class SlackBookingUpdateLoggerProvider implements BookingUpdateLo
       })
     } catch (logErrorException) {
       console.log('SlackLoggerProvider.logError -> ', logErrorException)
+      await logApplicationError(logErrorException)
     }
   }
 
@@ -116,6 +118,7 @@ export default class SlackBookingUpdateLoggerProvider implements BookingUpdateLo
       })
     } catch (logPayload) {
       console.log('SlackLoggerProvider.logPayloadError -> ', logPayload)
+      await logApplicationError(logPayload)
     }
   }
 }

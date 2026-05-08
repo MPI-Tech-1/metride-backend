@@ -2,6 +2,7 @@ import { type HttpContext } from '@adonisjs/core/http'
 import DriverVehicleActions from '#model_management/actions/driver_vehicle_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class GetVehicleInformationController {
   async handle({ response, auth }: HttpContext) {
@@ -42,6 +43,7 @@ export default class GetVehicleInformationController {
       })
     } catch (GetVehicleInformationControllerError) {
       console.log('GetVehicleInformationControllerError -> ', GetVehicleInformationControllerError)
+      await logApplicationError(GetVehicleInformationControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

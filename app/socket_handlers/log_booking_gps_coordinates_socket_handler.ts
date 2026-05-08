@@ -4,6 +4,7 @@ import BackgroundDispatchClient from '#infrastructure_providers/internals/backgr
 import CacheClient from '#infrastructure_providers/internals/cache_client'
 import { type LogBookingGpsCoordinatesBackgroundProcessingJobPayload } from '#jobs/background_processing/booking/log_booking_gps_coordinates_background_processing_job'
 import BookingActions from '#model_management/actions/booking_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 import type { Server, Socket } from 'socket.io'
 
 export async function logBookingGpsCoordinatesSocketHandler(io: Server, socket: Socket) {
@@ -63,8 +64,8 @@ export async function logBookingGpsCoordinatesSocketHandler(io: Server, socket: 
 
       io.to('room:admins').emit('booking:driver-location', messageData)
     } catch (error) {
-      // ✅ Catch-all — logs the error but NEVER crashes the process
       console.error('[driver:location] Unhandled error =>', error)
+      await logApplicationError(error)
     }
   })
 }

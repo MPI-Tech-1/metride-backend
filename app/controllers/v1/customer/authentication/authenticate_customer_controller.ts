@@ -11,6 +11,7 @@ import {
 } from '#common/messages/system_messages'
 import CustomerActions from '#model_management/actions/customer_actions'
 import { DateTime } from 'luxon'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class AuthenticateCustomerController {
   async handle({ request, response }: HttpContext) {
@@ -78,6 +79,7 @@ export default class AuthenticateCustomerController {
       })
     } catch (AuthenticateCustomerControllerError) {
       console.log('AuthenticateCustomerControllerError -> ', AuthenticateCustomerControllerError)
+      await logApplicationError(AuthenticateCustomerControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

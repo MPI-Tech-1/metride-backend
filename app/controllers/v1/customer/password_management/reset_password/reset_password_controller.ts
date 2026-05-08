@@ -6,6 +6,7 @@ import CustomerActions from '#model_management/actions/customer_actions'
 import CustomerResetPasswordRequestValidator from '#validators/v1/customer/password_management/customer_reset_password_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class ResetPasswordController {
   async handle({ request, response }: HttpContext) {
@@ -83,6 +84,7 @@ export default class ResetPasswordController {
       })
     } catch (ResetPasswordControllerError) {
       console.log('ResetPasswordControllerError -> ', ResetPasswordControllerError)
+      await logApplicationError(ResetPasswordControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

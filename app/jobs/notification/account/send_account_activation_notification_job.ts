@@ -5,6 +5,7 @@ import {
 import MailClient from '#infrastructure_providers/internals/mail_client'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendAccountActivationNotificationJobPayload {
   email: string
@@ -38,10 +39,12 @@ export default class SendAccountActivationNotificationJob extends Job<SendAccoun
         'sendAccountActivationNotificationJobError => ',
         sendAccountActivationNotificationJobError
       )
+      await logApplicationError(sendAccountActivationNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendAccountActivationNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

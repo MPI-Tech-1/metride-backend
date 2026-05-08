@@ -5,6 +5,7 @@ import AssignBookingDriverRequestValidator from '#validators/v1/admin/booking_ma
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class AssignBookingDriverController {
   async handle({ request, response }: HttpContext) {
@@ -85,6 +86,7 @@ export default class AssignBookingDriverController {
       })
     } catch (AssignBookingDriverControllerError) {
       console.log('AssignBookingDriverControllerError -> ', AssignBookingDriverControllerError)
+      await logApplicationError(AssignBookingDriverControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

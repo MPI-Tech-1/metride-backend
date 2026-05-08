@@ -3,6 +3,7 @@ import BookingActions from '#model_management/actions/booking_actions'
 import CustomerNotificationActions from '#model_management/actions/customer_notification_actions'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendBookingPaymentFailedNotificationJobPayload {
   bookingId: number
@@ -67,10 +68,12 @@ export default class SendBookingPaymentFailedNotificationJob extends Job<SendBoo
         'sendBookingPaymentFailedNotificationJobError => ',
         sendBookingPaymentFailedNotificationJobError
       )
+      await logApplicationError(sendBookingPaymentFailedNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendBookingPaymentFailedNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

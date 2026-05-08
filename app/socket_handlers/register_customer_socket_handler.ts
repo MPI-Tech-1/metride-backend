@@ -1,5 +1,6 @@
 import { CACHE_DATA_DOES_NOT_EXIST } from '#common/messages/system_messages'
 import CacheClient from '#infrastructure_providers/internals/cache_client'
+import logApplicationError from '#common/helper_functions/log_application_error'
 import type { Socket } from 'socket.io'
 
 export async function registerCustomerSocketHandler(socket: Socket) {
@@ -26,6 +27,7 @@ export async function registerCustomerSocketHandler(socket: Socket) {
       registeredCacheKey = cacheKey
     } catch (error) {
       console.error('[customer:register] Error =>', error)
+      await logApplicationError(error)
     }
   })
 
@@ -39,6 +41,7 @@ export async function registerCustomerSocketHandler(socket: Socket) {
       }
     } catch (error) {
       console.error('[customer:disconnect] Error clearing cache =>', error)
+      await logApplicationError(error)
     }
   })
 }

@@ -7,6 +7,7 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 import db from '@adonisjs/lucid/services/db'
 import RideTypeActions from '#model_management/actions/ride_type_actions'
 import calculateDistanceBetween2Points from '#common/helper_functions/calculate_distance_between_2_points'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class CreateBookingController {
   async handle({ request, auth, response }: HttpContext) {
@@ -121,6 +122,7 @@ export default class CreateBookingController {
     } catch (CreateBookingControllerError) {
       await dbTransaction.rollback()
       console.log('CreateBookingControllerError -> ', CreateBookingControllerError)
+      await logApplicationError(CreateBookingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

@@ -4,6 +4,7 @@ import DriverWalletTransactionActions from '#model_management/actions/driver_wal
 import FetchDriverWalletTransactionsRequestValidator from '#validators/v1/admin/wallet/driver/fetch_driver_wallet_transactions_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FetchWalletTransactionsController {
   async handle({ request, response }: HttpContext) {
@@ -63,6 +64,7 @@ export default class FetchWalletTransactionsController {
         'FetchWalletTransactionsControllerError -> ',
         FetchWalletTransactionsControllerError
       )
+      await logApplicationError(FetchWalletTransactionsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

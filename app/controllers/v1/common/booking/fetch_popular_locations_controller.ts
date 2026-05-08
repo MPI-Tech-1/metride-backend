@@ -4,6 +4,7 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 import PopularLocationActions from '#model_management/actions/popular_location_actions'
 import CityActions from '#model_management/actions/city_actions'
 import FetchPopularLocationsRequestValidator from '#validators/v1/common/booking/fetch_popular_locations_request_validator'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FetchPopularLocationsController {
   async handle({ request, response }: HttpContext) {
@@ -39,6 +40,7 @@ export default class FetchPopularLocationsController {
       })
     } catch (FetchPopularLocationsControllerError) {
       console.log('FetchPopularLocationsControllerError -> ', FetchPopularLocationsControllerError)
+      await logApplicationError(FetchPopularLocationsControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

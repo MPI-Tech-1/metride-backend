@@ -11,6 +11,7 @@ import {
 } from '#common/messages/system_messages'
 import DriverActions from '#model_management/actions/driver_actions'
 import { DateTime } from 'luxon'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class AuthenticateDriverController {
   async handle({ request, response }: HttpContext) {
@@ -84,6 +85,7 @@ export default class AuthenticateDriverController {
       })
     } catch (AuthenticateDriverControllerError) {
       console.log('AuthenticateDriverControllerError -> ', AuthenticateDriverControllerError)
+      await logApplicationError(AuthenticateDriverControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

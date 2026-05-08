@@ -18,6 +18,7 @@ import DriverDocumentActions from '#model_management/actions/driver_document_act
 import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
 import DriverApprovalStepActions from '#model_management/actions/driver_approval_step_actions'
 import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
@@ -121,6 +122,7 @@ export default class OnboardingController {
     } catch (OnboardingControllerError) {
       await dbTransaction.rollback()
       console.log('OnboardingControllerError -> ', OnboardingControllerError)
+      await logApplicationError(OnboardingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

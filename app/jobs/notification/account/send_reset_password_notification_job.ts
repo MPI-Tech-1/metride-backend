@@ -5,6 +5,7 @@ import {
 import MailClient from '#infrastructure_providers/internals/mail_client'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export interface SendResetPasswordNotificationJobPayload {
   email: string
@@ -37,10 +38,12 @@ export default class SendResetPasswordNotificationJob extends Job<SendResetPassw
         'sendResetPasswordNotificationJobError => ',
         sendResetPasswordNotificationJobError
       )
+      await logApplicationError(sendResetPasswordNotificationJobError)
     }
   }
 
   async failed(error: Error) {
     console.error('SendResetPasswordNotificationJob failed:', error.message)
+    await logApplicationError(error)
   }
 }

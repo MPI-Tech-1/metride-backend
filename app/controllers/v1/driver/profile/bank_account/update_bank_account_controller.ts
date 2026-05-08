@@ -6,6 +6,7 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 import BankActions from '#model_management/actions/bank_actions'
 import db from '@adonisjs/lucid/services/db'
 import DriverRegistrationStepActions from '#model_management/actions/driver_registration_step_actions'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class UpdateBankAccountController {
   async handle({ request, response, auth }: HttpContext) {
@@ -58,6 +59,7 @@ export default class UpdateBankAccountController {
     } catch (UpdateBankAccountControllerError) {
       await dbTransaction.rollback()
       console.log('UpdateBankAccountControllerError -> ', UpdateBankAccountControllerError)
+      await logApplicationError(UpdateBankAccountControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

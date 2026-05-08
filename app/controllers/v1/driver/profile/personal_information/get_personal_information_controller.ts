@@ -2,6 +2,7 @@ import { type HttpContext } from '@adonisjs/core/http'
 import DriverPersonalInformationActions from '#model_management/actions/driver_personal_information_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class GetPersonalInformationController {
   async handle({ response, auth }: HttpContext) {
@@ -39,6 +40,7 @@ export default class GetPersonalInformationController {
         'GetPersonalInformationControllerError -> ',
         GetPersonalInformationControllerError
       )
+      await logApplicationError(GetPersonalInformationControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

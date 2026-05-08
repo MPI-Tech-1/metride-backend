@@ -5,6 +5,7 @@ import InitiateWalletWithdrawalRequestValidator from '#validators/v1/driver/wall
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
+import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class InitiateWalletWithdrawalController {
   async handle({ request, auth, response }: HttpContext) {
@@ -74,6 +75,7 @@ export default class InitiateWalletWithdrawalController {
         'InitiateWalletWithdrawalControllerError -> ',
         InitiateWalletWithdrawalControllerError
       )
+      await logApplicationError(InitiateWalletWithdrawalControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,
