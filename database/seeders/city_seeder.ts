@@ -7,19 +7,24 @@ export default class extends BaseSeeder {
     const cities = [
       {
         name: 'Maiduguri',
+        latitude: '11.8333',
+        longitude: '13.15',
       },
       {
         name: 'Yola',
+        latitude: '9.2035',
+        longitude: '12.4954',
       },
       {
         name: 'Damaturu',
+        latitude: '11.747',
+        longitude: '11.9608',
       },
     ]
-    db.raw('SET FOREIGN_KEY_CHECKS = 0;')
 
+    await db.rawQuery('SET FOREIGN_KEY_CHECKS = 0;')
     await City.truncate()
     await City.createMany(cities)
-
-    db.raw('SET FOREIGN_KEY_CHECKS = 1;')
+    await db.rawQuery('SET FOREIGN_KEY_CHECKS = 1;')
   }
 }

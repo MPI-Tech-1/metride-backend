@@ -12,6 +12,8 @@ export default class FetchCitiesController {
         return {
           identifier: city.identifier,
           name: city.name,
+          latitude: city.latitude,
+          longitude: city.longitude,
         }
       })
 
