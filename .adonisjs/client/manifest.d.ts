@@ -4,8 +4,10 @@
  */
 
 /// <reference path="../../adonisrc.ts" />
+/// <reference path="../../config/application_logger_config.ts" />
 /// <reference path="../../config/auth.ts" />
 /// <reference path="../../config/bank_list_config.ts" />
+/// <reference path="../../config/booking_update_logger.ts" />
 /// <reference path="../../config/cache.ts" />
 /// <reference path="../../config/card_payment_config.ts" />
 /// <reference path="../../config/geolocation_config.ts" />

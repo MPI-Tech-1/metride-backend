@@ -103,4 +103,10 @@ export default await Env.create(new URL('../', import.meta.url), {
   GOOGLE_GEOLOCATION_PROVIDER_ENDPOINT: Env.schema.string(),
 
   METRIDE_ADMIN_DASHBOARD_URL: Env.schema.string(),
+
+  CURRENT_BOOKING_UPDATE_LOGGER_PROVIDER: Env.schema.string(),
+  BOOKING_UPDATE_LOGGER_SLACK_WEBHOOK_URL: Env.schema.string(),
+
+  CURRENT_APPLICATION_LOGGER_PROVIDER: Env.schema.string(),
+  APPLICATION_LOGGER_SLACK_WEBHOOK_URL: Env.schema.string(),
 })
