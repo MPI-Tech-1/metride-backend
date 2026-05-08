@@ -6,26 +6,39 @@ export async function registerCustomerSocketHandler(socket: Socket) {
   let registeredCacheKey: string = ''
 
   socket.on('customer:register', async (bookingId: string) => {
-    const cacheKey = `customer-websocket:${bookingId}`
+    try {
+      if (!bookingId || typeof bookingId !== 'string') {
+        console.error('[customer:register] Invalid bookingId =>', bookingId)
+        return
+      }
 
-    const cachedData = await CacheClient.fetchData(cacheKey)
+      const cacheKey = `customer-websocket:${bookingId}`
+      const cachedData = await CacheClient.fetchData(cacheKey)
 
-    if (cachedData === CACHE_DATA_DOES_NOT_EXIST) {
-      await CacheClient.saveToCache({
-        cacheKey,
-        cacheData: socket.id,
-      })
+      if (cachedData === CACHE_DATA_DOES_NOT_EXIST) {
+        await CacheClient.saveToCache({
+          cacheKey,
+          cacheData: socket.id,
+        })
+      }
+
+      console.log('Customer Registered =>', { bookingId, socketId: socket.id })
+      registeredCacheKey = cacheKey
+    } catch (error) {
+      console.error('[customer:register] Error =>', error)
     }
-
-    console.log('Customer Registered => ', { bookingId, socketId: cachedData })
-
-    registeredCacheKey = cacheKey
   })
 
-  socket.on('disconnect', async () => {
-    if (registeredCacheKey) {
-      await CacheClient.removeSingleRecord(registeredCacheKey)
-      console.log('Customer Disconnected => ', { socketId: socket.id })
+  socket.on('disconnect', async (reason) => {
+    try {
+      console.log('[customer:disconnect] Reason =>', reason, '| SocketId =>', socket.id)
+
+      if (registeredCacheKey) {
+        await CacheClient.removeSingleRecord(registeredCacheKey)
+        console.log('[customer:disconnect] Cache cleared =>', registeredCacheKey)
+      }
+    } catch (error) {
+      console.error('[customer:disconnect] Error clearing cache =>', error)
     }
   })
 }

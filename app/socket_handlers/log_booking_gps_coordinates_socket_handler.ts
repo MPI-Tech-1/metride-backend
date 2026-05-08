@@ -1,3 +1,4 @@
+import { isValidJson } from '#common/helper_functions/is_valid_json'
 import { CACHE_DATA_DOES_NOT_EXIST } from '#common/messages/system_messages'
 import BackgroundDispatchClient from '#infrastructure_providers/internals/background_dispatch_client'
 import CacheClient from '#infrastructure_providers/internals/cache_client'
@@ -7,44 +8,63 @@ import type { Server, Socket } from 'socket.io'
 
 export async function logBookingGpsCoordinatesSocketHandler(io: Server, socket: Socket) {
   socket.on('driver:location', async (data) => {
-    console.log('New GPS Message from Driver App => ', data)
+    try {
+      console.log('New GPS Message from Driver App => ', data)
 
-    const parsedData: LogBookingGpsCoordinatesBackgroundProcessingJobPayload = JSON.parse(data)
+      const isJsonValid = isValidJson(data)
 
-    const booking = await BookingActions.getBooking({
-      identifierType: 'identifier',
-      identifier: parsedData.bookingIdentifier,
-    })
+      if (isJsonValid === false) {
+        return
+      }
 
-    if (!booking) return
+      let parsedData: LogBookingGpsCoordinatesBackgroundProcessingJobPayload = JSON.parse(data)
 
-    const customerSocketId = await CacheClient.fetchData(
-      `customer-websocket:${parsedData.bookingIdentifier}`
-    )
+      const booking = await BookingActions.getBooking({
+        identifierType: 'identifier',
+        identifier: parsedData.bookingIdentifier,
+      })
 
-    console.log('customerSocketId => ', customerSocketId)
+      if (!booking) {
+        console.warn('[driver:location] Booking not found =>', parsedData.bookingIdentifier)
+        return
+      }
 
-    await BackgroundDispatchClient.logBookingGpsCoordinatesBackgroundProcessingJob(parsedData)
+      // ✅ Guard against null relations
+      if (!booking.assignedDriver || !booking.customer) {
+        console.warn('[driver:location] Booking missing driver or customer =>', booking)
+        return
+      }
 
-    const messageData = {
-      identifier: parsedData.bookingIdentifier,
-      driver: {
-        identifier: booking.assignedDriver.identifier,
-        fullName: booking.assignedDriver.fullName,
-      },
-      customer: {
-        identifier: booking.customer.identifier,
-        fullName: booking.customer.fullName,
-      },
-      gpsCoordinates: parsedData.gpsCoordinates,
+      const customerSocketId = await CacheClient.fetchData(
+        `customer-websocket:${parsedData.bookingIdentifier}`
+      )
+      console.log('customerSocketId => ', customerSocketId)
+
+      await BackgroundDispatchClient.logBookingGpsCoordinatesBackgroundProcessingJob(parsedData)
+
+      const messageData = {
+        identifier: parsedData.bookingIdentifier,
+        driver: {
+          identifier: booking.assignedDriver.identifier,
+          fullName: booking.assignedDriver.fullName,
+        },
+        customer: {
+          identifier: booking.customer.identifier,
+          fullName: booking.customer.fullName,
+        },
+        gpsCoordinates: parsedData.gpsCoordinates,
+      }
+
+      if (customerSocketId !== CACHE_DATA_DOES_NOT_EXIST) {
+        io.to(customerSocketId).emit('booking:driver-location', messageData)
+      } else {
+        console.log('[driver:location] No customer socket found =>', parsedData.bookingIdentifier)
+      }
+
+      io.to('room:admins').emit('booking:driver-location', messageData)
+    } catch (error) {
+      // ✅ Catch-all — logs the error but NEVER crashes the process
+      console.error('[driver:location] Unhandled error =>', error)
     }
-
-    if (customerSocketId !== CACHE_DATA_DOES_NOT_EXIST) {
-      io.to(customerSocketId).emit('booking:driver-location', messageData)
-    } else {
-      console.log('No customer socket found for bookingId => ', parsedData.bookingIdentifier)
-    }
-
-    io.to('room:admins').emit('booking:driver-location', messageData)
   })
 }
