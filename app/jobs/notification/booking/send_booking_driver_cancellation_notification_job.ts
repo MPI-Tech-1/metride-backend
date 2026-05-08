@@ -6,6 +6,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingDriverCancellationNotificationJobPayload {
   bookingId: number
@@ -29,6 +30,10 @@ export default class SendBookingDriverCancellationNotificationJob extends Job<Se
     if (!booking) {
       throw new Error('SendBookingDriverCancellationNotificationJob: booking not found')
     }
+
+    await logBookingUpdatePayload(
+      `Sending booking cancellation notification for booking ${booking.identifier} — notifying the customer and assigned driver (if any) that the booking has been cancelled.`
+    )
 
     const dbTransaction = await db.transaction()
 

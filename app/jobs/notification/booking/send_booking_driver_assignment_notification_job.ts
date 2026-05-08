@@ -6,6 +6,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingDriverAssignmentNotificationJobPayload {
   bookingId: number
@@ -33,6 +34,10 @@ export default class SendBookingDriverAssignmentNotificationJob extends Job<Send
     if (!booking.assignedDriverId) {
       throw new Error('SendBookingDriverAssignmentNotificationJob: booking has no assigned driver')
     }
+
+    await logBookingUpdatePayload(
+      `Sending driver assignment notification for booking ${booking.identifier} — notifying both the assigned driver and the customer of the assignment.`
+    )
 
     const dbTransaction = await db.transaction()
 

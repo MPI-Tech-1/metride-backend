@@ -5,6 +5,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingRejectedNotificationJobPayload {
   bookingId: number
@@ -32,6 +33,10 @@ export default class SendBookingRejectedNotificationJob extends Job<SendBookingR
     if (booking.status !== 'rejected') {
       throw new Error('SendBookingRejectedNotificationJob: booking has not been rejected')
     }
+
+    await logBookingUpdatePayload(
+      `Sending booking rejected notification for booking ${booking.identifier} — notifying the customer that their booking has been rejected.`
+    )
 
     const dbTransaction = await db.transaction()
 

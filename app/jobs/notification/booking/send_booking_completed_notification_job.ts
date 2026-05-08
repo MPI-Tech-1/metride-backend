@@ -11,6 +11,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingCompletedNotificationJobPayload {
   bookingId: number
@@ -34,6 +35,10 @@ export default class SendBookingCompletedNotificationJob extends Job<SendBooking
     if (!booking) {
       throw new Error('SendBookingCompletedNotificationJob: booking not found')
     }
+
+    await logBookingUpdatePayload(
+      `Sending booking completed notification for booking ${booking.identifier} — notifying the customer and assigned driver that the booking has been completed.`
+    )
 
     const dbTransaction = await db.transaction()
 

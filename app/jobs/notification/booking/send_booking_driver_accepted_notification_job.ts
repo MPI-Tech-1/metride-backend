@@ -5,6 +5,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingDriverAcceptedNotificationJobPayload {
   bookingId: number
@@ -34,6 +35,10 @@ export default class SendBookingDriverAcceptedNotificationJob extends Job<SendBo
         'SendBookingDriverAcceptedNotificationJob: booking has not been accepted by a driver'
       )
     }
+
+    await logBookingUpdatePayload(
+      `Sending driver accepted notification for booking ${booking.identifier} — notifying customer that the driver has accepted the ride.`
+    )
 
     const dbTransaction = await db.transaction()
 

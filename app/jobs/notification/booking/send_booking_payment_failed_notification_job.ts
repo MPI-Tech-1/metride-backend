@@ -4,6 +4,7 @@ import CustomerNotificationActions from '#model_management/actions/customer_noti
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingPaymentFailedNotificationJobPayload {
   bookingId: number
@@ -31,6 +32,10 @@ export default class SendBookingPaymentFailedNotificationJob extends Job<SendBoo
     if (booking.bookingPayment.paymentStatus !== 'failed') {
       throw new Error('SendBookingPaymentFailedNotificationJob: booking payment has not failed')
     }
+
+    await logBookingUpdatePayload(
+      `Sending payment failed notification for booking ${booking.identifier} — notifying the customer that their payment was unsuccessful.`
+    )
 
     try {
       const customerNotification =

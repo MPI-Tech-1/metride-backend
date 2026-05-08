@@ -4,6 +4,7 @@ import CustomerNotificationActions from '#model_management/actions/customer_noti
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingPaymentSuccessNotificationJobPayload {
   bookingId: number
@@ -33,6 +34,10 @@ export default class SendBookingPaymentSuccessNotificationJob extends Job<SendBo
         'SendBookingPaymentSuccessNotificationJob: booking payment has not been completed'
       )
     }
+
+    await logBookingUpdatePayload(
+      `Sending payment success notification for booking ${booking.identifier} — notifying the customer that their payment was successful and the ride is confirmed.`
+    )
 
     try {
       const customerNotification =

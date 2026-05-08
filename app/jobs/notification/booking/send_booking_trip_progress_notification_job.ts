@@ -5,6 +5,7 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 
 export interface SendBookingTripProgressNotificationJobPayload {
   bookingId: number
@@ -49,6 +50,10 @@ export default class SendBookingTripProgressNotificationJob extends Job<SendBook
     if (!notificationContent) {
       return
     }
+
+    await logBookingUpdatePayload(
+      `Sending trip progress notification for booking ${booking.identifier} — trip progress updated to "${booking.tripProgress}", notifying the customer.`
+    )
 
     const dbTransaction = await db.transaction()
 
