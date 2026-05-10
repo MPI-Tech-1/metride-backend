@@ -3,7 +3,7 @@ import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 const createPopularLocationRequestSchema = vine.object({
   cityIdentifier: vine.string().exists(async (db, value) => {
     const results = await db.from('cities').select('*').where('identifier', value).first()
-    return results ? false : true
+    return results ? true : false
   }),
   name: vine.string().trim().escape(),
   gpsCoordinates: vine.string().trim().escape(),
