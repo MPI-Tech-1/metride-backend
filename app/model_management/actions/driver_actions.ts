@@ -31,7 +31,9 @@ export default class DriverActions {
       )
       .preload('driverDocument')
       .preload('driverPersonalInformation')
-      .preload('driverApprovalSteps')
+      .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
+        driverApprovalStepsQuery.preload('performedByAdmin')
+      )
       .where('email', email)
       .first()
   }
@@ -44,7 +46,9 @@ export default class DriverActions {
       )
       .preload('driverDocument')
       .preload('driverPersonalInformation')
-      .preload('driverApprovalSteps')
+      .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
+        driverApprovalStepsQuery.preload('performedByAdmin')
+      )
       .where('id', driverId)
       .first()
   }
@@ -57,7 +61,9 @@ export default class DriverActions {
       )
       .preload('driverDocument')
       .preload('driverPersonalInformation')
-      .preload('driverApprovalSteps')
+      .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
+        driverApprovalStepsQuery.preload('performedByAdmin')
+      )
       .where('identifier', driverIdentifier)
       .first()
   }
@@ -143,7 +149,12 @@ export default class DriverActions {
 
     const [totalTripsResult, acceptanceStats, activeDriversResult, cancellationStats] =
       await Promise.all([
-        db.from('bookings').whereNull('deleted_at').where('status', 'completed').count('* as total').first(),
+        db
+          .from('bookings')
+          .whereNull('deleted_at')
+          .where('status', 'completed')
+          .count('* as total')
+          .first(),
 
         db
           .from('bookings')
@@ -184,8 +195,10 @@ export default class DriverActions {
     return {
       totalNumberOfTrips: Number(totalTripsResult?.total ?? 0),
       totalNumberOfActiveDrivers: Number(activeDriversResult?.total ?? 0),
-      totalAcceptanceRate: totalAssigned > 0 ? Math.round((totalAccepted / totalAssigned) * 100) : 0,
-      totalCancellationRate: totalBookings > 0 ? Math.round((totalCancelled / totalBookings) * 100) : 0,
+      totalAcceptanceRate:
+        totalAssigned > 0 ? Math.round((totalAccepted / totalAssigned) * 100) : 0,
+      totalCancellationRate:
+        totalBookings > 0 ? Math.round((totalCancelled / totalBookings) * 100) : 0,
     }
   }
 }

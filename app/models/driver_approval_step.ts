@@ -20,6 +20,6 @@ export default class DriverApprovalStep extends AbstractModel {
   @belongsTo(() => Driver)
   declare driver: BelongsTo<typeof Driver>
 
-  @belongsTo(() => Admin)
+  @belongsTo(() => Admin, { foreignKey: 'performedByAdminId' })
   declare performedByAdmin: BelongsTo<typeof Admin>
 }
