@@ -1,3 +1,5 @@
+const SubmitBookingReviewController = () =>
+  import('#controllers/v1/customer/booking/submit_booking_review_controller')
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 
@@ -11,10 +13,11 @@ const GetBookingController = () => import('#controllers/v1/customer/booking/get_
 
 router
   .group(() => {
+    router.post('/bookings/:bookingIdentifier/checkout/card', [CheckoutBookingWithCardController])
+    router.post('/bookings/:bookingIdentifier/reviews', [SubmitBookingReviewController])
+    router.get('/bookings/:bookingIdentifier', [GetBookingController])
     router.post('/bookings', [CreateBookingController])
     router.get('/bookings', [FetchBookingsController])
-    router.get('/bookings/:bookingIdentifier', [GetBookingController])
-    router.post('/bookings/:bookingIdentifier/checkout/card', [CheckoutBookingWithCardController])
   })
   .use(middleware.auth({ guards: ['customer'] }))
   .as('customer.bookings')
