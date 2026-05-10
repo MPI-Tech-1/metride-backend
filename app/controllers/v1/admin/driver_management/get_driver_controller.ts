@@ -79,6 +79,10 @@ export default class GetDriverController {
         driverApprovalSteps: driver.driverApprovalSteps.map((driverApprovalStep) => {
           return {
             identifier: driverApprovalStep.identifier,
+            performedByAdmin: {
+              identifier: driverApprovalStep.performedByAdmin?.identifier,
+              fullName: driverApprovalStep.performedByAdmin?.fullName,
+            },
             status: driverApprovalStep.status,
             reason: driverApprovalStep.reason,
             createdAt: driverApprovalStep.createdAt,

@@ -7,6 +7,7 @@ import BookingPayment from '#models/booking_payment'
 import BookingGpsLog from '#models/booking_gps_log'
 import Customer from '#models/customer'
 import Driver from '#models/driver'
+import BookingReview from '#models/booking_review'
 
 export default class Booking extends AbstractModel {
   @column()
@@ -90,4 +91,7 @@ export default class Booking extends AbstractModel {
 
   @hasMany(() => BookingGpsLog)
   declare bookingGpsLogs: HasMany<typeof BookingGpsLog>
+
+  @hasMany(() => BookingReview)
+  declare bookingReviews: HasMany<typeof BookingReview>
 }

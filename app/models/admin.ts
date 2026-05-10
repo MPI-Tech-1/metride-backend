@@ -1,4 +1,4 @@
-import { column } from '@adonisjs/lucid/orm'
+import { column, computed } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import AbstractModel from '#models/abstract_model'
 
@@ -11,6 +11,11 @@ export default class Admin extends AbstractModel {
 
   @column()
   declare email: string
+
+  @computed()
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`
+  }
 
   @column({ serializeAs: null })
   declare password: string

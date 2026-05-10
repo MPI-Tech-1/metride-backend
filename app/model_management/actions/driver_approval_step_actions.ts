@@ -22,13 +22,14 @@ export default class DriverApprovalStepActions {
   }
 
   private static async getDriverApprovalStepById(id: number): Promise<DriverApprovalStep | null> {
-    return await DriverApprovalStep.query().where('id', id).first()
+    return await DriverApprovalStep.query().preload('performedByAdmin').where('id', id).first()
   }
 
   private static async getDriverApprovalStepByIdentifier(
     identifier: string
   ): Promise<DriverApprovalStep | null> {
     return await DriverApprovalStep.query()
+      .preload('performedByAdmin')
       .where('identifier', identifier)
 
       .first()
@@ -38,6 +39,7 @@ export default class DriverApprovalStepActions {
     driverId: number
   ): Promise<DriverApprovalStep | null> {
     return await DriverApprovalStep.query()
+      .preload('performedByAdmin')
       .where('driver_id', driverId)
 
       .first()
@@ -84,7 +86,7 @@ export default class DriverApprovalStepActions {
   ): Promise<{ driverApprovalStepPayload: DriverApprovalStep[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = listDriverApprovalStepRecordsOptions
 
-    const driverApprovalStepQuery = DriverApprovalStep.query()
+    const driverApprovalStepQuery = DriverApprovalStep.query().preload('performedByAdmin')
 
     if (filterRecordOptionsPayload?.driverId) {
       driverApprovalStepQuery.where('driver_id', filterRecordOptionsPayload.driverId)

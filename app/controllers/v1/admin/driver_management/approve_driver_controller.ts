@@ -8,12 +8,14 @@ import NotificationDispatchClient from '#infrastructure_providers/internals/noti
 import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class ApproveDriverController {
-  async handle({ request, response }: HttpContext) {
+  async handle({ request, auth, response }: HttpContext) {
     const { identifier } = request.params()
 
     const dbTransaction = await db.transaction()
 
     try {
+      const loggedInAdmin = auth.use('admin').user!
+
       const driver = await DriverActions.getDriver({
         identifierType: 'identifier',
         identifier,
@@ -45,6 +47,7 @@ export default class ApproveDriverController {
       await DriverApprovalStepActions.createDriverApprovalStepRecord({
         createPayload: {
           driverId: driver.id,
+          performedByAdminId: loggedInAdmin.id,
           status: 'approved',
           reason: 'Information Sufficient',
         },

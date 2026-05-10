@@ -93,6 +93,7 @@ export const controllers = {
         CreateBooking: () => import('#controllers/v1/customer/booking/create_booking_controller'),
         FetchBookings: () => import('#controllers/v1/customer/booking/fetch_bookings_controller'),
         GetBooking: () => import('#controllers/v1/customer/booking/get_booking_controller'),
+        SubmitBookingReview: () => import('#controllers/v1/customer/booking/submit_booking_review_controller'),
       },
       notifications: {
         FetchNotifications: () => import('#controllers/v1/customer/notifications/fetch_notifications_controller'),

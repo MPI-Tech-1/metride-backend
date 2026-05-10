@@ -30,6 +30,7 @@ export default class BookingActions {
       .preload('bookingPayment')
       .preload('assignedDriver')
       .preload('bookingGpsLogs')
+      .preload('bookingReviews')
       .where('id', bookingId)
       .first()
   }
@@ -41,6 +42,7 @@ export default class BookingActions {
       .preload('bookingPayment')
       .preload('assignedDriver')
       .preload('bookingGpsLogs')
+      .preload('bookingReviews')
       .where('identifier', bookingIdentifier)
       .first()
   }

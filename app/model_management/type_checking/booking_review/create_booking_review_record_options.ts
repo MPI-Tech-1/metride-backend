@@ -1,0 +1,8 @@
+import type BookingReviewInterface from '#model_management/type_checking/booking_review/booking_review_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateBookingReviewRecordPayload = Partial<BookingReviewInterface>
+
+type CreateBookingReviewRecordOptions = CreateNewRecordGeneric<CreateBookingReviewRecordPayload>
+
+export default CreateBookingReviewRecordOptions

@@ -9,7 +9,7 @@ import NotificationDispatchClient from '#infrastructure_providers/internals/noti
 import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class RejectDriverController {
-  async handle({ request, response }: HttpContext) {
+  async handle({ request, auth, response }: HttpContext) {
     const { identifier } = request.params()
 
     const { reason } = await request.validateUsing(RejectDriverRequestValidator)
@@ -17,6 +17,8 @@ export default class RejectDriverController {
     const dbTransaction = await db.transaction()
 
     try {
+      const loggedInAdmin = auth.use('admin').user!
+
       const driver = await DriverActions.getDriver({
         identifierType: 'identifier',
         identifier,
@@ -47,6 +49,7 @@ export default class RejectDriverController {
 
       await DriverApprovalStepActions.createDriverApprovalStepRecord({
         createPayload: {
+          performedByAdminId: loggedInAdmin.id,
           driverId: driver.id,
           status: 'rejected',
           reason: reason,

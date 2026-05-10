@@ -66,6 +66,11 @@ export default class GetBookingController {
           gpsCoordinates: log.gpsCoordinates,
           createdAt: log.createdAt,
         })),
+        bookingReviews: booking.bookingReviews.map((review) => ({
+          identifier: review.identifier,
+          rating: review.rating,
+          review: review.review,
+        })),
         createdAt: booking.createdAt,
       }
 
