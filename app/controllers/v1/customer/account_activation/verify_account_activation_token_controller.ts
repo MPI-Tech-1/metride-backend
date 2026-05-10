@@ -56,7 +56,7 @@ export default class VerifyAccountActivationTokenController {
 
       await CustomerRegistrationStepActions.updateCustomerRegistrationStepRecord({
         identifierOptions: { identifier: loggedInCustomer.id, identifierType: 'customerId' },
-        updatePayload: { hasActivatedAccount: true, deletedAt: DateTime.now() },
+        updatePayload: { hasActivatedAccount: true },
         dbTransactionOptions: { useTransaction: false },
       })
 
