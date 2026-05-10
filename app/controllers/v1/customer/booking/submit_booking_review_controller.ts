@@ -12,8 +12,10 @@ export default class SubmitBookingReviewController {
 
     const loggedInCustomer = auth.use('customer').user!
 
-    const { bookingIdentifier, rating, review } = payload
+    const { rating, review } = payload
     try {
+      const { bookingIdentifier } = request.params()
+
       const booking = await BookingActions.getBooking({
         identifier: bookingIdentifier,
         identifierType: 'identifier',
