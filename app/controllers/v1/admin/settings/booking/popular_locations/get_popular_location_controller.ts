@@ -5,8 +5,8 @@ import PopularLocationActions from '#model_management/actions/popular_location_a
 import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class GetPopularLocationController {
-  async handle({ response, params }: HttpContext) {
-    const { identifier } = params
+  async handle({ response, request }: HttpContext) {
+    const { identifier } = request.params()
 
     try {
       const popularLocation = await PopularLocationActions.getPopularLocation({
@@ -22,11 +22,25 @@ export default class GetPopularLocationController {
         })
       }
 
+      const mutatedPayload = {
+        identifier: popularLocation.identifier,
+        city: {
+          identifier: popularLocation.city.identifier,
+          name: popularLocation.city.name,
+          longitude: popularLocation.city.longitude,
+          latitude: popularLocation.city.latitude,
+        },
+        name: popularLocation.name,
+        gpsCoordinates: popularLocation.gpsCoordinates,
+        typeOfLocation: popularLocation.typeOfLocation,
+        isActive: popularLocation.isActive,
+      }
+
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Popular location fetched successfully',
-        results: popularLocation,
+        results: mutatedPayload,
       })
     } catch (GetPopularLocationControllerError) {
       console.log('GetPopularLocationControllerError -> ', GetPopularLocationControllerError)

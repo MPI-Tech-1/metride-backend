@@ -9,28 +9,15 @@ import logApplicationError from '#common/helper_functions/log_application_error'
 export default class UpdatePopularLocationController {
   async handle({ request, response, params }: HttpContext) {
     const { identifier } = params
-    const { cityIdentifier, ...payload } = await request.validateUsing(
+
+    const { cityIdentifier, name, gpsCoordinates, typeOfLocation } = await request.validateUsing(
       UpdatePopularLocationRequestValidator
     )
 
     try {
-      let cityId: number | undefined
-
-      if (cityIdentifier) {
-        const city = await CityActions.getCity({
-          identifier: cityIdentifier,
-          identifierType: 'identifier',
-        })
-        cityId = city!.id
-      }
-
-      const popularLocation = await PopularLocationActions.updatePopularLocationRecord({
-        identifierOptions: { identifier, identifierType: 'identifier' },
-        updatePayload: {
-          ...payload,
-          ...(cityId && { cityId }),
-        },
-        dbTransactionOptions: { useTransaction: false },
+      const popularLocation = await PopularLocationActions.getPopularLocation({
+        identifierType: 'identifier',
+        identifier,
       })
 
       if (!popularLocation) {
@@ -41,11 +28,26 @@ export default class UpdatePopularLocationController {
         })
       }
 
+      const city = await CityActions.getCity({
+        identifier: cityIdentifier,
+        identifierType: 'identifier',
+      })
+
+      await PopularLocationActions.updatePopularLocationRecord({
+        identifierOptions: { identifier, identifierType: 'identifier' },
+        updatePayload: {
+          name,
+          gpsCoordinates,
+          typeOfLocation,
+          cityId: city?.id,
+        },
+        dbTransactionOptions: { useTransaction: false },
+      })
+
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Popular location updated successfully',
-        results: popularLocation,
       })
     } catch (UpdatePopularLocationControllerError) {
       console.log('UpdatePopularLocationControllerError -> ', UpdatePopularLocationControllerError)

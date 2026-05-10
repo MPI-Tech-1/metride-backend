@@ -24,13 +24,16 @@ export default class PopularLocationActions {
   private static async getPopularLocationById(
     popularLocationId: number
   ): Promise<PopularLocation | null> {
-    return await PopularLocation.query().where('id', popularLocationId).first()
+    return await PopularLocation.query().preload('city').where('id', popularLocationId).first()
   }
 
   private static async getPopularLocationByIdentifier(
     popularLocationIdentifier: string
   ): Promise<PopularLocation | null> {
-    return await PopularLocation.query().where('identifier', popularLocationIdentifier).first()
+    return await PopularLocation.query()
+      .preload('city')
+      .where('identifier', popularLocationIdentifier)
+      .first()
   }
 
   public static async getPopularLocation(
@@ -72,7 +75,7 @@ export default class PopularLocationActions {
   ): Promise<{ popularLocationPayload: PopularLocation[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getPopularLocationRecordOptions
 
-    const popularLocationQuery = PopularLocation.query()
+    const popularLocationQuery = PopularLocation.query().preload('city')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`

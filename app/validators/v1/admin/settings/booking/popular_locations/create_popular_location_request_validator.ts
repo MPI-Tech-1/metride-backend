@@ -2,11 +2,7 @@ import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const createPopularLocationRequestSchema = vine.object({
   cityIdentifier: vine.string().exists(async (db, value) => {
-    const results = await db
-      .from('popular_locations')
-      .select('*')
-      .where('identifier', value)
-      .first()
+    const results = await db.from('cities').select('*').where('identifier', value).first()
     return results ? false : true
   }),
   name: vine.string().trim().escape(),

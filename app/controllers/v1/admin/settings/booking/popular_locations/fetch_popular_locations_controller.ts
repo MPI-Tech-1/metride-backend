@@ -9,7 +9,7 @@ export default class FetchPopularLocationsController {
     const { page, limit, searchQuery, cityId, isActive, typeOfLocation } = request.qs()
 
     try {
-      const { popularLocationPayload, paginationMeta } =
+      const { popularLocationPayload: popularLocations, paginationMeta } =
         await PopularLocationActions.listPopularLocations({
           filterRecordOptionsPayload: {
             searchQuery,
@@ -20,12 +20,25 @@ export default class FetchPopularLocationsController {
           paginationPayload: page ? { page: Number(page), limit: Number(limit || 10) } : undefined,
         })
 
+      const mutatedPopularLocationPayload = popularLocations.map((location) => ({
+        identifier: location.identifier,
+        city: {
+          identifier: location.city.identifier,
+          name: location.city.name,
+          longitude: location.city.longitude,
+          latitude: location.city.latitude,
+        },
+        name: location.name,
+        gpsCoordinates: location.gpsCoordinates,
+        typeOfLocation: location.typeOfLocation,
+        isActive: location.isActive,
+      }))
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Fetched list of popular locations successfully',
         results: {
-          data: popularLocationPayload,
+          popularLocationPayload: mutatedPopularLocationPayload,
           paginationMeta,
         },
       })

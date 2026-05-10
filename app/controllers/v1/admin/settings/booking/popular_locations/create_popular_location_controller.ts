@@ -8,7 +8,7 @@ import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class CreatePopularLocationController {
   async handle({ request, response }: HttpContext) {
-    const { cityIdentifier, ...payload } = await request.validateUsing(
+    const { cityIdentifier, name, gpsCoordinates, typeOfLocation } = await request.validateUsing(
       CreatePopularLocationRequestValidator
     )
 
@@ -18,10 +18,12 @@ export default class CreatePopularLocationController {
         identifierType: 'identifier',
       })
 
-      const popularLocation = await PopularLocationActions.createPopularLocationRecord({
+      await PopularLocationActions.createPopularLocationRecord({
         createPayload: {
-          ...payload,
-          cityId: city!.id,
+          name,
+          gpsCoordinates,
+          typeOfLocation,
+          cityId: city?.id,
         },
         dbTransactionOptions: { useTransaction: false },
       })
@@ -30,7 +32,6 @@ export default class CreatePopularLocationController {
         status_code: HttpStatusCodesEnum.CREATED,
         status: SUCCESS,
         message: 'Popular location created successfully',
-        results: popularLocation,
       })
     } catch (CreatePopularLocationControllerError) {
       console.log('CreatePopularLocationControllerError -> ', CreatePopularLocationControllerError)
