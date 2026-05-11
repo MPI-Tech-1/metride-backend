@@ -12,6 +12,7 @@ import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
 import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
+import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 
 export interface SendBookingCompletedNotificationJobPayload {
   bookingId: number
@@ -37,7 +38,14 @@ export default class SendBookingCompletedNotificationJob extends Job<SendBooking
     }
 
     await logBookingUpdatePayload(
-      `Sending booking completed notification for booking ${booking.identifier} — notifying the customer and assigned driver that the booking has been completed.`
+      createBookingSlackEventPayload({
+        eventType: 'booking_completed',
+        booking,
+        summary: `Booking completion notifications are being sent for booking ${booking.identifier}.`,
+        metadata: {
+          notificationType: 'bookings:booking_completed',
+        },
+      })
     )
 
     const dbTransaction = await db.transaction()

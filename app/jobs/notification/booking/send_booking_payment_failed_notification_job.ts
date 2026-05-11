@@ -5,6 +5,7 @@ import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
 import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
+import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 
 export interface SendBookingPaymentFailedNotificationJobPayload {
   bookingId: number
@@ -34,7 +35,14 @@ export default class SendBookingPaymentFailedNotificationJob extends Job<SendBoo
     }
 
     await logBookingUpdatePayload(
-      `Sending payment failed notification for booking ${booking.identifier} — notifying the customer that their payment was unsuccessful.`
+      createBookingSlackEventPayload({
+        eventType: 'payment_failed',
+        booking,
+        summary: `Payment failure notification is being sent for booking ${booking.identifier}.`,
+        metadata: {
+          notificationType: 'bookings:payment_failed',
+        },
+      })
     )
 
     try {
