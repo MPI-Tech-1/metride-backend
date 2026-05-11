@@ -24,6 +24,24 @@ const UpdateCityController = () => import('#controllers/v1/admin/settings/cities
 const FetchCitiesController = () => import('#controllers/v1/admin/settings/cities/fetch_cities_controller')
 const GetCityController = () => import('#controllers/v1/admin/settings/cities/get_city_controller')
 
+const CreateVehicleMakeController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_make/create_vehicle_make_controller')
+const UpdateVehicleMakeController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_make/update_vehicle_make_controller')
+const FetchVehicleMakesController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_make/fetch_vehicle_makes_controller')
+const GetVehicleMakeController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_make/get_vehicle_make_controller')
+
+const CreateVehicleModelController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_model/create_vehicle_model_controller')
+const UpdateVehicleModelController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller')
+const FetchVehicleModelsController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_model/fetch_vehicle_models_controller')
+const GetVehicleModelController = () =>
+  import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller')
+
 router
   .group(() => {
     router
@@ -55,6 +73,28 @@ router
         router.get('/:identifier', [GetCityController])
       })
       .prefix('/cities')
+
+    router
+      .group(() => {
+        router
+          .group(() => {
+            router.post('/', [CreateVehicleMakeController])
+            router.patch('/:identifier', [UpdateVehicleMakeController])
+            router.get('/', [FetchVehicleMakesController])
+            router.get('/:identifier', [GetVehicleMakeController])
+          })
+          .prefix('/vehicle-makes')
+
+        router
+          .group(() => {
+            router.post('/', [CreateVehicleModelController])
+            router.patch('/:identifier', [UpdateVehicleModelController])
+            router.get('/', [FetchVehicleModelsController])
+            router.get('/:identifier', [GetVehicleModelController])
+          })
+          .prefix('/vehicle-models')
+      })
+      .prefix('/vehicles')
   })
   .prefix('/api/v1/admins/settings')
   .as('admin.settings')

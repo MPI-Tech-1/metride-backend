@@ -54,6 +54,20 @@ export const controllers = {
           GetCity: () => import('#controllers/v1/admin/settings/cities/get_city_controller'),
           UpdateCity: () => import('#controllers/v1/admin/settings/cities/update_city_controller'),
         },
+        vehicle: {
+          vehicleMake: {
+            CreateVehicleMake: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/create_vehicle_make_controller'),
+            FetchVehicleMakes: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/fetch_vehicle_makes_controller'),
+            GetVehicleMake: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/get_vehicle_make_controller'),
+            UpdateVehicleMake: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/update_vehicle_make_controller'),
+          },
+          vehicleModel: {
+            CreateVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/create_vehicle_model_controller'),
+            FetchVehicleModels: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/fetch_vehicle_models_controller'),
+            GetVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller'),
+            UpdateVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller'),
+          },
+        },
       },
       wallet: {
         driver: {
