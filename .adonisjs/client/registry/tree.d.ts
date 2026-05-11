@@ -43,6 +43,7 @@ export interface ApiDefinition {
       rejectWalletPayout: typeof routes['admin.wallet_management.reject_wallet_payout']
     }
     dashboard: {
+      fetchDashboardOverview: typeof routes['admin.dashboard.fetch_dashboard_overview']
       fetchCustomerMetrics: typeof routes['admin.dashboard.fetch_customer_metrics']
       fetchDriverMetrics: typeof routes['admin.dashboard.fetch_driver_metrics']
       fetchBookingMetrics: typeof routes['admin.dashboard.fetch_booking_metrics']

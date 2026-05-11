@@ -1,3 +1,5 @@
+import formatKoboToNairaDisplay from '#common/helper_functions/format_kobo_to_naira_display'
+
 function normalizeValue(value: unknown): string {
   if (value === null || value === undefined) return 'N/A'
   if (typeof value === 'boolean') return value ? 'Yes' : 'No'
@@ -6,6 +8,30 @@ function normalizeValue(value: unknown): string {
 
 function hasEventShape(message: unknown): message is Record<string, unknown> {
   return Boolean(message && typeof message === 'object' && 'eventType' in message && 'booking' in message)
+}
+
+const eventTypeEmoji: Record<string, string> = {
+  booking_created: '📝',
+  driver_assigned: '🚗',
+  driver_accepted: '✅',
+  driver_cancelled: '🚫',
+  booking_rejected: '❌',
+  trip_progress_updated: '📍',
+  payment_failed: '💳',
+  payment_completed: '💰',
+  booking_completed: '🎉',
+}
+
+function eventEmojiFor(message: Record<string, unknown>): string {
+  const key = typeof message.eventType === 'string' ? message.eventType : ''
+  return eventTypeEmoji[key] ?? '📋'
+}
+
+function formatMetadataValue(key: string, value: unknown): string {
+  if (typeof value === 'number' && /amount|price|paid|total/i.test(key)) {
+    return formatKoboToNairaDisplay(value)
+  }
+  return normalizeValue(value)
 }
 
 export default function formatBookingSlackMessage(
@@ -53,41 +79,56 @@ export default function formatBookingSlackMessage(
 
   const metadataEntries = Object.entries(metadata).filter(([, value]) => value !== null && value !== undefined)
 
+  const emoji = eventEmojiFor(message)
+  const headerPlain = `${emoji} ${normalizeValue(message.eventTitle)} | ${normalizeValue(booking.identifier)}`.slice(
+    0,
+    150
+  )
+
   const blocks: Record<string, unknown>[] = [
     {
       type: 'header',
       text: {
         type: 'plain_text',
-        text: `${normalizeValue(message.eventTitle)} | ${normalizeValue(booking.identifier)}`,
+        text: headerPlain,
       },
     },
     {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: normalizeValue(message.summary),
+        text: `${emoji} ${normalizeValue(message.summary)}`,
       },
     },
     {
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*Customer*\n${normalizeValue(customer.name)}` },
-        { type: 'mrkdwn', text: `*Phone*\n${normalizeValue(customer.phoneNumber)}` },
-        { type: 'mrkdwn', text: `*Booking Status*\n${normalizeValue(booking.status)}` },
-        { type: 'mrkdwn', text: `*Trip Progress*\n${normalizeValue(booking.tripProgress)}` },
-        { type: 'mrkdwn', text: `*Pickup*\n${normalizeValue(booking.departureLocationName)}` },
-        { type: 'mrkdwn', text: `*Dropoff*\n${normalizeValue(booking.destinationLocationName)}` },
+        { type: 'mrkdwn', text: `👤 *Customer*\n${normalizeValue(customer.name)}` },
+        { type: 'mrkdwn', text: `📱 *Phone*\n${normalizeValue(customer.phoneNumber)}` },
+        { type: 'mrkdwn', text: `📊 *Booking status*\n${normalizeValue(booking.status)}` },
+        { type: 'mrkdwn', text: `🛣️ *Trip progress*\n${normalizeValue(booking.tripProgress)}` },
+        { type: 'mrkdwn', text: `📍 *Pickup*\n${normalizeValue(booking.departureLocationName)}` },
+        { type: 'mrkdwn', text: `🏁 *Dropoff*\n${normalizeValue(booking.destinationLocationName)}` },
       ],
     },
     {
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*Ride Type*\n${normalizeValue(booking.rideTypeName)}` },
-        { type: 'mrkdwn', text: `*Booking Type*\n${normalizeValue(booking.typeOfBooking)}` },
-        { type: 'mrkdwn', text: `*Payment Status*\n${normalizeValue(payment.paymentStatus)}` },
-        { type: 'mrkdwn', text: `*Amount Paid*\n${normalizeValue(payment.amountPaid)}` },
-        { type: 'mrkdwn', text: `*Base Price*\n${normalizeValue(payment.basePrice)}` },
-        { type: 'mrkdwn', text: `*Discount*\n${normalizeValue(payment.discountAmount)}` },
+        { type: 'mrkdwn', text: `🚙 *Ride type*\n${normalizeValue(booking.rideTypeName)}` },
+        { type: 'mrkdwn', text: `📅 *Booking type*\n${normalizeValue(booking.typeOfBooking)}` },
+        { type: 'mrkdwn', text: `💳 *Payment status*\n${normalizeValue(payment.paymentStatus)}` },
+        {
+          type: 'mrkdwn',
+          text: `💰 *Amount paid*\n${formatKoboToNairaDisplay(payment.amountPaid)}`,
+        },
+        {
+          type: 'mrkdwn',
+          text: `🏷️ *Base price*\n${formatKoboToNairaDisplay(payment.basePrice)}`,
+        },
+        {
+          type: 'mrkdwn',
+          text: `✂️ *Discount*\n${formatKoboToNairaDisplay(payment.discountAmount)}`,
+        },
       ],
     },
   ]
@@ -96,22 +137,22 @@ export default function formatBookingSlackMessage(
     blocks.push({
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*Driver*\n${normalizeValue(driver.name)}` },
-        { type: 'mrkdwn', text: `*Driver Phone*\n${normalizeValue(driver.phoneNumber)}` },
+        { type: 'mrkdwn', text: `🧑‍✈️ *Driver*\n${normalizeValue(driver.name)}` },
+        { type: 'mrkdwn', text: `📱 *Driver phone*\n${normalizeValue(driver.phoneNumber)}` },
       ],
     })
   }
 
   if (metadataEntries.length > 0) {
     const metadataText = metadataEntries
-      .map(([key, value]) => `• *${key}:* ${normalizeValue(value)}`)
+      .map(([key, value]) => `▸ *${key}:* ${formatMetadataValue(key, value)}`)
       .join('\n')
 
     blocks.push({
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Additional Details*\n${metadataText}`,
+        text: `📎 *Additional details*\n${metadataText}`,
       },
     })
   }
@@ -121,7 +162,7 @@ export default function formatBookingSlackMessage(
     elements: [
       {
         type: 'mrkdwn',
-        text: `Environment: ${environment} | Event: ${normalizeValue(message.eventType)} | Timestamp: ${timestamp}`,
+        text: `🌐 *${environment}* · 🏷️ *${normalizeValue(message.eventType)}* · 🕐 ${timestamp}`,
       },
     ],
   })

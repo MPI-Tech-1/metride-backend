@@ -307,6 +307,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/wallet/driver/reject_wallet_payout_controller').default['handle']>>>
     }
   }
+  'admin.dashboard.fetch_dashboard_overview': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/dashboard/overview'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_dashboard_overview_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_dashboard_overview_controller').default['handle']>>>
+    }
+  }
   'admin.dashboard.fetch_customer_metrics': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/dashboard/customer-metrics'

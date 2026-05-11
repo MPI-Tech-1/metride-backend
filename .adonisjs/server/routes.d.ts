@@ -29,6 +29,7 @@ export type ScannedRoutes = {
     'admin.wallet_management.fetch_wallet_withdrawal_requests': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
     'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
+    'admin.dashboard.fetch_dashboard_overview': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_customer_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_driver_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
@@ -121,6 +122,7 @@ export type ScannedRoutes = {
     'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'admin.wallet_management.fetch_wallet_withdrawal_requests': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_dashboard_overview': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_customer_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_driver_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
@@ -161,6 +163,7 @@ export type ScannedRoutes = {
     'admin.wallet_management.fetch_wallet_transactions': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.get_wallet_transaction': { paramsTuple: [ParamValue]; params: {'transactionIdentifier': ParamValue} }
     'admin.wallet_management.fetch_wallet_withdrawal_requests': { paramsTuple?: []; params?: {} }
+    'admin.dashboard.fetch_dashboard_overview': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_customer_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_driver_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
