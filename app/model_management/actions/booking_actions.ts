@@ -2,6 +2,8 @@ import type CreateBookingRecordOptions from '#model_management/type_checking/boo
 import type ListBookingRecordsOptions from '#model_management/type_checking/booking/list_booking_records_options'
 import type UpdateBookingRecordOptions from '#model_management/type_checking/booking/update_booking_record_options'
 import type BookingIdentifierOptions from '#model_management/type_checking/booking/booking_identifier_options'
+import computeMetricChangePercent from '#common/helper_functions/compute_metric_change_percent'
+import type DashboardMetricCard from '#model_management/type_checking/admin/dashboard_metric_card'
 import Booking from '#models/booking'
 import db from '@adonisjs/lucid/services/db'
 import { DateTime } from 'luxon'
@@ -197,6 +199,105 @@ export default class BookingActions {
       totalBookingsForPastMonth: Number(result?.total ?? 0),
       totalCompletedBookingsForPastMonth: Number(result?.total_completed ?? 0),
       totalCancelledBookingsForPastMonth: Number(result?.total_cancelled ?? 0),
+    }
+  }
+
+  private static buildPeriodMetricCard(
+    currentPeriodValue: number,
+    previousPeriodValue: number
+  ): DashboardMetricCard {
+    return {
+      value: currentPeriodValue,
+      currentPeriodValue,
+      previousPeriodValue,
+      changePercentVsPreviousPeriod: computeMetricChangePercent(
+        previousPeriodValue,
+        currentPeriodValue
+      ),
+    }
+  }
+
+  /**
+   * Admin home dashboard — bookings section (rolling 30d vs prior 30d + live pending queue).
+   */
+  public static async getAdminDashboardBookingStats(): Promise<{
+    total: DashboardMetricCard
+    completed: DashboardMetricCard
+    cancelled: DashboardMetricCard
+    pendingAwaitingDriverAssignment: DashboardMetricCard
+    inProgress: DashboardMetricCard
+    comparisonNote: string
+  }> {
+    const now = DateTime.now()
+    const thirtyDaysAgo = now.minus({ days: 30 }).toSQL()
+    const sixtyDaysAgo = now.minus({ days: 60 }).toSQL()
+
+    const [currentPeriod, previousPeriod, pendingRow, inProgressRow] = await Promise.all([
+      db
+        .from('bookings')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', thirtyDaysAgo)
+        .select(
+          db.raw('COUNT(*) as total'),
+          db.raw("SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as total_completed"),
+          db.raw("SUM(CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) as total_cancelled")
+        )
+        .first(),
+
+      db
+        .from('bookings')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', sixtyDaysAgo)
+        .where('created_at', '<', thirtyDaysAgo)
+        .select(
+          db.raw('COUNT(*) as total'),
+          db.raw("SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as total_completed"),
+          db.raw("SUM(CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) as total_cancelled")
+        )
+        .first(),
+
+      db
+        .from('bookings')
+        .whereNull('deleted_at')
+        .where('status', 'created')
+        .count('* as total')
+        .first(),
+
+      db
+        .from('bookings')
+        .whereNull('deleted_at')
+        .whereIn('status', ['assigned-a-driver', 'accepted'])
+        .count('* as total')
+        .first(),
+    ])
+
+    const curTotal = Number(currentPeriod?.total ?? 0)
+    const prevTotal = Number(previousPeriod?.total ?? 0)
+    const curCompleted = Number(currentPeriod?.total_completed ?? 0)
+    const prevCompleted = Number(previousPeriod?.total_completed ?? 0)
+    const curCancelled = Number(currentPeriod?.total_cancelled ?? 0)
+    const prevCancelled = Number(previousPeriod?.total_cancelled ?? 0)
+
+    const pending = Number(pendingRow?.total ?? 0)
+    const inProgress = Number(inProgressRow?.total ?? 0)
+
+    return {
+      total: this.buildPeriodMetricCard(curTotal, prevTotal),
+      completed: this.buildPeriodMetricCard(curCompleted, prevCompleted),
+      cancelled: this.buildPeriodMetricCard(curCancelled, prevCancelled),
+      pendingAwaitingDriverAssignment: {
+        value: pending,
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      inProgress: {
+        value: inProgress,
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      comparisonNote: 'Booking volume metrics compare the last 30 days to the prior 30 days.',
     }
   }
 }

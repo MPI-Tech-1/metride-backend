@@ -1,7 +1,9 @@
 import type CreateDriverRecordOptions from '#model_management/type_checking/driver/create_driver_record_options'
 import type ListDriverRecordsOptions from '#model_management/type_checking/driver/list_driver_records_options'
 import type UpdateDriverRecordOptions from '#model_management/type_checking/driver/update_driver_record_options'
+import computeMetricChangePercent from '#common/helper_functions/compute_metric_change_percent'
 import type DriverIdentifierOptions from '#model_management/type_checking/driver/driver_identifier_options'
+import type DashboardMetricCard from '#model_management/type_checking/admin/dashboard_metric_card'
 import Driver from '#models/driver'
 import db from '@adonisjs/lucid/services/db'
 import { DateTime } from 'luxon'
@@ -199,6 +201,118 @@ export default class DriverActions {
         totalAssigned > 0 ? Math.round((totalAccepted / totalAssigned) * 100) : 0,
       totalCancellationRate:
         totalBookings > 0 ? Math.round((totalCancelled / totalBookings) * 100) : 0,
+    }
+  }
+
+  /**
+   * Admin home dashboard — drivers section (catalog + activity + registration momentum).
+   */
+  public static async getAdminDashboardDriverStats(): Promise<{
+    total: DashboardMetricCard
+    activeLast24Hours: DashboardMetricCard
+    approved: DashboardMetricCard
+    pendingApproval: DashboardMetricCard
+    rejected: DashboardMetricCard
+    comparisonNote: string
+  }> {
+    const now = DateTime.now()
+    const twentyFourHoursAgo = now.minus({ hours: 24 }).toSQL()
+    const thirtyDaysAgo = now.minus({ days: 30 }).toSQL()
+    const sixtyDaysAgo = now.minus({ days: 60 }).toSQL()
+
+    const [
+      totalDriversRow,
+      newDriversCurrentWindowRow,
+      newDriversPreviousWindowRow,
+      active24hRow,
+      approvedRow,
+      pendingRow,
+      rejectedRow,
+    ] = await Promise.all([
+      db.from('drivers').whereNull('deleted_at').count('* as total').first(),
+
+      db
+        .from('drivers')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', thirtyDaysAgo)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('drivers')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', sixtyDaysAgo)
+        .where('created_at', '<', thirtyDaysAgo)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('drivers')
+        .whereNull('deleted_at')
+        .where('last_logged_in_at', '>=', twentyFourHoursAgo)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('drivers')
+        .whereNull('deleted_at')
+        .where('status', 'approved')
+        .count('* as total')
+        .first(),
+
+      db
+        .from('drivers')
+        .whereNull('deleted_at')
+        .where('status', 'pending')
+        .count('* as total')
+        .first(),
+
+      db
+        .from('drivers')
+        .whereNull('deleted_at')
+        .where('status', 'rejected')
+        .count('* as total')
+        .first(),
+    ])
+
+    const totalDrivers = Number(totalDriversRow?.total ?? 0)
+    const newCurrent = Number(newDriversCurrentWindowRow?.total ?? 0)
+    const newPrevious = Number(newDriversPreviousWindowRow?.total ?? 0)
+
+    return {
+      total: {
+        value: totalDrivers,
+        currentPeriodValue: newCurrent,
+        previousPeriodValue: newPrevious,
+        changePercentVsPreviousPeriod: computeMetricChangePercent(newPrevious, newCurrent),
+        trendBasis: 'new_driver_registrations_last_30d_vs_prior_30d',
+      },
+      activeLast24Hours: {
+        value: Number(active24hRow?.total ?? 0),
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      approved: {
+        value: Number(approvedRow?.total ?? 0),
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      pendingApproval: {
+        value: Number(pendingRow?.total ?? 0),
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      rejected: {
+        value: Number(rejectedRow?.total ?? 0),
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      comparisonNote:
+        'Total drivers card shows all-time count; trend compares new driver registrations in the last 30 days vs the prior 30 days.',
     }
   }
 }

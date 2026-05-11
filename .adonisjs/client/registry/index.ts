@@ -156,6 +156,12 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"api","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"wallet-management","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"driver","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"withdrawal-requests","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":1,"val":"withdrawalRequestIdentifier","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"reject","end":""}],
     types: placeholder as Registry['admin.wallet_management.reject_wallet_payout']['types'],
   },
+  'admin.dashboard.fetch_dashboard_overview': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/dashboard/overview',
+    tokens: [{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"api","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"dashboard","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"overview","end":""}],
+    types: placeholder as Registry['admin.dashboard.fetch_dashboard_overview']['types'],
+  },
   'admin.dashboard.fetch_customer_metrics': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/dashboard/customer-metrics',
