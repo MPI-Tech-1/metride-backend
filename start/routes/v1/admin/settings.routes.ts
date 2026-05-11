@@ -19,6 +19,11 @@ const FetchPopularLocationsController = () =>
 const GetPopularLocationController = () =>
   import('#controllers/v1/admin/settings/booking/popular_locations/get_popular_location_controller')
 
+const CreateCityController = () => import('#controllers/v1/admin/settings/cities/create_city_controller')
+const UpdateCityController = () => import('#controllers/v1/admin/settings/cities/update_city_controller')
+const FetchCitiesController = () => import('#controllers/v1/admin/settings/cities/fetch_cities_controller')
+const GetCityController = () => import('#controllers/v1/admin/settings/cities/get_city_controller')
+
 router
   .group(() => {
     router
@@ -41,6 +46,15 @@ router
           .prefix('/popular-locations')
       })
       .prefix('/booking')
+
+    router
+      .group(() => {
+        router.post('/', [CreateCityController])
+        router.patch('/:identifier', [UpdateCityController])
+        router.get('/', [FetchCitiesController])
+        router.get('/:identifier', [GetCityController])
+      })
+      .prefix('/cities')
   })
   .prefix('/api/v1/admins/settings')
   .as('admin.settings')

@@ -1,40 +1,43 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
-import RideTypeActions from '#model_management/actions/ride_type_actions'
-import UpdateRideTypeRequestValidator from '#validators/v1/admin/settings/booking/ride_types/update_ride_type_request_validator'
+import CityActions from '#model_management/actions/city_actions'
+import UpdateCityRequestValidator from '#validators/v1/admin/settings/cities/update_city_request_validator'
 import logApplicationError from '#common/helper_functions/log_application_error'
 
-export default class UpdateRideTypeController {
-  async handle({ request, response, params }: HttpContext) {
-    const { identifier } = params
-    const payload = await request.validateUsing(UpdateRideTypeRequestValidator)
+export default class UpdateCityController {
+  async handle({ request, response }: HttpContext) {
+    const { identifier } = request.params()
+    const { latitude, longitude, name } = await request.validateUsing(UpdateCityRequestValidator)
 
     try {
-      const rideType = await RideTypeActions.getRideType({ identifier, identifierType: 'identifier' })
+      const city = await CityActions.getCity({
+        identifier,
+        identifierType: 'identifier',
+      })
 
-      if (!rideType) {
+      if (!city) {
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
           status_code: HttpStatusCodesEnum.NOT_FOUND,
           status: ERROR,
-          message: 'Ride type not found',
+          message: 'City not found',
         })
       }
 
-      await RideTypeActions.updateRideTypeRecord({
+      await CityActions.updateCityRecord({
         identifierOptions: { identifier, identifierType: 'identifier' },
-        updatePayload: payload,
+        updatePayload: { latitude, longitude, name },
         dbTransactionOptions: { useTransaction: false },
       })
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
-        message: 'Ride type updated successfully',
+        message: 'City updated successfully',
       })
-    } catch (UpdateRideTypeControllerError) {
-      console.log('UpdateRideTypeControllerError -> ', UpdateRideTypeControllerError)
-      await logApplicationError(UpdateRideTypeControllerError)
+    } catch (UpdateCityControllerError) {
+      console.log('UpdateCityControllerError -> ', UpdateCityControllerError)
+      await logApplicationError(UpdateCityControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
         status: ERROR,

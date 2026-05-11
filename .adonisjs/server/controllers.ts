@@ -48,6 +48,12 @@ export const controllers = {
             UpdateRideType: () => import('#controllers/v1/admin/settings/booking/ride_types/update_ride_type_controller'),
           },
         },
+        cities: {
+          CreateCity: () => import('#controllers/v1/admin/settings/cities/create_city_controller'),
+          FetchCities: () => import('#controllers/v1/admin/settings/cities/fetch_cities_controller'),
+          GetCity: () => import('#controllers/v1/admin/settings/cities/get_city_controller'),
+          UpdateCity: () => import('#controllers/v1/admin/settings/cities/update_city_controller'),
+        },
       },
       wallet: {
         driver: {
