@@ -8,6 +8,8 @@ import db from '@adonisjs/lucid/services/db'
 import RideTypeActions from '#model_management/actions/ride_type_actions'
 import calculateDistanceBetween2Points from '#common/helper_functions/calculate_distance_between_2_points'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
+import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 
 export default class CreateBookingController {
   async handle({ request, auth, response }: HttpContext) {
@@ -112,6 +114,17 @@ export default class CreateBookingController {
           amountPaid: finalBooking!.bookingPayment.amountPaid,
         },
       }
+
+      await logBookingUpdatePayload(
+        createBookingSlackEventPayload({
+          eventType: 'booking_created',
+          booking: finalBooking!,
+          summary: `A new booking has been created by ${finalBooking!.customer.firstName} ${finalBooking!.customer.lastName}.`,
+          metadata: {
+            bookingChannel: 'customer_api',
+          },
+        })
+      )
 
       return response.status(HttpStatusCodesEnum.CREATED).send({
         status_code: HttpStatusCodesEnum.CREATED,

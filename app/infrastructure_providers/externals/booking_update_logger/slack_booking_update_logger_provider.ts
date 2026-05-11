@@ -3,6 +3,7 @@ import env from '#start/env'
 import type BookingUpdateLoggerInterface from '#infrastructure_providers/type_checkings/booking_update_logger/booking_update_logger_interface'
 import HttpClient from '#infrastructure_providers/internals/http_client'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import formatBookingSlackMessage from '#common/helper_functions/format_booking_slack_message'
 
 export default class SlackBookingUpdateLoggerProvider implements BookingUpdateLoggerInterface {
   private webhookUrl: string = loggerConfig.slack.bookingUpdateWebhookUrl
@@ -81,36 +82,7 @@ export default class SlackBookingUpdateLoggerProvider implements BookingUpdateLo
 
   public async logPayload(message: any): Promise<void> {
     try {
-      const timestamp: string = new Date().toISOString()
-
-      const payload = {
-        text: `🚨 [${this.environment}] MET Ride`,
-        blocks: [
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `*🚨 [${this.environment}] MET Ride Payload Log*`,
-            },
-          },
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `*Message:* \n\`\`\`\n${JSON.stringify(message)}\n\`\`\``,
-            },
-          },
-          {
-            type: 'context',
-            elements: [
-              {
-                type: 'mrkdwn',
-                text: `*Timestamp:* ${timestamp}`,
-              },
-            ],
-          },
-        ],
-      }
+      const payload = formatBookingSlackMessage(message?.message ?? message, this.environment)
 
       await HttpClient.post({
         endpointUrl: this.webhookUrl,
