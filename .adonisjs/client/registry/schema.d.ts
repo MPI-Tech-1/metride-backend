@@ -499,6 +499,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
     }
   }
+  'customer.profile.get_profile': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/customer/profile'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/get_customer_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/get_customer_profile_controller').default['handle']>>>
+    }
+  }
+  'customer.profile.fetch_ride_statistics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/customer/profile/ride-statistics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller').default['handle']>>>
+    }
+  }
   'customer.notifications.fetch_notifications': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/customer/notifications'
@@ -521,6 +545,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/notifications/mark_notification_as_read_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/notifications/mark_notification_as_read_controller').default['handle']>>>
+    }
+  }
+  'customer.profile.update_profile': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/customer/profile'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/profile/update_customer_profile_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/profile/update_customer_profile_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/update_customer_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/update_customer_profile_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'driver.authentication.driver_onboarding': {

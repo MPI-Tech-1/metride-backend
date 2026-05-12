@@ -45,6 +45,9 @@ export type ScannedRoutes = {
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.checkout_booking_with_card': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.profile.get_profile': { paramsTuple?: []; params?: {} }
+    'customer.profile.update_profile': { paramsTuple?: []; params?: {} }
+    'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'customer.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
     'driver.authentication.driver_onboarding': { paramsTuple?: []; params?: {} }
@@ -130,6 +133,8 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.profile.get_profile': { paramsTuple?: []; params?: {} }
+    'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
@@ -171,6 +176,8 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
+    'customer.profile.get_profile': { paramsTuple?: []; params?: {} }
+    'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
     'customer.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.profile.get_personal_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
@@ -197,6 +204,7 @@ export type ScannedRoutes = {
     'admin.bookings.cancel_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.complete_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
+    'customer.profile.update_profile': { paramsTuple?: []; params?: {} }
     'driver.profile.update_personal_information': { paramsTuple?: []; params?: {} }
     'driver.profile.update_vehicle_information': { paramsTuple?: []; params?: {} }
     'driver.profile.update_bank_account': { paramsTuple?: []; params?: {} }

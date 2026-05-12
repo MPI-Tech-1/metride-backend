@@ -273,4 +273,34 @@ export default class CustomerActions {
         'Total customers is all-time count; its trend compares new sign-ups in the last 30 days vs the prior 30 days. "New this month" compares the current calendar month to the previous calendar month.',
     }
   }
+
+  /**
+   * Completed rides and total amount paid (kobo) for a customer.
+   * Amounts align with Paystack minor units (kobo); expose naira to API consumers as needed.
+   */
+  public static async getCustomerRideAndSpendStats(customerId: number): Promise<{
+    completedRidesCount: number
+    totalAmountPaidKobo: number
+    totalAmountPaidNaira: number
+  }> {
+    const row = await db
+      .from('bookings')
+      .join('booking_payments', 'booking_payments.booking_id', 'bookings.id')
+      .where('bookings.customer_id', customerId)
+      .whereNull('bookings.deleted_at')
+      .whereNull('booking_payments.deleted_at')
+      .where('bookings.status', 'completed')
+      .where('booking_payments.payment_status', 'completed')
+      .countDistinct('bookings.id as completed_rides')
+      .sum('booking_payments.amount_paid as total_kobo')
+      .first()
+
+    const totalKobo = Number(row?.total_kobo ?? 0)
+
+    return {
+      completedRidesCount: Number(row?.completed_rides ?? 0),
+      totalAmountPaidKobo: totalKobo,
+      totalAmountPaidNaira: Math.round((totalKobo / 100) * 100) / 100,
+    }
+  }
 }
