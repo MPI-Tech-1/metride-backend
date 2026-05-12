@@ -109,4 +109,13 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   CURRENT_APPLICATION_LOGGER_PROVIDER: Env.schema.string(),
   APPLICATION_LOGGER_SLACK_WEBHOOK_URL: Env.schema.string(),
+
+  CURRENT_PAYOUT_PROVIDER: Env.schema.string(),
+  PAYSTACK_PAYOUT_PROVIDER_SECRET_KEY: Env.schema.string(),
+  PAYSTACK_PAYOUT_PROVIDER_CREATE_TRANSFER_RECIPIENT_ENDPOINT: Env.schema.string(),
+  PAYSTACK_PAYOUT_PROVIDER_INITIATE_TRANSFER_ENDPOINT: Env.schema.string(),
+
+  CURRENT_ACCOUNT_INFO_PROVIDER: Env.schema.string(),
+  PAYSTACK_ACCOUNT_INFO_ENDPOINT: Env.schema.string(),
+  PAYSTACK_ACCOUNT_INFO_SECRET_KEY: Env.schema.string(),
 })

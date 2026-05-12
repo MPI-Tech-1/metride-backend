@@ -7,6 +7,7 @@ import BankActions from '#model_management/actions/bank_actions'
 import db from '@adonisjs/lucid/services/db'
 import DriverRegistrationStepActions from '#model_management/actions/driver_registration_step_actions'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import configurePayoutProvider from '#infrastructure_providers/helpers/configure_payout_provider'
 
 export default class UpdateBankAccountController {
   async handle({ request, response, auth }: HttpContext) {
@@ -23,12 +24,30 @@ export default class UpdateBankAccountController {
         identifier: bankIdentifier,
       })
 
+      const payoutProvider = configurePayoutProvider()
+
+      const { transferRecipientInformation } = await payoutProvider.createPayoutRecipient({
+        accountName,
+        accountNumber,
+        bankCode: bank!.bankCode,
+      })
+
+      if (!transferRecipientInformation) {
+        return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
+          status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,
+          status: ERROR,
+          message:
+            'Could not generate a transfer recipient with the provided bank account details. Please confirm that the account details are correct and try again.',
+        })
+      }
+
       await DriverBankAccountActions.updateDriverBankAccountRecord({
         identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: {
           bankId: bank?.id,
           accountName,
           accountNumber,
+          payoutProviderIdentifier: transferRecipientInformation.providerRecipientCode,
         },
         dbTransactionOptions: {
           useTransaction: true,

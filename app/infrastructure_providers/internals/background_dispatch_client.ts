@@ -7,6 +7,9 @@ import ProcessBookingPaymentJob, {
 import ProcessDriverWalletEarningJob, {
   type ProcessDriverWalletEarningJobPayload,
 } from '#jobs/background_processing/booking/process_driver_wallet_earning_job'
+import ProcessApprovePaystackTransactionBackgroundProcessingJob, {
+  type ProcessApprovePaystackTransactionBackgroundProcessingJobPayload,
+} from '#jobs/background_processing/finance/process_approve_paystack_transaction_background_processing_job'
 
 export default class BackgroundDispatchClient {
   public static async processBookingPaymentJob(
@@ -26,6 +29,14 @@ export default class BackgroundDispatchClient {
   ) {
     await LogBookingGpsCoordinatesBackgroundProcessingJob.dispatch(
       logBookingGpsCoordinatesBackgroundProcessingJobPayload
+    )
+  }
+
+  public static async processApprovePaystackTransactionBackgroundProcessingJob(
+    processApprovePaystackTransactionBackgroundProcessingJobPayload: ProcessApprovePaystackTransactionBackgroundProcessingJobPayload
+  ) {
+    await ProcessApprovePaystackTransactionBackgroundProcessingJob.dispatch(
+      processApprovePaystackTransactionBackgroundProcessingJobPayload
     )
   }
 }

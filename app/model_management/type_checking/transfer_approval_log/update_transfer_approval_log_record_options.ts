@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type TransferApprovalLogIdentifierOptions from '#model_management/type_checking/transfer_approval_log/transfer_approval_log_identifier_options'
+import type TransferApprovalLogInterface from '#model_management/type_checking/transfer_approval_log/transfer_approval_log_interface'
+
+type UpdateTransferApprovalLogRecordOptions = UpdateRecordGeneric<
+  TransferApprovalLogIdentifierOptions,
+  Partial<TransferApprovalLogInterface>
+>
+
+export default UpdateTransferApprovalLogRecordOptions

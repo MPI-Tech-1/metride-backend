@@ -1,13 +1,12 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
-import DriverWalletTransactionActions from '#model_management/actions/driver_wallet_transaction_actions'
 import DriverWalletWithdrawalRequestActions from '#model_management/actions/driver_wallet_withdrawal_request_actions'
-import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import db from '@adonisjs/lucid/services/db'
-import { randomUUID } from 'node:crypto'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
+import configurePayoutProvider from '#infrastructure_providers/helpers/configure_payout_provider'
 
 export default class ApproveWalletPayoutController {
   async handle({ params, response }: HttpContext) {
@@ -65,50 +64,50 @@ export default class ApproveWalletPayoutController {
         })
       }
 
-      const walletTransaction =
-        await DriverWalletTransactionActions.createDriverWalletTransactionRecord({
-          createPayload: {
-            driverId: withdrawalRequest.driverId,
-            driverWalletId: withdrawalRequest.driverWalletId,
-            amount: withdrawalRequest.amount,
-            systemGeneratedTransactionReference: randomUUID(),
-            providerTransactionReference: null,
-            remark: 'Wallet withdrawal payout',
-            typeOfTransaction: 'debit',
-            status: 'completed',
-          },
-          dbTransactionOptions: { useTransaction: true, dbTransaction },
+      const driverBankAccount = await DriverBankAccountActions.getDriverBankAccount({
+        identifierType: 'driverId',
+        identifier: wallet.driverId,
+      })
+
+      if (driverBankAccount === null || driverBankAccount.payoutProviderIdentifier === null) {
+        await dbTransaction.rollback()
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
+          status: ERROR,
+          message: 'Driver bank account not found or does not support payout provider.',
+        })
+      }
+
+      const payoutProvider = configurePayoutProvider()
+
+      const { initiatedPayoutTransactionInformation } =
+        await payoutProvider.initiatePayoutTransaction({
+          amount: withdrawalRequest.amount,
+          recipient: driverBankAccount.payoutProviderIdentifier,
+          reference: withdrawalRequest.identifier,
+          reason: `Payout request for withdrawal request ${withdrawalRequest.identifier}`,
         })
 
-      await DriverWalletActions.updateDriverWalletRecord({
-        identifierOptions: { identifierType: 'id', identifier: wallet.id },
-        updatePayload: {
-          balance: wallet.balance - withdrawalRequest.amount,
-          totalOutflowFunds: wallet.totalOutflowFunds + withdrawalRequest.amount,
-        },
-        dbTransactionOptions: { useTransaction: true, dbTransaction },
-      })
+      if (!initiatedPayoutTransactionInformation) {
+        throw new Error('Failed to initiate payout transaction')
+      }
 
       await DriverWalletWithdrawalRequestActions.updateDriverWalletWithdrawalRequestRecord({
         identifierOptions: { identifierType: 'id', identifier: withdrawalRequest.id },
-        updatePayload: { status: 'approved' },
+        updatePayload: { status: 'processing' },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
       await dbTransaction.commit()
 
-      await NotificationDispatchClient.sendWalletPayoutApprovedNotificationJob({
-        walletTransactionId: walletTransaction.id,
-      })
-
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
-        message: 'Wallet payout approved successfully.',
+        message: 'Wallet payout is processing successfully.',
         results: {
           identifier: withdrawalRequest.identifier,
           amount: withdrawalRequest.amount,
-          status: 'approved',
+          status: 'processing',
         },
       })
     } catch (ApproveWalletPayoutControllerError) {

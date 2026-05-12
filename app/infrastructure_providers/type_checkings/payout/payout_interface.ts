@@ -1,0 +1,15 @@
+import type CreatePayoutRecipientInputOptions from '#infrastructure_providers/type_checkings/payout/create_payout_recipient_input_options'
+import type CreatePayoutRecipientOutputOptions from '#infrastructure_providers/type_checkings/payout/create_payout_recipient_output_options'
+import type InitiatePayoutTransactionInputOptions from '#infrastructure_providers/type_checkings/payout/initiate_payout_transaction_input_options'
+import type InitiatePayoutTransactionOutputOptions from '#infrastructure_providers/type_checkings/payout/initiate_payout_transaction_output_options'
+
+interface PayoutInterface {
+  initiatePayoutTransaction(
+    initiatePayoutTransactionInputOptions: InitiatePayoutTransactionInputOptions
+  ): Promise<InitiatePayoutTransactionOutputOptions>
+  createPayoutRecipient(
+    createPayoutRecipientInputOptions: CreatePayoutRecipientInputOptions
+  ): Promise<CreatePayoutRecipientOutputOptions>
+}
+
+export default PayoutInterface

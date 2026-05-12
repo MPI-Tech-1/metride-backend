@@ -15,7 +15,7 @@ export default class DriverWalletWithdrawalRequest extends AbstractModel {
   declare amount: number
 
   @column()
-  declare status: 'pending' | 'approved' | 'rejected'
+  declare status: 'pending' | 'processing' | 'approved' | 'rejected'
 
   @belongsTo(() => Driver)
   declare driver: BelongsTo<typeof Driver>

@@ -13,6 +13,7 @@ export default class FetchBanksController {
         return {
           identifier: bank.identifier,
           name: bank.name,
+          bankCode: bank.bankCode,
         }
       })
 
