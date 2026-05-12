@@ -1,7 +1,9 @@
 import type CreateCustomerRecordOptions from '#model_management/type_checking/customer/create_customer_record_options'
 import type ListCustomerRecordsOptions from '#model_management/type_checking/customer/list_customer_records_options'
 import type UpdateCustomerRecordOptions from '#model_management/type_checking/customer/update_customer_record_options'
+import computeMetricChangePercent from '#common/helper_functions/compute_metric_change_percent'
 import type CustomerIdentifierOptions from '#model_management/type_checking/customer/customer_identifier_options'
+import type DashboardMetricCard from '#model_management/type_checking/admin/dashboard_metric_card'
 import Customer from '#models/customer'
 import db from '@adonisjs/lucid/services/db'
 import { DateTime } from 'luxon'
@@ -157,6 +159,148 @@ export default class CustomerActions {
       totalActiveCustomerForTheMonth: Number(totalActiveResult?.total ?? 0),
       totalNewCustomerForTheMonth: Number(totalNewResult?.total ?? 0),
       totalInActiveCustomer: Number(totalInactiveResult?.total ?? 0),
+    }
+  }
+
+  /**
+   * Admin home dashboard — customers section (retention, acquisition, inactivity).
+   */
+  public static async getAdminDashboardCustomerStats(): Promise<{
+    total: DashboardMetricCard
+    activeLast30Days: DashboardMetricCard
+    newThisCalendarMonth: DashboardMetricCard
+    inactive90PlusDays: DashboardMetricCard
+    comparisonNote: string
+  }> {
+    const now = DateTime.now()
+    const thirtyDaysAgo = now.minus({ days: 30 }).toSQL()
+    const sixtyDaysAgo = now.minus({ days: 60 }).toSQL()
+    const ninetyDaysAgo = now.minus({ days: 90 }).toSQL()
+    const startOfThisMonth = now.startOf('month').toSQL()
+    const startOfLastMonth = now.startOf('month').minus({ months: 1 }).toSQL()
+
+    const [
+      totalCountRow,
+      newSignupsCurrent30Row,
+      newSignupsPrevious30Row,
+      activeLast30Row,
+      newThisMonthRow,
+      newLastMonthRow,
+      inactiveRow,
+    ] = await Promise.all([
+      db.from('customers').whereNull('deleted_at').count('* as total').first(),
+
+      db
+        .from('customers')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', thirtyDaysAgo)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('customers')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', sixtyDaysAgo)
+        .where('created_at', '<', thirtyDaysAgo)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('customers')
+        .whereNull('deleted_at')
+        .where('last_logged_in_at', '>=', thirtyDaysAgo)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('customers')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', startOfThisMonth)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('customers')
+        .whereNull('deleted_at')
+        .where('created_at', '>=', startOfLastMonth)
+        .where('created_at', '<', startOfThisMonth)
+        .count('* as total')
+        .first(),
+
+      db
+        .from('customers')
+        .whereNull('deleted_at')
+        .where((query) => {
+          query.where('last_logged_in_at', '<', ninetyDaysAgo).orWhereNull('last_logged_in_at')
+        })
+        .count('* as total')
+        .first(),
+    ])
+
+    const totalCustomers = Number(totalCountRow?.total ?? 0)
+    const new30Current = Number(newSignupsCurrent30Row?.total ?? 0)
+    const new30Previous = Number(newSignupsPrevious30Row?.total ?? 0)
+    const newThisMonth = Number(newThisMonthRow?.total ?? 0)
+    const newLastMonth = Number(newLastMonthRow?.total ?? 0)
+
+    return {
+      total: {
+        value: totalCustomers,
+        currentPeriodValue: new30Current,
+        previousPeriodValue: new30Previous,
+        changePercentVsPreviousPeriod: computeMetricChangePercent(new30Previous, new30Current),
+        trendBasis: 'new_customer_registrations_last_30d_vs_prior_30d',
+      },
+      activeLast30Days: {
+        value: Number(activeLast30Row?.total ?? 0),
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      newThisCalendarMonth: {
+        value: newThisMonth,
+        currentPeriodValue: newThisMonth,
+        previousPeriodValue: newLastMonth,
+        changePercentVsPreviousPeriod: computeMetricChangePercent(newLastMonth, newThisMonth),
+      },
+      inactive90PlusDays: {
+        value: Number(inactiveRow?.total ?? 0),
+        currentPeriodValue: null,
+        previousPeriodValue: null,
+        changePercentVsPreviousPeriod: null,
+      },
+      comparisonNote:
+        'Total customers is all-time count; its trend compares new sign-ups in the last 30 days vs the prior 30 days. "New this month" compares the current calendar month to the previous calendar month.',
+    }
+  }
+
+  /**
+   * Completed rides and total amount paid (kobo) for a customer.
+   * Amounts align with Paystack minor units (kobo); expose naira to API consumers as needed.
+   */
+  public static async getCustomerRideAndSpendStats(customerId: number): Promise<{
+    completedRidesCount: number
+    totalAmountPaidKobo: number
+    totalAmountPaidNaira: number
+  }> {
+    const row = await db
+      .from('bookings')
+      .join('booking_payments', 'booking_payments.booking_id', 'bookings.id')
+      .where('bookings.customer_id', customerId)
+      .whereNull('bookings.deleted_at')
+      .whereNull('booking_payments.deleted_at')
+      .where('bookings.status', 'completed')
+      .where('booking_payments.payment_status', 'completed')
+      .countDistinct('bookings.id as completed_rides')
+      .sum('booking_payments.amount_paid as total_kobo')
+      .first()
+
+    const totalKobo = Number(row?.total_kobo ?? 0)
+
+    return {
+      completedRidesCount: Number(row?.completed_rides ?? 0),
+      totalAmountPaidKobo: totalKobo,
+      totalAmountPaidNaira: Math.round((totalKobo / 100) * 100) / 100,
     }
   }
 }

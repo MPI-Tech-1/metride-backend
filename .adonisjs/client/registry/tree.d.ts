@@ -43,6 +43,7 @@ export interface ApiDefinition {
       rejectWalletPayout: typeof routes['admin.wallet_management.reject_wallet_payout']
     }
     dashboard: {
+      fetchDashboardOverview: typeof routes['admin.dashboard.fetch_dashboard_overview']
       fetchCustomerMetrics: typeof routes['admin.dashboard.fetch_customer_metrics']
       fetchDriverMetrics: typeof routes['admin.dashboard.fetch_driver_metrics']
       fetchBookingMetrics: typeof routes['admin.dashboard.fetch_booking_metrics']
@@ -68,6 +69,11 @@ export interface ApiDefinition {
       fetchBookings: typeof routes['customer.bookings.fetch_bookings']
       getBooking: typeof routes['customer.bookings.get_booking']
       checkoutBookingWithCard: typeof routes['customer.bookings.checkout_booking_with_card']
+    }
+    profile: {
+      getProfile: typeof routes['customer.profile.get_profile']
+      updateProfile: typeof routes['customer.profile.update_profile']
+      fetchRideStatistics: typeof routes['customer.profile.fetch_ride_statistics']
     }
     notifications: {
       fetchNotifications: typeof routes['customer.notifications.fetch_notifications']

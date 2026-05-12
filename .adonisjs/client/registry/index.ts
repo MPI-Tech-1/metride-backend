@@ -156,6 +156,12 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"api","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"wallet-management","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"driver","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"withdrawal-requests","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":1,"val":"withdrawalRequestIdentifier","end":""},{"old":"/api/v1/admins/wallet-management/driver/withdrawal-requests/:withdrawalRequestIdentifier/reject","type":0,"val":"reject","end":""}],
     types: placeholder as Registry['admin.wallet_management.reject_wallet_payout']['types'],
   },
+  'admin.dashboard.fetch_dashboard_overview': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/dashboard/overview',
+    tokens: [{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"api","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"dashboard","end":""},{"old":"/api/v1/admins/dashboard/overview","type":0,"val":"overview","end":""}],
+    types: placeholder as Registry['admin.dashboard.fetch_dashboard_overview']['types'],
+  },
   'admin.dashboard.fetch_customer_metrics': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/dashboard/customer-metrics',
@@ -245,6 +251,24 @@ const routes = {
     pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card',
     tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":1,"val":"bookingIdentifier","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"checkout","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"card","end":""}],
     types: placeholder as Registry['customer.bookings.checkout_booking_with_card']['types'],
+  },
+  'customer.profile.get_profile': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/customer/profile',
+    tokens: [{"old":"/api/v1/customer/profile","type":0,"val":"api","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"profile","end":""}],
+    types: placeholder as Registry['customer.profile.get_profile']['types'],
+  },
+  'customer.profile.fetch_ride_statistics': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/customer/profile/ride-statistics',
+    tokens: [{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"api","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"profile","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"ride-statistics","end":""}],
+    types: placeholder as Registry['customer.profile.fetch_ride_statistics']['types'],
+  },
+  'customer.profile.update_profile': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/customer/profile',
+    tokens: [{"old":"/api/v1/customer/profile","type":0,"val":"api","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"profile","end":""}],
+    types: placeholder as Registry['customer.profile.update_profile']['types'],
   },
   'customer.notifications.fetch_notifications': {
     methods: ["GET","HEAD"],

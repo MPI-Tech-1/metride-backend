@@ -23,6 +23,7 @@ export const controllers = {
       dashboard: {
         FetchBookingMetrics: () => import('#controllers/v1/admin/dashboard/fetch_booking_metrics_controller'),
         FetchCustomerMetrics: () => import('#controllers/v1/admin/dashboard/fetch_customer_metrics_controller'),
+        FetchDashboardOverview: () => import('#controllers/v1/admin/dashboard/fetch_dashboard_overview_controller'),
         FetchDriverMetrics: () => import('#controllers/v1/admin/dashboard/fetch_driver_metrics_controller'),
         FetchPayoutMetrics: () => import('#controllers/v1/admin/dashboard/fetch_payout_metrics_controller'),
         FetchWalletTransactionMetrics: () => import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller'),
@@ -126,6 +127,11 @@ export const controllers = {
           RequestResetPasswordOtpToken: () => import('#controllers/v1/customer/password_management/reset_password/request_reset_password_otp_token_controller'),
           ResetPassword: () => import('#controllers/v1/customer/password_management/reset_password/reset_password_controller'),
         },
+      },
+      profile: {
+        FetchCustomerRideStatistics: () => import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller'),
+        GetCustomerProfile: () => import('#controllers/v1/customer/profile/get_customer_profile_controller'),
+        UpdateCustomerProfile: () => import('#controllers/v1/customer/profile/update_customer_profile_controller'),
       },
     },
     driver: {

@@ -11,9 +11,12 @@ const FetchPayoutMetricsController = () =>
   import('#controllers/v1/admin/dashboard/fetch_payout_metrics_controller')
 const FetchWalletTransactionMetricsController = () =>
   import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller')
+const FetchDashboardOverviewController = () =>
+  import('#controllers/v1/admin/dashboard/fetch_dashboard_overview_controller')
 
 router
   .group(() => {
+    router.get('/overview', [FetchDashboardOverviewController])
     router.get('/customer-metrics', [FetchCustomerMetricsController])
     router.get('/driver-metrics', [FetchDriverMetricsController])
     router.get('/booking-metrics', [FetchBookingMetricsController])
