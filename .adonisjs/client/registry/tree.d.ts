@@ -81,7 +81,8 @@ export interface ApiDefinition {
       submitBookingReview: typeof routes['customer.bookings.submit_booking_review']
       getBooking: typeof routes['customer.bookings.get_booking']
       fetchNearestDrivers: typeof routes['customer.bookings.fetch_nearest_drivers']
-      createBooking: typeof routes['customer.bookings.create_booking']
+      createShuttleBooking: typeof routes['customer.bookings.create_shuttle_booking']
+      createInstantBooking: typeof routes['customer.bookings.create_instant_booking']
       fetchBookings: typeof routes['customer.bookings.fetch_bookings']
     }
     profile: {

@@ -324,11 +324,17 @@ const routes = {
     tokens: [{"old":"/api/v1/customer/drivers","type":0,"val":"api","end":""},{"old":"/api/v1/customer/drivers","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/drivers","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/drivers","type":0,"val":"drivers","end":""}],
     types: placeholder as Registry['customer.bookings.fetch_nearest_drivers']['types'],
   },
-  'customer.bookings.create_booking': {
+  'customer.bookings.create_shuttle_booking': {
     methods: ["POST"],
-    pattern: '/api/v1/customer/bookings',
-    tokens: [{"old":"/api/v1/customer/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"bookings","end":""}],
-    types: placeholder as Registry['customer.bookings.create_booking']['types'],
+    pattern: '/api/v1/customer/bookings/shuttle',
+    tokens: [{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"shuttle","end":""}],
+    types: placeholder as Registry['customer.bookings.create_shuttle_booking']['types'],
+  },
+  'customer.bookings.create_instant_booking': {
+    methods: ["POST"],
+    pattern: '/api/v1/customer/bookings/instant',
+    tokens: [{"old":"/api/v1/customer/bookings/instant","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"instant","end":""}],
+    types: placeholder as Registry['customer.bookings.create_instant_booking']['types'],
   },
   'customer.bookings.fetch_bookings': {
     methods: ["GET","HEAD"],

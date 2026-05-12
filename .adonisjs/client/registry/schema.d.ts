@@ -639,20 +639,32 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking_management/fetch_nearest_drivers_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking_management/fetch_nearest_drivers_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking_management/fetch_nearest_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'customer.bookings.create_booking': {
+  'customer.bookings.create_shuttle_booking': {
     methods: ["POST"]
-    pattern: '/api/v1/customer/bookings'
+    pattern: '/api/v1/customer/bookings/shuttle'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/create_booking_request_validator').default)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/create_shuttle_booking_request_validator').default)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/create_booking_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_booking_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/create_shuttle_booking_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_shuttle_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_shuttle_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.bookings.create_instant_booking': {
+    methods: ["POST"]
+    pattern: '/api/v1/customer/bookings/instant'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/create_instant_booking_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/create_instant_booking_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_instant_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_instant_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'customer.bookings.fetch_bookings': {

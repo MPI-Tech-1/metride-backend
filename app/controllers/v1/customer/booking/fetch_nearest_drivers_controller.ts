@@ -24,8 +24,17 @@ export default class FetchNearestDriversController {
         .join('driver_vehicles as dv', (join) => {
           join.on('dv.driver_id', '=', 'd.id').onNull('dv.deleted_at')
         })
+        .join('driver_documents as dd', (join) => {
+          join.on('dd.driver_id', '=', 'd.id').onNull('dd.deleted_at')
+        })
         .join('ride_types as rt', (join) => {
           join.on('rt.id', '=', 'dv.ride_type_id').onNull('rt.deleted_at')
+        })
+        .join('vehicle_makes as vm', (join) => {
+          join.on('vm.id', '=', 'dv.vehicle_make_id').onNull('vm.deleted_at')
+        })
+        .join('vehicle_models as vmo', (join) => {
+          join.on('vmo.id', '=', 'dv.vehicle_model_id').onNull('vmo.deleted_at')
         })
         .whereRaw(
           'dl.id = (SELECT id FROM driver_locations dl2 WHERE dl2.driver_id = d.id AND dl2.deleted_at IS NULL ORDER BY dl2.created_at DESC LIMIT 1)'
@@ -34,6 +43,7 @@ export default class FetchNearestDriversController {
           'dv.id = (SELECT id FROM driver_vehicles dv2 WHERE dv2.driver_id = d.id AND dv2.deleted_at IS NULL ORDER BY dv2.created_at DESC LIMIT 1)'
         )
         .where('d.is_driver_active_for_trip', 1)
+        .where('d.status', 'approved')
         .whereNull('d.deleted_at')
         .select(
           'd.identifier',
@@ -42,7 +52,14 @@ export default class FetchNearestDriversController {
           'd.mobile_number',
           'dl.latitude',
           'dl.longitude',
+          'dd.vehicle_photo_url',
+          'dv.color_of_vehicle',
+          'dv.plate_number',
+          'dv.seat_capacity',
+          'vm.name as vehicle_make_name',
+          'vmo.name as vehicle_model_name',
           'rt.price_per_kilometer as price_per_kilometer',
+          'rt.identifier as ride_type_identfier',
           'rt.name as ride_type_name',
           db.raw(
             `(6371000 * acos(LEAST(1, cos(radians(?)) * cos(radians(dl.latitude)) * cos(radians(dl.longitude) - radians(?)) + sin(radians(?)) * sin(radians(dl.latitude))))) AS distance_in_meters`,
@@ -101,7 +118,18 @@ export default class FetchNearestDriversController {
             firstName: driver.first_name,
             lastName: driver.last_name,
             mobileNumber: driver.mobile_number,
-            rideTypeName: driver.ride_type_name,
+            rideType: {
+              identfier: driver.ride_type_identfier,
+              name: driver.ride_type_name,
+            },
+            driverVehicle: {
+              vehiclePhotoUrl: driver.vehicle_photo_url,
+              make: driver.vehicle_make_name,
+              model: driver.vehicle_model_name,
+              color: driver.color_of_vehicle,
+              plateNumber: driver.plate_number,
+              seatCapacity: driver.seat_capacity,
+            },
             currentLocation: {
               latitude: driver.latitude,
               longitude: driver.longitude,

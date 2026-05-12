@@ -111,13 +111,13 @@ export const controllers = {
         AuthenticateCustomer: () => import('#controllers/v1/customer/authentication/authenticate_customer_controller'),
         Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
       },
-      bookingManagement: {
-        FetchNearestDrivers: () => import('#controllers/v1/customer/booking_management/fetch_nearest_drivers_controller'),
-      },
       booking: {
         CheckoutBookingWithCard: () => import('#controllers/v1/customer/booking/checkout_booking_with_card_controller'),
         CreateBooking: () => import('#controllers/v1/customer/booking/create_booking_controller'),
+        CreateInstantBooking: () => import('#controllers/v1/customer/booking/create_instant_booking_controller'),
+        CreateShuttleBooking: () => import('#controllers/v1/customer/booking/create_shuttle_booking_controller'),
         FetchBookings: () => import('#controllers/v1/customer/booking/fetch_bookings_controller'),
+        FetchNearestDrivers: () => import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller'),
         GetBooking: () => import('#controllers/v1/customer/booking/get_booking_controller'),
         SubmitBookingReview: () => import('#controllers/v1/customer/booking/submit_booking_review_controller'),
       },

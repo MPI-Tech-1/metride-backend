@@ -57,7 +57,8 @@ export type ScannedRoutes = {
     'customer.bookings.submit_booking_review': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.fetch_nearest_drivers': { paramsTuple?: []; params?: {} }
-    'customer.bookings.create_booking': { paramsTuple?: []; params?: {} }
+    'customer.bookings.create_shuttle_booking': { paramsTuple?: []; params?: {} }
+    'customer.bookings.create_instant_booking': { paramsTuple?: []; params?: {} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
     'customer.profile.get_profile': { paramsTuple?: []; params?: {} }
@@ -124,7 +125,8 @@ export type ScannedRoutes = {
     'customer.bookings.checkout_booking_with_card': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.submit_booking_review': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.fetch_nearest_drivers': { paramsTuple?: []; params?: {} }
-    'customer.bookings.create_booking': { paramsTuple?: []; params?: {} }
+    'customer.bookings.create_shuttle_booking': { paramsTuple?: []; params?: {} }
+    'customer.bookings.create_instant_booking': { paramsTuple?: []; params?: {} }
     'driver.authentication.driver_onboarding': { paramsTuple?: []; params?: {} }
     'driver.authentication.authenticate_driver': { paramsTuple?: []; params?: {} }
     'driver.account-activation.driver_request_account_activation_token': { paramsTuple?: []; params?: {} }
