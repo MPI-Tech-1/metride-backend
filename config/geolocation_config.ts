@@ -6,6 +6,7 @@ const geolocationConfig = {
     identifier: 'google',
     apiKey: env.get('GOOGLE_GEOLOCATION_PROVIDER_API_KEY'),
     endpoint: env.get('GOOGLE_GEOLOCATION_PROVIDER_ENDPOINT'),
+    matrixEndpoint: env.get('GOOGLE_GEOLOCATION_MATRIX_PROVIDER_ENDPOINT'),
   },
 }
 

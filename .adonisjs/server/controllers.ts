@@ -111,6 +111,9 @@ export const controllers = {
         AuthenticateCustomer: () => import('#controllers/v1/customer/authentication/authenticate_customer_controller'),
         Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
       },
+      bookingManagement: {
+        FetchNearestDrivers: () => import('#controllers/v1/customer/booking_management/fetch_nearest_drivers_controller'),
+      },
       booking: {
         CheckoutBookingWithCard: () => import('#controllers/v1/customer/booking/checkout_booking_with_card_controller'),
         CreateBooking: () => import('#controllers/v1/customer/booking/create_booking_controller'),
@@ -145,10 +148,13 @@ export const controllers = {
       },
       bookingManagement: {
         AcceptBooking: () => import('#controllers/v1/driver/booking_management/accept_booking_controller'),
+        DisableRideAcceptanceStatus: () => import('#controllers/v1/driver/booking_management/disable_ride_acceptance_status'),
+        EnableRideAcceptanceStatus: () => import('#controllers/v1/driver/booking_management/enable_ride_acceptance_status'),
         FetchBookings: () => import('#controllers/v1/driver/booking_management/fetch_bookings_controller'),
         GetBooking: () => import('#controllers/v1/driver/booking_management/get_booking_controller'),
         RejectBooking: () => import('#controllers/v1/driver/booking_management/reject_booking_controller'),
         UpdateBookingTripProgress: () => import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller'),
+        UpdateDriverLocation: () => import('#controllers/v1/driver/booking_management/update_driver_location_controller'),
       },
       dashboard: {
         FetchBookingsMetrics: () => import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller'),

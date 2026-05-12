@@ -1,10 +1,16 @@
 import type CalculateDistanceInputOptions from '#infrastructure_providers/type_checkings/geolocation/calculate_distance_input_options'
 import type CalculateDistanceOutputOptions from '#infrastructure_providers/type_checkings/geolocation/calculate_distance_output_options'
+import type CalculateMultipleDistancesInputOptions from '#infrastructure_providers/type_checkings/geolocation/calculate_multiple_distances_input_options'
+import type CalculateMultipleDistancesOutputOptions from '#infrastructure_providers/type_checkings/geolocation/calculate_multiple_distances_output_options'
 
 interface GeolocationInterface {
   calculateDistance(
     calculateDistanceInputOptions: CalculateDistanceInputOptions
   ): Promise<CalculateDistanceOutputOptions>
+
+  calculateMultipleDistances(
+    calculateMultipleDistancesInputOptions: CalculateMultipleDistancesInputOptions
+  ): Promise<CalculateMultipleDistancesOutputOptions>
 }
 
 export default GeolocationInterface

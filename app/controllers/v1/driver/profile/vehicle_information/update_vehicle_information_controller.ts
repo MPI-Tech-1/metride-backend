@@ -7,11 +7,17 @@ import db from '@adonisjs/lucid/services/db'
 import DriverRegistrationStepActions from '#model_management/actions/driver_registration_step_actions'
 import VehicleModelActions from '#model_management/actions/vehicle_model_actions'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import RideTypeActions from '#model_management/actions/ride_type_actions'
 
 export default class UpdateVehicleInformationController {
   async handle({ request, response, auth }: HttpContext) {
-    const { vehicleModelIdentifier, typeOfVehicle, colorOfVehicle, plateNumber, seatCapacity } =
-      await request.validateUsing(UpdateVehicleInformationRequestValidator)
+    const {
+      vehicleModelIdentifier,
+      rideTypeIdentifier,
+      colorOfVehicle,
+      plateNumber,
+      seatCapacity,
+    } = await request.validateUsing(UpdateVehicleInformationRequestValidator)
 
     const dbTransaction = await db.transaction()
     try {
@@ -22,12 +28,17 @@ export default class UpdateVehicleInformationController {
         identifier: vehicleModelIdentifier,
       })
 
+      const rideType = await RideTypeActions.getRideType({
+        identifierType: 'identifier',
+        identifier: rideTypeIdentifier,
+      })
+
       await DriverVehicleActions.updateDriverVehicleRecord({
         identifierOptions: { identifier: loggedInDriver.id, identifierType: 'driverId' },
         updatePayload: {
           vehicleModelId: vehicleModel?.id,
           vehicleMakeId: vehicleModel?.vehicleMakeId,
-          typeOfVehicle,
+          rideTypeId: rideType?.id,
           colorOfVehicle,
           plateNumber,
           seatCapacity,

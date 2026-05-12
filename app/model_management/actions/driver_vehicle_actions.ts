@@ -27,6 +27,7 @@ export default class DriverVehicleActions {
     return await DriverVehicle.query()
       .preload('vehicleMake')
       .preload('vehicleModel')
+      .preload('rideType')
       .where('id', driverVehicleId)
       .first()
   }
@@ -35,6 +36,7 @@ export default class DriverVehicleActions {
     return await DriverVehicle.query()
       .preload('vehicleMake')
       .preload('vehicleModel')
+      .preload('rideType')
       .where('driver_id', driverId)
       .first()
   }
@@ -45,6 +47,7 @@ export default class DriverVehicleActions {
     return await DriverVehicle.query()
       .preload('vehicleMake')
       .preload('vehicleModel')
+      .preload('rideType')
       .where('identifier', driverVehicleIdentifier)
       .first()
   }
@@ -90,7 +93,10 @@ export default class DriverVehicleActions {
   ): Promise<{ driverVehiclePayload: DriverVehicle[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getDriverVehicleRecordOptions
 
-    const driverVehicleQuery = DriverVehicle.query().preload('vehicleMake').preload('vehicleModel')
+    const driverVehicleQuery = DriverVehicle.query()
+      .preload('vehicleMake')
+      .preload('vehicleModel')
+      .preload('rideType')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`

@@ -32,6 +32,9 @@ export default class Driver extends AbstractModel {
   @column({ serializeAs: null })
   declare password: string
 
+  @column({ consume: (value) => value === 1 })
+  declare isDriverActiveForTrip: boolean
+
   @column()
   declare fcmToken: string
 

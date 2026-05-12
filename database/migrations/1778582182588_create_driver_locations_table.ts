@@ -1,21 +1,15 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'drivers'
+  protected tableName = 'driver_locations'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('identifier').index()
-      table.string('first_name')
-      table.string('last_name')
-      table.string('email').index()
-      table.string('mobile_number')
-      table.boolean('is_driver_active_for_trip').defaultTo(false)
-      table.string('password')
-      table.string('fcm_token').nullable()
-      table.timestamp('last_logged_in_at').nullable()
-      table.string('status').defaultTo('pending')
+      table.integer('driver_id').index()
+      table.string('latitude')
+      table.string('longitude')
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

@@ -1,5 +1,7 @@
 const SubmitBookingReviewController = () =>
   import('#controllers/v1/customer/booking/submit_booking_review_controller')
+const FetchNearestDriversController = () =>
+  import('#controllers/v1/customer/booking_management/fetch_nearest_drivers_controller')
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 
@@ -16,6 +18,7 @@ router
     router.post('/bookings/:bookingIdentifier/checkout/card', [CheckoutBookingWithCardController])
     router.post('/bookings/:bookingIdentifier/reviews', [SubmitBookingReviewController])
     router.get('/bookings/:bookingIdentifier', [GetBookingController])
+    router.post('/drivers', [FetchNearestDriversController])
     router.post('/bookings', [CreateBookingController])
     router.get('/bookings', [FetchBookingsController])
   })
