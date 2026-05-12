@@ -21,9 +21,9 @@ export const controllers = {
         GetCustomer: () => import('#controllers/v1/admin/customer_management/get_customer_controller'),
       },
       dashboard: {
-        FetchDashboardOverview: () => import('#controllers/v1/admin/dashboard/fetch_dashboard_overview_controller'),
         FetchBookingMetrics: () => import('#controllers/v1/admin/dashboard/fetch_booking_metrics_controller'),
         FetchCustomerMetrics: () => import('#controllers/v1/admin/dashboard/fetch_customer_metrics_controller'),
+        FetchDashboardOverview: () => import('#controllers/v1/admin/dashboard/fetch_dashboard_overview_controller'),
         FetchDriverMetrics: () => import('#controllers/v1/admin/dashboard/fetch_driver_metrics_controller'),
         FetchPayoutMetrics: () => import('#controllers/v1/admin/dashboard/fetch_payout_metrics_controller'),
         FetchWalletTransactionMetrics: () => import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller'),
