@@ -70,6 +70,11 @@ export interface ApiDefinition {
       getBooking: typeof routes['customer.bookings.get_booking']
       checkoutBookingWithCard: typeof routes['customer.bookings.checkout_booking_with_card']
     }
+    profile: {
+      getProfile: typeof routes['customer.profile.get_profile']
+      updateProfile: typeof routes['customer.profile.update_profile']
+      fetchRideStatistics: typeof routes['customer.profile.fetch_ride_statistics']
+    }
     notifications: {
       fetchNotifications: typeof routes['customer.notifications.fetch_notifications']
       markNotificationAsRead: typeof routes['customer.notifications.mark_notification_as_read']

@@ -106,6 +106,11 @@ export const controllers = {
           ResetPassword: () => import('#controllers/v1/customer/password_management/reset_password/reset_password_controller'),
         },
       },
+      profile: {
+        FetchCustomerRideStatistics: () => import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller'),
+        GetCustomerProfile: () => import('#controllers/v1/customer/profile/get_customer_profile_controller'),
+        UpdateCustomerProfile: () => import('#controllers/v1/customer/profile/update_customer_profile_controller'),
+      },
     },
     driver: {
       accountActivation: {
