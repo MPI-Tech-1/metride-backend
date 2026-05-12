@@ -22,6 +22,7 @@ export default class PaystackBankListProvider implements BankListInterface {
       return apiResponse.data.map((bank: Record<string, any>) => {
         return {
           name: bank.name,
+          bankCode: bank.code,
         }
       })
     } catch (listBanksError) {
