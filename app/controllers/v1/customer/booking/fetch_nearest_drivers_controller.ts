@@ -61,6 +61,7 @@ export default class FetchNearestDriversController {
           'rt.price_per_kilometer as price_per_kilometer',
           'rt.identifier as ride_type_identfier',
           'rt.name as ride_type_name',
+          'rt.minimum_price as minimum_ride_price',
           db.raw(
             `(6371000 * acos(LEAST(1, cos(radians(?)) * cos(radians(dl.latitude)) * cos(radians(dl.longitude) - radians(?)) + sin(radians(?)) * sin(radians(dl.latitude))))) AS distance_in_meters`,
             [departure.latitude, departure.longitude, departure.latitude]
@@ -113,6 +114,8 @@ export default class FetchNearestDriversController {
           const totalDistanceInKilometers =
             tripDistance.distanceInKilometers + driverDistance.distanceInKilometers
 
+          const estimatedFare = driver.price_per_kilometer * totalDistanceInKilometers
+
           return {
             identifier: driver.identifier,
             firstName: driver.first_name,
@@ -146,7 +149,7 @@ export default class FetchNearestDriversController {
             },
             totalDistanceInKilometers,
             pricePerKilometer: driver.price_per_kilometer,
-            estimatedFare: driver.price_per_kilometer * totalDistanceInKilometers,
+            estimatedFare: estimatedFare > 0 ? estimatedFare : driver.minimum_ride_price,
           }
         })
         .filter((driver) => driver !== null)

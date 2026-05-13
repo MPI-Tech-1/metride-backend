@@ -2,11 +2,11 @@ import { DATE_FORMAT } from '#common/messages/system_messages'
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const createShuttleBookingRequestSchema = vine.object({
-  departureLocationName: vine.string().trim().escape().optional(),
+  departureLocationName: vine.string().trim().escape(),
   departureLocationGpsCoordinates: vine.string().trim().escape(),
   departureLocationType: vine.enum(['home', 'work', 'office', 'mall', 'market', 'others']),
 
-  destinationLocationName: vine.string().trim().escape().optional(),
+  destinationLocationName: vine.string().trim().escape(),
   destinationLocationGpsCoordinates: vine.string().trim().escape(),
   destinationLocationType: vine.enum(['home', 'work', 'office', 'mall', 'market', 'others']),
 

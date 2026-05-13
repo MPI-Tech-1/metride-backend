@@ -178,6 +178,7 @@ export const controllers = {
           GetDocuments: () => import('#controllers/v1/driver/profile/documents/get_documents_controller'),
           UpdateDocuments: () => import('#controllers/v1/driver/profile/documents/update_documents_controller'),
         },
+        GetProfile: () => import('#controllers/v1/driver/profile/get_profile_controller'),
         personalInformation: {
           GetPersonalInformation: () => import('#controllers/v1/driver/profile/personal_information/get_personal_information_controller'),
           UpdatePersonalInformation: () => import('#controllers/v1/driver/profile/personal_information/update_personal_information_controller'),
