@@ -6,8 +6,6 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
-import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
-import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 
 export interface SendBookingDriverCancellationNotificationJobPayload {
   bookingId: number
@@ -31,17 +29,6 @@ export default class SendBookingDriverCancellationNotificationJob extends Job<Se
     if (!booking) {
       throw new Error('SendBookingDriverCancellationNotificationJob: booking not found')
     }
-
-    await logBookingUpdatePayload(
-      createBookingSlackEventPayload({
-        eventType: 'driver_cancelled',
-        booking,
-        summary: `Cancellation notifications are being sent for booking ${booking.identifier}.`,
-        metadata: {
-          notificationType: 'bookings:booking_cancellation',
-        },
-      })
-    )
 
     const dbTransaction = await db.transaction()
 
@@ -81,7 +68,7 @@ export default class SendBookingDriverCancellationNotificationJob extends Job<Se
 
       const pushNotificationProvider = configurePushNotificationProvider()
 
-      if (booking.assignedDriver.fcmToken) {
+      if (booking.assignedDriver?.fcmToken) {
         await pushNotificationProvider.send({
           token: booking.assignedDriver.fcmToken!,
           notification: {

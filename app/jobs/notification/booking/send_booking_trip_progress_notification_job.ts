@@ -5,8 +5,6 @@ import db from '@adonisjs/lucid/services/db'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import logApplicationError from '#common/helper_functions/log_application_error'
-import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
-import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 
 export interface SendBookingTripProgressNotificationJobPayload {
   bookingId: number
@@ -16,14 +14,14 @@ const tripProgressMessageMap: Record<string, string> = {
   'heading-to-pickup': 'Your driver is heading to your pickup location.',
   'arrived-at-pickup': 'Your driver has arrived at your pickup location.',
   'enroute-to-dropoff': 'Your trip is underway. You are on your way to your destination.',
-  'completed': 'Your trip has been completed. Thank you for riding with us.',
+  completed: 'Your trip has been completed. Thank you for riding with us.',
 }
 
 const tripProgressTitleMap: Record<string, string> = {
   'heading-to-pickup': 'Driver On The Way',
   'arrived-at-pickup': 'Driver Arrived',
   'enroute-to-dropoff': 'Trip In Progress',
-  'completed': 'Trip Completed',
+  completed: 'Trip Completed',
 }
 
 export default class SendBookingTripProgressNotificationJob extends Job<SendBookingTripProgressNotificationJobPayload> {
@@ -51,17 +49,6 @@ export default class SendBookingTripProgressNotificationJob extends Job<SendBook
     if (!notificationContent) {
       return
     }
-
-    await logBookingUpdatePayload(
-      createBookingSlackEventPayload({
-        eventType: 'trip_progress_updated',
-        booking,
-        summary: `Trip progress has changed to "${booking.tripProgress}" and the customer is being notified.`,
-        metadata: {
-          notificationType: 'bookings:trip_progress',
-        },
-      })
-    )
 
     const dbTransaction = await db.transaction()
 
