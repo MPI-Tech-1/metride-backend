@@ -1,0 +1,9 @@
+import type DriverVehiclePhotoInterface from '#model_management/type_checking/driver_vehicle_photo/driver_vehicle_photo_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverVehiclePhotoRecordPayload = Partial<DriverVehiclePhotoInterface>
+
+type CreateDriverVehiclePhotoRecordOptions =
+  CreateNewRecordGeneric<CreateDriverVehiclePhotoRecordPayload>
+
+export default CreateDriverVehiclePhotoRecordOptions

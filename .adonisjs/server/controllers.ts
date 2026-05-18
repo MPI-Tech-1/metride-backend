@@ -35,6 +35,11 @@ export const controllers = {
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
         RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
         UpdateDriverCommission: () => import('#controllers/v1/admin/driver_management/update_driver_commission_controller'),
+        vehiclePhotos: {
+          AddVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/add_vehicle_photo_controller'),
+          DeleteVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/delete_vehicle_photo_controller'),
+          FetchVehiclePhotos: () => import('#controllers/v1/admin/driver_management/vehicle_photos/fetch_vehicle_photos_controller'),
+        },
       },
       settings: {
         booking: {

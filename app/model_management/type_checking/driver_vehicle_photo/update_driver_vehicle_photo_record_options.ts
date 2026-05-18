@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverVehiclePhotoIdentifierOptions from '#model_management/type_checking/driver_vehicle_photo/driver_vehicle_photo_identifier_options'
+import type DriverVehiclePhotoInterface from '#model_management/type_checking/driver_vehicle_photo/driver_vehicle_photo_interface'
+
+type UpdateDriverVehiclePhotoRecordOptions = UpdateRecordGeneric<
+  DriverVehiclePhotoIdentifierOptions,
+  Partial<DriverVehiclePhotoInterface>
+>
+
+export default UpdateDriverVehiclePhotoRecordOptions

@@ -91,6 +91,7 @@ export default class OnboardingController {
       await DriverSettingActions.createDriverSettingRecord({
         createPayload: {
           driverId: driver.id,
+          commissionPercentage: 70,
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
