@@ -3,6 +3,8 @@ import { middleware } from '#start/kernel'
 
 const FetchDriversController = () =>
   import('#controllers/v1/admin/driver_management/fetch_drivers_controller')
+const FetchActiveDriversController = () =>
+  import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller')
 const GetDriverController = () =>
   import('#controllers/v1/admin/driver_management/get_driver_controller')
 const ApproveDriverController = () =>
@@ -13,6 +15,7 @@ const RejectDriverController = () =>
 router
   .group(() => {
     router.get('/', [FetchDriversController])
+    router.get('/active', [FetchActiveDriversController])
     router.get('/:identifier', [GetDriverController])
     router.post('/:identifier/approve', [ApproveDriverController])
     router.post('/:identifier/reject', [RejectDriverController])

@@ -3,7 +3,7 @@ import type ListRecordsGeneric from '#common/type_checkings/model_management/lis
 type ListDriverRecordsOptionsFilterOptions = {
   searchQuery?: string
 
-  isActive?: boolean
+  isDriverActiveForTrip?: boolean
 }
 
 type ListDriverRecordsOptions = ListRecordsGeneric<ListDriverRecordsOptionsFilterOptions>

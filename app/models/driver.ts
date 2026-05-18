@@ -10,6 +10,7 @@ import DriverBankAccount from '#models/driver_bank_account'
 import DriverDocument from '#models/driver_document'
 import DriverPersonalInformation from '#models/driver_personal_information'
 import Booking from '#models/booking'
+import DriverLocation from '#models/driver_location'
 
 export default class Driver extends AbstractModel {
   @column()
@@ -48,6 +49,9 @@ export default class Driver extends AbstractModel {
     foreignKey: 'assignedDriverId',
   })
   declare assignedBookings: HasMany<typeof Booking>
+
+  @hasMany(() => DriverLocation)
+  declare driverLocations: HasMany<typeof DriverLocation>
 
   @hasOne(() => DriverRegistrationStep)
   declare driverRegistrationStep: HasOne<typeof DriverRegistrationStep>
