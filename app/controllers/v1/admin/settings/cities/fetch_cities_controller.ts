@@ -6,7 +6,6 @@ import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FetchCitiesController {
   async handle({ response }: HttpContext) {
-
     try {
       const { cityPayload: cities, paginationMeta } = await CityActions.listCities({
         filterRecordOptionsPayload: {},

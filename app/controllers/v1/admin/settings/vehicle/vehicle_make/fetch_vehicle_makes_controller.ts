@@ -11,10 +11,10 @@ export default class FetchVehicleMakesController {
         filterRecordOptionsPayload: {},
       })
 
-      const mutatedVehicleMakes = vehicleMakes.map(vehicleMake => {
+      const mutatedVehicleMakes = vehicleMakes.map((vehicleMake) => {
         return {
           identifier: vehicleMake.identifier,
-          name: vehicleMake.name
+          name: vehicleMake.name,
         }
       })
 
@@ -23,7 +23,7 @@ export default class FetchVehicleMakesController {
         status: SUCCESS,
         message: 'Vehicle makes fetched successfully',
         results: {
-          vehicleMakes: mutatedVehicleMakes
+          vehicleMakes: mutatedVehicleMakes,
         },
       })
     } catch (FetchVehicleMakesControllerError) {

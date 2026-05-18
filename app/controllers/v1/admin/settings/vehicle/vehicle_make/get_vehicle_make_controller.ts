@@ -24,14 +24,14 @@ export default class GetVehicleMakeController {
 
       const mutatedPayload = {
         identifier: vehicleMake.identifier,
-        name: vehicleMake.name
+        name: vehicleMake.name,
       }
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Vehicle make fetched successfully',
-        results: mutatedPayload
+        results: mutatedPayload,
       })
     } catch (GetVehicleMakeControllerError) {
       console.log('GetVehicleMakeControllerError -> ', GetVehicleMakeControllerError)

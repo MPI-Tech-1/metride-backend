@@ -54,6 +54,10 @@ export default class GetDriverController {
           hasProvidedRequiredDocuments: driver.driverRegistrationStep?.hasProvidedRequiredDocuments,
           hasProvidedBankAccount: driver.driverRegistrationStep?.hasProvidedBankAccount,
         },
+        driverSettings: {
+          identifier: driver.driverSetting.identifier,
+          commissionPercentage: driver.driverSetting.commissionPercentage,
+        },
         driverBankAccount: {
           identifier: driver.driverBankAccount?.identifier,
           bank: driver.driverBankAccount.bank

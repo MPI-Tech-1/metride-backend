@@ -28,14 +28,14 @@ export default class GetVehicleModelController {
         vehicleMake: {
           identifier: vehicleModel.vehicleMake?.identifier,
           name: vehicleModel.vehicleMake?.name,
-        }
+        },
       }
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Vehicle model fetched successfully',
-        results: mutatedPayload
+        results: mutatedPayload,
       })
     } catch (GetVehicleModelControllerError) {
       console.log('GetVehicleModelControllerError -> ', GetVehicleModelControllerError)

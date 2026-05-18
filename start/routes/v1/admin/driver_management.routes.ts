@@ -11,6 +11,8 @@ const ApproveDriverController = () =>
   import('#controllers/v1/admin/driver_management/approve_driver_controller')
 const RejectDriverController = () =>
   import('#controllers/v1/admin/driver_management/reject_driver_controller')
+const UpdateDriverCommissionController = () =>
+  import('#controllers/v1/admin/driver_management/update_driver_commission_controller')
 
 router
   .group(() => {
@@ -19,6 +21,7 @@ router
     router.get('/:identifier', [GetDriverController])
     router.post('/:identifier/approve', [ApproveDriverController])
     router.post('/:identifier/reject', [RejectDriverController])
+    router.patch('/:identifier/commission', [UpdateDriverCommissionController])
   })
   .prefix('/api/v1/admins/driver-management/drivers')
   .as('admin.driver_management')

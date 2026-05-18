@@ -3,10 +3,7 @@ import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 const createVehicleModelRequestSchema = vine.object({
   name: vine.string(),
   vehicleMakeIdentifier: vine.string().exists(async (db, value) => {
-    const vehicleMake = await db
-      .from('vehicle_makes')
-      .where('identifier', value)
-      .first()
+    const vehicleMake = await db.from('vehicle_makes').where('identifier', value).first()
     return vehicleMake ? true : false
   }),
 })

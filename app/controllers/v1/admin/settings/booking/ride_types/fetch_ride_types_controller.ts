@@ -6,7 +6,6 @@ import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class FetchRideTypesController {
   async handle({ response }: HttpContext) {
-
     try {
       const { rideTypePayload } = await RideTypeActions.listRideTypes({
         filterRecordOptionsPayload: {},
@@ -20,6 +19,7 @@ export default class FetchRideTypesController {
         pricePerKilometer: rideType.pricePerKilometer,
         basePrice: rideType.basePrice,
         minimumPrice: rideType.minimumPrice,
+        isActive: rideType.isActive,
       }))
 
       return response.status(HttpStatusCodesEnum.OK).send({

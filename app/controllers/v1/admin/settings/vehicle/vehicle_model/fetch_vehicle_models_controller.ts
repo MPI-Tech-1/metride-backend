@@ -21,14 +21,14 @@ export default class FetchVehicleModelsController {
         },
       })
 
-      const mutatedPayload = vehicleModels.map(vehicleModel => {
+      const mutatedPayload = vehicleModels.map((vehicleModel) => {
         return {
           identifier: vehicleModel.identifier,
           name: vehicleModel.name,
           vehicleMake: {
             identifier: vehicleModel.vehicleMake?.identifier,
             name: vehicleModel.vehicleMake?.name,
-          }
+          },
         }
       })
       return response.status(HttpStatusCodesEnum.OK).send({
@@ -36,8 +36,8 @@ export default class FetchVehicleModelsController {
         status: SUCCESS,
         message: 'Vehicle models fetched successfully',
         results: {
-          vehicleModels: mutatedPayload
-        }
+          vehicleModels: mutatedPayload,
+        },
       })
     } catch (FetchVehicleModelsControllerError) {
       console.log('FetchVehicleModelsControllerError -> ', FetchVehicleModelsControllerError)

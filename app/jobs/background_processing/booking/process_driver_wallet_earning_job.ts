@@ -6,6 +6,7 @@ import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
 import { randomUUID } from 'node:crypto'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import DriverSettingActions from '#model_management/actions/driver_setting_actions'
 
 export interface ProcessDriverWalletEarningJobPayload {
   bookingId: number
@@ -58,7 +59,19 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
         throw new Error('ProcessDriverWalletEarningJob: driver wallet not found')
       }
 
-      const earningAmount = booking.bookingPayment.amountPaid
+      const driverSettings = await DriverSettingActions.getDriverSetting({
+        identifierType: 'driverId',
+        identifier: booking.assignedDriverId,
+      })
+
+      if (!driverSettings) {
+        throw new Error('ProcessDriverWalletEarningJob: Driver does not have a settings')
+      }
+
+      const paidAmount = booking.bookingPayment.amountPaid
+      const commisionInPercentage = driverSettings.commissionPercentage / 100
+
+      const earningAmount = paidAmount * commisionInPercentage
 
       await DriverWalletTransactionActions.createDriverWalletTransactionRecord({
         createPayload: {

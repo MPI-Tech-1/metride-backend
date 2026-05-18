@@ -30,9 +30,11 @@ export const controllers = {
       },
       driverManagement: {
         ApproveDriver: () => import('#controllers/v1/admin/driver_management/approve_driver_controller'),
+        FetchActiveDrivers: () => import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller'),
         FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
         RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
+        UpdateDriverCommission: () => import('#controllers/v1/admin/driver_management/update_driver_commission_controller'),
       },
       settings: {
         booking: {

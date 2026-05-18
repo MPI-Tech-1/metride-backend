@@ -21,7 +21,9 @@ export default class BookingReviewActions {
     return bookingReview
   }
 
-  private static async getBookingReviewById(bookingReviewId: number): Promise<BookingReview | null> {
+  private static async getBookingReviewById(
+    bookingReviewId: number
+  ): Promise<BookingReview | null> {
     return await BookingReview.query().where('id', bookingReviewId).first()
   }
 

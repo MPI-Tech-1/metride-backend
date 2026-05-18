@@ -7,7 +7,9 @@ function normalizeValue(value: unknown): string {
 }
 
 function hasEventShape(message: unknown): message is Record<string, unknown> {
-  return Boolean(message && typeof message === 'object' && 'eventType' in message && 'booking' in message)
+  return Boolean(
+    message && typeof message === 'object' && 'eventType' in message && 'booking' in message
+  )
 }
 
 const eventTypeEmoji: Record<string, string> = {
@@ -77,13 +79,16 @@ export default function formatBookingSlackMessage(
   const payment = (message.payment as Record<string, unknown>) || {}
   const metadata = (message.metadata as Record<string, unknown>) || {}
 
-  const metadataEntries = Object.entries(metadata).filter(([, value]) => value !== null && value !== undefined)
+  const metadataEntries = Object.entries(metadata).filter(
+    ([, value]) => value !== null && value !== undefined
+  )
 
   const emoji = eventEmojiFor(message)
-  const headerPlain = `${emoji} ${normalizeValue(message.eventTitle)} | ${normalizeValue(booking.identifier)}`.slice(
-    0,
-    150
-  )
+  const headerPlain =
+    `${emoji} ${normalizeValue(message.eventTitle)} | ${normalizeValue(booking.identifier)}`.slice(
+      0,
+      150
+    )
 
   const blocks: Record<string, unknown>[] = [
     {
@@ -108,7 +113,10 @@ export default function formatBookingSlackMessage(
         { type: 'mrkdwn', text: `📊 *Booking status*\n${normalizeValue(booking.status)}` },
         { type: 'mrkdwn', text: `🛣️ *Trip progress*\n${normalizeValue(booking.tripProgress)}` },
         { type: 'mrkdwn', text: `📍 *Pickup*\n${normalizeValue(booking.departureLocationName)}` },
-        { type: 'mrkdwn', text: `🏁 *Dropoff*\n${normalizeValue(booking.destinationLocationName)}` },
+        {
+          type: 'mrkdwn',
+          text: `🏁 *Dropoff*\n${normalizeValue(booking.destinationLocationName)}`,
+        },
       ],
     },
     {

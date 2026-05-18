@@ -155,10 +155,18 @@ export default class DriverWalletTransactionActions {
       .whereNull('deleted_at')
       .where('created_at', '>=', thirtyDaysAgo)
       .select(
-        db.raw("SUM(CASE WHEN type_of_transaction = 'credit' THEN 1 ELSE 0 END) as total_credit_count"),
-        db.raw("SUM(CASE WHEN type_of_transaction = 'debit' THEN 1 ELSE 0 END) as total_debit_count"),
-        db.raw("SUM(CASE WHEN type_of_transaction = 'credit' THEN amount ELSE 0 END) as total_credit_amount"),
-        db.raw("SUM(CASE WHEN type_of_transaction = 'debit' THEN amount ELSE 0 END) as total_debit_amount")
+        db.raw(
+          "SUM(CASE WHEN type_of_transaction = 'credit' THEN 1 ELSE 0 END) as total_credit_count"
+        ),
+        db.raw(
+          "SUM(CASE WHEN type_of_transaction = 'debit' THEN 1 ELSE 0 END) as total_debit_count"
+        ),
+        db.raw(
+          "SUM(CASE WHEN type_of_transaction = 'credit' THEN amount ELSE 0 END) as total_credit_amount"
+        ),
+        db.raw(
+          "SUM(CASE WHEN type_of_transaction = 'debit' THEN amount ELSE 0 END) as total_debit_amount"
+        )
       )
       .first()
 

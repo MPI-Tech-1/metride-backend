@@ -1,7 +1,7 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const updateVehicleMakeRequestSchema = vine.object({
-  name: vine.string()
+  name: vine.string(),
 })
 
 const messages = {

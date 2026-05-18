@@ -32,6 +32,7 @@ export default class DriverActions {
         driverBankAccountQuery.preload('bank')
       )
       .preload('driverDocument')
+      .preload('driverSetting')
       .preload('driverPersonalInformation')
       .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
         driverApprovalStepsQuery.preload('performedByAdmin')
@@ -47,6 +48,7 @@ export default class DriverActions {
         driverBankAccountQuery.preload('bank')
       )
       .preload('driverDocument')
+      .preload('driverSetting')
       .preload('driverPersonalInformation')
       .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
         driverApprovalStepsQuery.preload('performedByAdmin')
@@ -62,6 +64,7 @@ export default class DriverActions {
         driverBankAccountQuery.preload('bank')
       )
       .preload('driverDocument')
+      .preload('driverSetting')
       .preload('driverPersonalInformation')
       .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
         driverApprovalStepsQuery.preload('performedByAdmin')

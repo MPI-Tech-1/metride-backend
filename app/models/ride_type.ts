@@ -19,4 +19,7 @@ export default class RideType extends AbstractModel {
 
   @column()
   declare minimumPrice: number
+
+  @column({ consume: (value) => value === 1 })
+  declare isActive: boolean
 }

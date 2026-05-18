@@ -30,13 +30,14 @@ export default class GetRideTypeController {
         pricePerKilometer: rideType.pricePerKilometer,
         basePrice: rideType.basePrice,
         minimumPrice: rideType.minimumPrice,
+        isActive: rideType.isActive,
       }
 
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Ride type fetched successfully',
-        results: mutatedPayload
+        results: mutatedPayload,
       })
     } catch (GetRideTypeControllerError) {
       console.log('GetRideTypeControllerError -> ', GetRideTypeControllerError)

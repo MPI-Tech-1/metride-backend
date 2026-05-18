@@ -30,9 +30,7 @@ export default class DriverLocationActions {
   private static async getDriverLocationByIdentifier(
     driverLocationIdentifier: string
   ): Promise<DriverLocation | null> {
-    return await DriverLocation.query()
-      .where('identifier', driverLocationIdentifier)
-      .first()
+    return await DriverLocation.query().where('identifier', driverLocationIdentifier).first()
   }
 
   private static async getDriverLocationByDriverId(

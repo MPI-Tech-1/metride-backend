@@ -47,7 +47,7 @@ export default class UpdateVehicleModelController {
         },
         updatePayload: {
           name,
-          vehicleMakeId: vehicleMake.id
+          vehicleMakeId: vehicleMake.id,
         },
         dbTransactionOptions: { useTransaction: false },
       })

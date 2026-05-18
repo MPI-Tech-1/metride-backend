@@ -11,7 +11,10 @@ export default class UpdateVehicleMakeController {
     const { name } = await request.validateUsing(UpdateVehicleMakeRequestValidator)
 
     try {
-      const vehicleMake = await VehicleMakeActions.getVehicleMake({ identifier, identifierType: 'identifier' })
+      const vehicleMake = await VehicleMakeActions.getVehicleMake({
+        identifier,
+        identifierType: 'identifier',
+      })
 
       if (!vehicleMake) {
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
@@ -27,7 +30,7 @@ export default class UpdateVehicleMakeController {
           identifierType: 'identifier',
         },
         updatePayload: {
-          name
+          name,
         },
         dbTransactionOptions: { useTransaction: false },
       })

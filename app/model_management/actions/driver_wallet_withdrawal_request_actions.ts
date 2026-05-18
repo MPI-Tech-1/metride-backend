@@ -172,7 +172,9 @@ export default class DriverWalletWithdrawalRequestActions {
         .select(
           db.raw("SUM(CASE WHEN status = 'approved' THEN 1 ELSE 0 END) as total_approved"),
           db.raw("SUM(CASE WHEN status = 'rejected' THEN 1 ELSE 0 END) as total_rejected"),
-          db.raw("SUM(CASE WHEN status = 'approved' THEN amount ELSE 0 END) as total_approved_amount")
+          db.raw(
+            "SUM(CASE WHEN status = 'approved' THEN amount ELSE 0 END) as total_approved_amount"
+          )
         )
         .first(),
     ])

@@ -14,17 +14,20 @@
         table[class=body] span {
           font-size: 16px !important;
         }
+      
         table[class=body] .container {
           width: 100% !important;
           padding: 0 !important;
         }
       }
+      
       body,
       p,
       td {
         font-family: Arial, Helvetica, sans-serif;
         color: #333333;
       }
+      
       .receipt-pill {
         display: inline-block;
         background: #f8f4ef;
@@ -38,6 +41,7 @@
         border-radius: 4px;
         margin-bottom: 8px;
       }
+      
       .receipt-box {
         background: #fafbfd;
         border: 1px solid #e8e4df;
@@ -45,14 +49,17 @@
         overflow: hidden;
         margin: 22px 0;
       }
+      
       .receipt-row td {
         padding: 12px 18px;
         border-bottom: 1px solid #eeeeee;
         vertical-align: top;
       }
+      
       .receipt-row:last-child td {
         border-bottom: none;
       }
+      
       .label {
         font-size: 11px;
         font-weight: bold;
@@ -61,17 +68,20 @@
         letter-spacing: 0.6px;
         width: 42%;
       }
+      
       .value {
         font-size: 15px;
         color: #222222;
         line-height: 1.45;
       }
+      
       .total-row td {
         background: #f8f4ef;
         border-top: 2px solid #bb9267;
         border-bottom: none !important;
         padding: 16px 18px;
       }
+      
       .total-label {
         font-size: 12px;
         font-weight: bold;
@@ -79,12 +89,14 @@
         text-transform: uppercase;
         letter-spacing: 0.8px;
       }
+      
       .total-amount {
         font-size: 24px;
         font-weight: bold;
         color: #bb9267;
         line-height: 1.2;
       }
+      
       .muted {
         font-size: 12px;
         color: #777777;
@@ -96,13 +108,19 @@
   <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
     <table class="body" width="100%" style="background-color: #f6f6f6;">
       <tr>
-        <td></td>
+        <td>
+        </td>
         <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
           <div class="content" style="max-width: 580px; margin: 0 auto;">
-            <table class="main" width="100%" style="background: #ffffff; border-radius: 8px; border-collapse: separate;">
+            <table
+              class="main"
+              width="100%"
+              style="background: #ffffff; border-radius: 8px; border-collapse: separate;"
+            >
 
               <tr style="background-color: #bb9267;">
-                <td style="padding: 14px 24px;"></td>
+                <td style="padding: 14px 24px;">
+                </td>
               </tr>
 
               <tr>
@@ -133,67 +151,125 @@
                     <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
 
                       <tr class="receipt-row">
-                        <td class="label">Reference</td>
-                        <td class="value" style="font-family: Consolas, Monaco, monospace; font-size: 14px;">{{ bookingReference }}</td>
+                        <td class="label">
+                          Reference
+                        </td>
+                        <td class="value" style="font-family: Consolas, Monaco, monospace; font-size: 14px;">
+                          {{ bookingReference }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Trip date</td>
-                        <td class="value">{{ tripDate }}</td>
+                        <td class="label">
+                          Trip date
+                        </td>
+                        <td class="value">
+                          {{ tripDate }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Receipt issued</td>
-                        <td class="value">{{ receiptIssuedAt }}</td>
+                        <td class="label">
+                          Receipt issued
+                        </td>
+                        <td class="value">
+                          {{ receiptIssuedAt }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Service</td>
-                        <td class="value">{{ rideTypeName }} · <span style="text-transform: capitalize;">{{ typeOfBooking }}</span></td>
+                        <td class="label">
+                          Service
+                        </td>
+                        <td class="value">
+                          {{ rideTypeName }} · <span style="text-transform: capitalize;">{{ typeOfBooking }}</span>
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Pickup</td>
-                        <td class="value">{{ departureLocationName }}</td>
+                        <td class="label">
+                          Pickup
+                        </td>
+                        <td class="value">
+                          {{ departureLocationName }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Drop-off</td>
-                        <td class="value">{{ destinationLocationName }}</td>
+                        <td class="label">
+                          Drop-off
+                        </td>
+                        <td class="value">
+                          {{ destinationLocationName }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Est. distance</td>
-                        <td class="value">{{ estimatedDistance }}</td>
+                        <td class="label">
+                          Est. distance
+                        </td>
+                        <td class="value">
+                          {{ estimatedDistance }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Est. duration</td>
-                        <td class="value">{{ estimatedDuration }}</td>
+                        <td class="label">
+                          Est. duration
+                        </td>
+                        <td class="value">
+                          {{ estimatedDuration }}
+                        </td>
                       </tr>
 
                       @if(driverName)
                         <tr class="receipt-row">
-                          <td class="label">Driver</td>
-                          <td class="value">{{ driverName }}</td>
+                          <td class="label">
+                            Driver
+                          </td>
+                          <td class="value">
+                            {{ driverName }}
+                          </td>
                         </tr>
                       @endif
-
+                      
                       <tr class="receipt-row">
-                        <td class="label">Payment method</td>
-                        <td class="value" style="text-transform: capitalize;">{{ paymentMethod }}</td>
+                        <td class="label">
+                          Payment method
+                        </td>
+                        <td class="value" style="text-transform: capitalize;">
+                          {{ paymentMethod }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Payment status</td>
-                        <td class="value" style="text-transform: capitalize;">{{ paymentStatus }}</td>
+                        <td class="label">
+                          Payment status
+                        </td>
+                        <td class="value" style="text-transform: capitalize;">
+                          {{ paymentStatus }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Base fare</td>
-                        <td class="value">{{ basePriceFormatted }}</td>
+                        <td class="label">
+                          Base fare
+                        </td>
+                        <td class="value">
+                          {{ basePriceFormatted }}
+                        </td>
                       </tr>
                       <tr class="receipt-row">
-                        <td class="label">Discount</td>
-                        <td class="value">{{ discountFormatted }}</td>
+                        <td class="label">
+                          Discount
+                        </td>
+                        <td class="value">
+                          {{ discountFormatted }}
+                        </td>
                       </tr>
 
                       <tr class="total-row">
-                        <td class="total-label" style="vertical-align: middle;">Total paid</td>
+                        <td class="total-label" style="vertical-align: middle;">
+                          Total paid
+                        </td>
                         <td style="text-align: right; vertical-align: middle;">
-                          <div class="total-amount">{{ amountPaidFormatted }}</div>
-                          <div class="muted">Amount charged in Nigerian Naira (₦)</div>
+                          <div class="total-amount">
+                            {{ amountPaidFormatted }}
+                          </div>
+                          <div class="muted">
+                            Amount charged in Nigerian Naira (₦)
+                          </div>
                         </td>
                       </tr>
                     </table>
@@ -228,7 +304,8 @@
             </table>
           </div>
         </td>
-        <td></td>
+        <td>
+        </td>
       </tr>
     </table>
   </body>

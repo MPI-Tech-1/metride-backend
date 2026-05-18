@@ -10,7 +10,9 @@ const FetchCustomerRideStatisticsController = () =>
 
 router
   .group(() => {
-    router.get('/ride-statistics', [FetchCustomerRideStatisticsController]).as('fetch_ride_statistics')
+    router
+      .get('/ride-statistics', [FetchCustomerRideStatisticsController])
+      .as('fetch_ride_statistics')
     router.get('/', [GetCustomerProfileController]).as('get_profile')
     router.patch('/', [UpdateCustomerProfileController]).as('update_profile')
   })

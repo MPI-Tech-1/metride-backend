@@ -7,11 +7,19 @@ import logApplicationError from '#common/helper_functions/log_application_error'
 
 export default class CreateRideTypeController {
   async handle({ request, response }: HttpContext) {
-    const { name, numberOfSeats, pricePerKilometer, basePrice, minimumPrice, description } = await request.validateUsing(CreateRideTypeRequestValidator)
+    const { name, numberOfSeats, pricePerKilometer, basePrice, minimumPrice, description } =
+      await request.validateUsing(CreateRideTypeRequestValidator)
 
     try {
       await RideTypeActions.createRideTypeRecord({
-        createPayload: { name, numberOfSeats, pricePerKilometer, basePrice, minimumPrice, description },
+        createPayload: {
+          name,
+          numberOfSeats,
+          pricePerKilometer,
+          basePrice,
+          minimumPrice,
+          description,
+        },
         dbTransactionOptions: { useTransaction: false },
       })
 

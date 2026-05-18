@@ -11,6 +11,7 @@ import DriverDocument from '#models/driver_document'
 import DriverPersonalInformation from '#models/driver_personal_information'
 import Booking from '#models/booking'
 import DriverLocation from '#models/driver_location'
+import DriverSetting from '#models/driver_setting'
 
 export default class Driver extends AbstractModel {
   @column()
@@ -70,6 +71,9 @@ export default class Driver extends AbstractModel {
 
   @hasOne(() => DriverPersonalInformation)
   declare driverPersonalInformation: HasOne<typeof DriverPersonalInformation>
+
+  @hasOne(() => DriverSetting)
+  declare driverSetting: HasOne<typeof DriverSetting>
 
   static accessTokens = DbAccessTokensProvider.forModel(Driver, {
     table: 'auth_access_tokens',

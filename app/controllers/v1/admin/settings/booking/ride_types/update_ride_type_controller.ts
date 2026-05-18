@@ -11,7 +11,10 @@ export default class UpdateRideTypeController {
     const payload = await request.validateUsing(UpdateRideTypeRequestValidator)
 
     try {
-      const rideType = await RideTypeActions.getRideType({ identifier, identifierType: 'identifier' })
+      const rideType = await RideTypeActions.getRideType({
+        identifier,
+        identifierType: 'identifier',
+      })
 
       if (!rideType) {
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
