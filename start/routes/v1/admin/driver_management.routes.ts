@@ -13,16 +13,8 @@ const RejectDriverController = () =>
   import('#controllers/v1/admin/driver_management/reject_driver_controller')
 const UpdateDriverCommissionController = () =>
   import('#controllers/v1/admin/driver_management/update_driver_commission_controller')
-const AddVehiclePhotoController = () =>
-  import('#controllers/v1/admin/driver_management/vehicle_photos/add_vehicle_photo_controller')
-const FetchVehiclePhotosController = () =>
-  import(
-    '#controllers/v1/admin/driver_management/vehicle_photos/fetch_vehicle_photos_controller'
-  )
-const DeleteVehiclePhotoController = () =>
-  import(
-    '#controllers/v1/admin/driver_management/vehicle_photos/delete_vehicle_photo_controller'
-  )
+const UploadDriverReferenceFormController = () =>
+  import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller')
 
 router
   .group(() => {
@@ -32,9 +24,7 @@ router
     router.post('/:identifier/approve', [ApproveDriverController])
     router.post('/:identifier/reject', [RejectDriverController])
     router.patch('/:identifier/commission', [UpdateDriverCommissionController])
-    router.post('/:identifier/vehicle-photos', [AddVehiclePhotoController])
-    router.get('/:identifier/vehicle-photos', [FetchVehiclePhotosController])
-    router.delete('/:identifier/vehicle-photos/:photoIdentifier', [DeleteVehiclePhotoController])
+    router.patch('/:identifier/reference-form', [UploadDriverReferenceFormController])
   })
   .prefix('/api/v1/admins/driver-management/drivers')
   .as('admin.driver_management')

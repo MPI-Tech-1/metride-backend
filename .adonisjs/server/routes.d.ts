@@ -8,9 +8,12 @@ export type ScannedRoutes = {
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
+    'admin.driver_management.fetch_active_drivers': { paramsTuple?: []; params?: {} }
     'admin.driver_management.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.approve_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.update_driver_commission': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.upload_driver_reference_form': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.create_ride_type': { paramsTuple?: []; params?: {} }
     'admin.settings.update_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_ride_types': { paramsTuple?: []; params?: {} }
@@ -47,6 +50,9 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
+    'admin.vehicle_management.add_vehicle_photo': { paramsTuple?: []; params?: {} }
+    'admin.vehicle_management.fetch_vehicle_photos': { paramsTuple?: []; params?: {} }
+    'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -79,6 +85,7 @@ export type ScannedRoutes = {
     'driver.profile.update_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
     'driver.profile.update_documents': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_profile': { paramsTuple?: []; params?: {} }
     'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
     'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
@@ -116,6 +123,7 @@ export type ScannedRoutes = {
     'admin.settings.create_vehicle_model': { paramsTuple?: []; params?: {} }
     'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
     'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
+    'admin.vehicle_management.add_vehicle_photo': { paramsTuple?: []; params?: {} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -143,6 +151,7 @@ export type ScannedRoutes = {
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
+    'admin.driver_management.fetch_active_drivers': { paramsTuple?: []; params?: {} }
     'admin.driver_management.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_ride_types': { paramsTuple?: []; params?: {} }
     'admin.settings.get_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -165,6 +174,7 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
+    'admin.vehicle_management.fetch_vehicle_photos': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
@@ -174,6 +184,7 @@ export type ScannedRoutes = {
     'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_profile': { paramsTuple?: []; params?: {} }
     'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -193,6 +204,7 @@ export type ScannedRoutes = {
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
+    'admin.driver_management.fetch_active_drivers': { paramsTuple?: []; params?: {} }
     'admin.driver_management.get_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.fetch_ride_types': { paramsTuple?: []; params?: {} }
     'admin.settings.get_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -215,6 +227,7 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_booking_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
+    'admin.vehicle_management.fetch_vehicle_photos': { paramsTuple?: []; params?: {} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
@@ -224,6 +237,7 @@ export type ScannedRoutes = {
     'driver.profile.get_vehicle_information': { paramsTuple?: []; params?: {} }
     'driver.profile.get_bank_account': { paramsTuple?: []; params?: {} }
     'driver.profile.get_documents': { paramsTuple?: []; params?: {} }
+    'driver.profile.get_profile': { paramsTuple?: []; params?: {} }
     'driver.notifications.fetch_notifications': { paramsTuple?: []; params?: {} }
     'driver.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'driver.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -240,6 +254,8 @@ export type ScannedRoutes = {
     'common.bookings.fetch_popular_locations': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
+    'admin.driver_management.update_driver_commission': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.driver_management.upload_driver_reference_form': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.update_ride_type': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.update_popular_location': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.update_city': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -260,6 +276,9 @@ export type ScannedRoutes = {
     'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'driver.bookings.enable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
     'driver.bookings.disable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
+  }
+  DELETE: {
+    'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

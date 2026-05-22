@@ -77,6 +77,7 @@ export default class GetDriverController {
           driverLicenceUrl: driver.driverDocument?.driverLicenceUrl,
           vehiclePaperUrl: driver.driverDocument?.vehiclePaperUrl,
           vehiclePhotoUrl: driver.driverDocument?.vehiclePhotoUrl,
+          referencePhotoUrl: driver.driverDocument?.referencePhotoUrl,
           createdAt: driver.driverDocument?.createdAt,
           updatedAt: driver.driverDocument?.updatedAt,
         },

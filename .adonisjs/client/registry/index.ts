@@ -30,6 +30,12 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"drivers","end":""}],
     types: placeholder as Registry['admin.driver_management.fetch_drivers']['types'],
   },
+  'admin.driver_management.fetch_active_drivers': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/driver-management/drivers/active',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"active","end":""}],
+    types: placeholder as Registry['admin.driver_management.fetch_active_drivers']['types'],
+  },
   'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/driver-management/drivers/:identifier',
@@ -47,6 +53,18 @@ const routes = {
     pattern: '/api/v1/admins/driver-management/drivers/:identifier/reject',
     tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"reject","end":""}],
     types: placeholder as Registry['admin.driver_management.reject_driver']['types'],
+  },
+  'admin.driver_management.update_driver_commission': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/commission',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"commission","end":""}],
+    types: placeholder as Registry['admin.driver_management.update_driver_commission']['types'],
+  },
+  'admin.driver_management.upload_driver_reference_form': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/reference-form',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"reference-form","end":""}],
+    types: placeholder as Registry['admin.driver_management.upload_driver_reference_form']['types'],
   },
   'admin.settings.create_ride_type': {
     methods: ["POST"],
@@ -264,6 +282,24 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"api","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"dashboard","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"wallet-transaction-metrics","end":""}],
     types: placeholder as Registry['admin.dashboard.fetch_wallet_transaction_metrics']['types'],
   },
+  'admin.vehicle_management.add_vehicle_photo': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos',
+    tokens: [{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"api","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-management","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-photos","end":""}],
+    types: placeholder as Registry['admin.vehicle_management.add_vehicle_photo']['types'],
+  },
+  'admin.vehicle_management.fetch_vehicle_photos': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos',
+    tokens: [{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"api","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-management","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-photos","end":""}],
+    types: placeholder as Registry['admin.vehicle_management.fetch_vehicle_photos']['types'],
+  },
+  'admin.vehicle_management.delete_vehicle_photo': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier',
+    tokens: [{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"vehicle-management","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"vehicle-photos","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":1,"val":"photoIdentifier","end":""}],
+    types: placeholder as Registry['admin.vehicle_management.delete_vehicle_photo']['types'],
+  },
   'customer.authentication.onboarding': {
     methods: ["POST"],
     pattern: '/api/v1/customers/authentication/onboarding',
@@ -455,6 +491,12 @@ const routes = {
     pattern: '/api/v1/drivers/profile/documents',
     tokens: [{"old":"/api/v1/drivers/profile/documents","type":0,"val":"api","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"v1","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"drivers","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"profile","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"documents","end":""}],
     types: placeholder as Registry['driver.profile.update_documents']['types'],
+  },
+  'driver.profile.get_profile': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/drivers/profile',
+    tokens: [{"old":"/api/v1/drivers/profile","type":0,"val":"api","end":""},{"old":"/api/v1/drivers/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/drivers/profile","type":0,"val":"drivers","end":""},{"old":"/api/v1/drivers/profile","type":0,"val":"profile","end":""}],
+    types: placeholder as Registry['driver.profile.get_profile']['types'],
   },
   'driver.notifications.fetch_notifications': {
     methods: ["GET","HEAD"],

@@ -55,6 +55,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'admin.driver_management.fetch_active_drivers': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/driver-management/drivers/active'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/driver_management/list_active_drivers_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/driver-management/drivers/:identifier'
@@ -89,6 +101,30 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/reject_driver_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/reject_driver_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/reject_driver_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.driver_management.update_driver_commission': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/commission'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/driver_management/update_driver_commission_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/update_driver_commission_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/update_driver_commission_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/update_driver_commission_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.driver_management.upload_driver_reference_form': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/reference-form'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/driver_management/upload_driver_reference_form_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/upload_driver_reference_form_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'admin.settings.create_ride_type': {
@@ -523,6 +559,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller').default['handle']>>>
     }
   }
+  'admin.vehicle_management.add_vehicle_photo': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.vehicle_management.fetch_vehicle_photos': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/vehicle_management/vehicle_photos/list_vehicle_photos_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/fetch_vehicle_photos_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/fetch_vehicle_photos_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.vehicle_management.delete_vehicle_photo': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { photoIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller').default['handle']>>>
+    }
+  }
   'customer.authentication.onboarding': {
     methods: ["POST"]
     pattern: '/api/v1/customers/authentication/onboarding'
@@ -905,6 +977,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/v1/driver/profile/documents/update_documents_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/documents/update_documents_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/documents/update_documents_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'driver.profile.get_profile': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/drivers/profile'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/get_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/get_profile_controller').default['handle']>>>
     }
   }
   'driver.notifications.fetch_notifications': {

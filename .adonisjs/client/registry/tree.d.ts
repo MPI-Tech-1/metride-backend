@@ -14,9 +14,12 @@ export interface ApiDefinition {
     }
     driverManagement: {
       fetchDrivers: typeof routes['admin.driver_management.fetch_drivers']
+      fetchActiveDrivers: typeof routes['admin.driver_management.fetch_active_drivers']
       getDriver: typeof routes['admin.driver_management.get_driver']
       approveDriver: typeof routes['admin.driver_management.approve_driver']
       rejectDriver: typeof routes['admin.driver_management.reject_driver']
+      updateDriverCommission: typeof routes['admin.driver_management.update_driver_commission']
+      uploadDriverReferenceForm: typeof routes['admin.driver_management.upload_driver_reference_form']
     }
     settings: {
       createRideType: typeof routes['admin.settings.create_ride_type']
@@ -61,6 +64,11 @@ export interface ApiDefinition {
       fetchBookingMetrics: typeof routes['admin.dashboard.fetch_booking_metrics']
       fetchPayoutMetrics: typeof routes['admin.dashboard.fetch_payout_metrics']
       fetchWalletTransactionMetrics: typeof routes['admin.dashboard.fetch_wallet_transaction_metrics']
+    }
+    vehicleManagement: {
+      addVehiclePhoto: typeof routes['admin.vehicle_management.add_vehicle_photo']
+      fetchVehiclePhotos: typeof routes['admin.vehicle_management.fetch_vehicle_photos']
+      deleteVehiclePhoto: typeof routes['admin.vehicle_management.delete_vehicle_photo']
     }
   }
   customer: {
@@ -117,6 +125,7 @@ export interface ApiDefinition {
       updateBankAccount: typeof routes['driver.profile.update_bank_account']
       getDocuments: typeof routes['driver.profile.get_documents']
       updateDocuments: typeof routes['driver.profile.update_documents']
+      getProfile: typeof routes['driver.profile.get_profile']
     }
     notifications: {
       fetchNotifications: typeof routes['driver.notifications.fetch_notifications']

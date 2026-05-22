@@ -40,6 +40,7 @@ export const controllers = {
           DeleteVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/delete_vehicle_photo_controller'),
           FetchVehiclePhotos: () => import('#controllers/v1/admin/driver_management/vehicle_photos/fetch_vehicle_photos_controller'),
         },
+        UploadDriverReferenceForm: () => import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller'),
       },
       settings: {
         booking: {
@@ -75,6 +76,13 @@ export const controllers = {
             GetVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller'),
             UpdateVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller'),
           },
+        },
+      },
+      vehicleManagement: {
+        vehiclePhotos: {
+          AddVehiclePhoto: () => import('#controllers/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_controller'),
+          DeleteVehiclePhoto: () => import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller'),
+          FetchVehiclePhotos: () => import('#controllers/v1/admin/vehicle_management/vehicle_photos/fetch_vehicle_photos_controller'),
         },
       },
       wallet: {
