@@ -7,6 +7,7 @@ const updateRideTypeRequestSchema = vine.object({
   pricePerKilometer: vine.number().min(0).optional(),
   basePrice: vine.number().min(0).optional(),
   minimumPrice: vine.number().min(0).optional(),
+  isActive: vine.boolean().optional(),
 })
 
 const messages = {
