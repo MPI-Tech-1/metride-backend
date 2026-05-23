@@ -1,13 +1,13 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const updateRideTypeRequestSchema = vine.object({
-  name: vine.string(),
+  name: vine.string().optional(),
   description: vine.string().optional(),
-  numberOfSeats: vine.number().min(1),
-  pricePerKilometer: vine.number().min(0),
-  basePrice: vine.number().min(0),
-  minimumPrice: vine.number().min(0),
-  is_active: vine.boolean(),
+  numberOfSeats: vine.number().min(1).optional(),
+  pricePerKilometer: vine.number().min(0).optional(),
+  basePrice: vine.number().min(0).optional(),
+  minimumPrice: vine.number().min(0).optional(),
+  isActive: vine.boolean().optional(),
 })
 
 const messages = {
