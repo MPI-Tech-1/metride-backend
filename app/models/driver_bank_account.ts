@@ -16,6 +16,9 @@ export default class DriverBankAccount extends AbstractModel {
   @column()
   declare accountNumber: string
 
+  @column()
+  declare payoutProviderIdentifier: string | null
+
   @belongsTo(() => Bank)
   declare bank: BelongsTo<typeof Bank>
 }

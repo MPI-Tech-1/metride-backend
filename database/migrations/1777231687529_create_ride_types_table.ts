@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.integer('price_per_kilometer').defaultTo(0)
       table.integer('base_price').defaultTo(0)
       table.integer('minimum_price').defaultTo(0)
+      table.boolean('is_active').defaultTo(true)
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

@@ -14,9 +14,12 @@ export interface ApiDefinition {
     }
     driverManagement: {
       fetchDrivers: typeof routes['admin.driver_management.fetch_drivers']
+      fetchActiveDrivers: typeof routes['admin.driver_management.fetch_active_drivers']
       getDriver: typeof routes['admin.driver_management.get_driver']
       approveDriver: typeof routes['admin.driver_management.approve_driver']
       rejectDriver: typeof routes['admin.driver_management.reject_driver']
+      updateDriverCommission: typeof routes['admin.driver_management.update_driver_commission']
+      uploadDriverReferenceForm: typeof routes['admin.driver_management.upload_driver_reference_form']
     }
     settings: {
       createRideType: typeof routes['admin.settings.create_ride_type']
@@ -27,6 +30,18 @@ export interface ApiDefinition {
       updatePopularLocation: typeof routes['admin.settings.update_popular_location']
       fetchPopularLocations: typeof routes['admin.settings.fetch_popular_locations']
       getPopularLocation: typeof routes['admin.settings.get_popular_location']
+      createCity: typeof routes['admin.settings.create_city']
+      updateCity: typeof routes['admin.settings.update_city']
+      fetchCities: typeof routes['admin.settings.fetch_cities']
+      getCity: typeof routes['admin.settings.get_city']
+      createVehicleMake: typeof routes['admin.settings.create_vehicle_make']
+      updateVehicleMake: typeof routes['admin.settings.update_vehicle_make']
+      fetchVehicleMakes: typeof routes['admin.settings.fetch_vehicle_makes']
+      getVehicleMake: typeof routes['admin.settings.get_vehicle_make']
+      createVehicleModel: typeof routes['admin.settings.create_vehicle_model']
+      updateVehicleModel: typeof routes['admin.settings.update_vehicle_model']
+      fetchVehicleModels: typeof routes['admin.settings.fetch_vehicle_models']
+      getVehicleModel: typeof routes['admin.settings.get_vehicle_model']
     }
     bookings: {
       fetchBookings: typeof routes['admin.bookings.fetch_bookings']
@@ -50,6 +65,11 @@ export interface ApiDefinition {
       fetchPayoutMetrics: typeof routes['admin.dashboard.fetch_payout_metrics']
       fetchWalletTransactionMetrics: typeof routes['admin.dashboard.fetch_wallet_transaction_metrics']
     }
+    vehicleManagement: {
+      addVehiclePhoto: typeof routes['admin.vehicle_management.add_vehicle_photo']
+      fetchVehiclePhotos: typeof routes['admin.vehicle_management.fetch_vehicle_photos']
+      deleteVehiclePhoto: typeof routes['admin.vehicle_management.delete_vehicle_photo']
+    }
   }
   customer: {
     authentication: {
@@ -65,15 +85,18 @@ export interface ApiDefinition {
       resetPassword: typeof routes['customer.password-management.reset_password']
     }
     bookings: {
-      createBooking: typeof routes['customer.bookings.create_booking']
-      fetchBookings: typeof routes['customer.bookings.fetch_bookings']
-      getBooking: typeof routes['customer.bookings.get_booking']
       checkoutBookingWithCard: typeof routes['customer.bookings.checkout_booking_with_card']
+      submitBookingReview: typeof routes['customer.bookings.submit_booking_review']
+      getBooking: typeof routes['customer.bookings.get_booking']
+      fetchNearestDrivers: typeof routes['customer.bookings.fetch_nearest_drivers']
+      createShuttleBooking: typeof routes['customer.bookings.create_shuttle_booking']
+      createInstantBooking: typeof routes['customer.bookings.create_instant_booking']
+      fetchBookings: typeof routes['customer.bookings.fetch_bookings']
     }
     profile: {
+      fetchRideStatistics: typeof routes['customer.profile.fetch_ride_statistics']
       getProfile: typeof routes['customer.profile.get_profile']
       updateProfile: typeof routes['customer.profile.update_profile']
-      fetchRideStatistics: typeof routes['customer.profile.fetch_ride_statistics']
     }
     notifications: {
       fetchNotifications: typeof routes['customer.notifications.fetch_notifications']
@@ -102,6 +125,7 @@ export interface ApiDefinition {
       updateBankAccount: typeof routes['driver.profile.update_bank_account']
       getDocuments: typeof routes['driver.profile.get_documents']
       updateDocuments: typeof routes['driver.profile.update_documents']
+      getProfile: typeof routes['driver.profile.get_profile']
     }
     notifications: {
       fetchNotifications: typeof routes['driver.notifications.fetch_notifications']
@@ -113,6 +137,9 @@ export interface ApiDefinition {
       acceptBooking: typeof routes['driver.bookings.accept_booking']
       rejectBooking: typeof routes['driver.bookings.reject_booking']
       updateBookingTripProgress: typeof routes['driver.bookings.update_booking_trip_progress']
+      enableRideAcceptanceStatus: typeof routes['driver.bookings.enable_ride_acceptance_status']
+      disableRideAcceptanceStatus: typeof routes['driver.bookings.disable_ride_acceptance_status']
+      updateDriverLocation: typeof routes['driver.bookings.update_driver_location']
     }
     wallet: {
       getWallet: typeof routes['driver.wallet.get_wallet']
@@ -130,6 +157,8 @@ export interface ApiDefinition {
     }
     finance: {
       fetchBanks: typeof routes['common.finance.fetch_banks']
+      resolveAccount: typeof routes['common.finance.resolve_account']
+      processApprovePaystackTransaction: typeof routes['common.finance.process_approve_paystack_transaction']
       processPaystackWebhook: typeof routes['common.finance.process_paystack_webhook']
     }
     vehicle: {

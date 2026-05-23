@@ -15,5 +15,8 @@ export default class DriverDocument extends AbstractModel {
   declare vehiclePaperUrl: string
 
   @column()
+  declare referencePhotoUrl: string
+
+  @column()
   declare vehiclePhotoUrl: string
 }

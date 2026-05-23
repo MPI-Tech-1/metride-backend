@@ -66,6 +66,7 @@ export default class AuthenticateDriverController {
         firstName: driver.firstName,
         lastName: driver.lastName,
         mobileNumber: driver.mobileNumber,
+        isDriverActiveForTrip: driver.isDriverActiveForTrip,
         registrationSteps: {
           hasVerifiedAccount: driver.driverRegistrationStep.hasActivatedAccount,
           hasProvidedPersonalInformation:

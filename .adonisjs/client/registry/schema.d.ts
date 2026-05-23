@@ -55,6 +55,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'admin.driver_management.fetch_active_drivers': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/driver-management/drivers/active'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/driver_management/list_active_drivers_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/driver-management/drivers/:identifier'
@@ -89,6 +101,30 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/reject_driver_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/reject_driver_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/reject_driver_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.driver_management.update_driver_commission': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/commission'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/driver_management/update_driver_commission_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/update_driver_commission_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/update_driver_commission_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/update_driver_commission_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.driver_management.upload_driver_reference_form': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/reference-form'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/driver_management/upload_driver_reference_form_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/upload_driver_reference_form_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'admin.settings.create_ride_type': {
@@ -185,6 +221,150 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/booking/popular_locations/get_popular_location_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/booking/popular_locations/get_popular_location_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.create_city': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/settings/cities'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/cities/create_city_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/cities/create_city_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/create_city_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/create_city_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.update_city': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/settings/cities/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/cities/update_city_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/cities/update_city_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/update_city_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/update_city_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.fetch_cities': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/cities'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/fetch_cities_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/fetch_cities_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.get_city': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/cities/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/get_city_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/cities/get_city_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.create_vehicle_make': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_makes/create_vehicle_make_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_makes/create_vehicle_make_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/create_vehicle_make_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/create_vehicle_make_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.update_vehicle_make': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_makes/update_vehicle_make_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_makes/update_vehicle_make_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/update_vehicle_make_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/update_vehicle_make_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.fetch_vehicle_makes': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/fetch_vehicle_makes_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/fetch_vehicle_makes_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.get_vehicle_make': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/get_vehicle_make_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_make/get_vehicle_make_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.create_vehicle_model': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_models/create_vehicle_model_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_models/create_vehicle_model_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/create_vehicle_model_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/create_vehicle_model_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.update_vehicle_model': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_models/update_vehicle_model_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/vehicle_models/update_vehicle_model_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.fetch_vehicle_models': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/fetch_vehicle_models_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/fetch_vehicle_models_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.get_vehicle_model': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller').default['handle']>>>
     }
   }
   'admin.bookings.fetch_bookings': {
@@ -379,6 +559,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/dashboard/fetch_wallet_transaction_metrics_controller').default['handle']>>>
     }
   }
+  'admin.vehicle_management.add_vehicle_photo': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.vehicle_management.fetch_vehicle_photos': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/vehicle_management/vehicle_photos/list_vehicle_photos_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/fetch_vehicle_photos_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/fetch_vehicle_photos_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.vehicle_management.delete_vehicle_photo': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { photoIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller').default['handle']>>>
+    }
+  }
   'customer.authentication.onboarding': {
     methods: ["POST"]
     pattern: '/api/v1/customers/authentication/onboarding'
@@ -451,28 +667,28 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/password_management/reset_password/reset_password_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'customer.bookings.create_booking': {
+  'customer.bookings.checkout_booking_with_card': {
     methods: ["POST"]
-    pattern: '/api/v1/customer/bookings'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/create_booking_request_validator').default)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/create_booking_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_booking_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
-  'customer.bookings.fetch_bookings': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/v1/customer/bookings'
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card'
     types: {
       body: {}
-      paramsTuple: []
-      params: {}
-      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/customer/booking/fetch_bookings_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+      paramsTuple: [ParamValue]
+      params: { bookingIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
+    }
+  }
+  'customer.bookings.submit_booking_review': {
+    methods: ["POST"]
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/reviews'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/submit_booking_review_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { bookingIdentifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/submit_booking_review_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/submit_booking_review_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/submit_booking_review_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'customer.bookings.get_booking': {
@@ -487,16 +703,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/get_booking_controller').default['handle']>>>
     }
   }
-  'customer.bookings.checkout_booking_with_card': {
+  'customer.bookings.fetch_nearest_drivers': {
     methods: ["POST"]
-    pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card'
+    pattern: '/api/v1/customer/drivers'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking_management/fetch_nearest_drivers_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking_management/fetch_nearest_drivers_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.bookings.create_shuttle_booking': {
+    methods: ["POST"]
+    pattern: '/api/v1/customer/bookings/shuttle'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/create_shuttle_booking_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/create_shuttle_booking_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_shuttle_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_shuttle_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.bookings.create_instant_booking': {
+    methods: ["POST"]
+    pattern: '/api/v1/customer/bookings/instant'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/create_instant_booking_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/create_instant_booking_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_instant_booking_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/create_instant_booking_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.bookings.fetch_bookings': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/customer/bookings'
     types: {
       body: {}
-      paramsTuple: [ParamValue]
-      params: { bookingIdentifier: ParamValue }
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/customer/booking/fetch_bookings_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.profile.fetch_ride_statistics': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/customer/profile/ride-statistics'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller').default['handle']>>>
     }
   }
   'customer.profile.get_profile': {
@@ -511,16 +775,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/get_customer_profile_controller').default['handle']>>>
     }
   }
-  'customer.profile.fetch_ride_statistics': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/v1/customer/profile/ride-statistics'
+  'customer.profile.update_profile': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/customer/profile'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/profile/update_customer_profile_request_validator').default)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller').default['handle']>>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/profile/update_customer_profile_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/update_customer_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/update_customer_profile_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'customer.notifications.fetch_notifications': {
@@ -545,18 +809,6 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/notifications/mark_notification_as_read_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/notifications/mark_notification_as_read_controller').default['handle']>>>
-    }
-  }
-  'customer.profile.update_profile': {
-    methods: ["PATCH"]
-    pattern: '/api/v1/customer/profile'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/profile/update_customer_profile_request_validator').default)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/profile/update_customer_profile_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/update_customer_profile_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/profile/update_customer_profile_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'driver.authentication.driver_onboarding': {
@@ -727,6 +979,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/documents/update_documents_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'driver.profile.get_profile': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/drivers/profile'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/get_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/profile/get_profile_controller').default['handle']>>>
+    }
+  }
   'driver.notifications.fetch_notifications': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/driver/notifications'
@@ -811,6 +1075,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'driver.bookings.enable_ride_acceptance_status': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/driver/ride-acceptance/enable'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/enable_ride_acceptance_status').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/enable_ride_acceptance_status').default['handle']>>>
+    }
+  }
+  'driver.bookings.disable_ride_acceptance_status': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/driver/ride-acceptance/disable'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/disable_ride_acceptance_status').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/disable_ride_acceptance_status').default['handle']>>>
+    }
+  }
+  'driver.bookings.update_driver_location': {
+    methods: ["POST"]
+    pattern: '/api/v1/driver/driver-locations'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/driver/booking_management/update_driver_location_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/driver/booking_management/update_driver_location_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/update_driver_location_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/booking_management/update_driver_location_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'driver.wallet.get_wallet': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/driver/wallet'
@@ -893,6 +1193,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/fetch_banks_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/fetch_banks_controller').default['handle']>>>
+    }
+  }
+  'common.finance.resolve_account': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/common/finance/resolve-accounts'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/common/finance/resolve_bank_account_info_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/resolve_bank_account_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/resolve_bank_account_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'common.finance.process_approve_paystack_transaction': {
+    methods: ["POST"]
+    pattern: '/api/v1/common/finance/approve-paystack-transaction'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/approve_paystack_transaction_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/finance/approve_paystack_transaction_controller').default['handle']>>>
     }
   }
   'common.finance.process_paystack_webhook': {

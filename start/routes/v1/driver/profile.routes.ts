@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const GetProfileController = () => import('#controllers/v1/driver/profile/get_profile_controller')
 
 const GetPersonalInformationController = () =>
   import('#controllers/v1/driver/profile/personal_information/get_personal_information_controller')
@@ -38,6 +39,8 @@ router
 
     router.get('/documents', [GetDocumentsController])
     router.patch('/documents', [UpdateDocumentsController])
+
+    router.get('/', [GetProfileController])
   })
   .prefix('/api/v1/drivers/profile')
   .as('driver.profile')

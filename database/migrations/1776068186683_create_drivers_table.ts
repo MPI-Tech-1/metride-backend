@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('last_name')
       table.string('email').index()
       table.string('mobile_number')
+      table.boolean('is_driver_active_for_trip').defaultTo(false)
       table.string('password')
       table.string('fcm_token').nullable()
       table.timestamp('last_logged_in_at').nullable()

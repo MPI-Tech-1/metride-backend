@@ -10,9 +10,7 @@ const messages = {
   'amount.min': 'Withdrawal amount must be at least 1.',
 }
 
-const InitiateWalletWithdrawalRequestValidator = vine.compile(
-  initiateWalletWithdrawalRequestSchema
-)
+const InitiateWalletWithdrawalRequestValidator = vine.compile(initiateWalletWithdrawalRequestSchema)
 
 InitiateWalletWithdrawalRequestValidator.messagesProvider = new SimpleMessagesProvider(messages)
 

@@ -28,7 +28,10 @@ export default class FetchDashboardOverviewController {
         },
       })
     } catch (FetchDashboardOverviewControllerError) {
-      console.log('FetchDashboardOverviewControllerError -> ', FetchDashboardOverviewControllerError)
+      console.log(
+        'FetchDashboardOverviewControllerError -> ',
+        FetchDashboardOverviewControllerError
+      )
       await logApplicationError(FetchDashboardOverviewControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,

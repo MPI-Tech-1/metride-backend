@@ -19,6 +19,7 @@ import DriverBankAccountActions from '#model_management/actions/driver_bank_acco
 import DriverApprovalStepActions from '#model_management/actions/driver_approval_step_actions'
 import DriverWalletActions from '#model_management/actions/driver_wallet_actions'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import DriverSettingActions from '#model_management/actions/driver_setting_actions'
 
 export default class OnboardingController {
   async handle({ request, response }: HttpContext) {
@@ -83,6 +84,14 @@ export default class OnboardingController {
         createPayload: {
           driverId: driver.id,
           status: 'pending',
+        },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
+      })
+
+      await DriverSettingActions.createDriverSettingRecord({
+        createPayload: {
+          driverId: driver.id,
+          commissionPercentage: 70,
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })

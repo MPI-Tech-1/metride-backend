@@ -30,9 +30,17 @@ export const controllers = {
       },
       driverManagement: {
         ApproveDriver: () => import('#controllers/v1/admin/driver_management/approve_driver_controller'),
+        FetchActiveDrivers: () => import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller'),
         FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
         RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
+        UpdateDriverCommission: () => import('#controllers/v1/admin/driver_management/update_driver_commission_controller'),
+        vehiclePhotos: {
+          AddVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/add_vehicle_photo_controller'),
+          DeleteVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/delete_vehicle_photo_controller'),
+          FetchVehiclePhotos: () => import('#controllers/v1/admin/driver_management/vehicle_photos/fetch_vehicle_photos_controller'),
+        },
+        UploadDriverReferenceForm: () => import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller'),
       },
       settings: {
         booking: {
@@ -48,6 +56,33 @@ export const controllers = {
             GetRideType: () => import('#controllers/v1/admin/settings/booking/ride_types/get_ride_type_controller'),
             UpdateRideType: () => import('#controllers/v1/admin/settings/booking/ride_types/update_ride_type_controller'),
           },
+        },
+        cities: {
+          CreateCity: () => import('#controllers/v1/admin/settings/cities/create_city_controller'),
+          FetchCities: () => import('#controllers/v1/admin/settings/cities/fetch_cities_controller'),
+          GetCity: () => import('#controllers/v1/admin/settings/cities/get_city_controller'),
+          UpdateCity: () => import('#controllers/v1/admin/settings/cities/update_city_controller'),
+        },
+        vehicle: {
+          vehicleMake: {
+            CreateVehicleMake: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/create_vehicle_make_controller'),
+            FetchVehicleMakes: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/fetch_vehicle_makes_controller'),
+            GetVehicleMake: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/get_vehicle_make_controller'),
+            UpdateVehicleMake: () => import('#controllers/v1/admin/settings/vehicle/vehicle_make/update_vehicle_make_controller'),
+          },
+          vehicleModel: {
+            CreateVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/create_vehicle_model_controller'),
+            FetchVehicleModels: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/fetch_vehicle_models_controller'),
+            GetVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller'),
+            UpdateVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller'),
+          },
+        },
+      },
+      vehicleManagement: {
+        vehiclePhotos: {
+          AddVehiclePhoto: () => import('#controllers/v1/admin/vehicle_management/vehicle_photos/add_vehicle_photo_controller'),
+          DeleteVehiclePhoto: () => import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller'),
+          FetchVehiclePhotos: () => import('#controllers/v1/admin/vehicle_management/vehicle_photos/fetch_vehicle_photos_controller'),
         },
       },
       wallet: {
@@ -66,8 +101,10 @@ export const controllers = {
         FetchRideTypes: () => import('#controllers/v1/common/booking/fetch_ride_types_controller'),
       },
       finance: {
+        ApprovePaystackTransaction: () => import('#controllers/v1/common/finance/approve_paystack_transaction_controller'),
         FetchBanks: () => import('#controllers/v1/common/finance/fetch_banks_controller'),
         ProcessPaystackWebhook: () => import('#controllers/v1/common/finance/process_paystack_webhook_controller'),
+        ResolveBankAccount: () => import('#controllers/v1/common/finance/resolve_bank_account_controller'),
       },
       location: {
         FetchCities: () => import('#controllers/v1/common/location/fetch_cities_controller'),
@@ -92,7 +129,10 @@ export const controllers = {
       booking: {
         CheckoutBookingWithCard: () => import('#controllers/v1/customer/booking/checkout_booking_with_card_controller'),
         CreateBooking: () => import('#controllers/v1/customer/booking/create_booking_controller'),
+        CreateInstantBooking: () => import('#controllers/v1/customer/booking/create_instant_booking_controller'),
+        CreateShuttleBooking: () => import('#controllers/v1/customer/booking/create_shuttle_booking_controller'),
         FetchBookings: () => import('#controllers/v1/customer/booking/fetch_bookings_controller'),
+        FetchNearestDrivers: () => import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller'),
         GetBooking: () => import('#controllers/v1/customer/booking/get_booking_controller'),
         SubmitBookingReview: () => import('#controllers/v1/customer/booking/submit_booking_review_controller'),
       },
@@ -123,10 +163,13 @@ export const controllers = {
       },
       bookingManagement: {
         AcceptBooking: () => import('#controllers/v1/driver/booking_management/accept_booking_controller'),
+        DisableRideAcceptanceStatus: () => import('#controllers/v1/driver/booking_management/disable_ride_acceptance_status'),
+        EnableRideAcceptanceStatus: () => import('#controllers/v1/driver/booking_management/enable_ride_acceptance_status'),
         FetchBookings: () => import('#controllers/v1/driver/booking_management/fetch_bookings_controller'),
         GetBooking: () => import('#controllers/v1/driver/booking_management/get_booking_controller'),
         RejectBooking: () => import('#controllers/v1/driver/booking_management/reject_booking_controller'),
         UpdateBookingTripProgress: () => import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller'),
+        UpdateDriverLocation: () => import('#controllers/v1/driver/booking_management/update_driver_location_controller'),
       },
       dashboard: {
         FetchBookingsMetrics: () => import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller'),
@@ -150,6 +193,7 @@ export const controllers = {
           GetDocuments: () => import('#controllers/v1/driver/profile/documents/get_documents_controller'),
           UpdateDocuments: () => import('#controllers/v1/driver/profile/documents/update_documents_controller'),
         },
+        GetProfile: () => import('#controllers/v1/driver/profile/get_profile_controller'),
         personalInformation: {
           GetPersonalInformation: () => import('#controllers/v1/driver/profile/personal_information/get_personal_information_controller'),
           UpdatePersonalInformation: () => import('#controllers/v1/driver/profile/personal_information/update_personal_information_controller'),

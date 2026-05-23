@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('identifier').index()
       table.integer('driver_id').index()
-      table.string('type_of_vehicle').nullable()
+      table.integer('ride_type_id').nullable().index()
       table.integer('vehicle_make_id').nullable().index()
       table.integer('vehicle_model_id').nullable().index()
       table.string('color_of_vehicle').nullable()

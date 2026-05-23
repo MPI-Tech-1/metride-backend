@@ -1,0 +1,9 @@
+import type TransferApprovalLogInterface from '#model_management/type_checking/transfer_approval_log/transfer_approval_log_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateTransferApprovalLogRecordPayload = Partial<TransferApprovalLogInterface>
+
+type CreateTransferApprovalLogRecordOptions =
+  CreateNewRecordGeneric<CreateTransferApprovalLogRecordPayload>
+
+export default CreateTransferApprovalLogRecordOptions

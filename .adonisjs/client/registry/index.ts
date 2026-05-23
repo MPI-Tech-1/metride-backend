@@ -30,6 +30,12 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers","type":0,"val":"drivers","end":""}],
     types: placeholder as Registry['admin.driver_management.fetch_drivers']['types'],
   },
+  'admin.driver_management.fetch_active_drivers': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/driver-management/drivers/active',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"active","end":""}],
+    types: placeholder as Registry['admin.driver_management.fetch_active_drivers']['types'],
+  },
   'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/driver-management/drivers/:identifier',
@@ -47,6 +53,18 @@ const routes = {
     pattern: '/api/v1/admins/driver-management/drivers/:identifier/reject',
     tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reject","type":0,"val":"reject","end":""}],
     types: placeholder as Registry['admin.driver_management.reject_driver']['types'],
+  },
+  'admin.driver_management.update_driver_commission': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/commission',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/commission","type":0,"val":"commission","end":""}],
+    types: placeholder as Registry['admin.driver_management.update_driver_commission']['types'],
+  },
+  'admin.driver_management.upload_driver_reference_form': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier/reference-form',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"reference-form","end":""}],
+    types: placeholder as Registry['admin.driver_management.upload_driver_reference_form']['types'],
   },
   'admin.settings.create_ride_type': {
     methods: ["POST"],
@@ -95,6 +113,78 @@ const routes = {
     pattern: '/api/v1/admins/settings/booking/popular-locations/:identifier',
     tokens: [{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"booking","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":0,"val":"popular-locations","end":""},{"old":"/api/v1/admins/settings/booking/popular-locations/:identifier","type":1,"val":"identifier","end":""}],
     types: placeholder as Registry['admin.settings.get_popular_location']['types'],
+  },
+  'admin.settings.create_city': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/settings/cities',
+    tokens: [{"old":"/api/v1/admins/settings/cities","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"cities","end":""}],
+    types: placeholder as Registry['admin.settings.create_city']['types'],
+  },
+  'admin.settings.update_city': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/settings/cities/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"cities","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.update_city']['types'],
+  },
+  'admin.settings.fetch_cities': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/cities',
+    tokens: [{"old":"/api/v1/admins/settings/cities","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/cities","type":0,"val":"cities","end":""}],
+    types: placeholder as Registry['admin.settings.fetch_cities']['types'],
+  },
+  'admin.settings.get_city': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/cities/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":0,"val":"cities","end":""},{"old":"/api/v1/admins/settings/cities/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.get_city']['types'],
+  },
+  'admin.settings.create_vehicle_make': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"vehicle-makes","end":""}],
+    types: placeholder as Registry['admin.settings.create_vehicle_make']['types'],
+  },
+  'admin.settings.update_vehicle_make': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"vehicle-makes","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.update_vehicle_make']['types'],
+  },
+  'admin.settings.fetch_vehicle_makes': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes","type":0,"val":"vehicle-makes","end":""}],
+    types: placeholder as Registry['admin.settings.fetch_vehicle_makes']['types'],
+  },
+  'admin.settings.get_vehicle_make': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-makes/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":0,"val":"vehicle-makes","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-makes/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.get_vehicle_make']['types'],
+  },
+  'admin.settings.create_vehicle_model': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"vehicle-models","end":""}],
+    types: placeholder as Registry['admin.settings.create_vehicle_model']['types'],
+  },
+  'admin.settings.update_vehicle_model': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"vehicle-models","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.update_vehicle_model']['types'],
+  },
+  'admin.settings.fetch_vehicle_models': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models","type":0,"val":"vehicle-models","end":""}],
+    types: placeholder as Registry['admin.settings.fetch_vehicle_models']['types'],
+  },
+  'admin.settings.get_vehicle_model': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/vehicles/vehicle-models/:identifier',
+    tokens: [{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"vehicles","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":0,"val":"vehicle-models","end":""},{"old":"/api/v1/admins/settings/vehicles/vehicle-models/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.settings.get_vehicle_model']['types'],
   },
   'admin.bookings.fetch_bookings': {
     methods: ["GET","HEAD"],
@@ -192,6 +282,24 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"api","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"dashboard","end":""},{"old":"/api/v1/admins/dashboard/wallet-transaction-metrics","type":0,"val":"wallet-transaction-metrics","end":""}],
     types: placeholder as Registry['admin.dashboard.fetch_wallet_transaction_metrics']['types'],
   },
+  'admin.vehicle_management.add_vehicle_photo': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos',
+    tokens: [{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"api","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-management","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-photos","end":""}],
+    types: placeholder as Registry['admin.vehicle_management.add_vehicle_photo']['types'],
+  },
+  'admin.vehicle_management.fetch_vehicle_photos': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos',
+    tokens: [{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"api","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-management","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos","type":0,"val":"vehicle-photos","end":""}],
+    types: placeholder as Registry['admin.vehicle_management.fetch_vehicle_photos']['types'],
+  },
+  'admin.vehicle_management.delete_vehicle_photo': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier',
+    tokens: [{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"vehicle-management","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":0,"val":"vehicle-photos","end":""},{"old":"/api/v1/admins/vehicle-management/vehicle-photos/:photoIdentifier","type":1,"val":"photoIdentifier","end":""}],
+    types: placeholder as Registry['admin.vehicle_management.delete_vehicle_photo']['types'],
+  },
   'customer.authentication.onboarding': {
     methods: ["POST"],
     pattern: '/api/v1/customers/authentication/onboarding',
@@ -228,17 +336,17 @@ const routes = {
     tokens: [{"old":"/api/v1/customers/password-management/reset","type":0,"val":"api","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"v1","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"customers","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"password-management","end":""},{"old":"/api/v1/customers/password-management/reset","type":0,"val":"reset","end":""}],
     types: placeholder as Registry['customer.password-management.reset_password']['types'],
   },
-  'customer.bookings.create_booking': {
+  'customer.bookings.checkout_booking_with_card': {
     methods: ["POST"],
-    pattern: '/api/v1/customer/bookings',
-    tokens: [{"old":"/api/v1/customer/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"bookings","end":""}],
-    types: placeholder as Registry['customer.bookings.create_booking']['types'],
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card',
+    tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":1,"val":"bookingIdentifier","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"checkout","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"card","end":""}],
+    types: placeholder as Registry['customer.bookings.checkout_booking_with_card']['types'],
   },
-  'customer.bookings.fetch_bookings': {
-    methods: ["GET","HEAD"],
-    pattern: '/api/v1/customer/bookings',
-    tokens: [{"old":"/api/v1/customer/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"bookings","end":""}],
-    types: placeholder as Registry['customer.bookings.fetch_bookings']['types'],
+  'customer.bookings.submit_booking_review': {
+    methods: ["POST"],
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/reviews',
+    tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier/reviews","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/reviews","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/reviews","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/reviews","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/reviews","type":1,"val":"bookingIdentifier","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/reviews","type":0,"val":"reviews","end":""}],
+    types: placeholder as Registry['customer.bookings.submit_booking_review']['types'],
   },
   'customer.bookings.get_booking': {
     methods: ["GET","HEAD"],
@@ -246,23 +354,41 @@ const routes = {
     tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier","type":1,"val":"bookingIdentifier","end":""}],
     types: placeholder as Registry['customer.bookings.get_booking']['types'],
   },
-  'customer.bookings.checkout_booking_with_card': {
+  'customer.bookings.fetch_nearest_drivers': {
     methods: ["POST"],
-    pattern: '/api/v1/customer/bookings/:bookingIdentifier/checkout/card',
-    tokens: [{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":1,"val":"bookingIdentifier","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"checkout","end":""},{"old":"/api/v1/customer/bookings/:bookingIdentifier/checkout/card","type":0,"val":"card","end":""}],
-    types: placeholder as Registry['customer.bookings.checkout_booking_with_card']['types'],
+    pattern: '/api/v1/customer/drivers',
+    tokens: [{"old":"/api/v1/customer/drivers","type":0,"val":"api","end":""},{"old":"/api/v1/customer/drivers","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/drivers","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/drivers","type":0,"val":"drivers","end":""}],
+    types: placeholder as Registry['customer.bookings.fetch_nearest_drivers']['types'],
   },
-  'customer.profile.get_profile': {
+  'customer.bookings.create_shuttle_booking': {
+    methods: ["POST"],
+    pattern: '/api/v1/customer/bookings/shuttle',
+    tokens: [{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/shuttle","type":0,"val":"shuttle","end":""}],
+    types: placeholder as Registry['customer.bookings.create_shuttle_booking']['types'],
+  },
+  'customer.bookings.create_instant_booking': {
+    methods: ["POST"],
+    pattern: '/api/v1/customer/bookings/instant',
+    tokens: [{"old":"/api/v1/customer/bookings/instant","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"bookings","end":""},{"old":"/api/v1/customer/bookings/instant","type":0,"val":"instant","end":""}],
+    types: placeholder as Registry['customer.bookings.create_instant_booking']['types'],
+  },
+  'customer.bookings.fetch_bookings': {
     methods: ["GET","HEAD"],
-    pattern: '/api/v1/customer/profile',
-    tokens: [{"old":"/api/v1/customer/profile","type":0,"val":"api","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"profile","end":""}],
-    types: placeholder as Registry['customer.profile.get_profile']['types'],
+    pattern: '/api/v1/customer/bookings',
+    tokens: [{"old":"/api/v1/customer/bookings","type":0,"val":"api","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/bookings","type":0,"val":"bookings","end":""}],
+    types: placeholder as Registry['customer.bookings.fetch_bookings']['types'],
   },
   'customer.profile.fetch_ride_statistics': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/customer/profile/ride-statistics',
     tokens: [{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"api","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"profile","end":""},{"old":"/api/v1/customer/profile/ride-statistics","type":0,"val":"ride-statistics","end":""}],
     types: placeholder as Registry['customer.profile.fetch_ride_statistics']['types'],
+  },
+  'customer.profile.get_profile': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/customer/profile',
+    tokens: [{"old":"/api/v1/customer/profile","type":0,"val":"api","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"customer","end":""},{"old":"/api/v1/customer/profile","type":0,"val":"profile","end":""}],
+    types: placeholder as Registry['customer.profile.get_profile']['types'],
   },
   'customer.profile.update_profile': {
     methods: ["PATCH"],
@@ -366,6 +492,12 @@ const routes = {
     tokens: [{"old":"/api/v1/drivers/profile/documents","type":0,"val":"api","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"v1","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"drivers","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"profile","end":""},{"old":"/api/v1/drivers/profile/documents","type":0,"val":"documents","end":""}],
     types: placeholder as Registry['driver.profile.update_documents']['types'],
   },
+  'driver.profile.get_profile': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/drivers/profile',
+    tokens: [{"old":"/api/v1/drivers/profile","type":0,"val":"api","end":""},{"old":"/api/v1/drivers/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/drivers/profile","type":0,"val":"drivers","end":""},{"old":"/api/v1/drivers/profile","type":0,"val":"profile","end":""}],
+    types: placeholder as Registry['driver.profile.get_profile']['types'],
+  },
   'driver.notifications.fetch_notifications': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/driver/notifications',
@@ -408,6 +540,24 @@ const routes = {
     tokens: [{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"api","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"bookings","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":1,"val":"identifier","end":""},{"old":"/api/v1/driver/bookings/:identifier/trip-progress","type":0,"val":"trip-progress","end":""}],
     types: placeholder as Registry['driver.bookings.update_booking_trip_progress']['types'],
   },
+  'driver.bookings.enable_ride_acceptance_status': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/driver/ride-acceptance/enable',
+    tokens: [{"old":"/api/v1/driver/ride-acceptance/enable","type":0,"val":"api","end":""},{"old":"/api/v1/driver/ride-acceptance/enable","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/ride-acceptance/enable","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/ride-acceptance/enable","type":0,"val":"ride-acceptance","end":""},{"old":"/api/v1/driver/ride-acceptance/enable","type":0,"val":"enable","end":""}],
+    types: placeholder as Registry['driver.bookings.enable_ride_acceptance_status']['types'],
+  },
+  'driver.bookings.disable_ride_acceptance_status': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/driver/ride-acceptance/disable',
+    tokens: [{"old":"/api/v1/driver/ride-acceptance/disable","type":0,"val":"api","end":""},{"old":"/api/v1/driver/ride-acceptance/disable","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/ride-acceptance/disable","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/ride-acceptance/disable","type":0,"val":"ride-acceptance","end":""},{"old":"/api/v1/driver/ride-acceptance/disable","type":0,"val":"disable","end":""}],
+    types: placeholder as Registry['driver.bookings.disable_ride_acceptance_status']['types'],
+  },
+  'driver.bookings.update_driver_location': {
+    methods: ["POST"],
+    pattern: '/api/v1/driver/driver-locations',
+    tokens: [{"old":"/api/v1/driver/driver-locations","type":0,"val":"api","end":""},{"old":"/api/v1/driver/driver-locations","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/driver-locations","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/driver-locations","type":0,"val":"driver-locations","end":""}],
+    types: placeholder as Registry['driver.bookings.update_driver_location']['types'],
+  },
   'driver.wallet.get_wallet': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/driver/wallet',
@@ -449,6 +599,18 @@ const routes = {
     pattern: '/api/v1/common/finance/banks',
     tokens: [{"old":"/api/v1/common/finance/banks","type":0,"val":"api","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"v1","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"common","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"finance","end":""},{"old":"/api/v1/common/finance/banks","type":0,"val":"banks","end":""}],
     types: placeholder as Registry['common.finance.fetch_banks']['types'],
+  },
+  'common.finance.resolve_account': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/common/finance/resolve-accounts',
+    tokens: [{"old":"/api/v1/common/finance/resolve-accounts","type":0,"val":"api","end":""},{"old":"/api/v1/common/finance/resolve-accounts","type":0,"val":"v1","end":""},{"old":"/api/v1/common/finance/resolve-accounts","type":0,"val":"common","end":""},{"old":"/api/v1/common/finance/resolve-accounts","type":0,"val":"finance","end":""},{"old":"/api/v1/common/finance/resolve-accounts","type":0,"val":"resolve-accounts","end":""}],
+    types: placeholder as Registry['common.finance.resolve_account']['types'],
+  },
+  'common.finance.process_approve_paystack_transaction': {
+    methods: ["POST"],
+    pattern: '/api/v1/common/finance/approve-paystack-transaction',
+    tokens: [{"old":"/api/v1/common/finance/approve-paystack-transaction","type":0,"val":"api","end":""},{"old":"/api/v1/common/finance/approve-paystack-transaction","type":0,"val":"v1","end":""},{"old":"/api/v1/common/finance/approve-paystack-transaction","type":0,"val":"common","end":""},{"old":"/api/v1/common/finance/approve-paystack-transaction","type":0,"val":"finance","end":""},{"old":"/api/v1/common/finance/approve-paystack-transaction","type":0,"val":"approve-paystack-transaction","end":""}],
+    types: placeholder as Registry['common.finance.process_approve_paystack_transaction']['types'],
   },
   'common.finance.process_paystack_webhook': {
     methods: ["POST"],

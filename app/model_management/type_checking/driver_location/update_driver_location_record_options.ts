@@ -1,0 +1,12 @@
+import type DriverLocationInterface from '#model_management/type_checking/driver_location/driver_location_interface'
+import type DriverLocationIdentifierOptions from '#model_management/type_checking/driver_location/driver_location_identifier_options'
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+
+type UpdateDriverLocationRecordPayload = Partial<DriverLocationInterface>
+
+type UpdateDriverLocationRecordOptions = UpdateRecordGeneric<
+  DriverLocationIdentifierOptions,
+  UpdateDriverLocationRecordPayload
+>
+
+export default UpdateDriverLocationRecordOptions

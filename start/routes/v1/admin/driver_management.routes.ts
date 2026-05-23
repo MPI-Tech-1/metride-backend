@@ -4,19 +4,28 @@ import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 const FetchDriversController = () =>
   import('#controllers/v1/admin/driver_management/fetch_drivers_controller')
+const FetchActiveDriversController = () =>
+  import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller')
 const GetDriverController = () =>
   import('#controllers/v1/admin/driver_management/get_driver_controller')
 const ApproveDriverController = () =>
   import('#controllers/v1/admin/driver_management/approve_driver_controller')
 const RejectDriverController = () =>
   import('#controllers/v1/admin/driver_management/reject_driver_controller')
+const UpdateDriverCommissionController = () =>
+  import('#controllers/v1/admin/driver_management/update_driver_commission_controller')
+const UploadDriverReferenceFormController = () =>
+  import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller')
 
 router
   .group(() => {
     router.get('/', [FetchDriversController])
+    router.get('/active', [FetchActiveDriversController])
     router.get('/:identifier', [GetDriverController])
     router.post('/:identifier/approve', [ApproveDriverController])
     router.post('/:identifier/reject', [RejectDriverController])
+    router.patch('/:identifier/commission', [UpdateDriverCommissionController])
+    router.patch('/:identifier/reference-form', [UploadDriverReferenceFormController])
   })
   .prefix('/api/v1/admins/driver-management/drivers')
   .as('admin.driver_management')

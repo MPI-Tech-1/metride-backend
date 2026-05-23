@@ -132,7 +132,9 @@ export default class SendBookingCompletedNotificationJob extends Job<SendBooking
           tripDate: booking.dateOfRide
             ? booking.dateOfRide.setZone('Africa/Lagos').toFormat("ccc, d LLL yyyy '·' h:mm a")
             : 'N/A',
-          receiptIssuedAt: DateTime.now().setZone('Africa/Lagos').toFormat("d LLL yyyy 'at' h:mm a"),
+          receiptIssuedAt: DateTime.now()
+            .setZone('Africa/Lagos')
+            .toFormat("d LLL yyyy 'at' h:mm a"),
           typeOfBooking: booking.typeOfBooking,
           rideTypeName: booking.rideType?.name ?? 'N/A',
           departureLocationName: booking.departureLocationName,

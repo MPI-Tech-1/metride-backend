@@ -12,7 +12,14 @@ const updateVehicleInformationRequestSchema = vine.object({
   colorOfVehicle: vine.string().trim(),
   plateNumber: vine.string().trim().escape(),
   seatCapacity: vine.number(),
-  typeOfVehicle: vine.string().trim().escape(),
+  rideTypeIdentifier: vine
+    .string()
+    .trim()
+    .escape()
+    .exists(async (db, value) => {
+      const result = await db.from('ride_types').select('*').where('identifier', value).first()
+      return result ? true : false
+    }),
 })
 
 const messages = {
@@ -33,8 +40,8 @@ const messages = {
   'seatCapacity.required': 'Seat capacity is required',
   'seatCapacity.number': 'Seat capacity must be a number',
 
-  'typeOfVehicle.required': 'Vehicle type is required',
-  'typeOfVehicle.string': 'Vehicle type must be a valid string',
+  'rideTypeIdentifier.required': 'Vehicle type is required',
+  'rideTypeIdentifier.string': 'Vehicle type must be a valid string',
 }
 
 const UpdateVehicleInformationRequestValidator = vine.compile(updateVehicleInformationRequestSchema)

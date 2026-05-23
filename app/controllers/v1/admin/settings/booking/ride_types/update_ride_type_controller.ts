@@ -11,10 +11,9 @@ export default class UpdateRideTypeController {
     const payload = await request.validateUsing(UpdateRideTypeRequestValidator)
 
     try {
-      const rideType = await RideTypeActions.updateRideTypeRecord({
-        identifierOptions: { identifier, identifierType: 'identifier' },
-        updatePayload: payload,
-        dbTransactionOptions: { useTransaction: false },
+      const rideType = await RideTypeActions.getRideType({
+        identifier,
+        identifierType: 'identifier',
       })
 
       if (!rideType) {
@@ -25,11 +24,16 @@ export default class UpdateRideTypeController {
         })
       }
 
+      await RideTypeActions.updateRideTypeRecord({
+        identifierOptions: { identifier, identifierType: 'identifier' },
+        updatePayload: payload,
+        dbTransactionOptions: { useTransaction: false },
+      })
+
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Ride type updated successfully',
-        results: rideType,
       })
     } catch (UpdateRideTypeControllerError) {
       console.log('UpdateRideTypeControllerError -> ', UpdateRideTypeControllerError)

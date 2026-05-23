@@ -14,14 +14,14 @@ const tripProgressMessageMap: Record<string, string> = {
   'heading-to-pickup': 'Your driver is heading to your pickup location.',
   'arrived-at-pickup': 'Your driver has arrived at your pickup location.',
   'enroute-to-dropoff': 'Your trip is underway. You are on your way to your destination.',
-  completed: 'Your trip has been completed. Thank you for riding with us.',
+  'completed': 'Your trip has been completed. Thank you for riding with us.',
 }
 
 const tripProgressTitleMap: Record<string, string> = {
   'heading-to-pickup': 'Driver On The Way',
   'arrived-at-pickup': 'Driver Arrived',
   'enroute-to-dropoff': 'Trip In Progress',
-  completed: 'Trip Completed',
+  'completed': 'Trip Completed',
 }
 
 export default class SendBookingTripProgressNotificationJob extends Job<SendBookingTripProgressNotificationJobPayload> {

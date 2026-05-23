@@ -54,6 +54,10 @@ export default class GetDriverController {
           hasProvidedRequiredDocuments: driver.driverRegistrationStep?.hasProvidedRequiredDocuments,
           hasProvidedBankAccount: driver.driverRegistrationStep?.hasProvidedBankAccount,
         },
+        driverSettings: {
+          identifier: driver.driverSetting.identifier,
+          commissionPercentage: driver.driverSetting.commissionPercentage,
+        },
         driverBankAccount: {
           identifier: driver.driverBankAccount?.identifier,
           bank: driver.driverBankAccount.bank
@@ -73,6 +77,7 @@ export default class GetDriverController {
           driverLicenceUrl: driver.driverDocument?.driverLicenceUrl,
           vehiclePaperUrl: driver.driverDocument?.vehiclePaperUrl,
           vehiclePhotoUrl: driver.driverDocument?.vehiclePhotoUrl,
+          referencePhotoUrl: driver.driverDocument?.referencePhotoUrl,
           createdAt: driver.driverDocument?.createdAt,
           updatedAt: driver.driverDocument?.updatedAt,
         },

@@ -32,7 +32,12 @@ export default class GetVehicleInformationController {
         colorOfVehicle: vehicleInformation?.colorOfVehicle,
         plateNumber: vehicleInformation?.plateNumber,
         seatCapacity: vehicleInformation?.seatCapacity,
-        typeOfVehicle: vehicleInformation?.typeOfVehicle,
+        rideType: vehicleInformation?.rideTypeId
+          ? {
+              identifier: vehicleInformation?.rideType.identifier,
+              name: vehicleInformation?.rideType.name,
+            }
+          : null,
       }
 
       return response.status(HttpStatusCodesEnum.OK).send({

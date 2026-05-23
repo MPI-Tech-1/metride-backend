@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('driver_licence_url').nullable()
       table.string('vehicle_paper_url').nullable()
       table.string('vehicle_photo_url').nullable()
+      table.string('reference_photo_url').nullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
       table.timestamp('deleted_at').nullable()

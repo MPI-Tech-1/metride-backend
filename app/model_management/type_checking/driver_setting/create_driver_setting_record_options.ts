@@ -1,0 +1,8 @@
+import type DriverSettingInterface from '#model_management/type_checking/driver_setting/driver_setting_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverSettingRecordPayload = Partial<DriverSettingInterface>
+
+type CreateDriverSettingRecordOptions = CreateNewRecordGeneric<CreateDriverSettingRecordPayload>
+
+export default CreateDriverSettingRecordOptions

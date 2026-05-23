@@ -22,11 +22,22 @@ export default class GetRideTypeController {
         })
       }
 
+      const mutatedPayload = {
+        identifier: rideType.identifier,
+        name: rideType.name,
+        description: rideType.description,
+        numberOfSeats: rideType.numberOfSeats,
+        pricePerKilometer: rideType.pricePerKilometer,
+        basePrice: rideType.basePrice,
+        minimumPrice: rideType.minimumPrice,
+        isActive: rideType.isActive,
+      }
+
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Ride type fetched successfully',
-        results: rideType,
+        results: mutatedPayload,
       })
     } catch (GetRideTypeControllerError) {
       console.log('GetRideTypeControllerError -> ', GetRideTypeControllerError)

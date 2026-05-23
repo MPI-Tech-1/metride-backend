@@ -32,6 +32,7 @@ export default class DriverActions {
         driverBankAccountQuery.preload('bank')
       )
       .preload('driverDocument')
+      .preload('driverSetting')
       .preload('driverPersonalInformation')
       .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
         driverApprovalStepsQuery.preload('performedByAdmin')
@@ -47,6 +48,7 @@ export default class DriverActions {
         driverBankAccountQuery.preload('bank')
       )
       .preload('driverDocument')
+      .preload('driverSetting')
       .preload('driverPersonalInformation')
       .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
         driverApprovalStepsQuery.preload('performedByAdmin')
@@ -62,6 +64,7 @@ export default class DriverActions {
         driverBankAccountQuery.preload('bank')
       )
       .preload('driverDocument')
+      .preload('driverSetting')
       .preload('driverPersonalInformation')
       .preload('driverApprovalSteps', (driverApprovalStepsQuery) =>
         driverApprovalStepsQuery.preload('performedByAdmin')
@@ -108,7 +111,13 @@ export default class DriverActions {
   ): Promise<{ driverPayload: Driver[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getDriverRecordOptions
 
-    const driverQuery = Driver.query().preload('assignedBookings')
+    const TODAY = DateTime.now().toISODate()
+
+    const driverQuery = Driver.query()
+      .preload('assignedBookings')
+      .preload('driverLocations', (driverLocationQuery) =>
+        driverLocationQuery.whereRaw('DATE(created_at) = ? ', [TODAY]).orderBy('created_at', 'desc')
+      )
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `${filterRecordOptionsPayload.searchQuery}%`
@@ -117,6 +126,13 @@ export default class DriverActions {
         .whereILike('first_name', searchValue)
         .orWhereILike('last_name', searchValue)
         .orWhereILike('email', searchValue)
+    }
+
+    if (typeof filterRecordOptionsPayload?.isDriverActiveForTrip === 'boolean') {
+      driverQuery.where(
+        'is_driver_active_for_trip',
+        filterRecordOptionsPayload.isDriverActiveForTrip
+      )
     }
 
     if (paginationPayload) {

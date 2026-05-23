@@ -10,6 +10,8 @@ import DriverBankAccount from '#models/driver_bank_account'
 import DriverDocument from '#models/driver_document'
 import DriverPersonalInformation from '#models/driver_personal_information'
 import Booking from '#models/booking'
+import DriverLocation from '#models/driver_location'
+import DriverSetting from '#models/driver_setting'
 
 export default class Driver extends AbstractModel {
   @column()
@@ -32,6 +34,9 @@ export default class Driver extends AbstractModel {
   @column({ serializeAs: null })
   declare password: string
 
+  @column({ consume: (value) => value === 1 })
+  declare isDriverActiveForTrip: boolean
+
   @column()
   declare fcmToken: string
 
@@ -45,6 +50,9 @@ export default class Driver extends AbstractModel {
     foreignKey: 'assignedDriverId',
   })
   declare assignedBookings: HasMany<typeof Booking>
+
+  @hasMany(() => DriverLocation)
+  declare driverLocations: HasMany<typeof DriverLocation>
 
   @hasOne(() => DriverRegistrationStep)
   declare driverRegistrationStep: HasOne<typeof DriverRegistrationStep>
@@ -63,6 +71,9 @@ export default class Driver extends AbstractModel {
 
   @hasOne(() => DriverPersonalInformation)
   declare driverPersonalInformation: HasOne<typeof DriverPersonalInformation>
+
+  @hasOne(() => DriverSetting)
+  declare driverSetting: HasOne<typeof DriverSetting>
 
   static accessTokens = DbAccessTokensProvider.forModel(Driver, {
     table: 'auth_access_tokens',

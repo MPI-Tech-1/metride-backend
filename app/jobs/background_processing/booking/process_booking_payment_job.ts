@@ -54,6 +54,12 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
         dbTransactionOptions: { useTransaction: false },
       })
 
+      if (bookingPayment.booking.assignedDriverId) {
+        await NotificationDispatchClient.sendBookingDriverAssignmentNotificationJob({
+          bookingId: bookingPayment.bookingId,
+        })
+      }
+
       if (previousPaymentStatus !== 'completed') {
         const booking = await BookingActions.getBooking({
           identifierType: 'id',

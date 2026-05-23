@@ -1,3 +1,5 @@
+const UpdateDriverLocationController = () =>
+  import('#controllers/v1/driver/booking_management/update_driver_location_controller')
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 
@@ -11,6 +13,10 @@ const RejectBookingController = () =>
   import('#controllers/v1/driver/booking_management/reject_booking_controller')
 const UpdateBookingTripProgressController = () =>
   import('#controllers/v1/driver/booking_management/update_booking_trip_progress_controller')
+const EnableRideAcceptanceStatusController = () =>
+  import('#controllers/v1/driver/booking_management/enable_ride_acceptance_status')
+const DisableRideAcceptanceStatusController = () =>
+  import('#controllers/v1/driver/booking_management/disable_ride_acceptance_status')
 
 router
   .group(() => {
@@ -19,6 +25,9 @@ router
     router.patch('/bookings/:identifier/accept', [AcceptBookingController])
     router.patch('/bookings/:identifier/reject', [RejectBookingController])
     router.patch('/bookings/:identifier/trip-progress', [UpdateBookingTripProgressController])
+    router.patch('/ride-acceptance/enable', [EnableRideAcceptanceStatusController])
+    router.patch('/ride-acceptance/disable', [DisableRideAcceptanceStatusController])
+    router.post('/driver-locations', [UpdateDriverLocationController])
   })
   .use(middleware.auth({ guards: ['driver'] }))
   .as('driver.bookings')
