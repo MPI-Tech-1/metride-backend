@@ -1,0 +1,15 @@
+import vine, { SimpleMessagesProvider } from '@vinejs/vine'
+
+const fetchAdminsRequestSchema = vine.object({
+  page: vine.number().min(1).optional(),
+  limit: vine.number().max(100).optional(),
+  searchQuery: vine.string().trim().escape().optional(),
+})
+
+const messages = {}
+
+const FetchAdminsRequestValidator = vine.compile(fetchAdminsRequestSchema)
+
+FetchAdminsRequestValidator.messagesProvider = new SimpleMessagesProvider(messages)
+
+export default FetchAdminsRequestValidator

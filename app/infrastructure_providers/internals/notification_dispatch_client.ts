@@ -1,6 +1,9 @@
 import SendAccountActivationNotificationJob, {
   type SendAccountActivationNotificationJobPayload,
 } from '#jobs/notification/account/send_account_activation_notification_job'
+import SendAdminAccountCreatedNotificationJob, {
+  type SendAdminAccountCreatedNotificationJobPayload,
+} from '#jobs/notification/account/send_admin_account_created_notification_job'
 import SendResetPasswordNotificationJob, {
   type SendResetPasswordNotificationJobPayload,
 } from '#jobs/notification/account/send_reset_password_notification_job'
@@ -42,6 +45,14 @@ import SendWalletPayoutRejectedNotificationJob, {
 } from '#jobs/notification/wallet/send_wallet_payout_rejected_notification_job'
 
 export default class NotificationDispatchClient {
+  public static async sendAdminAccountCreatedNotificationJob(
+    sendAdminAccountCreatedNotificationJobPayload: SendAdminAccountCreatedNotificationJobPayload
+  ) {
+    await SendAdminAccountCreatedNotificationJob.dispatch(
+      sendAdminAccountCreatedNotificationJobPayload
+    )
+  }
+
   public static async sendAccountActivationNotificationJob(
     sendAccountActivationNotificationJobPayload: SendAccountActivationNotificationJobPayload
   ) {

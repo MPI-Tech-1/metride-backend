@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 const CancelBookingController = () =>
   import('#controllers/v1/admin/booking_management/cancel_booking_controller')
 const CompleteBookingController = () =>
@@ -23,3 +24,4 @@ router
   .prefix('api/v1/admins/bookings')
   .as('admin.bookings')
   .use(middleware.auth({ guards: ['admin'] }))
+  .use(middleware.adminRole({ roles: [AdminRoleEnum.ADMIN, AdminRoleEnum.OPERATIONS] }))
