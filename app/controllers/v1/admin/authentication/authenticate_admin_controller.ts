@@ -49,6 +49,7 @@ export default class AuthenticateAdminController {
         firstName: admin.firstName,
         lastName: admin.lastName,
         email: admin.email,
+        role: admin.role,
         accessCredentials,
       }
 

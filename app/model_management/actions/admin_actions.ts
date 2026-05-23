@@ -100,6 +100,18 @@ export default class AdminActions {
     }
   }
 
+  public static async deleteAdminRecord(
+    getAdminOptions: AdminIdentifierOptions
+  ): Promise<Admin | null> {
+    const admin = await this.getAdmin(getAdminOptions)
+
+    if (admin === null) return null
+
+    await admin.softDelete()
+
+    return admin
+  }
+
   public static async deleteAdminAuthenticationToken(adminId: number) {
     await db.from('auth_access_tokens').where('tokenable_id', adminId).delete()
   }

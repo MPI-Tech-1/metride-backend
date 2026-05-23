@@ -1,6 +1,7 @@
 import { column, computed } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import AbstractModel from '#models/abstract_model'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 export default class Admin extends AbstractModel {
   @column()
@@ -11,6 +12,9 @@ export default class Admin extends AbstractModel {
 
   @column()
   declare email: string
+
+  @column()
+  declare role: AdminRoleEnum
 
   @computed()
   get fullName(): string {

@@ -22,3 +22,7 @@ export const WALLET_PAYOUT_APPROVED_EMAIL_TEMPLATE =
 export const WALLET_PAYOUT_REJECTED_EMAIL_SUBJECT = 'Update on your wallet payout request'
 export const WALLET_PAYOUT_REJECTED_EMAIL_TEMPLATE =
   'emails/wallet/wallet_payout_rejected_email_template'
+
+export const ADMIN_ACCOUNT_CREATED_EMAIL_SUBJECT = 'Welcome — Your Admin Account Has Been Created'
+export const ADMIN_ACCOUNT_CREATED_EMAIL_TEMPLATE =
+  'emails/account/admin_account_created_email_template'

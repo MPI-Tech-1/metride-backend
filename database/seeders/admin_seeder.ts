@@ -2,6 +2,7 @@ import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Admin from '#models/admin'
 import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 export default class extends BaseSeeder {
   async run() {
@@ -15,12 +16,14 @@ export default class extends BaseSeeder {
         lastName: 'Admin',
         email: 'superadmin@metride.app',
         password: hashedPassword,
+        role: AdminRoleEnum.ADMIN,
       },
       {
         firstName: 'Normal',
         lastName: 'Admin',
         email: 'normaladmin@metride.app',
         password: hashedPassword,
+        role: AdminRoleEnum.ADMIN,
       },
     ]
 

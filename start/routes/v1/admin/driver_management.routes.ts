@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 const FetchDriversController = () =>
   import('#controllers/v1/admin/driver_management/fetch_drivers_controller')
@@ -29,3 +30,4 @@ router
   .prefix('/api/v1/admins/driver-management/drivers')
   .as('admin.driver_management')
   .use(middleware.auth({ guards: ['admin'] }))
+  .use(middleware.adminRole({ roles: [AdminRoleEnum.ADMIN, AdminRoleEnum.OPERATIONS] }))
