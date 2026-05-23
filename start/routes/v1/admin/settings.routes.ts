@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 const CreateRideTypeController = () =>
   import('#controllers/v1/admin/settings/booking/ride_types/create_ride_type_controller')
@@ -102,3 +103,4 @@ router
   .prefix('/api/v1/admins/settings')
   .as('admin.settings')
   .use(middleware.auth({ guards: ['admin'] }))
+  .use(middleware.adminRole({ roles: [AdminRoleEnum.ADMIN] }))

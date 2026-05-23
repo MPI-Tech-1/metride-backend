@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 const FetchWalletTransactionsController = () =>
   import('#controllers/v1/admin/wallet/driver/fetch_wallet_transactions_controller')
@@ -27,3 +28,4 @@ router
   .prefix('/api/v1/admins/wallet-management')
   .as('admin.wallet_management')
   .use(middleware.auth({ guards: ['admin'] }))
+  .use(middleware.adminRole({ roles: [AdminRoleEnum.ADMIN, AdminRoleEnum.FINANCE] }))

@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>
+      Your Admin Account Has Been Created
+    </title>
+
+    <style>
+      @media only screen and (max-width: 620px) {
+        table[class=body] p,
+        table[class=body] td,
+        table[class=body] span {
+          font-size: 16px !important;
+        }
+
+        table[class=body] .wrapper {
+          padding: 10px !important;
+        }
+
+        table[class=body] .container {
+          width: 100% !important;
+          padding: 0 !important;
+        }
+      }
+
+      body,
+      p {
+        font-family: Arial, sans-serif;
+      }
+
+      .credentials-box {
+        background: #f8f4ef;
+        padding: 20px 25px;
+        border-radius: 6px;
+        margin: 25px 0;
+        border: 1px solid #bb9267;
+      }
+
+      .credentials-box p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+
+      .credentials-box .label {
+        color: #888;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 2px;
+      }
+
+      .credentials-box .value {
+        font-weight: bold;
+        color: #333;
+        font-size: 15px;
+      }
+
+      .role-badge {
+        display: inline-block;
+        background: #bb9267;
+        color: #fff;
+        padding: 3px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #f6f6f6; margin: 0; padding: 0;">
+    <table class="body" width="100%" style="background-color: #f6f6f6;">
+      <tr>
+        <td></td>
+        <td class="container" width="580" style="margin: 0 auto; padding: 10px;">
+          <div class="content" style="max-width: 580px; margin: 0 auto;">
+
+            <table class="main" width="100%" style="background: #ffffff; border-radius: 6px;">
+
+              <!-- HEADER BAR -->
+              <tr style="background-color: #bb9267;">
+                <td style="padding: 15px;"></td>
+              </tr>
+
+              <tr>
+                <td style="padding: 25px 35px;">
+
+                  <!-- LOGO -->
+                  <img
+                    src="https://res.cloudinary.com/dy4l3lrx1/image/upload/v1776506387/general/jnereh5fodzx08ejftds.png"
+                    width="120"
+                    style="display:block; border:none; outline:none;"
+                    alt="logo"
+                  />
+
+                  <h2 style="color: #333; margin-top: 20px;">
+                    Welcome to the Admin Dashboard
+                  </h2>
+
+                  <p>
+                    Hello {{ recipientFirstName }},
+                  </p>
+
+                  <p>
+                    An admin account has been created for you on
+                    <strong>{{ sentenceCase(env('BUSINESS_NAME')) }}</strong>.
+                    You can log in using the credentials below.
+                  </p>
+
+                  <!-- CREDENTIALS -->
+                  <div class="credentials-box">
+                    <p class="label">Role</p>
+                    <p><span class="role-badge">{{ role }}</span></p>
+
+                    <p class="label" style="margin-top: 16px;">Email Address</p>
+                    <p class="value">{{ recipientEmail }}</p>
+
+                    <p class="label" style="margin-top: 16px;">Temporary Password</p>
+                    <p class="value">{{ tempPassword }}</p>
+                  </div>
+
+                  <p>
+                    <strong style="color:#bb9267;">Please change your password after your first login</strong>
+                    using the password reset option on the login page.
+                  </p>
+
+                  <p>
+                    <strong style="color:#bb9267;">Do not share these credentials with anyone.</strong>
+                  </p>
+
+                  <p>
+                    If you did not expect this email, please contact your system administrator immediately.
+                  </p>
+
+                  <p>
+                    Warm Regards,<br />
+                    <strong>The {{ sentenceCase(env('BUSINESS_NAME')) }} Team</strong>
+                  </p>
+
+                </td>
+              </tr>
+
+              <!-- FOOTER -->
+              <tr>
+                <td style="padding: 20px 35px; background-color: #fafbfd;">
+                  <p style="font-size: 11px; color: #666;">
+                    Do not reply to this email as it was automatically generated.
+                  </p>
+
+                  <p style="font-size: 11px; color: #666;">
+                    &copy; {{ currentYear() }} {{ sentenceCase(env('BUSINESS_NAME')) }}. All Rights Reserved.
+                  </p>
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </body>
+
+</html>

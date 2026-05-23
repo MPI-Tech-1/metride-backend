@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+import AdminRoleEnum from '#common/enums/admin_role_enum'
 
 const FetchCustomerMetricsController = () =>
   import('#controllers/v1/admin/dashboard/fetch_customer_metrics_controller')
@@ -26,3 +27,8 @@ router
   .prefix('/api/v1/admins/dashboard')
   .as('admin.dashboard')
   .use(middleware.auth({ guards: ['admin'] }))
+  .use(
+    middleware.adminRole({
+      roles: [AdminRoleEnum.ADMIN, AdminRoleEnum.OPERATIONS, AdminRoleEnum.FINANCE],
+    })
+  )
