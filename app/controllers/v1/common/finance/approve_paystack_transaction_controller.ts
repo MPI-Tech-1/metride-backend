@@ -26,10 +26,12 @@ export default class ProcessApprovePaystackTransactionController {
         return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({})
       }
 
+      const transactionReference = transferData.reference.split('_')[0]
+
       const pendingTransferTransaction =
         await DriverWalletWithdrawalRequestActions.getDriverWalletWithdrawalRequest({
           identifierType: 'identifier',
-          identifier: transferData.reference,
+          identifier: transactionReference,
         })
 
       console.log('pendingTransferTransaction -> ', pendingTransferTransaction?.identifier)
@@ -42,7 +44,7 @@ export default class ProcessApprovePaystackTransactionController {
       }
 
       await BackgroundDispatchClient.processApprovePaystackTransactionBackgroundProcessingJob({
-        transactionReference: transferData.reference,
+        transactionReference: transactionReference,
       })
 
       return response.status(HttpStatusCodesEnum.OK).send({})

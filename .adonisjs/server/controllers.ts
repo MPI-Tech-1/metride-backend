@@ -8,6 +8,8 @@ export const controllers = {
     admin: {
       authentication: {
         AuthenticateAdmin: () => import('#controllers/v1/admin/authentication/authenticate_admin_controller'),
+        RequestAdminPasswordReset: () => import('#controllers/v1/admin/authentication/request_admin_password_reset_controller'),
+        ResetAdminPassword: () => import('#controllers/v1/admin/authentication/reset_admin_password_controller'),
       },
       bookingManagement: {
         AssignBookingDriver: () => import('#controllers/v1/admin/booking_management/assign_booking_driver_controller'),
@@ -35,12 +37,12 @@ export const controllers = {
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
         RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
         UpdateDriverCommission: () => import('#controllers/v1/admin/driver_management/update_driver_commission_controller'),
+        UploadDriverReferenceForm: () => import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller'),
         vehiclePhotos: {
           AddVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/add_vehicle_photo_controller'),
           DeleteVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/delete_vehicle_photo_controller'),
           FetchVehiclePhotos: () => import('#controllers/v1/admin/driver_management/vehicle_photos/fetch_vehicle_photos_controller'),
         },
-        UploadDriverReferenceForm: () => import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller'),
       },
       settings: {
         booking: {
@@ -77,6 +79,12 @@ export const controllers = {
             UpdateVehicleModel: () => import('#controllers/v1/admin/settings/vehicle/vehicle_model/update_vehicle_model_controller'),
           },
         },
+      },
+      userManagement: {
+        CreateAdmin: () => import('#controllers/v1/admin/user_management/create_admin_controller'),
+        DeleteAdmin: () => import('#controllers/v1/admin/user_management/delete_admin_controller'),
+        FetchAdmins: () => import('#controllers/v1/admin/user_management/fetch_admins_controller'),
+        GetAdmin: () => import('#controllers/v1/admin/user_management/get_admin_controller'),
       },
       vehicleManagement: {
         vehiclePhotos: {

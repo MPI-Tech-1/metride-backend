@@ -5,6 +5,14 @@ export interface ApiDefinition {
   admin: {
     authentication: {
       authenticateAdmin: typeof routes['admin.authentication.authenticate_admin']
+      requestAdminPasswordReset: typeof routes['admin.authentication.request_admin_password_reset']
+      resetAdminPassword: typeof routes['admin.authentication.reset_admin_password']
+    }
+    userManagement: {
+      createAdmin: typeof routes['admin.user_management.create_admin']
+      fetchAdmins: typeof routes['admin.user_management.fetch_admins']
+      getAdmin: typeof routes['admin.user_management.get_admin']
+      deleteAdmin: typeof routes['admin.user_management.delete_admin']
     }
     customerManagement: {
       customers: {

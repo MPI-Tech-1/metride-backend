@@ -19,6 +19,78 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/authenticate_admin_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'admin.authentication.request_admin_password_reset': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/authentication/request-password-reset'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/authentication/admin_request_reset_password_otp_token_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/authentication/admin_request_reset_password_otp_token_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/request_admin_password_reset_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/request_admin_password_reset_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.authentication.reset_admin_password': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/authentication/reset-password'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/authentication/admin_reset_password_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/authentication/admin_reset_password_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/reset_admin_password_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/reset_admin_password_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.user_management.create_admin': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/user-management'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/user_management/create_admin_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/user_management/create_admin_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/create_admin_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/create_admin_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.user_management.fetch_admins': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/user-management'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/user_management/fetch_admins_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/fetch_admins_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/fetch_admins_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.user_management.get_admin': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/user-management/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/get_admin_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/get_admin_controller').default['handle']>>>
+    }
+  }
+  'admin.user_management.delete_admin': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admins/user-management/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/delete_admin_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/delete_admin_controller').default['handle']>>>
+    }
+  }
   'admin.customer_management.customers.fetch_customers': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/customer-management/customers'

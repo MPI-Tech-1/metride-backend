@@ -5,6 +5,12 @@ type ParamValue = string | number | bigint | boolean
 export type ScannedRoutes = {
   ALL: {
     'admin.authentication.authenticate_admin': { paramsTuple?: []; params?: {} }
+    'admin.authentication.request_admin_password_reset': { paramsTuple?: []; params?: {} }
+    'admin.authentication.reset_admin_password': { paramsTuple?: []; params?: {} }
+    'admin.user_management.create_admin': { paramsTuple?: []; params?: {} }
+    'admin.user_management.fetch_admins': { paramsTuple?: []; params?: {} }
+    'admin.user_management.get_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.user_management.delete_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
@@ -114,6 +120,9 @@ export type ScannedRoutes = {
   }
   POST: {
     'admin.authentication.authenticate_admin': { paramsTuple?: []; params?: {} }
+    'admin.authentication.request_admin_password_reset': { paramsTuple?: []; params?: {} }
+    'admin.authentication.reset_admin_password': { paramsTuple?: []; params?: {} }
+    'admin.user_management.create_admin': { paramsTuple?: []; params?: {} }
     'admin.driver_management.approve_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.reject_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.settings.create_ride_type': { paramsTuple?: []; params?: {} }
@@ -148,6 +157,8 @@ export type ScannedRoutes = {
     'common.media.upload_image': { paramsTuple?: []; params?: {} }
   }
   GET: {
+    'admin.user_management.fetch_admins': { paramsTuple?: []; params?: {} }
+    'admin.user_management.get_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
@@ -201,6 +212,8 @@ export type ScannedRoutes = {
     'common.bookings.fetch_popular_locations': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
+    'admin.user_management.fetch_admins': { paramsTuple?: []; params?: {} }
+    'admin.user_management.get_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.customer_management.customers.fetch_customers': { paramsTuple?: []; params?: {} }
     'admin.customer_management.customers.get_customer': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.fetch_drivers': { paramsTuple?: []; params?: {} }
@@ -253,6 +266,10 @@ export type ScannedRoutes = {
     'common.bookings.fetch_ride_types': { paramsTuple?: []; params?: {} }
     'common.bookings.fetch_popular_locations': { paramsTuple?: []; params?: {} }
   }
+  DELETE: {
+    'admin.user_management.delete_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
+  }
   PATCH: {
     'admin.driver_management.update_driver_commission': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.upload_driver_reference_form': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -276,9 +293,6 @@ export type ScannedRoutes = {
     'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'driver.bookings.enable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
     'driver.bookings.disable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
-  }
-  DELETE: {
-    'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

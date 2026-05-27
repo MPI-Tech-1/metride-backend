@@ -12,6 +12,42 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"api","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"authentication","end":""},{"old":"/api/v1/admins/authentication/authenticate","type":0,"val":"authenticate","end":""}],
     types: placeholder as Registry['admin.authentication.authenticate_admin']['types'],
   },
+  'admin.authentication.request_admin_password_reset': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/authentication/request-password-reset',
+    tokens: [{"old":"/api/v1/admins/authentication/request-password-reset","type":0,"val":"api","end":""},{"old":"/api/v1/admins/authentication/request-password-reset","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/authentication/request-password-reset","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/authentication/request-password-reset","type":0,"val":"authentication","end":""},{"old":"/api/v1/admins/authentication/request-password-reset","type":0,"val":"request-password-reset","end":""}],
+    types: placeholder as Registry['admin.authentication.request_admin_password_reset']['types'],
+  },
+  'admin.authentication.reset_admin_password': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/authentication/reset-password',
+    tokens: [{"old":"/api/v1/admins/authentication/reset-password","type":0,"val":"api","end":""},{"old":"/api/v1/admins/authentication/reset-password","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/authentication/reset-password","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/authentication/reset-password","type":0,"val":"authentication","end":""},{"old":"/api/v1/admins/authentication/reset-password","type":0,"val":"reset-password","end":""}],
+    types: placeholder as Registry['admin.authentication.reset_admin_password']['types'],
+  },
+  'admin.user_management.create_admin': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/user-management',
+    tokens: [{"old":"/api/v1/admins/user-management","type":0,"val":"api","end":""},{"old":"/api/v1/admins/user-management","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/user-management","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/user-management","type":0,"val":"user-management","end":""}],
+    types: placeholder as Registry['admin.user_management.create_admin']['types'],
+  },
+  'admin.user_management.fetch_admins': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/user-management',
+    tokens: [{"old":"/api/v1/admins/user-management","type":0,"val":"api","end":""},{"old":"/api/v1/admins/user-management","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/user-management","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/user-management","type":0,"val":"user-management","end":""}],
+    types: placeholder as Registry['admin.user_management.fetch_admins']['types'],
+  },
+  'admin.user_management.get_admin': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/user-management/:identifier',
+    tokens: [{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"user-management","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.user_management.get_admin']['types'],
+  },
+  'admin.user_management.delete_admin': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/admins/user-management/:identifier',
+    tokens: [{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":0,"val":"user-management","end":""},{"old":"/api/v1/admins/user-management/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.user_management.delete_admin']['types'],
+  },
   'admin.customer_management.customers.fetch_customers': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/customer-management/customers',
