@@ -15,7 +15,7 @@ export default class AcceptBookingController {
         identifier,
       })
 
-      if (!booking) {
+      if (!booking || booking.bookingPayment.paymentStatus !== 'completed') {
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
           status_code: HttpStatusCodesEnum.NOT_FOUND,
           status: ERROR,

@@ -110,6 +110,12 @@ export default class BookingActions {
       bookingQuery.where('is_recurring_booking', filterRecordOptionsPayload.isRecurringBooking)
     }
 
+    if (filterRecordOptionsPayload?.paymentStatus) {
+      bookingQuery.whereHas('bookingPayment', (query) => {
+        query.where('payment_status', String(filterRecordOptionsPayload.paymentStatus))
+      })
+    }
+
     if (filterRecordOptionsPayload?.status) {
       bookingQuery.where('status', filterRecordOptionsPayload.status)
     }

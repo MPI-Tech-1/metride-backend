@@ -6,6 +6,7 @@ type ListBookingRecordsOptionsFilterOptions = {
   isRecurringBooking?: boolean
   typeOfBooking?: 'instant' | 'shuttle'
   status?: 'created' | 'assigned-a-driver' | 'accepted' | 'completed' | 'cancelled' | 'rejected'
+  paymentStatus?: 'pending' | 'completed' | 'failed'
   customerId?: number
   assignedDriverId?: number
 }

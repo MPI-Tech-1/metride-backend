@@ -19,6 +19,7 @@ export default class FetchBookingsController {
         filterRecordOptionsPayload: {
           assignedDriverId: loggedInDriverId.id,
           status,
+          paymentStatus: 'completed',
         },
         paginationPayload: {
           page,
