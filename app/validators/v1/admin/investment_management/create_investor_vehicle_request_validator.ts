@@ -1,20 +1,20 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const createInvestorVehicleRequestSchema = vine.object({
-  investorId: vine.number(),
-  vehicleName: vine.string(),
-  vehicleType: vine.string(),
-  plateNumber: vine.string().optional(),
-  investmentAmount: vine.number(),
+  investorIdentifier: vine.string(),
+  rideTypeIdentifier: vine.string(),
+  vehicleMakeIdentifier: vine.string(),
+  vehicleModelIdentifier: vine.string(),
+  colorOfVehicle: vine.string(),
+  plateNumber: vine.string(),
+  seatCapacity: vine.number(),
   percentageShare: vine.number(),
 })
 
 const messages = {
-  'investorId.required': 'Investor is required',
-  'vehicleName.required': 'Vehicle name is required',
-  'vehicleType.required': 'Vehicle type is required',
-  'investmentAmount.required': 'Investment amount is required',
+  'investorIdentifier.required': 'Investor identifier is required',
   'percentageShare.required': 'Percentage share is required',
+  'seatCapacity.required': 'Seat capacity is required',
 }
 
 const CreateInvestorVehicleRequestValidator = vine.compile(createInvestorVehicleRequestSchema)

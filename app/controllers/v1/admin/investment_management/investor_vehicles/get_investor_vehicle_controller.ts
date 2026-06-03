@@ -34,10 +34,27 @@ export default class GetInvestorVehicleController {
               email: investorVehicle.investor.email,
             }
           : null,
-        vehicleName: investorVehicle.vehicleName,
-        vehicleType: investorVehicle.vehicleType,
+        rideType: investorVehicle.rideType
+          ? {
+              identifier: investorVehicle.rideType.identifier,
+              name: investorVehicle.rideType.name,
+            }
+          : null,
+        vehicleMake: investorVehicle.vehicleMake
+          ? {
+              identifier: investorVehicle.vehicleMake.identifier,
+              name: investorVehicle.vehicleMake.name,
+            }
+          : null,
+        vehicleModel: investorVehicle.vehicleModel
+          ? {
+              identifier: investorVehicle.vehicleModel.identifier,
+              name: investorVehicle.vehicleModel.name,
+            }
+          : null,
+        colorOfVehicle: investorVehicle.colorOfVehicle,
         plateNumber: investorVehicle.plateNumber,
-        investmentAmount: investorVehicle.investmentAmount,
+        seatCapacity: investorVehicle.seatCapacity,
         percentageShare: investorVehicle.percentageShare,
         createdAt: investorVehicle.createdAt,
         updatedAt: investorVehicle.updatedAt,
@@ -50,10 +67,7 @@ export default class GetInvestorVehicleController {
         results: mutatedInvestorVehicle,
       })
     } catch (GetInvestorVehicleControllerError) {
-      console.log(
-        'GetInvestorVehicleControllerError -> ',
-        GetInvestorVehicleControllerError
-      )
+      console.log('GetInvestorVehicleControllerError -> ', GetInvestorVehicleControllerError)
       await logApplicationError(GetInvestorVehicleControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,

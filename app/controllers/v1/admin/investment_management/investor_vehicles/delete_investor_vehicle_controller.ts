@@ -9,12 +9,12 @@ export default class DeleteInvestorVehicleController {
     const { identifier } = request.params()
 
     try {
-      const deleted = await InvestorVehicleActions.deleteInvestorVehicleRecord({
+      const investorVehicle = await InvestorVehicleActions.getInvestorVehicle({
         identifier,
         identifierType: 'identifier',
       })
 
-      if (!deleted) {
+      if (!investorVehicle) {
         return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
           status_code: HttpStatusCodesEnum.NOT_FOUND,
           status: ERROR,
@@ -22,16 +22,18 @@ export default class DeleteInvestorVehicleController {
         })
       }
 
+      await InvestorVehicleActions.deleteInvestorVehicleRecord({
+        identifier,
+        identifierType: 'identifier',
+      })
+
       return response.status(HttpStatusCodesEnum.OK).send({
         status_code: HttpStatusCodesEnum.OK,
         status: SUCCESS,
         message: 'Investor vehicle deleted successfully',
       })
     } catch (DeleteInvestorVehicleControllerError) {
-      console.log(
-        'DeleteInvestorVehicleControllerError -> ',
-        DeleteInvestorVehicleControllerError
-      )
+      console.log('DeleteInvestorVehicleControllerError -> ', DeleteInvestorVehicleControllerError)
       await logApplicationError(DeleteInvestorVehicleControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({
         status_code: HttpStatusCodesEnum.INTERNAL_SERVER_ERROR,

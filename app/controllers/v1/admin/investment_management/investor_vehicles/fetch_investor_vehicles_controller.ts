@@ -33,10 +33,27 @@ export default class FetchInvestorVehiclesController {
               email: vehicle.investor.email,
             }
           : null,
-        vehicleName: vehicle.vehicleName,
-        vehicleType: vehicle.vehicleType,
+        rideType: vehicle.rideType
+          ? {
+              identifier: vehicle.rideType.identifier,
+              name: vehicle.rideType.name,
+            }
+          : null,
+        vehicleMake: vehicle.vehicleMake
+          ? {
+              identifier: vehicle.vehicleMake.identifier,
+              name: vehicle.vehicleMake.name,
+            }
+          : null,
+        vehicleModel: vehicle.vehicleModel
+          ? {
+              identifier: vehicle.vehicleModel.identifier,
+              name: vehicle.vehicleModel.name,
+            }
+          : null,
+        colorOfVehicle: vehicle.colorOfVehicle,
         plateNumber: vehicle.plateNumber,
-        investmentAmount: vehicle.investmentAmount,
+        seatCapacity: vehicle.seatCapacity,
         percentageShare: vehicle.percentageShare,
         createdAt: vehicle.createdAt,
       }))

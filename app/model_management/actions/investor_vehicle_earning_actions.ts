@@ -27,7 +27,7 @@ export default class InvestorVehicleEarningActions {
     return await InvestorVehicleEarning.query()
       .where('id', investorVehicleEarningId)
       .preload('investorVehicle', (query) => {
-        query.preload('investor')
+        query.preload('investor').preload('rideType').preload('vehicleMake').preload('vehicleModel')
       })
       .first()
   }
@@ -38,7 +38,7 @@ export default class InvestorVehicleEarningActions {
     return await InvestorVehicleEarning.query()
       .where('identifier', investorVehicleEarningIdentifier)
       .preload('investorVehicle', (query) => {
-        query.preload('investor')
+        query.preload('investor').preload('rideType').preload('vehicleMake').preload('vehicleModel')
       })
       .first()
   }
@@ -68,7 +68,7 @@ export default class InvestorVehicleEarningActions {
     const investorVehicleEarningQuery = InvestorVehicleEarning.query().preload(
       'investorVehicle',
       (query) => {
-        query.preload('investor')
+        query.preload('investor').preload('rideType').preload('vehicleMake').preload('vehicleModel')
       }
     )
 

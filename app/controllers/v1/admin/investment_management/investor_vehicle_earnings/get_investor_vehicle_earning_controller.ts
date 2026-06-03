@@ -28,11 +28,28 @@ export default class GetInvestorVehicleEarningController {
         investorVehicle: earning.investorVehicle
           ? {
               identifier: earning.investorVehicle.identifier,
-              vehicleName: earning.investorVehicle.vehicleName,
-              vehicleType: earning.investorVehicle.vehicleType,
               plateNumber: earning.investorVehicle.plateNumber,
-              investmentAmount: earning.investorVehicle.investmentAmount,
+              colorOfVehicle: earning.investorVehicle.colorOfVehicle,
+              seatCapacity: earning.investorVehicle.seatCapacity,
               percentageShare: earning.investorVehicle.percentageShare,
+              rideType: earning.investorVehicle.rideType
+                ? {
+                    identifier: earning.investorVehicle.rideType.identifier,
+                    name: earning.investorVehicle.rideType.name,
+                  }
+                : null,
+              vehicleMake: earning.investorVehicle.vehicleMake
+                ? {
+                    identifier: earning.investorVehicle.vehicleMake.identifier,
+                    name: earning.investorVehicle.vehicleMake.name,
+                  }
+                : null,
+              vehicleModel: earning.investorVehicle.vehicleModel
+                ? {
+                    identifier: earning.investorVehicle.vehicleModel.identifier,
+                    name: earning.investorVehicle.vehicleModel.name,
+                  }
+                : null,
               investor: earning.investorVehicle.investor
                 ? {
                     identifier: earning.investorVehicle.investor.identifier,

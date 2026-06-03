@@ -24,7 +24,13 @@ export default class InvestorVehicleActions {
   private static async getInvestorVehicleById(
     investorVehicleId: number
   ): Promise<InvestorVehicle | null> {
-    return await InvestorVehicle.query().where('id', investorVehicleId).preload('investor').first()
+    return await InvestorVehicle.query()
+      .where('id', investorVehicleId)
+      .preload('investor')
+      .preload('rideType')
+      .preload('vehicleMake')
+      .preload('vehicleModel')
+      .first()
   }
 
   private static async getInvestorVehicleByIdentifier(
@@ -33,6 +39,9 @@ export default class InvestorVehicleActions {
     return await InvestorVehicle.query()
       .where('identifier', investorVehicleIdentifier)
       .preload('investor')
+      .preload('rideType')
+      .preload('vehicleMake')
+      .preload('vehicleModel')
       .first()
   }
 
@@ -75,15 +84,34 @@ export default class InvestorVehicleActions {
   ): Promise<{ investorVehiclePayload: InvestorVehicle[]; paginationMeta?: any }> {
     const { filterRecordOptionsPayload, paginationPayload } = getInvestorVehicleRecordOptions
 
-    const investorVehicleQuery = InvestorVehicle.query().preload('investor')
+    const investorVehicleQuery = InvestorVehicle.query()
+      .preload('investor')
+      .preload('rideType')
+      .preload('vehicleMake')
+      .preload('vehicleModel')
 
     if (filterRecordOptionsPayload?.searchQuery) {
       const searchValue = `%${filterRecordOptionsPayload.searchQuery}%`
 
-      investorVehicleQuery
-        .whereILike('vehicle_name', searchValue)
-        .orWhereILike('vehicle_type', searchValue)
-        .orWhereILike('plate_number', searchValue)
+      investorVehicleQuery.where((query) => {
+        query
+          .whereILike('plate_number', searchValue)
+          .orWhereILike('color_of_vehicle', searchValue)
+          .orWhereHas('investor', (investorQuery) => {
+            investorQuery
+              .whereILike('first_name', searchValue)
+              .orWhereILike('last_name', searchValue)
+          })
+          .orWhereHas('rideType', (rideTypeQuery) => {
+            rideTypeQuery.whereILike('name', searchValue)
+          })
+          .orWhereHas('vehicleMake', (vehicleMakeQuery) => {
+            vehicleMakeQuery.whereILike('name', searchValue)
+          })
+          .orWhereHas('vehicleModel', (vehicleModelQuery) => {
+            vehicleModelQuery.whereILike('name', searchValue)
+          })
+      })
     }
 
     if (filterRecordOptionsPayload?.investorId) {
@@ -109,12 +137,11 @@ export default class InvestorVehicleActions {
 
   public static async deleteInvestorVehicleRecord(
     identifierOptions: InvestorVehicleIdentifierOptions
-  ): Promise<boolean> {
+  ): Promise<void> {
     const investorVehicle = await this.getInvestorVehicle(identifierOptions)
 
-    if (investorVehicle === null) return false
+    if (investorVehicle === null) return
 
     await investorVehicle.softDelete()
-    return true
   }
 }

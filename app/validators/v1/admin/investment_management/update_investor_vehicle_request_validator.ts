@@ -1,11 +1,13 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
 const updateInvestorVehicleRequestSchema = vine.object({
-  investorId: vine.number(),
-  vehicleName: vine.string(),
-  vehicleType: vine.string(),
+  investorIdentifier: vine.string(),
+  rideTypeIdentifier: vine.string(),
+  vehicleMakeIdentifier: vine.string(),
+  vehicleModelIdentifier: vine.string(),
+  colorOfVehicle: vine.string(),
   plateNumber: vine.string(),
-  investmentAmount: vine.number(),
+  seatCapacity: vine.number(),
   percentageShare: vine.number(),
 })
 
