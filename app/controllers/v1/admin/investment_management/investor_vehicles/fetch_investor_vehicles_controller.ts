@@ -23,7 +23,6 @@ export default class FetchInvestorVehiclesController {
 
       const mutatedInvestorVehicles = investorVehicles.map((vehicle) => ({
         identifier: vehicle.identifier,
-        investorId: vehicle.investorId,
         investor: vehicle.investor
           ? {
               identifier: vehicle.investor.identifier,
