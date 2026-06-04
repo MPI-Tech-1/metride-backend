@@ -24,7 +24,6 @@ export default class GetInvestorVehicleController {
 
       const mutatedInvestorVehicle = {
         identifier: investorVehicle.identifier,
-        investorId: investorVehicle.investorId,
         investor: investorVehicle.investor
           ? {
               identifier: investorVehicle.investor.identifier,
