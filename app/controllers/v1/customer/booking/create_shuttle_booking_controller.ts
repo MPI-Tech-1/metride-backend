@@ -71,10 +71,14 @@ export default class CreateShuttleBookingController {
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
+      const numberOfRideDays = isRecurringBooking
+        ? recurringBookingDates!.days.length * recurringBookingDates!.durationInWeeks
+        : 1
+
       await BookingPaymentActions.createBookingPaymentRecord({
         createPayload: {
           bookingId: booking.id,
-          basePrice: distance.distanceInKilometers * rideType!.pricePerKilometer,
+          basePrice: distance.distanceInKilometers * rideType!.pricePerKilometer * numberOfRideDays,
           discountAmount: 0,
           amountPaid: 0,
         },
