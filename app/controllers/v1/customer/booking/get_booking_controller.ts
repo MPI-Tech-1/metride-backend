@@ -48,6 +48,7 @@ export default class GetBookingController {
         },
         isRecurringBooking: booking.isRecurringBooking,
         dateOfRide: booking.dateOfRide,
+        timeOfRide: booking.timeOfRide,
         recurringBookingDates: booking.recurringBookingDates,
         assignedDriver: booking.assignedDriver
           ? {
