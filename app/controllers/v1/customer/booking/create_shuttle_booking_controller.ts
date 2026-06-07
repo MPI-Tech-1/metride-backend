@@ -25,8 +25,10 @@ export default class CreateShuttleBookingController {
       rideTypeIdentifier,
       isRecurringBooking,
       dateOfRide,
+      timeOfRide,
       recurringBookingDates,
     } = payload
+
 
     const { mutatedPayload: distance } = await calculateDistanceBetween2Points(
       departureLocationGpsCoordinates,
@@ -66,6 +68,7 @@ export default class CreateShuttleBookingController {
           rideTypeId: rideType?.id,
           isRecurringBooking: isRecurringBooking || false,
           dateOfRide,
+          timeOfRide: timeOfRide ?? null,
           recurringBookingDates: recurringBookingDates || {},
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },
@@ -105,6 +108,7 @@ export default class CreateShuttleBookingController {
         estimatedDistanceInMeters: finalBooking!.estimatedDistanceInMeters,
         isRecurringBooking: finalBooking!.isRecurringBooking,
         dateOfRide: finalBooking!.dateOfRide,
+        timeOfRide: finalBooking!.timeOfRide,
         recurringBookingDates: finalBooking!.recurringBookingDates,
         bookingPayment: {
           identifier: finalBooking!.bookingPayment.identifier,

@@ -22,6 +22,12 @@ const createShuttleBookingRequestSchema = vine.object({
     .optional()
     .requiredWhen('isRecurringBooking', '=', false),
 
+  timeOfRide: vine
+    .string()
+    .regex(/^\d{2}:\d{2}$/)
+    .optional()
+    .requiredWhen('isRecurringBooking', '=', true),
+
   recurringBookingDates: vine
     .object({
       durationInWeeks: vine.number().min(1),
@@ -58,6 +64,9 @@ const messages = {
 
   'dateOfRide.required': 'Please select the date of your ride.',
   'dateOfRide.date': 'Date must be in the format YYYY-MM-DD.',
+
+  'timeOfRide.required': 'Please provide the time of your ride.',
+  'timeOfRide.regex': 'Time must be in HH:mm format (e.g. 08:30).',
 
   'recurringBookingDates.required': 'Please provide your recurring booking schedule.',
   'recurringBookingDates.object': 'Recurring booking details must be valid.',

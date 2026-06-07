@@ -33,6 +33,7 @@ export default class FetchBookingsController {
         tripProgress: booking.tripProgress,
         isRecurringBooking: booking.isRecurringBooking,
         dateOfRide: booking.dateOfRide,
+        timeOfRide: booking.timeOfRide,
         recurringBookingDates: booking.recurringBookingDates,
         estimatedDurationInSeconds: booking.estimatedDurationInSeconds,
         estimatedDistanceInMeters: booking.estimatedDistanceInMeters,
