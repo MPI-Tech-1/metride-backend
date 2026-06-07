@@ -73,6 +73,9 @@ export default class Booking extends AbstractModel {
   declare dateOfRide: DateTime
 
   @column()
+  declare timeOfRide: string | null
+
+  @column()
   declare recurringBookingDates: object
 
   @belongsTo(() => RideType)
