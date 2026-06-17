@@ -23,6 +23,8 @@ const createInstantBookingRequestSchema = vine.object({
   destinationLocationType: vine.enum(['home', 'work', 'office', 'mall', 'market', 'others']),
 
   dateOfRide: vine.date({ formats: [DATE_FORMAT.toUpperCase()] }),
+
+  paymentTiming: vine.enum(['pay_now', 'pay_on_arrival']).optional(),
 })
 
 const messages = {
@@ -46,6 +48,8 @@ const messages = {
 
   'dateOfRide.required': 'Please select the date of your ride.',
   'dateOfRide.date': 'Date must be in the format YYYY-MM-DD.',
+
+  'paymentTiming.enum': 'Payment timing is invalid. Use pay_now or pay_on_arrival.',
 }
 
 const CreateInstantBookingRequestValidator = vine.compile(createInstantBookingRequestSchema)

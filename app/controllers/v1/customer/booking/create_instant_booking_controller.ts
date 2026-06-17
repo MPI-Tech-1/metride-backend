@@ -25,6 +25,7 @@ export default class CreateInstantBookingController {
       destinationLocationGpsCoordinates,
       destinationLocationType,
       dateOfRide,
+      paymentTiming,
     } = payload
 
     const { mutatedPayload: distance } = await calculateDistanceBetween2Points(
@@ -77,6 +78,7 @@ export default class CreateInstantBookingController {
           assignedDriverId: driver.id,
           typeOfBooking: 'instant',
           status: 'assigned-a-driver',
+          paymentTiming: paymentTiming ?? 'pay_now',
           departureLocationName,
           departureLocationGpsCoordinates,
           departureLocationType,
@@ -114,6 +116,7 @@ export default class CreateInstantBookingController {
         identifier: finalBooking!.identifier,
         typeOfBooking: finalBooking!.typeOfBooking,
         status: finalBooking!.status,
+        paymentTiming: finalBooking!.paymentTiming,
         departureLocationName: finalBooking!.departureLocationName,
         departureLocationGpsCoordinates: finalBooking!.departureLocationGpsCoordinates,
         departureLocationType: finalBooking!.departureLocationType,
