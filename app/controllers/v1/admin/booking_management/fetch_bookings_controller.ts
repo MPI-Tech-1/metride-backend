@@ -46,6 +46,7 @@ export default class FetchBookingsController {
       const mutatedResponsePayload = bookings.map((booking) => ({
         identifier: booking.identifier,
         typeOfBooking: booking.typeOfBooking,
+        paymentTiming: booking.paymentTiming,
         status: booking.status,
         tripProgress: booking.tripProgress,
         isRecurringBooking: booking.isRecurringBooking,

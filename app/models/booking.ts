@@ -66,6 +66,9 @@ export default class Booking extends AbstractModel {
     | 'cancelled'
     | 'rejected'
 
+  @column()
+  declare paymentTiming: 'pay_now' | 'pay_on_arrival'
+
   @column({ consume: (value) => value === 1 })
   declare isRecurringBooking: boolean
 

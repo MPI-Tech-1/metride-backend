@@ -45,6 +45,14 @@ export default class UpdateBookingTripProgress {
         })
       }
 
+      if (tripProgress === 'completed' && booking.bookingPayment.paymentStatus !== 'completed') {
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
+          status: ERROR,
+          message: 'Payment must be completed before the trip can be marked as completed.',
+        })
+      }
+
       await BookingActions.updateBookingRecord({
         identifierOptions: {
           identifierType: 'identifier',

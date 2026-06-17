@@ -11,6 +11,7 @@ import logApplicationError from '#common/helper_functions/log_application_error'
 import logBookingUpdatePayload from '#common/helper_functions/log_booking_update_payload'
 import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 import DriverVehicleActions from '#model_management/actions/driver_vehicle_actions'
+import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
 
 export default class CreateInstantBookingController {
   async handle({ request, auth, response }: HttpContext) {
@@ -25,6 +26,7 @@ export default class CreateInstantBookingController {
       destinationLocationGpsCoordinates,
       destinationLocationType,
       dateOfRide,
+      paymentTiming,
     } = payload
 
     const { mutatedPayload: distance } = await calculateDistanceBetween2Points(
@@ -77,6 +79,7 @@ export default class CreateInstantBookingController {
           assignedDriverId: driver.id,
           typeOfBooking: 'instant',
           status: 'assigned-a-driver',
+          paymentTiming: paymentTiming ?? 'pay_now',
           departureLocationName,
           departureLocationGpsCoordinates,
           departureLocationType,
@@ -114,6 +117,7 @@ export default class CreateInstantBookingController {
         identifier: finalBooking!.identifier,
         typeOfBooking: finalBooking!.typeOfBooking,
         status: finalBooking!.status,
+        paymentTiming: finalBooking!.paymentTiming,
         departureLocationName: finalBooking!.departureLocationName,
         departureLocationGpsCoordinates: finalBooking!.departureLocationGpsCoordinates,
         departureLocationType: finalBooking!.departureLocationType,
@@ -149,6 +153,14 @@ export default class CreateInstantBookingController {
           metadata: { bookingChannel: 'customer_api' },
         })
       )
+
+      // For pay-on-arrival rides there is no upfront payment to trigger the driver
+      // assignment notification, so notify the assigned driver immediately at creation.
+      if (finalBooking!.paymentTiming === 'pay_on_arrival') {
+        await NotificationDispatchClient.sendBookingDriverAssignmentNotificationJob({
+          bookingId: finalBooking!.id,
+        })
+      }
 
       return response.status(HttpStatusCodesEnum.CREATED).send({
         status_code: HttpStatusCodesEnum.CREATED,
