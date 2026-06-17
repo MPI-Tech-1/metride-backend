@@ -27,6 +27,7 @@ export default class GetBookingController {
       const responsePayload = {
         identifier: booking.identifier,
         typeOfBooking: booking.typeOfBooking,
+        paymentTiming: booking.paymentTiming,
         departureLocationName: booking.departureLocationName,
         departureLocationGpsCoordinates: booking.departureLocationGpsCoordinates,
         departureLocationType: booking.departureLocationType,
