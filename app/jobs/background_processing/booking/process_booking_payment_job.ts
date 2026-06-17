@@ -54,7 +54,12 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
         dbTransactionOptions: { useTransaction: false },
       })
 
-      if (bookingPayment.booking.assignedDriverId) {
+      // pay-on-arrival rides already notified the driver at creation, so only the
+      // pay-now flow uses payment success as the trigger for driver assignment.
+      if (
+        bookingPayment.booking.assignedDriverId &&
+        bookingPayment.booking.paymentTiming === 'pay_now'
+      ) {
         await NotificationDispatchClient.sendBookingDriverAssignmentNotificationJob({
           bookingId: bookingPayment.bookingId,
         })
