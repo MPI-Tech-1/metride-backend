@@ -19,6 +19,78 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/authenticate_admin_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'admin.authentication.request_admin_password_reset': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/authentication/request-password-reset'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/authentication/admin_request_reset_password_otp_token_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/authentication/admin_request_reset_password_otp_token_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/request_admin_password_reset_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/request_admin_password_reset_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.authentication.reset_admin_password': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/authentication/reset-password'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/authentication/admin_reset_password_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/authentication/admin_reset_password_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/reset_admin_password_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/authentication/reset_admin_password_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.user_management.create_admin': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/user-management'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/user_management/create_admin_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/user_management/create_admin_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/create_admin_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/create_admin_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.user_management.fetch_admins': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/user-management'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/user_management/fetch_admins_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/fetch_admins_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/fetch_admins_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.user_management.get_admin': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/user-management/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/get_admin_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/get_admin_controller').default['handle']>>>
+    }
+  }
+  'admin.user_management.delete_admin': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admins/user-management/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/delete_admin_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/user_management/delete_admin_controller').default['handle']>>>
+    }
+  }
   'admin.customer_management.customers.fetch_customers': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/customer-management/customers'
@@ -595,6 +667,138 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller').default['handle']>>>
     }
   }
+  'admin.promotions.create_promotion': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/promotions'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/promotions/create_promotion_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/promotions/create_promotion_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/create_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/create_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.promotions.fetch_promotions': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/promotions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/fetch_promotions_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/fetch_promotions_controller').default['handle']>>>
+    }
+  }
+  'admin.promotions.update_promotion': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/promotions/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/promotions/update_promotion_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/promotions/update_promotion_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/update_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/update_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.mvest.create_owner': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/mvest/owners'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_owner_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_owner_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_owner_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_owner_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.mvest.fetch_owners': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/mvest/owners'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.update_owner': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/mvest/owners/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_owner_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_owner_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.fetch_available_vehicles': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/mvest/available-vehicles'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.create_agreement': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/mvest/agreements'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_agreement_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_agreement_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_agreement_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_agreement_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.mvest.update_agreement': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/mvest/agreements/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_agreement_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_agreement_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.fetch_earnings': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/mvest/earnings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.mark_paid': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/mvest/earnings/:identifier/mark-paid'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller').default['handle']>>>
+    }
+  }
   'customer.authentication.onboarding': {
     methods: ["POST"]
     pattern: '/api/v1/customers/authentication/onboarding'
@@ -679,6 +883,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/checkout_booking_with_card_controller').default['handle']>>>
     }
   }
+  'customer.bookings.apply_booking_promotion': {
+    methods: ["POST"]
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/promotion'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/apply_promotion_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { bookingIdentifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/apply_promotion_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/apply_booking_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/apply_booking_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.bookings.remove_booking_promotion': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/customer/bookings/:bookingIdentifier/promotion'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { bookingIdentifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/remove_booking_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/remove_booking_promotion_controller').default['handle']>>>
+    }
+  }
   'customer.bookings.submit_booking_review': {
     methods: ["POST"]
     pattern: '/api/v1/customer/bookings/:bookingIdentifier/reviews'
@@ -749,6 +977,18 @@ export interface Registry {
       query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/customer/booking/fetch_bookings_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/booking/fetch_bookings_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'customer.promotions.validate_promotion': {
+    methods: ["POST"]
+    pattern: '/api/v1/customer/promotions/validate'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/customer/booking/apply_promotion_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/customer/booking/apply_promotion_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/customer/promotion/validate_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/customer/promotion/validate_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'customer.profile.fetch_ride_statistics': {
@@ -1289,6 +1529,78 @@ export interface Registry {
       query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/common/booking/fetch_popular_locations_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/common/booking/fetch_popular_locations_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/common/booking/fetch_popular_locations_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'mvest.auth.login': {
+    methods: ["POST"]
+    pattern: '/api/v1/mvest/auth/login'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/mvest/authenticate_mvest_owner_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/mvest/authenticate_mvest_owner_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/mvest/authentication/authenticate_mvest_owner_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/mvest/authentication/authenticate_mvest_owner_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'mvest.dashboard': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/mvest/dashboard'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/mvest/dashboard/get_mvest_dashboard_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/mvest/dashboard/get_mvest_dashboard_controller').default['handle']>>>
+    }
+  }
+  'mvest.vehicles': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/mvest/vehicles'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/mvest/vehicles/fetch_mvest_vehicles_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/mvest/vehicles/fetch_mvest_vehicles_controller').default['handle']>>>
+    }
+  }
+  'mvest.earnings': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/mvest/earnings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/mvest/earnings/fetch_mvest_owner_earnings_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/mvest/earnings/fetch_mvest_owner_earnings_controller').default['handle']>>>
+    }
+  }
+  'mvest.profile': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/mvest/profile'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/mvest/profile/get_mvest_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/mvest/profile/get_mvest_profile_controller').default['handle']>>>
+    }
+  }
+  'mvest.update_profile': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/mvest/profile'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/mvest/update_mvest_profile_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/mvest/update_mvest_profile_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/mvest/profile/update_mvest_profile_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/mvest/profile/update_mvest_profile_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
 }

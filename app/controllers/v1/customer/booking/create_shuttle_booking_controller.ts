@@ -29,7 +29,6 @@ export default class CreateShuttleBookingController {
       recurringBookingDates,
     } = payload
 
-
     const { mutatedPayload: distance } = await calculateDistanceBetween2Points(
       departureLocationGpsCoordinates,
       destinationLocationGpsCoordinates
@@ -74,11 +73,17 @@ export default class CreateShuttleBookingController {
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
+      const basePrice = Math.max(
+        rideType!.minimumPrice,
+        Math.round(distance.distanceInKilometers * rideType!.pricePerKilometer)
+      )
+
       await BookingPaymentActions.createBookingPaymentRecord({
         createPayload: {
           bookingId: booking.id,
-          basePrice: distance.distanceInKilometers * rideType!.pricePerKilometer,
+          basePrice,
           discountAmount: 0,
+          amountDue: basePrice,
           amountPaid: 0,
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },

@@ -40,7 +40,7 @@ export default class Driver extends AbstractModel {
   @column()
   declare fcmToken: string
 
-  @column()
+  @column.dateTime()
   declare lastLoggedInAt: DateTime
 
   @column()
