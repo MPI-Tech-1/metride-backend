@@ -1,0 +1,343 @@
+{
+  "info": {
+    "_postman_id": "7cb95be4-b953-41fb-b8cb-aac8df75a116",
+    "name": "Metride — Discounts & MVest",
+    "description": "Feature-specific API collection for promotion discounts and the backward-compatible MVest MVP. Monetary values are integer kobo.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3333" },
+    { "key": "adminToken", "value": "" },
+    { "key": "customerToken", "value": "" },
+    { "key": "mvestOwnerToken", "value": "" },
+    { "key": "adminEmail", "value": "" },
+    { "key": "adminPassword", "value": "" },
+    { "key": "customerEmail", "value": "" },
+    { "key": "customerPassword", "value": "" },
+    { "key": "mvestOwnerEmail", "value": "" },
+    { "key": "mvestOwnerPassword", "value": "" },
+    { "key": "promotionCode", "value": "" },
+    { "key": "promotionIdentifier", "value": "" },
+    { "key": "bookingIdentifier", "value": "" },
+    { "key": "ownerIdentifier", "value": "" },
+    { "key": "driverVehicleIdentifier", "value": "" },
+    { "key": "agreementIdentifier", "value": "" },
+    { "key": "earningIdentifier", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Admin Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.accessCredentials?.token) pm.environment.set('adminToken', body.results.accessCredentials.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/admins/authentication/authenticate"
+          }
+        },
+        {
+          "name": "Customer Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.accessCredentials?.token) pm.environment.set('customerToken', body.results.accessCredentials.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{customerEmail}}\",\n  \"password\": \"{{customerPassword}}\",\n  \"fcmToken\": \"{{customerFcmToken}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/customers/authentication/authenticate"
+          }
+        },
+        {
+          "name": "MVest Owner Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.accessCredentials?.token) pm.environment.set('mvestOwnerToken', body.results.accessCredentials.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{mvestOwnerEmail}}\",\n  \"password\": \"{{mvestOwnerPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/mvest/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Discounts — Admin",
+      "auth": {
+        "type": "bearer",
+        "bearer": [{ "key": "token", "value": "{{adminToken}}", "type": "string" }]
+      },
+      "item": [
+        {
+          "name": "Create Percentage Promotion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.identifier) pm.environment.set('promotionIdentifier', body.results.identifier);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"{{promotionCode}}\",\n  \"name\": \"{{promotionName}}\",\n  \"description\": \"{{promotionDescription}}\",\n  \"discountType\": \"percentage\",\n  \"discountValue\": 10,\n  \"maximumDiscountAmount\": 200000,\n  \"minimumBookingAmount\": 100000,\n  \"globalUsageLimit\": 1000,\n  \"usageLimitPerCustomer\": 1,\n  \"applicableBookingType\": \"all\",\n  \"startsAt\": \"{{promotionStartsAt}}\",\n  \"endsAt\": \"{{promotionEndsAt}}\",\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/admins/promotions"
+          }
+        },
+        {
+          "name": "List Promotions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admins/promotions?page=1&limit=20"
+          }
+        },
+        {
+          "name": "Update / Disable Promotion",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"isActive\": false\n}" },
+            "url": "{{baseUrl}}/api/v1/admins/promotions/{{promotionIdentifier}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Discounts — Customer",
+      "auth": {
+        "type": "bearer",
+        "bearer": [{ "key": "token", "value": "{{customerToken}}", "type": "string" }]
+      },
+      "item": [
+        {
+          "name": "Validate Promotion Code",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"code\": \"{{promotionCode}}\"\n}" },
+            "url": "{{baseUrl}}/api/v1/customer/promotions/validate"
+          }
+        },
+        {
+          "name": "Apply Promotion to Pending Booking",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"code\": \"{{promotionCode}}\"\n}" },
+            "url": "{{baseUrl}}/api/v1/customer/bookings/{{bookingIdentifier}}/promotion"
+          }
+        },
+        {
+          "name": "Remove Promotion",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/customer/bookings/{{bookingIdentifier}}/promotion"
+          }
+        },
+        {
+          "name": "Checkout Discounted Booking",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/customer/bookings/{{bookingIdentifier}}/checkout/card"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MVest — Admin",
+      "auth": {
+        "type": "bearer",
+        "bearer": [{ "key": "token", "value": "{{adminToken}}", "type": "string" }]
+      },
+      "item": [
+        {
+          "name": "Create MVest Owner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.identifier) pm.environment.set('ownerIdentifier', body.results.identifier);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"{{mvestOwnerFirstName}}\",\n  \"lastName\": \"{{mvestOwnerLastName}}\",\n  \"email\": \"{{mvestOwnerEmail}}\",\n  \"mobileNumber\": \"{{mvestOwnerMobileNumber}}\",\n  \"password\": \"{{mvestOwnerPassword}}\",\n  \"status\": \"active\",\n  \"bankName\": \"{{mvestOwnerBankName}}\",\n  \"accountName\": \"{{mvestOwnerAccountName}}\",\n  \"accountNumber\": \"{{mvestOwnerAccountNumber}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/admins/mvest/owners"
+          }
+        },
+        {
+          "name": "List MVest Owners",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admins/mvest/owners?page=1&limit=50&status=active&search="
+          }
+        },
+        {
+          "name": "List Vehicles Available for MVest",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "const firstVehicle = body.results?.[0];",
+                  "if (firstVehicle?.driver_vehicle_identifier) pm.environment.set('driverVehicleIdentifier', firstVehicle.driver_vehicle_identifier);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admins/mvest/available-vehicles?page=1&limit=20"
+          }
+        },
+        {
+          "name": "Create Vehicle Agreement",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.identifier) pm.environment.set('agreementIdentifier', body.results.identifier);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ownerIdentifier\": \"{{ownerIdentifier}}\",\n  \"driverVehicleIdentifier\": \"{{driverVehicleIdentifier}}\",\n  \"commissionPercentage\": 10,\n  \"startsAt\": \"2026-08-01T00:00:00.000+01:00\",\n  \"endsAt\": null\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/admins/mvest/agreements"
+          }
+        },
+        {
+          "name": "Suspend Vehicle Agreement",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"isActive\": false\n}" },
+            "url": "{{baseUrl}}/api/v1/admins/mvest/agreements/{{agreementIdentifier}}"
+          }
+        },
+        {
+          "name": "List All MVest Earnings",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admins/mvest/earnings?page=1&limit=20"
+          }
+        },
+        {
+          "name": "List MVest Earnings by Owner",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/admins/mvest/earnings?page=1&limit=20&ownerIdentifier={{ownerIdentifier}}"
+          }
+        },
+        {
+          "name": "Mark Earning Paid",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/admins/mvest/earnings/{{earningIdentifier}}/mark-paid"
+          }
+        }
+      ]
+    },
+    {
+      "name": "MVest — Owner Dashboard",
+      "auth": {
+        "type": "bearer",
+        "bearer": [{ "key": "token", "value": "{{mvestOwnerToken}}", "type": "string" }]
+      },
+      "item": [
+        {
+          "name": "Dashboard Summary",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/mvest/dashboard" }
+        },
+        {
+          "name": "My Vehicles",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/mvest/vehicles" }
+        },
+        {
+          "name": "My Earnings",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/mvest/earnings?page=1&limit=20&status=pending"
+          }
+        },
+        {
+          "name": "My Profile",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/mvest/profile" }
+        },
+        {
+          "name": "Update Profile / Bank Details",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobileNumber\": \"{{mvestOwnerMobileNumber}}\",\n  \"bankName\": \"{{mvestOwnerBankName}}\",\n  \"accountName\": \"{{mvestOwnerAccountName}}\",\n  \"accountNumber\": \"{{mvestOwnerAccountNumber}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/mvest/profile"
+          }
+        }
+      ]
+    }
+  ]
+}

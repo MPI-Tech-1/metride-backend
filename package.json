@@ -18,7 +18,10 @@
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:local:migrate": "node ace migration:run --force",
+    "db:local:banks": "node ace db:seed --files=database/seeders/bank_seeder.ts",
+    "db:local:setup": "npm run db:local:migrate && npm run db:local:banks"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",

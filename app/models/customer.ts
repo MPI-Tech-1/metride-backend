@@ -29,7 +29,7 @@ export default class Customer extends AbstractModel {
   @column()
   declare fcmToken: string
 
-  @column()
+  @column.dateTime()
   declare lastLoggedInAt: DateTime
 
   @hasOne(() => CustomerRegistrationStep)

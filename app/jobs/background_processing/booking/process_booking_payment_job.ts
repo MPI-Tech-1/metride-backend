@@ -7,6 +7,8 @@ import BookingActions from '#model_management/actions/booking_actions'
 import createBookingSlackEventPayload from '#common/helper_functions/create_booking_slack_event_payload'
 import { Job } from '@adonisjs/queue'
 import type { JobOptions } from '@adonisjs/queue/types'
+import PromotionRedemption from '#models/promotion_redemption'
+import { DateTime } from 'luxon'
 
 export interface ProcessBookingPaymentJobPayload {
   paymentProviderReference: string
@@ -41,6 +43,15 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
 
     if (transactionStatus === 'success') {
       const previousPaymentStatus = bookingPayment.paymentStatus
+      const verifiedAmount = transactionVerificationInformation?.amount
+      const expectedAmount =
+        bookingPayment.amountDue ??
+        Math.max(0, bookingPayment.basePrice - bookingPayment.discountAmount)
+      if (verifiedAmount !== expectedAmount) {
+        throw new Error(
+          `ProcessBookingPaymentJob: expected ${expectedAmount}, received ${verifiedAmount}`
+        )
+      }
 
       await BookingPaymentActions.updateBookingPaymentRecord({
         identifierOptions: {
@@ -48,11 +59,21 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
           identifier: bookingPayment.id,
         },
         updatePayload: {
-          amountPaid: transactionVerificationInformation?.amount,
+          amountPaid: verifiedAmount,
           paymentStatus: 'completed',
         },
         dbTransactionOptions: { useTransaction: false },
       })
+
+      const redemption = await PromotionRedemption.query()
+        .where('booking_id', bookingPayment.bookingId)
+        .where('status', 'reserved')
+        .first()
+      if (redemption) {
+        redemption.status = 'redeemed'
+        redemption.redeemedAt = DateTime.now()
+        await redemption.save()
+      }
 
       // pay-on-arrival rides already notified the driver at creation, so only the
       // pay-now flow uses payment success as the trigger for driver assignment.
@@ -106,6 +127,16 @@ export default class ProcessBookingPaymentJob extends Job<ProcessBookingPaymentJ
           useTransaction: false,
         },
       })
+
+      const redemption = await PromotionRedemption.query()
+        .where('booking_id', bookingPayment.bookingId)
+        .where('status', 'reserved')
+        .first()
+      if (redemption) {
+        redemption.status = 'released'
+        redemption.releasedAt = DateTime.now()
+        await redemption.save()
+      }
 
       await NotificationDispatchClient.sendBookingPaymentFailedNotificationJob({
         bookingId: bookingPayment.bookingId,

@@ -47,6 +47,12 @@ export default class FetchBookingsController {
           identifier: booking.bookingPayment.identifier,
           paymentMethod: booking.bookingPayment.paymentMethod,
           basePrice: booking.bookingPayment.basePrice,
+          discountAmount: booking.bookingPayment.discountAmount,
+          amountDue:
+            booking.bookingPayment.amountDue ??
+            Math.max(0, booking.bookingPayment.basePrice - booking.bookingPayment.discountAmount),
+          promotionCode: booking.bookingPayment.promotionCode,
+          amountPaid: booking.bookingPayment.amountPaid,
           paymentStatus: booking.bookingPayment.paymentStatus,
         },
         departureLocation: {

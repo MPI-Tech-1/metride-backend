@@ -14,6 +14,15 @@ export default class BookingPayment extends AbstractModel {
   declare discountAmount: number
 
   @column()
+  declare amountDue: number | null
+
+  @column()
+  declare promotionId: number | null
+
+  @column()
+  declare promotionCode: string | null
+
+  @column()
   declare amountPaid: number
 
   @column()

@@ -14,10 +14,16 @@ const CheckoutBookingWithCardController = () =>
 const FetchBookingsController = () =>
   import('#controllers/v1/customer/booking/fetch_bookings_controller')
 const GetBookingController = () => import('#controllers/v1/customer/booking/get_booking_controller')
+const ApplyBookingPromotionController = () =>
+  import('#controllers/v1/customer/booking/apply_booking_promotion_controller')
+const RemoveBookingPromotionController = () =>
+  import('#controllers/v1/customer/booking/remove_booking_promotion_controller')
 
 router
   .group(() => {
     router.post('/bookings/:bookingIdentifier/checkout/card', [CheckoutBookingWithCardController])
+    router.post('/bookings/:bookingIdentifier/promotion', [ApplyBookingPromotionController])
+    router.delete('/bookings/:bookingIdentifier/promotion', [RemoveBookingPromotionController])
     router.post('/bookings/:bookingIdentifier/reviews', [SubmitBookingReviewController])
     router.get('/bookings/:bookingIdentifier', [GetBookingController])
     router.post('/drivers', [FetchNearestDriversController])

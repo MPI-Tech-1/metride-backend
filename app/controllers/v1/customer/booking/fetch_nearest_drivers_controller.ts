@@ -5,8 +5,26 @@ import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_me
 import logApplicationError from '#common/helper_functions/log_application_error'
 import db from '@adonisjs/lucid/services/db'
 import calculateMultipleDistances from '#common/helper_functions/calculate_multiple_distances'
+import app from '@adonisjs/core/services/app'
+import env from '#start/env'
 
 const MAX_NEAREST_DRIVERS = 5
+
+function calculateHaversineDistanceInMeters(
+  from: { latitude: number; longitude: number },
+  to: { latitude: number; longitude: number }
+) {
+  const earthRadiusInMeters = 6_371_000
+  const toRadians = (value: number) => (value * Math.PI) / 180
+  const latitudeDelta = toRadians(to.latitude - from.latitude)
+  const longitudeDelta = toRadians(to.longitude - from.longitude)
+  const a =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(toRadians(from.latitude)) *
+      Math.cos(toRadians(to.latitude)) *
+      Math.sin(longitudeDelta / 2) ** 2
+  return Math.round(earthRadiusInMeters * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)))
+}
 
 export default class FetchNearestDriversController {
   async handle({ request, response }: HttpContext) {
@@ -15,6 +33,96 @@ export default class FetchNearestDriversController {
     )
 
     try {
+      if (app.inDev && env.get('DB_CONNECTION', 'mysql') === 'sqlite') {
+        const seededDrivers = await db
+          .from('drivers as d')
+          .join('driver_vehicles as dv', 'dv.driver_id', 'd.id')
+          .join('ride_types as rt', 'rt.id', 'dv.ride_type_id')
+          .leftJoin('vehicle_makes as vm', 'vm.id', 'dv.vehicle_make_id')
+          .leftJoin('vehicle_models as vmo', 'vmo.id', 'dv.vehicle_model_id')
+          .where('d.is_driver_active_for_trip', 1)
+          .where('d.status', 'approved')
+          .whereNull('d.deleted_at')
+          .whereNull('dv.deleted_at')
+          .select(
+            'd.identifier',
+            'd.first_name',
+            'd.last_name',
+            'd.mobile_number',
+            'dv.color_of_vehicle',
+            'dv.plate_number',
+            'dv.seat_capacity',
+            'vm.name as vehicle_make_name',
+            'vmo.name as vehicle_model_name',
+            'rt.price_per_kilometer',
+            'rt.identifier as ride_type_identifier',
+            'rt.name as ride_type_name',
+            'rt.minimum_price'
+          )
+          .limit(MAX_NEAREST_DRIVERS)
+
+        const tripDistanceInMeters = calculateHaversineDistanceInMeters(departure, destination)
+        const tripDistanceInKilometers = tripDistanceInMeters / 1000
+        const drivers = seededDrivers.map((driver, index) => {
+          const driverDistanceInMeters = 800 + index * 350
+          const driverDistanceInKilometers = driverDistanceInMeters / 1000
+          const totalDistanceInKilometers = tripDistanceInKilometers + driverDistanceInKilometers
+          const estimatedFare = Math.max(
+            Number(driver.minimum_price),
+            Math.round(Number(driver.price_per_kilometer) * totalDistanceInKilometers)
+          )
+
+          return {
+            identifier: driver.identifier,
+            firstName: driver.first_name,
+            lastName: driver.last_name,
+            mobileNumber: driver.mobile_number,
+            rideType: {
+              identfier: driver.ride_type_identifier,
+              identifier: driver.ride_type_identifier,
+              name: driver.ride_type_name,
+            },
+            driverVehicle: {
+              vehiclePhotoUrl: null,
+              make: driver.vehicle_make_name,
+              model: driver.vehicle_model_name,
+              color: driver.color_of_vehicle,
+              plateNumber: driver.plate_number,
+              seatCapacity: driver.seat_capacity,
+            },
+            currentLocation: {
+              latitude: departure.latitude + 0.005 + index * 0.001,
+              longitude: departure.longitude + 0.005 + index * 0.001,
+            },
+            driverDistance: {
+              distanceInMeters: driverDistanceInMeters,
+              distanceInKilometers: driverDistanceInKilometers,
+              estimatedDurationInSeconds: Math.round(driverDistanceInMeters / 8.33),
+            },
+            tripDistance: {
+              distanceInMeters: tripDistanceInMeters,
+              distanceInKilometers: tripDistanceInKilometers,
+              estimatedDurationInSeconds: Math.round(tripDistanceInMeters / 8.33),
+            },
+            totalDistanceInKilometers,
+            pricePerKilometer: Number(driver.price_per_kilometer),
+            estimatedFare,
+          }
+        })
+
+        return response.status(HttpStatusCodesEnum.OK).send({
+          status_code: HttpStatusCodesEnum.OK,
+          status: SUCCESS,
+          message: 'Dummy nearest drivers fetched successfully for local development.',
+          results: {
+            isTestData: true,
+            departure,
+            destination,
+            drivers,
+          },
+        })
+      }
+
       // Step 1: Fetch 5 nearest drivers using Haversine
       const nearestDrivers = await db
         .from('drivers as d')
