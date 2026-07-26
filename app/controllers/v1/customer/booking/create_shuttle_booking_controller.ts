@@ -73,15 +73,14 @@ export default class CreateShuttleBookingController {
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
-      const basePrice = Math.max(
-        rideType!.minimumPrice,
-        Math.round(distance.distanceInKilometers * rideType!.pricePerKilometer)
-      )
+      const numberOfRideDays = isRecurringBooking
+        ? recurringBookingDates!.days.length * recurringBookingDates!.durationInWeeks
+        : 1
 
       await BookingPaymentActions.createBookingPaymentRecord({
         createPayload: {
           bookingId: booking.id,
-          basePrice,
+          basePrice: distance.distanceInKilometers * rideType!.pricePerKilometer * numberOfRideDays,
           discountAmount: 0,
           amountDue: basePrice,
           amountPaid: 0,

@@ -44,20 +44,25 @@ export const controllers = {
           FetchVehiclePhotos: () => import('#controllers/v1/admin/driver_management/vehicle_photos/fetch_vehicle_photos_controller'),
         },
       },
-      mvest: {
-        CreateMvestAgreement: () => import('#controllers/v1/admin/mvest/create_mvest_agreement_controller'),
-        CreateMvestOwner: () => import('#controllers/v1/admin/mvest/create_mvest_owner_controller'),
-        FetchAvailableMvestVehicles: () => import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller'),
-        FetchMvestEarnings: () => import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller'),
-        FetchMvestOwners: () => import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller'),
-        MarkMvestEarningPaid: () => import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller'),
-        UpdateMvestAgreement: () => import('#controllers/v1/admin/mvest/update_mvest_agreement_controller'),
-        UpdateMvestOwner: () => import('#controllers/v1/admin/mvest/update_mvest_owner_controller'),
-      },
-      promotions: {
-        CreatePromotion: () => import('#controllers/v1/admin/promotions/create_promotion_controller'),
-        FetchPromotions: () => import('#controllers/v1/admin/promotions/fetch_promotions_controller'),
-        UpdatePromotion: () => import('#controllers/v1/admin/promotions/update_promotion_controller'),
+      investmentManagement: {
+        investorVehicleEarnings: {
+          FetchInvestorVehicleEarnings: () => import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/fetch_investor_vehicle_earnings_controller'),
+          GetInvestorVehicleEarning: () => import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/get_investor_vehicle_earning_controller'),
+          PayoutInvestorVehicleEarning: () => import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/payout_investor_vehicle_earning_controller'),
+        },
+        investorVehicles: {
+          CreateInvestorVehicle: () => import('#controllers/v1/admin/investment_management/investor_vehicles/create_investor_vehicle_controller'),
+          DeleteInvestorVehicle: () => import('#controllers/v1/admin/investment_management/investor_vehicles/delete_investor_vehicle_controller'),
+          FetchInvestorVehicles: () => import('#controllers/v1/admin/investment_management/investor_vehicles/fetch_investor_vehicles_controller'),
+          GetInvestorVehicle: () => import('#controllers/v1/admin/investment_management/investor_vehicles/get_investor_vehicle_controller'),
+          UpdateInvestorVehicle: () => import('#controllers/v1/admin/investment_management/investor_vehicles/update_investor_vehicle_controller'),
+        },
+        investors: {
+          CreateInvestor: () => import('#controllers/v1/admin/investment_management/investors/create_investor_controller'),
+          FetchInvestors: () => import('#controllers/v1/admin/investment_management/investors/fetch_investors_controller'),
+          GetInvestor: () => import('#controllers/v1/admin/investment_management/investors/get_investor_controller'),
+          UpdateInvestor: () => import('#controllers/v1/admin/investment_management/investors/update_investor_controller'),
+        },
       },
       settings: {
         booking: {

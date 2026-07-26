@@ -7,6 +7,7 @@ import db from '@adonisjs/lucid/services/db'
 import logApplicationError from '#common/helper_functions/log_application_error'
 import DriverBankAccountActions from '#model_management/actions/driver_bank_account_actions'
 import configurePayoutProvider from '#infrastructure_providers/helpers/configure_payout_provider'
+import { randomUUID } from 'node:crypto'
 
 export default class ApproveWalletPayoutController {
   async handle({ params, response }: HttpContext) {
@@ -84,7 +85,7 @@ export default class ApproveWalletPayoutController {
         await payoutProvider.initiatePayoutTransaction({
           amount: withdrawalRequest.amount,
           recipient: driverBankAccount.payoutProviderIdentifier,
-          reference: withdrawalRequest.identifier,
+          reference: `${withdrawalRequest.identifier}_${randomUUID()}`,
           reason: `Payout request for withdrawal request ${withdrawalRequest.identifier}`,
         })
 

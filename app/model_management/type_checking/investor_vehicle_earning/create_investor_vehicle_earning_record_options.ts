@@ -1,0 +1,9 @@
+import type InvestorVehicleEarningInterface from '#model_management/type_checking/investor_vehicle_earning/investor_vehicle_earning_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateInvestorVehicleEarningRecordPayload = Partial<InvestorVehicleEarningInterface>
+
+type CreateInvestorVehicleEarningRecordOptions =
+  CreateNewRecordGeneric<CreateInvestorVehicleEarningRecordPayload>
+
+export default CreateInvestorVehicleEarningRecordOptions

@@ -314,6 +314,10 @@ export type ScannedRoutes = {
     'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
     'customer.bookings.remove_booking_promotion': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
   }
+  DELETE: {
+    'admin.user_management.delete_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
+  }
   PATCH: {
     'admin.driver_management.update_driver_commission': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.driver_management.upload_driver_reference_form': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -340,7 +344,6 @@ export type ScannedRoutes = {
     'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'driver.bookings.enable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
     'driver.bookings.disable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
-    'mvest.update_profile': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

@@ -84,6 +84,7 @@ export default class PaystackPayoutProvider implements PayoutInterface {
         },
       }
     } catch (initiatePayoutTransactionError) {
+      console.log('initiatePayoutTransactionError -> ', initiatePayoutTransactionError)
       await logApplicationError(initiatePayoutTransactionError)
       return {
         infrastructureResults: {},
