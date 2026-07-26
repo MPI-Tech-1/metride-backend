@@ -6,6 +6,7 @@ import NotificationDispatchClient from '#infrastructure_providers/internals/noti
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import DriverVehicleActions from '#model_management/actions/driver_vehicle_actions'
 
 export default class AssignBookingDriverController {
   async handle({ request, response }: HttpContext) {
@@ -63,6 +64,18 @@ export default class AssignBookingDriverController {
         })
       }
 
+      const driverVehicle = await DriverVehicleActions.getDriverVehicle({
+        identifierType: 'driverId',
+        identifier: driver.id,
+      })
+      if (!driverVehicle) {
+        return response.status(HttpStatusCodesEnum.BAD_REQUEST).send({
+          status_code: HttpStatusCodesEnum.BAD_REQUEST,
+          status: ERROR,
+          message: 'Driver has no registered vehicle.',
+        })
+      }
+
       await BookingActions.updateBookingRecord({
         identifierOptions: {
           identifierType: 'identifier',
@@ -70,6 +83,7 @@ export default class AssignBookingDriverController {
         },
         updatePayload: {
           assignedDriverId: driver.id,
+          driverVehicleId: driverVehicle.id,
           status: 'assigned-a-driver',
         },
         dbTransactionOptions: { useTransaction: false },

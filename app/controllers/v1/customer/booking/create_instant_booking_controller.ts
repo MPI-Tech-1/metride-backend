@@ -89,6 +89,7 @@ export default class CreateInstantBookingController {
           estimatedDistanceInMeters: distance.distanceInMeters,
           estimatedDurationInSeconds: distance.estimatedDurationInSeconds,
           rideTypeId: driverVehicle.rideTypeId,
+          driverVehicleId: driverVehicle.id,
           isRecurringBooking: false,
           dateOfRide,
           recurringBookingDates: {},
@@ -96,11 +97,17 @@ export default class CreateInstantBookingController {
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
+      const basePrice = Math.max(
+        driverVehicle.rideType.minimumPrice,
+        Math.round(distance.distanceInKilometers * driverVehicle.rideType.pricePerKilometer)
+      )
+
       await BookingPaymentActions.createBookingPaymentRecord({
         createPayload: {
           bookingId: booking.id,
-          basePrice: distance.distanceInKilometers * driverVehicle.rideType.pricePerKilometer,
+          basePrice,
           discountAmount: 0,
+          amountDue: basePrice,
           amountPaid: 0,
         },
         dbTransactionOptions: { useTransaction: true, dbTransaction },

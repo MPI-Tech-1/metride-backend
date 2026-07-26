@@ -35,6 +35,13 @@ const authConfig = defineConfig({
       }),
     }),
 
+    mvestOwner: tokensGuard({
+      provider: tokensUserProvider({
+        tokens: 'accessTokens',
+        model: () => import('#models/mvest_owner'),
+      }),
+    }),
+
     /**
      * Session-based guard for browser authentication.
      */

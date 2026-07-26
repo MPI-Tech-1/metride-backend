@@ -2,7 +2,6 @@ import configureBankListProvider from '#infrastructure_providers/helpers/configu
 import Bank from '#models/bank'
 import { inject } from '@adonisjs/core'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import db from '@adonisjs/lucid/services/db'
 
 @inject()
 export default class extends BaseSeeder {
@@ -11,12 +10,12 @@ export default class extends BaseSeeder {
 
     const providerBankList = await bankListProvider.listBanks()
 
-    db.raw('SET FOREIGN_KEY_CHECKS = 0;')
+    if (providerBankList.length === 0) {
+      throw new Error('Bank provider returned an empty list. Existing bank records were preserved.')
+    }
 
-    await Bank.truncate()
-
-    await Bank.createMany(providerBankList)
-
-    db.raw('SET FOREIGN_KEY_CHECKS = 1;')
+    for (const bank of providerBankList) {
+      await Bank.updateOrCreate({ bankCode: bank.bankCode }, bank)
+    }
   }
 }

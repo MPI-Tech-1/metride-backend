@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('identifier').index()
       table.integer('driver_id').index()
-      table.bigInteger('driver_wallet_id').index('driver_wallet_id_index')
+      table.bigInteger('driver_wallet_id').index('driver_withdrawal_wallet_id_index')
       table.bigInteger('amount').defaultTo(0)
       table.string('status').defaultTo('pending')
       table.timestamp('created_at')

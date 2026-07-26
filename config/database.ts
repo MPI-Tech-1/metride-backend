@@ -6,7 +6,9 @@ const dbConfig = defineConfig({
   /**
    * Default connection used for all queries.
    */
-  connection: 'mysql',
+  // Production keeps using MySQL when DB_CONNECTION is omitted. Developers can
+  // opt into the isolated SQLite database through the ignored .env.local file.
+  connection: env.get('DB_CONNECTION', 'mysql'),
 
   connections: {
     /**

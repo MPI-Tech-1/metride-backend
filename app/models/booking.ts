@@ -17,6 +17,9 @@ export default class Booking extends AbstractModel {
   declare assignedDriverId: number | null
 
   @column()
+  declare driverVehicleId: number | null
+
+  @column()
   declare typeOfBooking: 'instant' | 'shuttle'
 
   @column()

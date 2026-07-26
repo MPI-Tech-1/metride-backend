@@ -7,6 +7,10 @@ import type { JobOptions } from '@adonisjs/queue/types'
 import { randomUUID } from 'node:crypto'
 import logApplicationError from '#common/helper_functions/log_application_error'
 import DriverSettingActions from '#model_management/actions/driver_setting_actions'
+import Booking from '#models/booking'
+import MvestVehicleAgreement from '#models/mvest_vehicle_agreement'
+import MvestEarning from '#models/mvest_earning'
+import { DateTime } from 'luxon'
 
 export interface ProcessDriverWalletEarningJobPayload {
   bookingId: number
@@ -22,33 +26,41 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
     console.log('Processing ProcessDriverWalletEarningJob', this.payload)
     const { bookingId } = this.payload
 
-    const booking = await BookingActions.getBooking({
+    const initialBooking = await BookingActions.getBooking({
       identifierType: 'id',
       identifier: bookingId,
     })
 
-    if (!booking) {
+    if (!initialBooking) {
       throw new Error('ProcessDriverWalletEarningJob: booking not found')
     }
 
-    if (booking.status !== 'completed') {
+    if (initialBooking.status !== 'completed') {
       throw new Error('ProcessDriverWalletEarningJob: booking has not been completed')
     }
 
-    if (booking.hasEarningBeenCreditedToDriver === true) {
-      throw new Error('ProcessDriverWalletEarningJob: booking earning has been credited to driver')
-    }
-
-    if (!booking.assignedDriverId) {
+    if (!initialBooking.assignedDriverId) {
       throw new Error('ProcessDriverWalletEarningJob: booking has no assigned driver')
     }
+    const assignedDriverId = initialBooking.assignedDriverId
 
     const dbTransaction = await db.transaction()
 
     try {
+      const booking = await Booking.query({ client: dbTransaction })
+        .preload('bookingPayment')
+        .where('id', bookingId)
+        .forUpdate()
+        .firstOrFail()
+
+      if (booking.hasEarningBeenCreditedToDriver === true) {
+        await dbTransaction.commit()
+        return
+      }
+
       const wallet = await DriverWalletActions.getDriverWallet({
         identifierType: 'driverId',
-        identifier: booking.assignedDriverId,
+        identifier: assignedDriverId,
         dbTransactionOptions: {
           useTransaction: true,
           dbTransaction,
@@ -61,7 +73,7 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
 
       const driverSettings = await DriverSettingActions.getDriverSetting({
         identifierType: 'driverId',
-        identifier: booking.assignedDriverId,
+        identifier: assignedDriverId,
       })
 
       if (!driverSettings) {
@@ -71,7 +83,7 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
       const paidAmount = booking.bookingPayment.amountPaid
       const commisionInPercentage = driverSettings.commissionPercentage / 100
 
-      const earningAmount = paidAmount * commisionInPercentage
+      const earningAmount = Math.floor(paidAmount * commisionInPercentage)
 
       await DriverWalletTransactionActions.createDriverWalletTransactionRecord({
         createPayload: {
@@ -96,11 +108,48 @@ export default class ProcessDriverWalletEarningJob extends Job<ProcessDriverWall
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
+      if (booking.driverVehicleId) {
+        const now = DateTime.now()
+        const agreement = await MvestVehicleAgreement.query({ client: dbTransaction })
+          .where('driver_vehicle_id', booking.driverVehicleId)
+          .where('is_active', true)
+          .where('starts_at', '<=', now.toSQL()!)
+          .where((query) => query.whereNull('ends_at').orWhere('ends_at', '>=', now.toSQL()!))
+          .first()
+
+        if (agreement) {
+          const existingMvestEarning = await MvestEarning.query({ client: dbTransaction })
+            .where('booking_id', booking.id)
+            .first()
+          if (!existingMvestEarning) {
+            const eligibleAmount = booking.bookingPayment.basePrice
+            const mvestEarning = new MvestEarning()
+            mvestEarning.useTransaction(dbTransaction)
+            mvestEarning.merge({
+              bookingId: booking.id,
+              mvestOwnerId: agreement.mvestOwnerId,
+              mvestVehicleAgreementId: agreement.id,
+              driverVehicleId: booking.driverVehicleId,
+              eligibleAmount,
+              commissionPercentage: agreement.commissionPercentage,
+              commissionAmount: Math.floor((eligibleAmount * agreement.commissionPercentage) / 100),
+              status: 'pending',
+            })
+            await mvestEarning.save()
+          }
+        }
+      }
+
+      booking.useTransaction(dbTransaction)
+      booking.hasEarningBeenCreditedToDriver = true
+      await booking.save()
+
       await dbTransaction.commit()
     } catch (processDriverWalletEarningJobError) {
       await dbTransaction.rollback()
       console.log('processDriverWalletEarningJobError => ', processDriverWalletEarningJobError)
       await logApplicationError(processDriverWalletEarningJobError)
+      throw processDriverWalletEarningJobError
     }
   }
 

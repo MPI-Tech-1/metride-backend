@@ -155,6 +155,7 @@ export const controllers = {
         Onboarding: () => import('#controllers/v1/customer/authentication/onboarding_controller'),
       },
       booking: {
+        ApplyBookingPromotion: () => import('#controllers/v1/customer/booking/apply_booking_promotion_controller'),
         CheckoutBookingWithCard: () => import('#controllers/v1/customer/booking/checkout_booking_with_card_controller'),
         CreateBooking: () => import('#controllers/v1/customer/booking/create_booking_controller'),
         CreateInstantBooking: () => import('#controllers/v1/customer/booking/create_instant_booking_controller'),
@@ -162,6 +163,7 @@ export const controllers = {
         FetchBookings: () => import('#controllers/v1/customer/booking/fetch_bookings_controller'),
         FetchNearestDrivers: () => import('#controllers/v1/customer/booking/fetch_nearest_drivers_controller'),
         GetBooking: () => import('#controllers/v1/customer/booking/get_booking_controller'),
+        RemoveBookingPromotion: () => import('#controllers/v1/customer/booking/remove_booking_promotion_controller'),
         SubmitBookingReview: () => import('#controllers/v1/customer/booking/submit_booking_review_controller'),
       },
       notifications: {
@@ -178,6 +180,9 @@ export const controllers = {
         FetchCustomerRideStatistics: () => import('#controllers/v1/customer/profile/fetch_customer_ride_statistics_controller'),
         GetCustomerProfile: () => import('#controllers/v1/customer/profile/get_customer_profile_controller'),
         UpdateCustomerProfile: () => import('#controllers/v1/customer/profile/update_customer_profile_controller'),
+      },
+      promotion: {
+        ValidatePromotion: () => import('#controllers/v1/customer/promotion/validate_promotion_controller'),
       },
     },
     driver: {
@@ -236,6 +241,24 @@ export const controllers = {
         GetWallet: () => import('#controllers/v1/driver/wallet/get_wallet_controller'),
         GetWalletTransaction: () => import('#controllers/v1/driver/wallet/get_wallet_transaction_controller'),
         InitiateWalletWithdrawal: () => import('#controllers/v1/driver/wallet/initiate_wallet_withdrawal_controller'),
+      },
+    },
+    mvest: {
+      authentication: {
+        AuthenticateMvestOwner: () => import('#controllers/v1/mvest/authentication/authenticate_mvest_owner_controller'),
+      },
+      dashboard: {
+        GetMvestDashboard: () => import('#controllers/v1/mvest/dashboard/get_mvest_dashboard_controller'),
+      },
+      earnings: {
+        FetchMvestOwnerEarnings: () => import('#controllers/v1/mvest/earnings/fetch_mvest_owner_earnings_controller'),
+      },
+      profile: {
+        GetMvestProfile: () => import('#controllers/v1/mvest/profile/get_mvest_profile_controller'),
+        UpdateMvestProfile: () => import('#controllers/v1/mvest/profile/update_mvest_profile_controller'),
+      },
+      vehicles: {
+        FetchMvestVehicles: () => import('#controllers/v1/mvest/vehicles/fetch_mvest_vehicles_controller'),
       },
     },
   },

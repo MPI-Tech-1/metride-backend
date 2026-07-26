@@ -12,9 +12,14 @@ import db from '@adonisjs/lucid/services/db'
 import configureCardPaymentProvider from '#infrastructure_providers/helpers/configure_card_payment_provider'
 import { randomUUID } from 'node:crypto'
 import logApplicationError from '#common/helper_functions/log_application_error'
+import PromotionRedemption from '#models/promotion_redemption'
+import { DateTime } from 'luxon'
+import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
+import app from '@adonisjs/core/services/app'
+import env from '#start/env'
 
 export default class CheckoutBookingController {
-  async handle({ request, response }: HttpContext) {
+  async handle({ request, auth, response }: HttpContext) {
     const { bookingIdentifier } = request.params()
 
     const booking = await BookingActions.getBooking({
@@ -23,6 +28,14 @@ export default class CheckoutBookingController {
     })
 
     if (!booking) {
+      return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
+        status_code: HttpStatusCodesEnum.NOT_FOUND,
+        status: ERROR,
+        message: 'Booking not found',
+      })
+    }
+
+    if (booking.customerId !== auth.use('customer').user!.id) {
       return response.status(HttpStatusCodesEnum.NOT_FOUND).send({
         status_code: HttpStatusCodesEnum.NOT_FOUND,
         status: ERROR,
@@ -41,11 +54,68 @@ export default class CheckoutBookingController {
       })
     }
 
+    const amountDue =
+      booking.bookingPayment.amountDue ??
+      Math.max(0, booking.bookingPayment.basePrice - booking.bookingPayment.discountAmount)
+
+    if (amountDue === 0) {
+      const trx = await db.transaction()
+      try {
+        booking.bookingPayment.useTransaction(trx)
+        booking.bookingPayment.merge({ amountPaid: 0, paymentStatus: 'completed' })
+        await booking.bookingPayment.save()
+        const redemption = await PromotionRedemption.query({ client: trx })
+          .where('booking_id', booking.id)
+          .where('status', 'reserved')
+          .first()
+        if (redemption) {
+          redemption.useTransaction(trx)
+          redemption.status = 'redeemed'
+          redemption.redeemedAt = DateTime.now()
+          await redemption.save()
+        }
+        await trx.commit()
+        if (booking.assignedDriverId && booking.paymentTiming === 'pay_now') {
+          await NotificationDispatchClient.sendBookingDriverAssignmentNotificationJob({
+            bookingId: booking.id,
+          })
+        }
+        return response.status(HttpStatusCodesEnum.OK).send({
+          status_code: HttpStatusCodesEnum.OK,
+          status: SUCCESS,
+          message: 'Booking fully discounted and payment completed.',
+          results: { checkoutUrl: null, transactionReference: null },
+        })
+      } catch (error) {
+        await trx.rollback()
+        throw error
+      }
+    }
+
+    if (app.inDev && env.get('DB_CONNECTION', 'mysql') === 'sqlite') {
+      const dummyTransactionReference = `dummy-${randomUUID()}`
+      const dummyCheckoutUrl = `https://example.com/metride/payment-success?reference=${dummyTransactionReference}`
+
+      return response.status(HttpStatusCodesEnum.OK).send({
+        status_code: HttpStatusCodesEnum.OK,
+        status: SUCCESS,
+        message: 'Dummy checkout initialized for local development. No payment was recorded.',
+        results: {
+          isTestData: true,
+          checkoutUrl: dummyCheckoutUrl,
+          transactionReference: dummyTransactionReference,
+          amountDue,
+          amountPaid: 0,
+          paymentStatus: 'pending',
+        },
+      })
+    }
+
     const cardPaymentProvider = configureCardPaymentProvider()
 
     const { transactionStatus, initiateTransactionInformation } =
       await cardPaymentProvider.initiateTransaction({
-        amount: `${booking.bookingPayment.basePrice}`,
+        amount: `${amountDue}`,
         emailAddress: booking.customer.email,
         redirectTransactionRedirectUrl: `${METRIDE_ADMIN_DASHBOARD_URL}/payment-success`,
       })

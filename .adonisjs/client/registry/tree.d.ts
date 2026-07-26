@@ -78,6 +78,21 @@ export interface ApiDefinition {
       fetchVehiclePhotos: typeof routes['admin.vehicle_management.fetch_vehicle_photos']
       deleteVehiclePhoto: typeof routes['admin.vehicle_management.delete_vehicle_photo']
     }
+    promotions: {
+      createPromotion: typeof routes['admin.promotions.create_promotion']
+      fetchPromotions: typeof routes['admin.promotions.fetch_promotions']
+      updatePromotion: typeof routes['admin.promotions.update_promotion']
+    }
+    mvest: {
+      createOwner: typeof routes['admin.mvest.create_owner']
+      fetchOwners: typeof routes['admin.mvest.fetch_owners']
+      updateOwner: typeof routes['admin.mvest.update_owner']
+      fetchAvailableVehicles: typeof routes['admin.mvest.fetch_available_vehicles']
+      createAgreement: typeof routes['admin.mvest.create_agreement']
+      updateAgreement: typeof routes['admin.mvest.update_agreement']
+      fetchEarnings: typeof routes['admin.mvest.fetch_earnings']
+      markPaid: typeof routes['admin.mvest.mark_paid']
+    }
   }
   customer: {
     authentication: {
@@ -94,12 +109,17 @@ export interface ApiDefinition {
     }
     bookings: {
       checkoutBookingWithCard: typeof routes['customer.bookings.checkout_booking_with_card']
+      applyBookingPromotion: typeof routes['customer.bookings.apply_booking_promotion']
+      removeBookingPromotion: typeof routes['customer.bookings.remove_booking_promotion']
       submitBookingReview: typeof routes['customer.bookings.submit_booking_review']
       getBooking: typeof routes['customer.bookings.get_booking']
       fetchNearestDrivers: typeof routes['customer.bookings.fetch_nearest_drivers']
       createShuttleBooking: typeof routes['customer.bookings.create_shuttle_booking']
       createInstantBooking: typeof routes['customer.bookings.create_instant_booking']
       fetchBookings: typeof routes['customer.bookings.fetch_bookings']
+    }
+    promotions: {
+      validatePromotion: typeof routes['customer.promotions.validate_promotion']
     }
     profile: {
       fetchRideStatistics: typeof routes['customer.profile.fetch_ride_statistics']
@@ -180,5 +200,15 @@ export interface ApiDefinition {
       fetchRideTypes: typeof routes['common.bookings.fetch_ride_types']
       fetchPopularLocations: typeof routes['common.bookings.fetch_popular_locations']
     }
+  }
+  mvest: {
+    auth: {
+      login: typeof routes['mvest.auth.login']
+    }
+    dashboard: typeof routes['mvest.dashboard']
+    vehicles: typeof routes['mvest.vehicles']
+    earnings: typeof routes['mvest.earnings']
+    profile: typeof routes['mvest.profile']
+    updateProfile: typeof routes['mvest.update_profile']
   }
 }

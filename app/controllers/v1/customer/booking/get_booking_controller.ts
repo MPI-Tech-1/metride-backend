@@ -63,6 +63,10 @@ export default class GetBookingController {
           identifier: booking.bookingPayment.identifier,
           basePrice: booking.bookingPayment.basePrice,
           discountAmount: booking.bookingPayment.discountAmount,
+          amountDue:
+            booking.bookingPayment.amountDue ??
+            Math.max(0, booking.bookingPayment.basePrice - booking.bookingPayment.discountAmount),
+          promotionCode: booking.bookingPayment.promotionCode,
           amountPaid: booking.bookingPayment.amountPaid,
         },
         bookingGpsLogs: booking.bookingGpsLogs.map((log) => ({
