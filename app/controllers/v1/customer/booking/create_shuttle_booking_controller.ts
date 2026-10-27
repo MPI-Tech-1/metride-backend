@@ -77,6 +77,11 @@ export default class CreateShuttleBookingController {
         ? recurringBookingDates!.days.length * recurringBookingDates!.durationInWeeks
         : 1
 
+      const basePrice = Math.max(
+        rideType!.minimumPrice,
+        Math.round(distance.distanceInKilometers * rideType!.pricePerKilometer)
+      )
+
       await BookingPaymentActions.createBookingPaymentRecord({
         createPayload: {
           bookingId: booking.id,
