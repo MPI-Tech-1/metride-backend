@@ -59,17 +59,18 @@ export type ScannedRoutes = {
     'admin.vehicle_management.add_vehicle_photo': { paramsTuple?: []; params?: {} }
     'admin.vehicle_management.fetch_vehicle_photos': { paramsTuple?: []; params?: {} }
     'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
-    'admin.promotions.create_promotion': { paramsTuple?: []; params?: {} }
-    'admin.promotions.fetch_promotions': { paramsTuple?: []; params?: {} }
-    'admin.promotions.update_promotion': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.mvest.create_owner': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_owners': { paramsTuple?: []; params?: {} }
-    'admin.mvest.update_owner': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.mvest.fetch_available_vehicles': { paramsTuple?: []; params?: {} }
-    'admin.mvest.create_agreement': { paramsTuple?: []; params?: {} }
-    'admin.mvest.update_agreement': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.mvest.fetch_earnings': { paramsTuple?: []; params?: {} }
-    'admin.mvest.mark_paid': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.create_investor': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.update_investor': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investors': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.create_investor_vehicle': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.update_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investor_vehicles': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.delete_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investor_vehicle_earnings': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor_vehicle_earning': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.payout_investor_vehicle_earning': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -153,10 +154,9 @@ export type ScannedRoutes = {
     'admin.wallet_management.approve_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
     'admin.wallet_management.reject_wallet_payout': { paramsTuple: [ParamValue]; params: {'withdrawalRequestIdentifier': ParamValue} }
     'admin.vehicle_management.add_vehicle_photo': { paramsTuple?: []; params?: {} }
-    'admin.promotions.create_promotion': { paramsTuple?: []; params?: {} }
-    'admin.mvest.create_owner': { paramsTuple?: []; params?: {} }
-    'admin.mvest.create_agreement': { paramsTuple?: []; params?: {} }
-    'admin.mvest.mark_paid': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.create_investor': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.create_investor_vehicle': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.payout_investor_vehicle_earning': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.authentication.onboarding': { paramsTuple?: []; params?: {} }
     'customer.authentication.authenticate_customer': { paramsTuple?: []; params?: {} }
     'customer.account-activation.request_account_activation_token': { paramsTuple?: []; params?: {} }
@@ -213,10 +213,12 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'admin.vehicle_management.fetch_vehicle_photos': { paramsTuple?: []; params?: {} }
-    'admin.promotions.fetch_promotions': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_owners': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_available_vehicles': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_earnings': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.fetch_investors': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investor_vehicles': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investor_vehicle_earnings': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor_vehicle_earning': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
@@ -276,10 +278,12 @@ export type ScannedRoutes = {
     'admin.dashboard.fetch_payout_metrics': { paramsTuple?: []; params?: {} }
     'admin.dashboard.fetch_wallet_transaction_metrics': { paramsTuple?: []; params?: {} }
     'admin.vehicle_management.fetch_vehicle_photos': { paramsTuple?: []; params?: {} }
-    'admin.promotions.fetch_promotions': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_owners': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_available_vehicles': { paramsTuple?: []; params?: {} }
-    'admin.mvest.fetch_earnings': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.fetch_investors': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investor_vehicles': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.fetch_investor_vehicle_earnings': { paramsTuple?: []; params?: {} }
+    'admin.investment_management.get_investor_vehicle_earning': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.bookings.get_booking': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
     'customer.bookings.fetch_bookings': { paramsTuple?: []; params?: {} }
     'customer.profile.fetch_ride_statistics': { paramsTuple?: []; params?: {} }
@@ -312,11 +316,8 @@ export type ScannedRoutes = {
   DELETE: {
     'admin.user_management.delete_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
+    'admin.investment_management.delete_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.bookings.remove_booking_promotion': { paramsTuple: [ParamValue]; params: {'bookingIdentifier': ParamValue} }
-  }
-  DELETE: {
-    'admin.user_management.delete_admin': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.vehicle_management.delete_vehicle_photo': { paramsTuple: [ParamValue]; params: {'photoIdentifier': ParamValue} }
   }
   PATCH: {
     'admin.driver_management.update_driver_commission': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
@@ -329,9 +330,8 @@ export type ScannedRoutes = {
     'admin.bookings.assign_booking_driver': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.cancel_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'admin.bookings.complete_booking': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.promotions.update_promotion': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.mvest.update_owner': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
-    'admin.mvest.update_agreement': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.update_investor': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
+    'admin.investment_management.update_investor_vehicle': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'customer.profile.update_profile': { paramsTuple?: []; params?: {} }
     'customer.notifications.mark_notification_as_read': { paramsTuple: [ParamValue]; params: {'notificationIdentifier': ParamValue} }
     'driver.profile.update_personal_information': { paramsTuple?: []; params?: {} }
@@ -344,6 +344,7 @@ export type ScannedRoutes = {
     'driver.bookings.update_booking_trip_progress': { paramsTuple: [ParamValue]; params: {'identifier': ParamValue} }
     'driver.bookings.enable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
     'driver.bookings.disable_ride_acceptance_status': { paramsTuple?: []; params?: {} }
+    'mvest.update_profile': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

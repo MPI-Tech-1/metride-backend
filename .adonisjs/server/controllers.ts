@@ -21,6 +21,7 @@ export const controllers = {
       customerManagement: {
         FetchCustomers: () => import('#controllers/v1/admin/customer_management/fetch_customers_controller'),
         GetCustomer: () => import('#controllers/v1/admin/customer_management/get_customer_controller'),
+        UpdateCustomer: () => import('#controllers/v1/admin/customer_management/update_customer_controller'),
       },
       dashboard: {
         FetchBookingMetrics: () => import('#controllers/v1/admin/dashboard/fetch_booking_metrics_controller'),
@@ -37,6 +38,7 @@ export const controllers = {
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
         RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
         UpdateDriverCommission: () => import('#controllers/v1/admin/driver_management/update_driver_commission_controller'),
+        UpdateDriver: () => import('#controllers/v1/admin/driver_management/update_driver_controller'),
         UploadDriverReferenceForm: () => import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller'),
         vehiclePhotos: {
           AddVehiclePhoto: () => import('#controllers/v1/admin/driver_management/vehicle_photos/add_vehicle_photo_controller'),

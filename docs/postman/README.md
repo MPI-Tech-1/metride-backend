@@ -38,3 +38,19 @@ Deploy migrations before application code. The migrations are additive: they cre
 add nullable columns, and do not backfill or modify existing monetary records. Enrol one internal
 test vehicle first, complete a paid test trip, and reconcile the driver and MVest earning records
 before activating additional agreements.
+
+# Admin: edit driver & customer Postman guide
+
+Import `Metride_Admin_Edit_Driver_Customer.postman_collection.json` and use the same environment.
+
+1. Run **Authentication → Admin Login** (an `admin` or `operations` role). It stores `adminToken`.
+2. Set `driverIdentifier` / `customerIdentifier` (and `cityIdentifier` to change a driver's city).
+3. Send **Update Driver Info** (`PATCH /api/v1/admins/driver-management/drivers/:identifier`) or
+   **Update Customer Info** (`PATCH /api/v1/admins/customer-management/customers/:identifier`).
+
+- Every body field is optional; send only what changes. An empty body returns `400`.
+- Email and mobile number must not belong to another driver/customer (`422`).
+- Driver account fields and personal information save in one transaction. A missing personal
+  information record is created.
+- Driver status and commission keep their own endpoints (approve, reject, commission).
+- Each request has saved example responses (200, 400, 404, 422, 401).

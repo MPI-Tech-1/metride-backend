@@ -78,20 +78,19 @@ export interface ApiDefinition {
       fetchVehiclePhotos: typeof routes['admin.vehicle_management.fetch_vehicle_photos']
       deleteVehiclePhoto: typeof routes['admin.vehicle_management.delete_vehicle_photo']
     }
-    promotions: {
-      createPromotion: typeof routes['admin.promotions.create_promotion']
-      fetchPromotions: typeof routes['admin.promotions.fetch_promotions']
-      updatePromotion: typeof routes['admin.promotions.update_promotion']
-    }
-    mvest: {
-      createOwner: typeof routes['admin.mvest.create_owner']
-      fetchOwners: typeof routes['admin.mvest.fetch_owners']
-      updateOwner: typeof routes['admin.mvest.update_owner']
-      fetchAvailableVehicles: typeof routes['admin.mvest.fetch_available_vehicles']
-      createAgreement: typeof routes['admin.mvest.create_agreement']
-      updateAgreement: typeof routes['admin.mvest.update_agreement']
-      fetchEarnings: typeof routes['admin.mvest.fetch_earnings']
-      markPaid: typeof routes['admin.mvest.mark_paid']
+    investmentManagement: {
+      createInvestor: typeof routes['admin.investment_management.create_investor']
+      updateInvestor: typeof routes['admin.investment_management.update_investor']
+      fetchInvestors: typeof routes['admin.investment_management.fetch_investors']
+      getInvestor: typeof routes['admin.investment_management.get_investor']
+      createInvestorVehicle: typeof routes['admin.investment_management.create_investor_vehicle']
+      updateInvestorVehicle: typeof routes['admin.investment_management.update_investor_vehicle']
+      fetchInvestorVehicles: typeof routes['admin.investment_management.fetch_investor_vehicles']
+      getInvestorVehicle: typeof routes['admin.investment_management.get_investor_vehicle']
+      deleteInvestorVehicle: typeof routes['admin.investment_management.delete_investor_vehicle']
+      fetchInvestorVehicleEarnings: typeof routes['admin.investment_management.fetch_investor_vehicle_earnings']
+      getInvestorVehicleEarning: typeof routes['admin.investment_management.get_investor_vehicle_earning']
+      payoutInvestorVehicleEarning: typeof routes['admin.investment_management.payout_investor_vehicle_earning']
     }
   }
   customer: {
