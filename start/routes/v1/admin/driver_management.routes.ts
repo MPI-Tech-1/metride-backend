@@ -12,6 +12,8 @@ const ApproveDriverController = () =>
   import('#controllers/v1/admin/driver_management/approve_driver_controller')
 const RejectDriverController = () =>
   import('#controllers/v1/admin/driver_management/reject_driver_controller')
+const UpdateDriverController = () =>
+  import('#controllers/v1/admin/driver_management/update_driver_controller')
 const UpdateDriverCommissionController = () =>
   import('#controllers/v1/admin/driver_management/update_driver_commission_controller')
 const UploadDriverReferenceFormController = () =>
@@ -22,6 +24,7 @@ router
     router.get('/', [FetchDriversController])
     router.get('/active', [FetchActiveDriversController])
     router.get('/:identifier', [GetDriverController])
+    router.patch('/:identifier', [UpdateDriverController])
     router.post('/:identifier/approve', [ApproveDriverController])
     router.post('/:identifier/reject', [RejectDriverController])
     router.patch('/:identifier/commission', [UpdateDriverCommissionController])

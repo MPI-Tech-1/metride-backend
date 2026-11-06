@@ -667,136 +667,148 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/vehicle_management/vehicle_photos/delete_vehicle_photo_controller').default['handle']>>>
     }
   }
-  'admin.promotions.create_promotion': {
+  'admin.investment_management.create_investor': {
     methods: ["POST"]
-    pattern: '/api/v1/admins/promotions'
+    pattern: '/api/v1/admins/investment-management/investors'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/promotions/create_promotion_request_validator').default)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/investment_management/create_investor_request_validator').default)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/promotions/create_promotion_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/create_promotion_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/create_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/investment_management/create_investor_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/create_investor_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/create_investor_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'admin.promotions.fetch_promotions': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/v1/admins/promotions'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/fetch_promotions_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/fetch_promotions_controller').default['handle']>>>
-    }
-  }
-  'admin.promotions.update_promotion': {
+  'admin.investment_management.update_investor': {
     methods: ["PATCH"]
-    pattern: '/api/v1/admins/promotions/:identifier'
+    pattern: '/api/v1/admins/investment-management/investors/:identifier'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/promotions/update_promotion_request_validator').default)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/investment_management/update_investor_request_validator').default)>>
       paramsTuple: [ParamValue]
       params: { identifier: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/promotions/update_promotion_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/update_promotion_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/update_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/investment_management/update_investor_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/update_investor_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/update_investor_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'admin.mvest.create_owner': {
-    methods: ["POST"]
-    pattern: '/api/v1/admins/mvest/owners'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_owner_request_validator').default)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_owner_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_owner_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_owner_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
-  'admin.mvest.fetch_owners': {
+  'admin.investment_management.fetch_investors': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admins/mvest/owners'
+    pattern: '/api/v1/admins/investment-management/investors'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/fetch_investors_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/fetch_investors_controller').default['handle']>>>
     }
   }
-  'admin.mvest.update_owner': {
+  'admin.investment_management.get_investor': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/investment-management/investors/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/get_investor_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investors/get_investor_controller').default['handle']>>>
+    }
+  }
+  'admin.investment_management.create_investor_vehicle': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/investment-management/investor-vehicles'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/investment_management/create_investor_vehicle_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/investment_management/create_investor_vehicle_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/create_investor_vehicle_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/create_investor_vehicle_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.investment_management.update_investor_vehicle': {
     methods: ["PATCH"]
-    pattern: '/api/v1/admins/mvest/owners/:identifier'
+    pattern: '/api/v1/admins/investment-management/investor-vehicles/:identifier'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/investment_management/update_investor_vehicle_request_validator').default)>>
       paramsTuple: [ParamValue]
       params: { identifier: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_owner_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_owner_controller').default['handle']>>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/investment_management/update_investor_vehicle_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/update_investor_vehicle_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/update_investor_vehicle_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'admin.mvest.fetch_available_vehicles': {
+  'admin.investment_management.fetch_investor_vehicles': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admins/mvest/available-vehicles'
+    pattern: '/api/v1/admins/investment-management/investor-vehicles'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/fetch_investor_vehicles_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/fetch_investor_vehicles_controller').default['handle']>>>
     }
   }
-  'admin.mvest.create_agreement': {
-    methods: ["POST"]
-    pattern: '/api/v1/admins/mvest/agreements'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_agreement_request_validator').default)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_agreement_request_validator').default)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_agreement_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_agreement_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
-  'admin.mvest.update_agreement': {
-    methods: ["PATCH"]
-    pattern: '/api/v1/admins/mvest/agreements/:identifier'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { identifier: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_agreement_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_agreement_controller').default['handle']>>>
-    }
-  }
-  'admin.mvest.fetch_earnings': {
+  'admin.investment_management.get_investor_vehicle': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/admins/mvest/earnings'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller').default['handle']>>>
-    }
-  }
-  'admin.mvest.mark_paid': {
-    methods: ["POST"]
-    pattern: '/api/v1/admins/mvest/earnings/:identifier/mark-paid'
+    pattern: '/api/v1/admins/investment-management/investor-vehicles/:identifier'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { identifier: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller').default['handle']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller').default['handle']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/get_investor_vehicle_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/get_investor_vehicle_controller').default['handle']>>>
+    }
+  }
+  'admin.investment_management.delete_investor_vehicle': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/admins/investment-management/investor-vehicles/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/delete_investor_vehicle_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicles/delete_investor_vehicle_controller').default['handle']>>>
+    }
+  }
+  'admin.investment_management.fetch_investor_vehicle_earnings': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/investment-management/investor-vehicle-earnings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/fetch_investor_vehicle_earnings_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/fetch_investor_vehicle_earnings_controller').default['handle']>>>
+    }
+  }
+  'admin.investment_management.get_investor_vehicle_earning': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/get_investor_vehicle_earning_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/get_investor_vehicle_earning_controller').default['handle']>>>
+    }
+  }
+  'admin.investment_management.payout_investor_vehicle_earning': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/payout_investor_vehicle_earning_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/payout_investor_vehicle_earning_controller').default['handle']>>>
     }
   }
   'customer.authentication.onboarding': {

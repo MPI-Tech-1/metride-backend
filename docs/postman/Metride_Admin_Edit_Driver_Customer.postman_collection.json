@@ -1,0 +1,855 @@
+{
+  "info": {
+    "_postman_id": "c501d53c-3932-423f-bc71-6d5db5bad350",
+    "name": "Metride — Admin: Edit Driver & Customer",
+    "description": "Admin endpoints to edit driver and customer (user) information. All requests need an admin bearer token (`adminToken`), which **Admin Login** saves for you. Allowed roles: `admin`, `operations`.\n\nThe response envelope is `{ status_code, status, message, results }`. Validation failures return HTTP 422 with `results` as an array of `{ message, rule, field }`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{adminToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Admin Login",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.results?.accessCredentials?.token) pm.environment.set('adminToken', body.results.accessCredentials.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admins/authentication/authenticate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admins",
+                "authentication",
+                "authenticate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Driver Management",
+      "item": [
+        {
+          "name": "Get Driver",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admins",
+                "driver-management",
+                "drivers",
+                "{{driverIdentifier}}"
+              ]
+            },
+            "description": "Fetch the driver's current details before editing."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Driver Info",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admins",
+                "driver-management",
+                "drivers",
+                "{{driverIdentifier}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Chinedu\",\n  \"lastName\": \"Okafor\",\n  \"email\": \"chinedu.okafor@example.com\",\n  \"mobileNumber\": \"+2348031234567\",\n  \"cityIdentifier\": \"{{cityIdentifier}}\",\n  \"dateOfBirth\": \"1990-05-14\",\n  \"gender\": \"male\",\n  \"homeAddress\": \"12 Adeola Odeku Street, Victoria Island, Lagos\",\n  \"nationalIdentificationNumber\": \"12345678901\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Edit a driver's account details and personal information.\n\n**All fields are optional** — send only what you want to change. At least one field is required.\n\n| Field | Type | Notes |\n|---|---|---|\n| firstName | string | non-empty |\n| lastName | string | non-empty |\n| email | string | valid email; must not belong to another driver |\n| mobileNumber | string | must not belong to another driver |\n| cityIdentifier | string | `cities.identifier`; must exist |\n| dateOfBirth | string | `YYYY-MM-DD` |\n| gender | string | |\n| homeAddress | string | |\n| nationalIdentificationNumber | string | |\n\nAccount fields and personal information are saved in one database transaction. If the driver has no personal-information record yet, one is created.\n\nStatus (approve/reject) and commission are **not** edited here — use the existing approve, reject and commission endpoints.\n\nRoles: `admin`, `operations`."
+          },
+          "response": [
+            {
+              "name": "200 — Full update",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "driver-management",
+                    "drivers",
+                    "{{driverIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Chinedu\",\n  \"lastName\": \"Okafor\",\n  \"email\": \"chinedu.okafor@example.com\",\n  \"mobileNumber\": \"+2348031234567\",\n  \"cityIdentifier\": \"{{cityIdentifier}}\",\n  \"dateOfBirth\": \"1990-05-14\",\n  \"gender\": \"male\",\n  \"homeAddress\": \"12 Adeola Odeku Street, Victoria Island, Lagos\",\n  \"nationalIdentificationNumber\": \"12345678901\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 200,\n  \"status\": \"success\",\n  \"message\": \"Driver information updated successfully.\",\n  \"results\": {\n    \"identifier\": \"9f3c2a1e-6b7d-4c8e-a1f2-3d4e5f6a7b8c\",\n    \"firstName\": \"Chinedu\",\n    \"lastName\": \"Okafor\",\n    \"fullName\": \"Chinedu Okafor\",\n    \"email\": \"chinedu.okafor@example.com\",\n    \"mobileNumber\": \"+2348031234567\",\n    \"status\": \"approved\",\n    \"updatedAt\": \"2026-11-06T10:15:42.000+01:00\",\n    \"driverPersonalInformation\": {\n      \"identifier\": \"b2d4f6a8-1c3e-4a5b-9d7f-0e2c4a6b8d1f\",\n      \"dateOfBirth\": \"1990-05-14\",\n      \"gender\": \"male\",\n      \"homeAddress\": \"12 Adeola Odeku Street, Victoria Island, Lagos\",\n      \"nationalIdentificationNumber\": \"12345678901\",\n      \"city\": {\n        \"identifier\": \"c7e9a1b3-5d2f-4e6a-8b0c-1d3f5a7c9e2b\",\n        \"name\": \"Lagos\"\n      },\n      \"updatedAt\": \"2026-11-06T10:15:42.000+01:00\"\n    }\n  }\n}"
+            },
+            {
+              "name": "200 — Partial update (mobile number only)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "driver-management",
+                    "drivers",
+                    "{{driverIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mobileNumber\": \"+2348039876543\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 200,\n  \"status\": \"success\",\n  \"message\": \"Driver information updated successfully.\",\n  \"results\": {\n    \"identifier\": \"9f3c2a1e-6b7d-4c8e-a1f2-3d4e5f6a7b8c\",\n    \"firstName\": \"Chinedu\",\n    \"lastName\": \"Okafor\",\n    \"fullName\": \"Chinedu Okafor\",\n    \"email\": \"chinedu.okafor@example.com\",\n    \"mobileNumber\": \"+2348039876543\",\n    \"status\": \"approved\",\n    \"updatedAt\": \"2026-11-06T10:15:42.000+01:00\",\n    \"driverPersonalInformation\": {\n      \"identifier\": \"b2d4f6a8-1c3e-4a5b-9d7f-0e2c4a6b8d1f\",\n      \"dateOfBirth\": \"1990-05-14\",\n      \"gender\": \"male\",\n      \"homeAddress\": \"12 Adeola Odeku Street, Victoria Island, Lagos\",\n      \"nationalIdentificationNumber\": \"12345678901\",\n      \"city\": {\n        \"identifier\": \"c7e9a1b3-5d2f-4e6a-8b0c-1d3f5a7c9e2b\",\n        \"name\": \"Lagos\"\n      },\n      \"updatedAt\": \"2026-11-06T10:15:42.000+01:00\"\n    }\n  }\n}"
+            },
+            {
+              "name": "400 — Empty body",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "driver-management",
+                    "drivers",
+                    "{{driverIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 400,\n  \"status\": \"error\",\n  \"message\": \"Please provide at least one field to update.\"\n}"
+            },
+            {
+              "name": "404 — Driver not found",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "driver-management",
+                    "drivers",
+                    "{{driverIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mobileNumber\": \"+2348039876543\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 404,\n  \"status\": \"error\",\n  \"message\": \"Driver not found.\"\n}"
+            },
+            {
+              "name": "422 — Validation error",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "driver-management",
+                    "drivers",
+                    "{{driverIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"existing.driver@example.com\",\n  \"cityIdentifier\": \"not-a-real-city\",\n  \"dateOfBirth\": \"14/05/1990\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"error\",\n  \"status_code\": 422,\n  \"message\": \"Some fields require your attention\",\n  \"results\": [\n    {\n      \"message\": \"This email is already registered to another driver.\",\n      \"rule\": \"database.unique\",\n      \"field\": \"email\"\n    },\n    {\n      \"message\": \"Selected city does not exist.\",\n      \"rule\": \"database.exists\",\n      \"field\": \"cityIdentifier\"\n    },\n    {\n      \"message\": \"Date of birth must be a valid date in the format YYYY-MM-DD.\",\n      \"rule\": \"date\",\n      \"field\": \"dateOfBirth\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "401 — Missing or invalid token",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/driver-management/drivers/{{driverIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "driver-management",
+                    "drivers",
+                    "{{driverIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mobileNumber\": \"+2348039876543\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"Unauthorized access\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Customer Management",
+      "item": [
+        {
+          "name": "Get Customer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admins",
+                "customer-management",
+                "customers",
+                "{{customerIdentifier}}"
+              ]
+            },
+            "description": "Fetch the customer's current details before editing."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Customer Info",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admins",
+                "customer-management",
+                "customers",
+                "{{customerIdentifier}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Amaka\",\n  \"lastName\": \"Eze\",\n  \"email\": \"amaka.eze@example.com\",\n  \"mobileNumber\": \"+2348051112233\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Edit a customer's (rider's) account details.\n\n**All fields are optional** — send only what you want to change. At least one field is required.\n\n| Field | Type | Notes |\n|---|---|---|\n| firstName | string | non-empty |\n| lastName | string | non-empty |\n| email | string | valid email; must not belong to another customer |\n| mobileNumber | string | must not belong to another customer |\n\nPassword is not editable from this endpoint.\n\nRoles: `admin`, `operations`."
+          },
+          "response": [
+            {
+              "name": "200 — Full update",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "customer-management",
+                    "customers",
+                    "{{customerIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Amaka\",\n  \"lastName\": \"Eze\",\n  \"email\": \"amaka.eze@example.com\",\n  \"mobileNumber\": \"+2348051112233\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 200,\n  \"status\": \"success\",\n  \"message\": \"Customer information updated successfully.\",\n  \"results\": {\n    \"identifier\": \"4a6c8e0f-2b4d-4f6a-8c1e-3b5d7f9a1c2e\",\n    \"firstName\": \"Amaka\",\n    \"lastName\": \"Eze\",\n    \"fullName\": \"Amaka Eze\",\n    \"email\": \"amaka.eze@example.com\",\n    \"mobileNumber\": \"+2348051112233\",\n    \"lastLoggedInAt\": \"2026-11-05T18:42:10.000+01:00\",\n    \"updatedAt\": \"2026-11-06T10:20:05.000+01:00\"\n  }\n}"
+            },
+            {
+              "name": "200 — Partial update (email only)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "customer-management",
+                    "customers",
+                    "{{customerIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"amaka.new@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 200,\n  \"status\": \"success\",\n  \"message\": \"Customer information updated successfully.\",\n  \"results\": {\n    \"identifier\": \"4a6c8e0f-2b4d-4f6a-8c1e-3b5d7f9a1c2e\",\n    \"firstName\": \"Amaka\",\n    \"lastName\": \"Eze\",\n    \"fullName\": \"Amaka Eze\",\n    \"email\": \"amaka.new@example.com\",\n    \"mobileNumber\": \"+2348051112233\",\n    \"lastLoggedInAt\": \"2026-11-05T18:42:10.000+01:00\",\n    \"updatedAt\": \"2026-11-06T10:20:05.000+01:00\"\n  }\n}"
+            },
+            {
+              "name": "400 — Empty body",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "customer-management",
+                    "customers",
+                    "{{customerIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 400,\n  \"status\": \"error\",\n  \"message\": \"Please provide at least one field to update.\"\n}"
+            },
+            {
+              "name": "404 — Customer not found",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "customer-management",
+                    "customers",
+                    "{{customerIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"amaka.new@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status_code\": 404,\n  \"status\": \"error\",\n  \"message\": \"Customer not found.\"\n}"
+            },
+            {
+              "name": "422 — Validation error",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "customer-management",
+                    "customers",
+                    "{{customerIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"not-an-email\",\n  \"mobileNumber\": \"+2348000000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"error\",\n  \"status_code\": 422,\n  \"message\": \"Some fields require your attention\",\n  \"results\": [\n    {\n      \"message\": \"Please provide a valid email address.\",\n      \"rule\": \"email\",\n      \"field\": \"email\"\n    },\n    {\n      \"message\": \"This mobile number is already registered to another customer.\",\n      \"rule\": \"database.unique\",\n      \"field\": \"mobileNumber\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "401 — Missing or invalid token",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/admins/customer-management/customers/{{customerIdentifier}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "admins",
+                    "customer-management",
+                    "customers",
+                    "{{customerIdentifier}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"amaka.new@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"Unauthorized access\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3333"
+    },
+    {
+      "key": "driverIdentifier",
+      "value": ""
+    },
+    {
+      "key": "customerIdentifier",
+      "value": ""
+    },
+    {
+      "key": "cityIdentifier",
+      "value": ""
+    }
+  ]
+}
