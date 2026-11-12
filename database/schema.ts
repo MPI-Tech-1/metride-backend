@@ -382,6 +382,31 @@ export class DriverBankAccountSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class DriverBookingAssignmentSchema extends BaseModel {
+  static $columns = ['assignedAt', 'bookingId', 'createdAt', 'deletedAt', 'driverId', 'id', 'identifier', 'respondedAt', 'response', 'updatedAt'] as const
+  $columns = DriverBookingAssignmentSchema.$columns
+  @column.dateTime()
+  declare assignedAt: DateTime
+  @column()
+  declare bookingId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column.dateTime()
+  declare respondedAt: DateTime | null
+  @column()
+  declare response: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class DriverDocumentSchema extends BaseModel {
   static $columns = ['createdAt', 'deletedAt', 'driverId', 'driverLicenceUrl', 'id', 'identifier', 'passportPhotographUrl', 'referencePhotoUrl', 'updatedAt', 'vehiclePaperUrl', 'vehiclePhotoUrl'] as const
   $columns = DriverDocumentSchema.$columns
@@ -451,6 +476,83 @@ export class DriverNotificationSchema extends BaseModel {
   declare notificationType: string | null
   @column()
   declare payload: any | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class DriverOnlineRewardSettingSchema extends BaseModel {
+  static $columns = ['acceptanceTimeoutMinutes', 'createdAt', 'deletedAt', 'graceMinutes', 'id', 'identifier', 'isEnabled', 'rewardAmount', 'updatedAt', 'windowEndTime', 'windowStartTime'] as const
+  $columns = DriverOnlineRewardSettingSchema.$columns
+  @column()
+  declare acceptanceTimeoutMinutes: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare graceMinutes: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare isEnabled: boolean
+  @column()
+  declare rewardAmount: bigint | number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare windowEndTime: string
+  @column()
+  declare windowStartTime: string
+}
+
+export class DriverOnlineRewardSchema extends BaseModel {
+  static $columns = ['amount', 'createdAt', 'deletedAt', 'driverId', 'driverWalletTransactionId', 'id', 'identifier', 'onlineMinutes', 'rewardDate', 'updatedAt', 'windowEndTime', 'windowStartTime'] as const
+  $columns = DriverOnlineRewardSchema.$columns
+  @column()
+  declare amount: bigint | number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number
+  @column()
+  declare driverWalletTransactionId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare onlineMinutes: number
+  @column.date()
+  declare rewardDate: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare windowEndTime: string
+  @column()
+  declare windowStartTime: string
+}
+
+export class DriverOnlineSessionSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'driverId', 'endedAt', 'id', 'identifier', 'startedAt', 'updatedAt'] as const
+  $columns = DriverOnlineSessionSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare driverId: number
+  @column.dateTime()
+  declare endedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column.dateTime()
+  declare startedAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
@@ -686,6 +788,89 @@ export class DriverSchema extends BaseModel {
   declare password: string | null
   @column()
   declare status: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class InvestorVehicleEarningSchema extends BaseModel {
+  static $columns = ['amount', 'createdAt', 'deletedAt', 'description', 'id', 'identifier', 'investorId', 'investorVehicleId', 'paidAt', 'status', 'updatedAt'] as const
+  $columns = InvestorVehicleEarningSchema.$columns
+  @column()
+  declare amount: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare investorId: number | null
+  @column()
+  declare investorVehicleId: number | null
+  @column.dateTime()
+  declare paidAt: DateTime | null
+  @column()
+  declare status: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class InvestorVehicleSchema extends BaseModel {
+  static $columns = ['colorOfVehicle', 'createdAt', 'deletedAt', 'id', 'identifier', 'investorId', 'percentageShare', 'plateNumber', 'rideTypeId', 'seatCapacity', 'updatedAt', 'vehicleMakeId', 'vehicleModelId'] as const
+  $columns = InvestorVehicleSchema.$columns
+  @column()
+  declare colorOfVehicle: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare investorId: number | null
+  @column()
+  declare percentageShare: number | null
+  @column()
+  declare plateNumber: string | null
+  @column()
+  declare rideTypeId: number | null
+  @column()
+  declare seatCapacity: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare vehicleMakeId: number | null
+  @column()
+  declare vehicleModelId: number | null
+}
+
+export class InvestorSchema extends BaseModel {
+  static $columns = ['address', 'createdAt', 'deletedAt', 'email', 'firstName', 'id', 'identifier', 'lastName', 'mobileNumber', 'updatedAt'] as const
+  $columns = InvestorSchema.$columns
+  @column()
+  declare address: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare email: string | null
+  @column()
+  declare firstName: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare identifier: string | null
+  @column()
+  declare lastName: string | null
+  @column()
+  declare mobileNumber: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

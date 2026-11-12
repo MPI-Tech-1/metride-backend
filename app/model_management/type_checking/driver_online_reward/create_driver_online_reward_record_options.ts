@@ -1,0 +1,9 @@
+import type DriverOnlineRewardInterface from '#model_management/type_checking/driver_online_reward/driver_online_reward_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverOnlineRewardRecordPayload = Partial<DriverOnlineRewardInterface>
+
+type CreateDriverOnlineRewardRecordOptions =
+  CreateNewRecordGeneric<CreateDriverOnlineRewardRecordPayload>
+
+export default CreateDriverOnlineRewardRecordOptions

@@ -1,5 +1,6 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import BookingActions from '#model_management/actions/booking_actions'
+import DriverBookingAssignmentActions from '#model_management/actions/driver_booking_assignment_actions'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
@@ -49,6 +50,13 @@ export default class RejectBookingController {
         updatePayload: {
           status: 'rejected',
         },
+        dbTransactionOptions: { useTransaction: false },
+      })
+
+      await DriverBookingAssignmentActions.recordDriverBookingAssignmentResponse({
+        bookingId: booking.id,
+        driverId: loggedInDriver.id,
+        response: 'rejected',
         dbTransactionOptions: { useTransaction: false },
       })
 

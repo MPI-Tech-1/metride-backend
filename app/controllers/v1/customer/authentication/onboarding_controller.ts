@@ -42,6 +42,10 @@ export default class OnboardingController {
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
+      // Commit before issuing the token: the token is written outside the transaction,
+      // and on single-connection SQLite it would otherwise wait on the open transaction.
+      await dbTransaction.commit()
+
       const accessCredentials = await Customer.accessTokens.create(customer, ['*'], {
         expiresIn: `${ACCESS_TOKEN_EXPIRATION_TIME_FRAME_IN_MINUTES} minutes`,
       })
@@ -57,7 +61,6 @@ export default class OnboardingController {
         accessCredentials,
       }
 
-      await dbTransaction.commit()
       return response.status(HttpStatusCodesEnum.CREATED).send({
         status_code: HttpStatusCodesEnum.CREATED,
         status: SUCCESS,
@@ -65,7 +68,7 @@ export default class OnboardingController {
         results: mutatedCustomerPayload,
       })
     } catch (OnboardingControllerError) {
-      await dbTransaction.rollback()
+      if (!dbTransaction.isCompleted) await dbTransaction.rollback()
       console.log('OnboardingControllerError -> ', OnboardingControllerError)
       await logApplicationError(OnboardingControllerError)
       return response.status(HttpStatusCodesEnum.INTERNAL_SERVER_ERROR).send({

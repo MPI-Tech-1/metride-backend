@@ -54,3 +54,26 @@ Import `Metride_Admin_Edit_Driver_Customer.postman_collection.json` and use the 
   information record is created.
 - Driver status and commission keep their own endpoints (approve, reject, commission).
 - Each request has saved example responses (200, 400, 404, 422, 401).
+
+# Driver online rewards Postman guide
+
+Import `Metride_Driver_Online_Rewards.postman_collection.json` and use the same environment.
+
+1. Run the new migration (`1784000000000_create_driver_online_rewards_tables`). It seeds one
+   **disabled** settings row (07:00–09:00, ₦0).
+2. Run **Admin Login** (an `admin`-role account) and **Driver Login**. They store `adminToken` and
+   `driverToken`.
+3. **Update Settings** to enable the reward, e.g. `rewardAmount: 50000` (₦500).
+4. As the driver, **Go Online** before the window starts and accept every assigned ride within the
+   acceptance timeout. **My Online Rewards** shows live progress.
+5. Once the window plus the acceptance timeout has passed, the scheduled job (every 15 minutes, run
+   by the queue worker) credits the wallet. Check **List Paid Rewards** or the driver's wallet
+   transactions.
+
+- Times are Africa/Lagos. Windows cannot cross midnight.
+- Disqualifiers within the window: rejecting a ride, not responding, or accepting after the
+  timeout. A ride an admin cancels or reassigns before the timeout does not count.
+- Online time comes from the Go Online / Go Offline toggle. A driver who was already online before
+  this release must go offline and online once to start being tracked.
+- A driver is paid at most once per day (unique per driver and date), so re-running the job is safe.
+- Reward settings are `admin`-role only. Listing payouts is open to `admin` and `operations`.

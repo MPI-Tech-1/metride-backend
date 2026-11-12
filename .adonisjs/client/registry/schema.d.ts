@@ -115,6 +115,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/customer_management/get_customer_controller').default['handle']>>>
     }
   }
+  'admin.customer_management.customers.update_customer': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/customer-management/customers/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/customer_management/update_customer_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/customer_management/update_customer_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/customer_management/update_customer_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/customer_management/update_customer_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'admin.driver_management.fetch_drivers': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/driver-management/drivers'
@@ -139,6 +151,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'admin.driver_management.fetch_driver_online_rewards': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/driver-management/drivers/online-rewards'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/admin/driver_management/list_driver_online_rewards_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_driver_online_rewards_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/fetch_driver_online_rewards_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/admins/driver-management/drivers/:identifier'
@@ -149,6 +173,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/get_driver_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/get_driver_controller').default['handle']>>>
+    }
+  }
+  'admin.driver_management.update_driver': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/driver_management/update_driver_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/update_driver_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/update_driver_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/update_driver_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'admin.driver_management.approve_driver': {
@@ -197,6 +233,30 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/driver_management/upload_driver_reference_form_request_validator').default)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/driver_management/upload_driver_reference_form_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.settings.get_driver_online_reward_setting': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/settings/driver-online-reward'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/driver_online_reward/get_driver_online_reward_setting_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/driver_online_reward/get_driver_online_reward_setting_controller').default['handle']>>>
+    }
+  }
+  'admin.settings.update_driver_online_reward_setting': {
+    methods: ["PUT"]
+    pattern: '/api/v1/admins/settings/driver-online-reward'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/settings/driver_online_reward/update_driver_online_reward_setting_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/settings/driver_online_reward/update_driver_online_reward_setting_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/driver_online_reward/update_driver_online_reward_setting_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/settings/driver_online_reward/update_driver_online_reward_setting_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'admin.settings.create_ride_type': {
@@ -811,6 +871,138 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/investment_management/investor_vehicle_earnings/payout_investor_vehicle_earning_controller').default['handle']>>>
     }
   }
+  'admin.promotions.create_promotion': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/promotions'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/promotions/create_promotion_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/promotions/create_promotion_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/create_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/create_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.promotions.fetch_promotions': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/promotions'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/fetch_promotions_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/fetch_promotions_controller').default['handle']>>>
+    }
+  }
+  'admin.promotions.update_promotion': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/promotions/:identifier'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/promotions/update_promotion_request_validator').default)>>
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/promotions/update_promotion_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/update_promotion_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/promotions/update_promotion_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.mvest.create_owner': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/mvest/owners'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_owner_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_owner_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_owner_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_owner_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.mvest.fetch_owners': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/mvest/owners'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_owners_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.update_owner': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/mvest/owners/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_owner_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_owner_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.fetch_available_vehicles': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/mvest/available-vehicles'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_available_mvest_vehicles_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.create_agreement': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/mvest/agreements'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_agreement_request_validator').default)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/v1/admin/mvest/create_mvest_agreement_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_agreement_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/create_mvest_agreement_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'admin.mvest.update_agreement': {
+    methods: ["PATCH"]
+    pattern: '/api/v1/admins/mvest/agreements/:identifier'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_agreement_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/update_mvest_agreement_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.fetch_earnings': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/admins/mvest/earnings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/fetch_mvest_earnings_controller').default['handle']>>>
+    }
+  }
+  'admin.mvest.mark_paid': {
+    methods: ["POST"]
+    pattern: '/api/v1/admins/mvest/earnings/:identifier/mark-paid'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { identifier: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/admin/mvest/mark_mvest_earning_paid_controller').default['handle']>>>
+    }
+  }
   'customer.authentication.onboarding': {
     methods: ["POST"]
     pattern: '/api/v1/customers/authentication/onboarding'
@@ -1421,6 +1613,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller').default['handle']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/dashboard/fetch_bookings_metrics_controller').default['handle']>>>
+    }
+  }
+  'driver.online_rewards.fetch_online_rewards': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/driver/online-rewards'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/v1/driver/online_rewards/list_online_rewards_request_validator').default)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/v1/driver/online_rewards/fetch_online_rewards_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/v1/driver/online_rewards/fetch_online_rewards_controller').default['handle']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'common.location.fetch_cities': {

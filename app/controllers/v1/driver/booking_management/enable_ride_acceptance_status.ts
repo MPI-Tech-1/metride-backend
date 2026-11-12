@@ -3,6 +3,7 @@ import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
 import { ERROR, SOMETHING_WENT_WRONG, SUCCESS } from '#common/messages/system_messages'
 import logApplicationError from '#common/helper_functions/log_application_error'
 import DriverActions from '#model_management/actions/driver_actions'
+import DriverOnlineSessionActions from '#model_management/actions/driver_online_session_actions'
 
 export default class EnableRideAcceptanceStatus {
   async handle({ auth, response }: HttpContext) {
@@ -20,6 +21,10 @@ export default class EnableRideAcceptanceStatus {
         dbTransactionOptions: {
           useTransaction: false,
         },
+      })
+
+      await DriverOnlineSessionActions.openDriverOnlineSession(loggedInDriver.id, {
+        useTransaction: false,
       })
 
       return response.status(HttpStatusCodesEnum.OK).send({

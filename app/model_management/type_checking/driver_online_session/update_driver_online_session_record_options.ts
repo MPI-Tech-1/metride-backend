@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverOnlineSessionIdentifierOptions from '#model_management/type_checking/driver_online_session/driver_online_session_identifier_options'
+import type DriverOnlineSessionInterface from '#model_management/type_checking/driver_online_session/driver_online_session_interface'
+
+type UpdateDriverOnlineSessionRecordOptions = UpdateRecordGeneric<
+  DriverOnlineSessionIdentifierOptions,
+  Partial<DriverOnlineSessionInterface>
+>
+
+export default UpdateDriverOnlineSessionRecordOptions

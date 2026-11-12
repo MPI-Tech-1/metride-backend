@@ -1,0 +1,9 @@
+import type DriverBookingAssignmentInterface from '#model_management/type_checking/driver_booking_assignment/driver_booking_assignment_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverBookingAssignmentRecordPayload = Partial<DriverBookingAssignmentInterface>
+
+type CreateDriverBookingAssignmentRecordOptions =
+  CreateNewRecordGeneric<CreateDriverBookingAssignmentRecordPayload>
+
+export default CreateDriverBookingAssignmentRecordOptions

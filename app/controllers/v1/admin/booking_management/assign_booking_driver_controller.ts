@@ -1,5 +1,6 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import BookingActions from '#model_management/actions/booking_actions'
+import DriverBookingAssignmentActions from '#model_management/actions/driver_booking_assignment_actions'
 import DriverActions from '#model_management/actions/driver_actions'
 import AssignBookingDriverRequestValidator from '#validators/v1/admin/booking_management/assign_booking_driver_request_validator'
 import NotificationDispatchClient from '#infrastructure_providers/internals/notification_dispatch_client'
@@ -86,6 +87,12 @@ export default class AssignBookingDriverController {
           driverVehicleId: driverVehicle.id,
           status: 'assigned-a-driver',
         },
+        dbTransactionOptions: { useTransaction: false },
+      })
+
+      await DriverBookingAssignmentActions.recordDriverBookingAssignment({
+        bookingId: booking.id,
+        driverId: driver.id,
         dbTransactionOptions: { useTransaction: false },
       })
 

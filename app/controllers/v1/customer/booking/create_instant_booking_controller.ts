@@ -1,5 +1,6 @@
 import { type HttpContext } from '@adonisjs/core/http'
 import BookingActions from '#model_management/actions/booking_actions'
+import DriverBookingAssignmentActions from '#model_management/actions/driver_booking_assignment_actions'
 import BookingPaymentActions from '#model_management/actions/booking_payment_actions'
 import CreateInstantBookingRequestValidator from '#validators/v1/customer/booking/create_instant_booking_request_validator'
 import HttpStatusCodesEnum from '#common/enums/http_status_codes_enum'
@@ -110,6 +111,12 @@ export default class CreateInstantBookingController {
           amountDue: basePrice,
           amountPaid: 0,
         },
+        dbTransactionOptions: { useTransaction: true, dbTransaction },
+      })
+
+      await DriverBookingAssignmentActions.recordDriverBookingAssignment({
+        bookingId: booking.id,
+        driverId: driver.id,
         dbTransactionOptions: { useTransaction: true, dbTransaction },
       })
 
