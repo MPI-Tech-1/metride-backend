@@ -46,8 +46,16 @@ const FetchVehicleModelsController = () =>
 const GetVehicleModelController = () =>
   import('#controllers/v1/admin/settings/vehicle/vehicle_model/get_vehicle_model_controller')
 
+const GetDriverOnlineRewardSettingController = () =>
+  import('#controllers/v1/admin/settings/driver_online_reward/get_driver_online_reward_setting_controller')
+const UpdateDriverOnlineRewardSettingController = () =>
+  import('#controllers/v1/admin/settings/driver_online_reward/update_driver_online_reward_setting_controller')
+
 router
   .group(() => {
+    router.get('/driver-online-reward', [GetDriverOnlineRewardSettingController])
+    router.put('/driver-online-reward', [UpdateDriverOnlineRewardSettingController])
+
     router
       .group(() => {
         router

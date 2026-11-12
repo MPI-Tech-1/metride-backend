@@ -1,0 +1,9 @@
+import type DriverOnlineSessionInterface from '#model_management/type_checking/driver_online_session/driver_online_session_interface'
+import type CreateNewRecordGeneric from '#common/type_checkings/model_management/create_new_record_generic'
+
+type CreateDriverOnlineSessionRecordPayload = Partial<DriverOnlineSessionInterface>
+
+type CreateDriverOnlineSessionRecordOptions =
+  CreateNewRecordGeneric<CreateDriverOnlineSessionRecordPayload>
+
+export default CreateDriverOnlineSessionRecordOptions

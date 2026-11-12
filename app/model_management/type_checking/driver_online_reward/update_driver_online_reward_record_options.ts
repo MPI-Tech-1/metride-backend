@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverOnlineRewardIdentifierOptions from '#model_management/type_checking/driver_online_reward/driver_online_reward_identifier_options'
+import type DriverOnlineRewardInterface from '#model_management/type_checking/driver_online_reward/driver_online_reward_interface'
+
+type UpdateDriverOnlineRewardRecordOptions = UpdateRecordGeneric<
+  DriverOnlineRewardIdentifierOptions,
+  Partial<DriverOnlineRewardInterface>
+>
+
+export default UpdateDriverOnlineRewardRecordOptions

@@ -1,0 +1,10 @@
+import type UpdateRecordGeneric from '#common/type_checkings/model_management/update_record_generic'
+import type DriverBookingAssignmentIdentifierOptions from '#model_management/type_checking/driver_booking_assignment/driver_booking_assignment_identifier_options'
+import type DriverBookingAssignmentInterface from '#model_management/type_checking/driver_booking_assignment/driver_booking_assignment_interface'
+
+type UpdateDriverBookingAssignmentRecordOptions = UpdateRecordGeneric<
+  DriverBookingAssignmentIdentifierOptions,
+  Partial<DriverBookingAssignmentInterface>
+>
+
+export default UpdateDriverBookingAssignmentRecordOptions

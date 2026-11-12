@@ -60,6 +60,12 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"customer-management","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"customers","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":1,"val":"identifier","end":""}],
     types: placeholder as Registry['admin.customer_management.customers.get_customer']['types'],
   },
+  'admin.customer_management.customers.update_customer': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/customer-management/customers/:identifier',
+    tokens: [{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"customer-management","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":0,"val":"customers","end":""},{"old":"/api/v1/admins/customer-management/customers/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.customer_management.customers.update_customer']['types'],
+  },
   'admin.driver_management.fetch_drivers': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/driver-management/drivers',
@@ -72,11 +78,23 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/active","type":0,"val":"active","end":""}],
     types: placeholder as Registry['admin.driver_management.fetch_active_drivers']['types'],
   },
+  'admin.driver_management.fetch_driver_online_rewards': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/driver-management/drivers/online-rewards',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/online-rewards","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/online-rewards","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/online-rewards","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/online-rewards","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/online-rewards","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/online-rewards","type":0,"val":"online-rewards","end":""}],
+    types: placeholder as Registry['admin.driver_management.fetch_driver_online_rewards']['types'],
+  },
   'admin.driver_management.get_driver': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/admins/driver-management/drivers/:identifier',
     tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":1,"val":"identifier","end":""}],
     types: placeholder as Registry['admin.driver_management.get_driver']['types'],
+  },
+  'admin.driver_management.update_driver': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/driver-management/drivers/:identifier',
+    tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.driver_management.update_driver']['types'],
   },
   'admin.driver_management.approve_driver': {
     methods: ["POST"],
@@ -101,6 +119,18 @@ const routes = {
     pattern: '/api/v1/admins/driver-management/drivers/:identifier/reference-form',
     tokens: [{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"api","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"driver-management","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"drivers","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/driver-management/drivers/:identifier/reference-form","type":0,"val":"reference-form","end":""}],
     types: placeholder as Registry['admin.driver_management.upload_driver_reference_form']['types'],
+  },
+  'admin.settings.get_driver_online_reward_setting': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/settings/driver-online-reward',
+    tokens: [{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"driver-online-reward","end":""}],
+    types: placeholder as Registry['admin.settings.get_driver_online_reward_setting']['types'],
+  },
+  'admin.settings.update_driver_online_reward_setting': {
+    methods: ["PUT"],
+    pattern: '/api/v1/admins/settings/driver-online-reward',
+    tokens: [{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"api","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"settings","end":""},{"old":"/api/v1/admins/settings/driver-online-reward","type":0,"val":"driver-online-reward","end":""}],
+    types: placeholder as Registry['admin.settings.update_driver_online_reward_setting']['types'],
   },
   'admin.settings.create_ride_type': {
     methods: ["POST"],
@@ -408,6 +438,72 @@ const routes = {
     tokens: [{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":0,"val":"api","end":""},{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":0,"val":"investment-management","end":""},{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":0,"val":"investor-vehicle-earnings","end":""},{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/investment-management/investor-vehicle-earnings/:identifier/payout","type":0,"val":"payout","end":""}],
     types: placeholder as Registry['admin.investment_management.payout_investor_vehicle_earning']['types'],
   },
+  'admin.promotions.create_promotion': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/promotions',
+    tokens: [{"old":"/api/v1/admins/promotions","type":0,"val":"api","end":""},{"old":"/api/v1/admins/promotions","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/promotions","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/promotions","type":0,"val":"promotions","end":""}],
+    types: placeholder as Registry['admin.promotions.create_promotion']['types'],
+  },
+  'admin.promotions.fetch_promotions': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/promotions',
+    tokens: [{"old":"/api/v1/admins/promotions","type":0,"val":"api","end":""},{"old":"/api/v1/admins/promotions","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/promotions","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/promotions","type":0,"val":"promotions","end":""}],
+    types: placeholder as Registry['admin.promotions.fetch_promotions']['types'],
+  },
+  'admin.promotions.update_promotion': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/promotions/:identifier',
+    tokens: [{"old":"/api/v1/admins/promotions/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/promotions/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/promotions/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/promotions/:identifier","type":0,"val":"promotions","end":""},{"old":"/api/v1/admins/promotions/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.promotions.update_promotion']['types'],
+  },
+  'admin.mvest.create_owner': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/mvest/owners',
+    tokens: [{"old":"/api/v1/admins/mvest/owners","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"owners","end":""}],
+    types: placeholder as Registry['admin.mvest.create_owner']['types'],
+  },
+  'admin.mvest.fetch_owners': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/mvest/owners',
+    tokens: [{"old":"/api/v1/admins/mvest/owners","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/owners","type":0,"val":"owners","end":""}],
+    types: placeholder as Registry['admin.mvest.fetch_owners']['types'],
+  },
+  'admin.mvest.update_owner': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/mvest/owners/:identifier',
+    tokens: [{"old":"/api/v1/admins/mvest/owners/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/owners/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/owners/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/owners/:identifier","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/owners/:identifier","type":0,"val":"owners","end":""},{"old":"/api/v1/admins/mvest/owners/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.mvest.update_owner']['types'],
+  },
+  'admin.mvest.fetch_available_vehicles': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/mvest/available-vehicles',
+    tokens: [{"old":"/api/v1/admins/mvest/available-vehicles","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/available-vehicles","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/available-vehicles","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/available-vehicles","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/available-vehicles","type":0,"val":"available-vehicles","end":""}],
+    types: placeholder as Registry['admin.mvest.fetch_available_vehicles']['types'],
+  },
+  'admin.mvest.create_agreement': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/mvest/agreements',
+    tokens: [{"old":"/api/v1/admins/mvest/agreements","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/agreements","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/agreements","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/agreements","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/agreements","type":0,"val":"agreements","end":""}],
+    types: placeholder as Registry['admin.mvest.create_agreement']['types'],
+  },
+  'admin.mvest.update_agreement': {
+    methods: ["PATCH"],
+    pattern: '/api/v1/admins/mvest/agreements/:identifier',
+    tokens: [{"old":"/api/v1/admins/mvest/agreements/:identifier","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/agreements/:identifier","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/agreements/:identifier","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/agreements/:identifier","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/agreements/:identifier","type":0,"val":"agreements","end":""},{"old":"/api/v1/admins/mvest/agreements/:identifier","type":1,"val":"identifier","end":""}],
+    types: placeholder as Registry['admin.mvest.update_agreement']['types'],
+  },
+  'admin.mvest.fetch_earnings': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/admins/mvest/earnings',
+    tokens: [{"old":"/api/v1/admins/mvest/earnings","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/earnings","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/earnings","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/earnings","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/earnings","type":0,"val":"earnings","end":""}],
+    types: placeholder as Registry['admin.mvest.fetch_earnings']['types'],
+  },
+  'admin.mvest.mark_paid': {
+    methods: ["POST"],
+    pattern: '/api/v1/admins/mvest/earnings/:identifier/mark-paid',
+    tokens: [{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":0,"val":"api","end":""},{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":0,"val":"v1","end":""},{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":0,"val":"admins","end":""},{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":0,"val":"mvest","end":""},{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":0,"val":"earnings","end":""},{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":1,"val":"identifier","end":""},{"old":"/api/v1/admins/mvest/earnings/:identifier/mark-paid","type":0,"val":"mark-paid","end":""}],
+    types: placeholder as Registry['admin.mvest.mark_paid']['types'],
+  },
   'customer.authentication.onboarding': {
     methods: ["POST"],
     pattern: '/api/v1/customers/authentication/onboarding',
@@ -713,6 +809,12 @@ const routes = {
     pattern: '/api/v1/driver/dashboard/bookings-metrics',
     tokens: [{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"api","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"dashboard","end":""},{"old":"/api/v1/driver/dashboard/bookings-metrics","type":0,"val":"bookings-metrics","end":""}],
     types: placeholder as Registry['driver.dashboard.fetch_bookings_metrics']['types'],
+  },
+  'driver.online_rewards.fetch_online_rewards': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/driver/online-rewards',
+    tokens: [{"old":"/api/v1/driver/online-rewards","type":0,"val":"api","end":""},{"old":"/api/v1/driver/online-rewards","type":0,"val":"v1","end":""},{"old":"/api/v1/driver/online-rewards","type":0,"val":"driver","end":""},{"old":"/api/v1/driver/online-rewards","type":0,"val":"online-rewards","end":""}],
+    types: placeholder as Registry['driver.online_rewards.fetch_online_rewards']['types'],
   },
   'common.location.fetch_cities': {
     methods: ["GET","HEAD"],

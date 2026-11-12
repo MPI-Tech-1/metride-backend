@@ -18,18 +18,23 @@ export interface ApiDefinition {
       customers: {
         fetchCustomers: typeof routes['admin.customer_management.customers.fetch_customers']
         getCustomer: typeof routes['admin.customer_management.customers.get_customer']
+        updateCustomer: typeof routes['admin.customer_management.customers.update_customer']
       }
     }
     driverManagement: {
       fetchDrivers: typeof routes['admin.driver_management.fetch_drivers']
       fetchActiveDrivers: typeof routes['admin.driver_management.fetch_active_drivers']
+      fetchDriverOnlineRewards: typeof routes['admin.driver_management.fetch_driver_online_rewards']
       getDriver: typeof routes['admin.driver_management.get_driver']
+      updateDriver: typeof routes['admin.driver_management.update_driver']
       approveDriver: typeof routes['admin.driver_management.approve_driver']
       rejectDriver: typeof routes['admin.driver_management.reject_driver']
       updateDriverCommission: typeof routes['admin.driver_management.update_driver_commission']
       uploadDriverReferenceForm: typeof routes['admin.driver_management.upload_driver_reference_form']
     }
     settings: {
+      getDriverOnlineRewardSetting: typeof routes['admin.settings.get_driver_online_reward_setting']
+      updateDriverOnlineRewardSetting: typeof routes['admin.settings.update_driver_online_reward_setting']
       createRideType: typeof routes['admin.settings.create_ride_type']
       updateRideType: typeof routes['admin.settings.update_ride_type']
       fetchRideTypes: typeof routes['admin.settings.fetch_ride_types']
@@ -91,6 +96,21 @@ export interface ApiDefinition {
       fetchInvestorVehicleEarnings: typeof routes['admin.investment_management.fetch_investor_vehicle_earnings']
       getInvestorVehicleEarning: typeof routes['admin.investment_management.get_investor_vehicle_earning']
       payoutInvestorVehicleEarning: typeof routes['admin.investment_management.payout_investor_vehicle_earning']
+    }
+    promotions: {
+      createPromotion: typeof routes['admin.promotions.create_promotion']
+      fetchPromotions: typeof routes['admin.promotions.fetch_promotions']
+      updatePromotion: typeof routes['admin.promotions.update_promotion']
+    }
+    mvest: {
+      createOwner: typeof routes['admin.mvest.create_owner']
+      fetchOwners: typeof routes['admin.mvest.fetch_owners']
+      updateOwner: typeof routes['admin.mvest.update_owner']
+      fetchAvailableVehicles: typeof routes['admin.mvest.fetch_available_vehicles']
+      createAgreement: typeof routes['admin.mvest.create_agreement']
+      updateAgreement: typeof routes['admin.mvest.update_agreement']
+      fetchEarnings: typeof routes['admin.mvest.fetch_earnings']
+      markPaid: typeof routes['admin.mvest.mark_paid']
     }
   }
   customer: {
@@ -176,6 +196,9 @@ export interface ApiDefinition {
     }
     dashboard: {
       fetchBookingsMetrics: typeof routes['driver.dashboard.fetch_bookings_metrics']
+    }
+    onlineRewards: {
+      fetchOnlineRewards: typeof routes['driver.online_rewards.fetch_online_rewards']
     }
   }
   common: {

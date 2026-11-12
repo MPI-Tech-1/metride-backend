@@ -12,6 +12,8 @@ const ApproveDriverController = () =>
   import('#controllers/v1/admin/driver_management/approve_driver_controller')
 const RejectDriverController = () =>
   import('#controllers/v1/admin/driver_management/reject_driver_controller')
+const FetchDriverOnlineRewardsController = () =>
+  import('#controllers/v1/admin/driver_management/fetch_driver_online_rewards_controller')
 const UpdateDriverController = () =>
   import('#controllers/v1/admin/driver_management/update_driver_controller')
 const UpdateDriverCommissionController = () =>
@@ -23,6 +25,7 @@ router
   .group(() => {
     router.get('/', [FetchDriversController])
     router.get('/active', [FetchActiveDriversController])
+    router.get('/online-rewards', [FetchDriverOnlineRewardsController])
     router.get('/:identifier', [GetDriverController])
     router.patch('/:identifier', [UpdateDriverController])
     router.post('/:identifier/approve', [ApproveDriverController])

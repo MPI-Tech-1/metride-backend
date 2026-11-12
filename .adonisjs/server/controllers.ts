@@ -34,6 +34,7 @@ export const controllers = {
       driverManagement: {
         ApproveDriver: () => import('#controllers/v1/admin/driver_management/approve_driver_controller'),
         FetchActiveDrivers: () => import('#controllers/v1/admin/driver_management/fetch_active_drivers_controller'),
+        FetchDriverOnlineRewards: () => import('#controllers/v1/admin/driver_management/fetch_driver_online_rewards_controller'),
         FetchDrivers: () => import('#controllers/v1/admin/driver_management/fetch_drivers_controller'),
         GetDriver: () => import('#controllers/v1/admin/driver_management/get_driver_controller'),
         RejectDriver: () => import('#controllers/v1/admin/driver_management/reject_driver_controller'),
@@ -101,6 +102,10 @@ export const controllers = {
           FetchCities: () => import('#controllers/v1/admin/settings/cities/fetch_cities_controller'),
           GetCity: () => import('#controllers/v1/admin/settings/cities/get_city_controller'),
           UpdateCity: () => import('#controllers/v1/admin/settings/cities/update_city_controller'),
+        },
+        driverOnlineReward: {
+          GetDriverOnlineRewardSetting: () => import('#controllers/v1/admin/settings/driver_online_reward/get_driver_online_reward_setting_controller'),
+          UpdateDriverOnlineRewardSetting: () => import('#controllers/v1/admin/settings/driver_online_reward/update_driver_online_reward_setting_controller'),
         },
         vehicle: {
           vehicleMake: {
@@ -227,6 +232,9 @@ export const controllers = {
       notifications: {
         FetchNotifications: () => import('#controllers/v1/driver/notifications/fetch_notifications_controller'),
         MarkNotificationAsRead: () => import('#controllers/v1/driver/notifications/mark_notification_as_read_controller'),
+      },
+      onlineRewards: {
+        FetchOnlineRewards: () => import('#controllers/v1/driver/online_rewards/fetch_online_rewards_controller'),
       },
       passwordManagement: {
         resetPassword: {
